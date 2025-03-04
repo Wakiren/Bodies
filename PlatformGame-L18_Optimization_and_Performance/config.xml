@@ -31,8 +31,9 @@
 						<frame x="256" y="0" w="32" h="32" />
 					</idle>
 				</animations>
-			</player>
-			<items>
+			</player> 
+			
+			<!--<items>
 				<item name="coin" x="200" y="672" w="32" h="32" texture="Assets/Textures/goldCoin.png" gravity="true">
 					<animations>
 						<idle loop="true" speed="0.5">
@@ -72,7 +73,7 @@
 						</idle>
 					</animations>
 				</enemy>
-			</enemies>
+			</enemies>-->
 		</entities>
 	</scene>
 </config>
