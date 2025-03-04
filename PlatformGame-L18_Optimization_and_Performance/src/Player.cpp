@@ -9,6 +9,8 @@
 #include "Physics.h"
 #include "EntityManager.h"
 #include "tracy/Tracy.hpp"
+#include <iostream>
+using namespace std;
 
 Player::Player() : Entity(EntityType::PLAYER)
 {
@@ -47,7 +49,7 @@ bool Player::Start() {
 	pbody->ctype = ColliderType::PLAYER;
 
 	// Set the gravity of the body
-	if (!parameters.attribute("gravity").as_bool()) pbody->body->SetGravityScale(0);
+	pbody->body->SetGravityScale(0);
 
 	//initialize audio effect
 	pickCoinFxId = Engine::GetInstance().audio.get()->LoadFx("Assets/Audio/Fx/retro-video-game-coin-pickup-38299.ogg");
@@ -58,49 +60,15 @@ bool Player::Start() {
 bool Player::Update(float dt)
 {
 	ZoneScoped;
-	// Code you want to profile
-	
-	// L08 TODO 5: Add physics to the player - updated player position using physics
-	b2Vec2 velocity = b2Vec2(0, pbody->body->GetLinearVelocity().y);
+
+	b2Vec2 velocity = b2Vec2(0, 0);
 
 	if (!parameters.attribute("gravity").as_bool()) {
 		velocity = b2Vec2(0,0);
 	}
-
-	// Move left
-	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
-		velocity.x = -0.2 * 16;
-	}
-
-	// Move right
-	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
-		velocity.x = 0.2 * 16;
-	}
-
-	// Move Up
-	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
-		velocity.y = -0.2 * 16;
-	}
-
-	// Move down
-	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) {
-		velocity.y = 0.2 * 16;
-	}
 	
-	//Jump
-	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && isJumping == false) {
-		// Apply an initial upward force
-		pbody->body->ApplyLinearImpulseToCenter(b2Vec2(0, -jumpForce), true);
-		isJumping = true;
-	}
+	MoveToMousePos(0.05f);
 
-	// If the player is jumpling, we don't want to apply gravity, we use the current velocity prduced by the jump
-	if(isJumping == true)
-	{
-		velocity.y = pbody->body->GetLinearVelocity().y;
-	}
-
-	// Apply the velocity to the player
 	pbody->body->SetLinearVelocity(velocity);
 
 	b2Transform pbodyPos = pbody->body->GetTransform();
@@ -155,8 +123,25 @@ void Player::SetPosition(Vector2D pos) {
 	pbody->body->SetTransform(bodyPos,0);
 }
 
+void Player::MoveToMousePos(float speed)
+{
+	Vector2D playerPos = GetPosition();
+	Vector2D mousePos = Engine::GetInstance().input.get()->GetMousePosition();
+	
+	if (Engine::GetInstance().input.get()->GetMouseButtonDown(0)) 
+	{
+	
+	}
+	b2Vec2 newTransform;
+	newTransform.Set(PIXEL_TO_METERS(playerPos.LerpFloat(playerPos.getX(), mousePos.getX(), speed)) ,
+	PIXEL_TO_METERS(playerPos.LerpFloat(playerPos.getY(), mousePos.getY(), speed)));
+	pbody->body->SetTransform(newTransform, 0);	
+
+}
+
 Vector2D Player::GetPosition() {
 	b2Vec2 bodyPos = pbody->body->GetTransform().p;
 	Vector2D pos = Vector2D(METERS_TO_PIXELS(bodyPos.x), METERS_TO_PIXELS(bodyPos.y));
 	return pos;
 }
+

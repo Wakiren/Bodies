@@ -81,3 +81,9 @@ float Vector2D::distanceSquared(const Vector2D& other) const {
 	return std::pow(x - other.x, 2) + std::pow(y - other.y, 2);
 }
 
+float Vector2D::LerpFloat(float a, float b, float t) const
+{
+    return a + t * (b - a);
+}
+
+

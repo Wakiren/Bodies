@@ -30,6 +30,8 @@ public:
     float distanceEuclidean(const Vector2D& other) const;
     float distanceSquared(const Vector2D& other) const;
 
+    float LerpFloat(float a, float b, float t) const;
+
     // Output stream operator
     friend std::ostream& operator<<(std::ostream& os, const Vector2D& vec);
 

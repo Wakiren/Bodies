@@ -46,7 +46,7 @@ bool Enemy::Start() {
 	pbody->listener = this;
 
 	// Set the gravity of the body
-	if (!parameters.attribute("gravity").as_bool()) pbody->body->SetGravityScale(0);
+	pbody->body->SetGravityScale(0);
 
 	// Initialize pathfinding
 	pathfinding = new Pathfinding();
