@@ -50,8 +50,8 @@ bool Scene::Awake()
 	}
 
 	// L16: TODO 2: Instantiate a new GuiControlButton in the Scene
-	SDL_Rect btPos = { 520, 350, 120,20 };
-	guiBt = (GuiControlButton*) Engine::GetInstance().guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "MyButton", btPos, this);
+	/*SDL_Rect btPos = { 520, 350, 120,20 };
+	guiBt = (GuiControlButton*) Engine::GetInstance().guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "MyButton", btPos, this);*/
 
 	return ret;
 }
@@ -111,10 +111,16 @@ bool Scene::Update(float dt)
 	//Render a texture where the mouse is over to highlight the tile, use the texture 'mouseTileTex'
 	Vector2D highlightTile = Engine::GetInstance().map.get()->MapToWorld(mouseTile.getX(),mouseTile.getY());
 	SDL_Rect rect = { 0,0,32,32 };
-	Engine::GetInstance().render.get()->DrawTexture(mouseTileTex,
-													highlightTile.getX(),
-													highlightTile.getY(),
-													&rect);
+
+	if (Engine::GetInstance().physics.get()->debug) 
+	{
+		Engine::GetInstance().render.get()->DrawTexture(mouseTileTex, highlightTile.getX(), highlightTile.getY(), &rect);
+		//If mouse button is pressed modify enemy position
+		if (Engine::GetInstance().input.get()->GetMouseButtonDown(1) == KEY_DOWN) {
+			enemyList[0]->SetPosition(Vector2D(highlightTile.getX(), highlightTile.getY()));
+			enemyList[0]->ResetPath();
+		}
+	}
 
 	// saves the tile pos for debugging purposes
 	if (mouseTile.getX() >= 0 && mouseTile.getY() >= 0 || once) {
@@ -122,11 +128,7 @@ bool Scene::Update(float dt)
 		once = true;
 	}
 
-	//If mouse button is pressed modify enemy position
-	if (Engine::GetInstance().input.get()->GetMouseButtonDown(1) == KEY_DOWN) {
-		enemyList[0]->SetPosition(Vector2D(highlightTile.getX(), highlightTile.getY()));
-		enemyList[0]->ResetPath();
-	}
+
 
 	return true;
 }

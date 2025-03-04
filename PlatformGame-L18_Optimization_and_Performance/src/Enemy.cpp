@@ -128,7 +128,12 @@ bool Enemy::Update(float dt)
 	currentAnimation->Update();
 
 	// Draw pathfinding 
-	pathfinding->DrawPath();
+	
+	if (Engine::GetInstance().physics.get()->debug) 
+	{
+		pathfinding->DrawPath();
+	}
+
 
 	return true;
 }
