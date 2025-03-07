@@ -61,13 +61,13 @@ bool Player::Update(float dt)
 {
 	ZoneScoped;
 
-	b2Vec2 velocity = b2Vec2(0, 0);
+	b2Vec2 velocity = b2Vec2(0, pbody->body->GetLinearVelocity().y);
 
 	if (!parameters.attribute("gravity").as_bool()) {
 		velocity = b2Vec2(0,0);
 	}
 	
-	MoveToMousePos(0.05f);
+	//MoveToMousePos(0.05f);
 
 	pbody->body->SetLinearVelocity(velocity);
 

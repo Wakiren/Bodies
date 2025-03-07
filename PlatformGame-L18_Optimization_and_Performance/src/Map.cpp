@@ -210,22 +210,38 @@ bool Map::Load(std::string path, std::string fileName)
             mapData.layers.push_back(mapLayer);
         }
 
+		for (pugi::xml_node objectLayerNode = mapFileXML.child("map").child("objectgroup"); objectLayerNode != NULL; objectLayerNode = objectLayerNode.next_sibling("objectgroup")) {
+			MapObjectLayer* objectLayer = new MapObjectLayer();
+			objectLayer->id = objectLayerNode.attribute("id").as_int();
+			objectLayer->name = objectLayerNode.attribute("name").as_string();
+			//L09: TODO 6 Call Load Layer Properties
+			LoadProperties(objectLayerNode, objectLayer->properties);
+			for (pugi::xml_node objectNode = objectLayerNode.child("object"); objectNode != NULL; objectNode = objectNode.next_sibling("object")) {
+				Object* object = new Object();
+				object->id = objectNode.attribute("id").as_int();
+				object->x = objectNode.attribute("x").as_float();
+				object->y = objectNode.attribute("y").as_float();
+				object->width = objectNode.attribute("width").as_float();
+				object->height = objectNode.attribute("height").as_float();
+				// What is wrong here???
+				// copilot what is wrong here is that you are pushing the pointer to the object and not the object itself
+				// so you are pushing the same object in the vector and then deleting it, so you are deleting the same object multiple times
+				// you should push the object itself and not the pointer
+				objectLayer->object_list.push_back(*object);
+			}
+			mapData.objectLayers.push_back(objectLayer);
+		}
+
         // L08 TODO 3: Create colliders
         // L08 TODO 7: Assign collider type
         // Later you can create a function here to load and create the colliders from the map
 
-        //Iterate the layer and create colliders
-        for (const auto& mapLayer : mapData.layers) {
-            if (mapLayer->name == "Collisions") {
-                for (int i = 0; i < mapData.width; i++) {
-                    for (int j = 0; j < mapData.height; j++) {
-                        int gid = mapLayer->Get(i, j);
-                        if (gid == 49) {
-                            Vector2D mapCoord = MapToWorld(i, j);
-                            PhysBody* c1 = Engine::GetInstance().physics.get()->CreateRectangle(mapCoord.getX()+ mapData.tileWidth/2, mapCoord.getY()+ mapData.tileHeight/2, mapData.tileWidth, mapData.tileHeight, STATIC);
-                            c1->ctype = ColliderType::PLATFORM;
-                        }
-                    }
+        for (const auto& mapObjectGroup : mapData.objectLayers) {
+            if (mapObjectGroup->properties.GetProperty("Collisions_") != NULL && mapObjectGroup->properties.GetProperty("Collisions_")->value == true) {
+                for (const auto& mapObject : mapObjectGroup->object_list) {
+                    /*LOG("pos.x = %d, pos.y = %d, width = %d, height = %d", mapObject._x, mapObject._y, mapObject.width, mapObject.height);*/
+                    PhysBody* collider = Engine::GetInstance().physics.get()->CreateRectangle(mapObject.x + mapObject.width / 2, mapObject.y + mapObject.height / 2, mapObject.width - 1, mapObject.height, STATIC);
+                    collider->ctype = ColliderType::PLATFORM;
                 }
             }
         }
