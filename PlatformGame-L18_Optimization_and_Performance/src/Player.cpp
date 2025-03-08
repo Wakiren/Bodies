@@ -67,9 +67,7 @@ bool Player::Update(float dt)
 		velocity = b2Vec2(0,0);
 	}
 	
-	//MoveToMousePos(0.05f);
-
-	pbody->body->SetLinearVelocity(velocity);
+	MoveToMousePos(1);
 
 	b2Transform pbodyPos = pbody->body->GetTransform();
 	position.setX(METERS_TO_PIXELS(pbodyPos.p.x) - texH / 2);
@@ -127,15 +125,27 @@ void Player::MoveToMousePos(float speed)
 {
 	Vector2D playerPos = GetPosition();
 	Vector2D mousePos = Engine::GetInstance().input.get()->GetMousePosition();
-	
-	if (Engine::GetInstance().input.get()->GetMouseButtonDown(0)) 
+
+	if (Engine::GetInstance().input.get()->GetMouseButtonDown(1)) 
 	{
-	
+		destination = mousePos;
+		movementVector = destination - playerPos;
+		movementVector = movementVector.normalized();
 	}
-	b2Vec2 newTransform;
-	newTransform.Set(PIXEL_TO_METERS(playerPos.LerpFloat(playerPos.getX(), mousePos.getX(), speed)) ,
-	PIXEL_TO_METERS(playerPos.LerpFloat(playerPos.getY(), mousePos.getY(), speed)));
-	pbody->body->SetTransform(newTransform, 0);	
+
+	if (movementVector != vecZero)
+	{
+		pbody->body->SetLinearVelocity({ movementVector.getX() * speed, movementVector.getY() * speed});
+		cout << "PlayerPos: " << playerPos << endl;
+		cout << "Destination: " << destination << endl;
+
+		if (playerPos == destination) 
+		{
+			movementVector = vecZero;
+			pbody->body->SetLinearVelocity({ 0,0 });
+			cout << "ARRIVED";
+		}
+	}
 
 }
 
