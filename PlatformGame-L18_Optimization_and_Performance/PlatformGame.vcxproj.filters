@@ -167,6 +167,9 @@
     <ClInclude Include="src\GuiManager.h">
       <Filter>Source Files\Engine</Filter>
     </ClInclude>
+    <ClInclude Include="src\SString.h">
+      <Filter>Source Files\Utils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="config.xml">

@@ -194,6 +194,7 @@
     <ClInclude Include="src\Timer.h" />
     <ClInclude Include="src\Vector2D.h" />
     <ClInclude Include="src\Window.h" />
+    <ClInclude Include="src\SString.h" />
   </ItemGroup>
   <ItemGroup>
     <Xml Include="config.xml" />
