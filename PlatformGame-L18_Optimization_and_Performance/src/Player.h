@@ -63,4 +63,5 @@ private:
 	Vector2D destination;
 	Vector2D movementVector = {0,0};
 	
+	double spriteAngle;
 };
