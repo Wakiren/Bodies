@@ -15,7 +15,7 @@
 		<fullscreen_window value="false" />
 	</window>
 	<scene>
-		<map path="Assets/Maps/" name="MapTemplate.tmx" />
+		<map path="Assets/Maps/" name="untitled.tmx" />
 		<entities>
 			<player x="736" y="64" w="32" h="32" texture="Assets/Textures/player/Idle.png" gravity="true">
 				<animations>
