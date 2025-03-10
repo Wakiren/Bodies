@@ -9,6 +9,7 @@
 #include "Physics.h"
 #include "EntityManager.h"
 #include "tracy/Tracy.hpp"
+#include <cmath>
 #include <iostream>
 using namespace std;
 
@@ -73,7 +74,8 @@ bool Player::Update(float dt)
 	position.setX(METERS_TO_PIXELS(pbodyPos.p.x) - texH / 2);
 	position.setY(METERS_TO_PIXELS(pbodyPos.p.y) - texH / 2);
 
-	Engine::GetInstance().render.get()->DrawTexture(texture, (int)position.getX(), (int)position.getY(), &currentAnimation->GetCurrentFrame());
+	Engine::GetInstance().render.get()->DrawTexture(texture, (int)position.getX(), (int)position.getY(),
+	&currentAnimation->GetCurrentFrame(), 1, spriteAngle);
 	currentAnimation->Update();
 	return true;
 }
@@ -123,8 +125,11 @@ void Player::SetPosition(Vector2D pos) {
 
 void Player::MoveToMousePos(float speed)
 {
-	Vector2D playerPos = GetPosition();
+	Vector2D playerPos =  GetPosition();
 	Vector2D mousePos = Engine::GetInstance().input.get()->GetMousePosition();
+
+
+	
 
 	if (Engine::GetInstance().input.get()->GetMouseButtonDown(1)) 
 	{
@@ -135,18 +140,24 @@ void Player::MoveToMousePos(float speed)
 
 	if (movementVector != vecZero)
 	{
+		spriteAngle = atan2(destination.getX() - playerPos.getX(), destination.getY() - playerPos.getY()) * -180 / b2_pi;
 		pbody->body->SetLinearVelocity({ movementVector.getX() * speed, movementVector.getY() * speed});
-		cout << "PlayerPos: " << playerPos << endl;
-		cout << "Destination: " << destination << endl;
+		//cout << "PlayerPos: " << playerPos << endl;
+		//cout << "Destination: " << destination << endl;
 
 		if (playerPos == destination) 
 		{
 			movementVector = vecZero;
 			pbody->body->SetLinearVelocity({ 0,0 });
-			cout << "ARRIVED";
+			//cout << "ARRIVED";
 		}
 	}
-
+	else 
+	{
+		spriteAngle = atan2(mousePos.getX() - playerPos.getX(), mousePos.getY() - playerPos.getY()) * -180 / b2_pi;
+	}
+	
+	pbody->body->SetTransform({ pbody->body->GetPosition().x, pbody->body->GetPosition().y }, 3.14/2);
 }
 
 Vector2D Player::GetPosition() {

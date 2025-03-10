@@ -2,9 +2,15 @@
 <map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="16" tileheight="16" infinite="1" nextlayerid="6" nextobjectid="287">
  <imagelayer id="2" name="Base">
   <image source="Map.png" width="5184" height="3264"/>
+  <properties>
+   <property name="Draw" type="bool" value="true"/>
+  </properties>
  </imagelayer>
  <imagelayer id="4" name="Trees">
   <image source="Trees.png" width="5184" height="3264"/>
+  <properties>
+   <property name="Draw" type="bool" value="true"/>
+  </properties>
  </imagelayer>
  <objectgroup id="5" name="Collisions">
   <object id="1" x="1328" y="3184" width="1088" height="80"/>
