@@ -170,6 +170,11 @@
     <ClInclude Include="src\SString.h">
       <Filter>Source Files\Utils</Filter>
     </ClInclude>
+    <ClInclude Include="src\DialogueSystem.h">
+      <Filter>Source Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DialogueTree.h" />
+    <ClInclude Include="src\List.h" />
   </ItemGroup>
   <ItemGroup>
     <Xml Include="config.xml">
