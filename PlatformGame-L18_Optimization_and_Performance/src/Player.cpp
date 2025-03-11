@@ -157,7 +157,7 @@ void Player::MoveToMousePos(float speed)
 		spriteAngle = atan2(mousePos.getX() - playerPos.getX(), mousePos.getY() - playerPos.getY()) * -180 / b2_pi;
 	}
 	
-	pbody->body->SetTransform({ pbody->body->GetPosition().x, pbody->body->GetPosition().y }, 3.14/2);
+	pbody->body->SetTransform({ pbody->body->GetPosition().x, pbody->body->GetPosition().y }, spriteAngle);
 }
 
 Vector2D Player::GetPosition() {
