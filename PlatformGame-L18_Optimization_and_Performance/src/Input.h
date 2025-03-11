@@ -63,6 +63,10 @@ public:
 	Vector2D GetMousePosition();
 	Vector2D GetMouseMotion();
 
+	std::string playerName;
+	bool nameEntered = false;
+	bool getInput = false;
+
 private:
 	bool windowEvents[WE_COUNT];
 	KeyState*	keyboard;

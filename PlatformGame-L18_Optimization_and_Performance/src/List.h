@@ -129,7 +129,7 @@ public:
 		while (pData != NULL)
 		{
 			pNext = pData->next;
-			RELEASE(pData);
+			//RELEASE(pData);
 			pData = pNext;
 		}
 
@@ -273,7 +273,7 @@ public:
 		return (-1);
 	}
 
-	void InsertAfter(uint position, const List<tdata>& list)
+	void InsertAfter(int position, const List<tdata>& list)
 	{
 		ListItem<tdata>* pMyList = At(position);
 		ListItem<tdata>* pOtherList = list.start;
