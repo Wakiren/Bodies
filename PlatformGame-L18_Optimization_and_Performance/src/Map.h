@@ -185,6 +185,7 @@ public:
 public: 
     std::string mapFileName;
     std::string mapPath;
+	SDL_Texture* Filter = nullptr;
 
 private:
     bool mapLoaded;
