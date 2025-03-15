@@ -127,9 +127,6 @@ bool Scene::Update(float dt)
 		tilePosDebug = "[" + std::to_string((int)mouseTile.getX()) + "," + std::to_string((int)mouseTile.getY()) + "] ";
 		once = true;
 	}
-
-
-
 	return true;
 }
 

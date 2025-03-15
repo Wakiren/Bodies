@@ -90,6 +90,12 @@ bool Map::Update(float dt)
                 }
             }
         }
+        for (const auto& Image : mapData.bgImages) {
+            if (Image->properties.GetProperty("DrawTop") != NULL && Image->properties.GetProperty("DrawTop")->value == true)
+            {
+                Engine::GetInstance().render->DrawTexture(Image->texture, 0, 0);
+            }
+        }
 
     }
 

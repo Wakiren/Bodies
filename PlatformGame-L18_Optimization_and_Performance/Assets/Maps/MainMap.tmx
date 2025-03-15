@@ -132897,7 +132897,7 @@
  <imagelayer id="4" name="Trees">
   <image source="Trees.png" width="5184" height="3264"/>
   <properties>
-   <property name="Draw" type="bool" value="false"/>
+   <property name="DrawTop" type="bool" value="true"/>
   </properties>
  </imagelayer>
  <objectgroup id="5" name="Collisions" locked="1">
