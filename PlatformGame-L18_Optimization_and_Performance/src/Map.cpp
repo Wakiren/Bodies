@@ -99,9 +99,7 @@ bool Map::Update(float dt)
         }
 
         //Draw Filter
-        Vector2D camPos = Vector2D(Engine::GetInstance().render->camera.x * -1 * 0.2, Engine::GetInstance().render->camera.y * -1 * 0.2);
-
-        Engine::GetInstance().render->DrawTexture(Filter, camPos.getX(), camPos.getY());
+        //Engine::GetInstance().render->DrawTexture(Filter, camPos.getX(), camPos.getY());
 
     }
 
