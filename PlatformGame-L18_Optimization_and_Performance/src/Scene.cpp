@@ -14,6 +14,7 @@
 #include "Enemy.h"
 #include "GuiControl.h"
 #include "GuiManager.h"
+#include "Map.h"
 
 Scene::Scene() : Module()
 {
@@ -72,6 +73,9 @@ bool Scene::Start()
 	Engine::GetInstance().render.get()->camera.x = 0;
 	Engine::GetInstance().render.get()->camera.y = 0;
 
+	WWidth = Engine::GetInstance().window.get()->width;
+	WHeight = Engine::GetInstance().window.get()->height;
+
 	return true;
 }
 
@@ -86,24 +90,41 @@ bool Scene::Update(float dt)
 {
 
 	//L03 TODO 3: Make the camera movement independent of framerate
-	float camSpeed = 1;
+	float camSpeed = 2;
+	int scale = Engine::GetInstance().window.get()->GetScale();
 
-	if(Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
-		Engine::GetInstance().render.get()->camera.y += ceil(camSpeed * dt);
+	//if(Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
+	//	Engine::GetInstance().render.get()->camera.y += ceil(camSpeed * dt);
 
-	if(Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
-		Engine::GetInstance().render.get()->camera.y -= ceil(camSpeed * dt);
+	//if(Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
+	//	Engine::GetInstance().render.get()->camera.y -= ceil(camSpeed * dt);
 
-	if(Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
-		Engine::GetInstance().render.get()->camera.x += ceil(camSpeed * dt);
+	//if(Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
+	//	Engine::GetInstance().render.get()->camera.x += ceil(camSpeed * dt);
 
-	if(Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
-		Engine::GetInstance().render.get()->camera.x -= ceil(camSpeed * dt);
+	//if(Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
+	//	Engine::GetInstance().render.get()->camera.x -= ceil(camSpeed * dt);
+
+	Vector2D mapLimit = Engine::GetInstance().map->MapToWorld(Engine::GetInstance().map->GetWidth(), Engine::GetInstance().map->GetHeight());
+
+	Engine::GetInstance().render.get()->camera.y = (-player->position.getY() * scale);
+	Engine::GetInstance().render.get()->camera.x = (-player->position.getX() * scale);
+
+	if (player->position.getY() > WHeight/2 &&
+		player->position.getY() < mapLimit.getY() - WHeight/2)
+	{
+		Engine::GetInstance().render.get()->camera.y = (-player->position.getY() * scale) + WHeight / 2;
+	}
+	if (player->position.getX() > WWidth/2 &&
+		player->position.getX() < mapLimit.getX() - WWidth/2)
+	{
+		Engine::GetInstance().render.get()->camera.x = Slower(Engine::GetInstance().render.get()->camera.x, (-player->position.getX() * scale) + WWidth / 2, 1.0f);
+	}
+
 
 	// L10 TODO 6: Implement a method that repositions the player in the map with a mouse click
 
 	//Get mouse position and obtain the map coordinate
-	int scale = Engine::GetInstance().window.get()->GetScale();
 	Vector2D mousePos = Engine::GetInstance().input.get()->GetMousePosition();
 	Vector2D mouseTile = Engine::GetInstance().map.get()->WorldToMap(mousePos.getX() - Engine::GetInstance().render.get()->camera.x / scale,
 																     mousePos.getY() - Engine::GetInstance().render.get()->camera.y / scale);
@@ -218,4 +239,11 @@ bool Scene::OnGuiMouseClickEvent(GuiControl* control)
 	LOG("Press Gui Control: %d", control->id);
 
 	return true;
+}
+
+float Scene::Slower(float ogPos, float goalPos, float time)
+{
+	float acceleration = goalPos - ogPos;
+	float speed = ogPos + time * acceleration;
+	return speed;
 }

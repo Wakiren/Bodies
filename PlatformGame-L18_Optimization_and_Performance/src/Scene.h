@@ -47,12 +47,17 @@ public:
 	// Handles multiple Gui Event methods
 	bool OnGuiMouseClickEvent(GuiControl* control);
 
+	float Slower(float ogPos, float goalPos, float time);
+
 public:
 	// Get tilePosDebug value
 	std::string GetTilePosDebug() {
 		return tilePosDebug;
 
 	}
+
+	int WWidth;
+	int WHeight;
 
 private:
 	SDL_Texture* mouseTileTex = nullptr;

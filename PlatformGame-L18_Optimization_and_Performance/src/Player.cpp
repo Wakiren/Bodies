@@ -127,9 +127,8 @@ void Player::MoveToMousePos(float speed)
 {
 	Vector2D playerPos =  GetPosition();
 	Vector2D mousePos = Engine::GetInstance().input.get()->GetMousePosition();
-
-
-	
+	mousePos.setX(mousePos.getX() - Engine::GetInstance().render.get()->camera.x / 4);
+	mousePos.setY(mousePos.getY() - Engine::GetInstance().render.get()->camera.y / 4);
 
 	if (Engine::GetInstance().input.get()->GetMouseButtonDown(1)) 
 	{
