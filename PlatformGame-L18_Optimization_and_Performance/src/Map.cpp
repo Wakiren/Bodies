@@ -41,23 +41,30 @@ bool Map::Update(float dt)
 
     if (mapLoaded) {
 
+        //First lets lode the images for the BG
+        for (const auto& Image : mapData.bgImages) {
+            if (Image->properties.GetProperty("Draw") != NULL && Image->properties.GetProperty("Draw")->value == true)
+            {
+                Engine::GetInstance().render->DrawTexture(Image->texture, 0, 0);
+            }
+        }
         // L07 TODO 5: Prepare the loop to draw all tiles in a layer + DrawTexture()
         // iterate all tiles in a layer
         for (const auto& mapLayer : mapData.layers) {
             //Check if the property Draw exist get the value, if it's true draw the lawyer
             if (mapLayer->properties.GetProperty("Draw") != NULL && mapLayer->properties.GetProperty("Draw")->value == true) {
 
-				Vector2D camPos = Vector2D(Engine::GetInstance().render->camera.x*-1, Engine::GetInstance().render->camera.y*-1);
-				if (camPos.getX() < 0) camPos.setX(0);
-				if (camPos.getY() < 0) camPos.setY(0);
-				Vector2D camPosTile = WorldToMap(camPos.getX(), camPos.getY());
+                Vector2D camPos = Vector2D(Engine::GetInstance().render->camera.x * -1, Engine::GetInstance().render->camera.y * -1);
+                if (camPos.getX() < 0) camPos.setX(0);
+                if (camPos.getY() < 0) camPos.setY(0);
+                Vector2D camPosTile = WorldToMap(camPos.getX(), camPos.getY());
 
-				Vector2D camSize = Vector2D(Engine::GetInstance().render->camera.w, Engine::GetInstance().render->camera.h);
-				Vector2D camSizeTile = WorldToMap(camSize.getX(), camSize.getY());
+                Vector2D camSize = Vector2D(Engine::GetInstance().render->camera.w, Engine::GetInstance().render->camera.h);
+                Vector2D camSizeTile = WorldToMap(camSize.getX(), camSize.getY());
 
-				Vector2D limits = Vector2D(camPosTile.getX() + camSizeTile.getX(), camPosTile.getY() + camSizeTile.getY());
-				if (limits.getX() > mapData.width) limits.setX(mapData.width);
-				if (limits.getY() > mapData.height) limits.setY(mapData.height);
+                Vector2D limits = Vector2D(camPosTile.getX() + camSizeTile.getX(), camPosTile.getY() + camSizeTile.getY());
+                if (limits.getX() > mapData.width) limits.setX(mapData.width);
+                if (limits.getY() > mapData.height) limits.setY(mapData.height);
 
                 for (int i = camPosTile.getX(); i < limits.getX(); i++) {
                     for (int j = camPosTile.getY(); j < limits.getY(); j++) {
@@ -83,6 +90,7 @@ bool Map::Update(float dt)
                 }
             }
         }
+
     }
 
     return ret;
@@ -208,6 +216,25 @@ bool Map::Load(std::string path, std::string fileName)
 
             //add the layer to the map
             mapData.layers.push_back(mapLayer);
+        }
+
+        //Get the BG Images
+        for (pugi::xml_node ImageNode = mapFileXML.child("map").child("imagelayer"); ImageNode != NULL; ImageNode = ImageNode.next_sibling("imagelayer")) {
+
+            BGimage* Image = new BGimage();
+            Image->id = ImageNode.attribute("id").as_int();
+            Image->name = ImageNode.attribute("name").as_string();
+            Image->width = ImageNode.child("image").attribute("width").as_int();
+            Image->height = ImageNode.child("image").attribute("height").as_int();
+			Image->source = ImageNode.child("image").attribute("source").as_string();
+
+            //L09: TODO 6 Call Load Layer Properties
+            LoadProperties(ImageNode, Image->properties);
+
+			Image->texture = Engine::GetInstance().textures->Load((mapPath + Image->source).c_str());
+
+            //add the layer to the map
+            mapData.bgImages.push_back(Image);
         }
 
 		for (pugi::xml_node objectLayerNode = mapFileXML.child("map").child("objectgroup"); objectLayerNode != NULL; objectLayerNode = objectLayerNode.next_sibling("objectgroup")) {

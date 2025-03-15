@@ -54,6 +54,17 @@ struct MapLayer
     }
 };
 
+struct BGimage
+{
+    int id;
+    std::string name;
+    int width;
+    int height;
+	std::string source;
+    Properties properties;
+	SDL_Texture* texture;
+};
+
 struct Object
 {
     int id;
@@ -113,6 +124,7 @@ struct MapData
     // L07: TODO 2: Add the info to the MapLayer Struct
     std::list<MapLayer*> layers;
     std::list<MapObjectLayer*> objectLayers;
+	std::list<BGimage*> bgImages;
 };
 
 class Map : public Module
