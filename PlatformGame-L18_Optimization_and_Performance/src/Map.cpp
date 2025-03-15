@@ -55,7 +55,7 @@ bool Map::Update(float dt)
             //Check if the property Draw exist get the value, if it's true draw the lawyer
             if (mapLayer->properties.GetProperty("Draw") != NULL && mapLayer->properties.GetProperty("Draw")->value == true) {
 
-                Vector2D camPos = Vector2D(Engine::GetInstance().render->camera.x * -1*0.2, Engine::GetInstance().render->camera.y * -1*0.2);
+                Vector2D camPos = Vector2D(Engine::GetInstance().render->camera.x * -1 / 4, Engine::GetInstance().render->camera.y * -1 / 4 );
                 if (camPos.getX() < 0) camPos.setX(0);
                 if (camPos.getY() < 0) camPos.setY(0);
                 Vector2D camPosTile = WorldToMap(camPos.getX(), camPos.getY());
@@ -99,7 +99,8 @@ bool Map::Update(float dt)
         }
 
         //Draw Filter
-        //Engine::GetInstance().render->DrawTexture(Filter, camPos.getX(), camPos.getY());
+        
+        Engine::GetInstance().render->DrawUIimage(Filter, 0, 0);
 
     }
 
