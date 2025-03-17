@@ -50,6 +50,7 @@ bool Scene::Awake()
 		enemyList.push_back(enemy);
 	}
 
+
 	// L16: TODO 2: Instantiate a new GuiControlButton in the Scene
 	/*SDL_Rect btPos = { 520, 350, 120,20 };
 	guiBt = (GuiControlButton*) Engine::GetInstance().guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "MyButton", btPos, this);*/
@@ -107,19 +108,10 @@ bool Scene::Update(float dt)
 
 	Vector2D mapLimit = Engine::GetInstance().map->MapToWorld(Engine::GetInstance().map->GetWidth(), Engine::GetInstance().map->GetHeight());
 
-	Engine::GetInstance().render.get()->camera.y = (-player->position.getY() * scale);
-	Engine::GetInstance().render.get()->camera.x = (-player->position.getX() * scale);
 
-	if (player->position.getY() > WHeight/2 &&
-		player->position.getY() < mapLimit.getY() - WHeight/2)
-	{
 		Engine::GetInstance().render.get()->camera.y = (-player->position.getY() * scale) + WHeight / 2;
-	}
-	if (player->position.getX() > WWidth/2 &&
-		player->position.getX() < mapLimit.getX() - WWidth/2)
-	{
+
 		Engine::GetInstance().render.get()->camera.x = Slower(Engine::GetInstance().render.get()->camera.x, (-player->position.getX() * scale) + WWidth / 2, 1.0f);
-	}
 
 
 	// L10 TODO 6: Implement a method that repositions the player in the map with a mouse click

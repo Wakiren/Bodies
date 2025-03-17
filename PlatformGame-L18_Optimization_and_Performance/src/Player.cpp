@@ -68,7 +68,7 @@ bool Player::Update(float dt)
 		velocity = b2Vec2(0,0);
 	}
 	
-	MoveToMousePos(1);
+	//MoveToMousePos(1);
 
 	b2Transform pbodyPos = pbody->body->GetTransform();
 	position.setX(METERS_TO_PIXELS(pbodyPos.p.x) - texH / 2);

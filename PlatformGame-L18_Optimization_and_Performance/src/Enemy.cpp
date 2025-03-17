@@ -50,6 +50,7 @@ bool Enemy::Start() {
 
 	// Initialize pathfinding
 	pathfinding = new Pathfinding();
+	Engine::GetInstance().render.get()->DrawTexture(texture, (int)position.getX(), (int)position.getY(), &currentAnimation->GetCurrentFrame());
 	ResetPath();
 
 	return true;
@@ -114,10 +115,10 @@ bool Enemy::Update(float dt)
 
 	// Propagate the pathfinding algorithm using A* with the selected heuristic
 	ResetPath();
-	while (pathfinding->pathTiles.empty())
-	{
-		pathfinding->PropagateAStar(SQUARED);
-	}
+	//while (pathfinding->pathTiles.empty())
+	//{
+	//	pathfinding->PropagateAStar(SQUARED);
+	//}
 
 	// L08 TODO 4: Add a physics to an item - update the position of the object from the physics.  
 	b2Transform pbodyPos = pbody->body->GetTransform();
