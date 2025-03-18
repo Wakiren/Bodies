@@ -31,10 +31,11 @@ GuiControl* GuiManager::CreateGuiControl(GuiControlType type, int id, const char
 	}
 
 	//Set the observer
-	guiControl->observer = observer;
+	guiControl->SetObserver(observer);
 
 	// Created GuiControls are add it to the list of controls
 	guiControlsList.push_back(guiControl);
+	guiControlsList_.Add(guiControl);
 
 	return guiControl;
 }
@@ -49,12 +50,28 @@ bool GuiManager::Update(float dt)
 	return true;
 }
 
+bool GuiManager::Draw()
+{
+	ListItem<GuiControl*>* control_ = guiControlsList_.start;
+	while (control_ != NULL)
+	{
+		if (control_->data->state != GuiControlState::NONE) {
+			control_->data->Draw(Engine::GetInstance().render.get());
+		}
+	}
+
+	return true;
+}
+
 bool GuiManager::CleanUp()
 {
 	for (const auto& control : guiControlsList)
 	{
 		delete control;
 	}
+
+	ListItem<GuiControl*>* control_ = guiControlsList_.start;
+	guiControlsList_.Clear();
 
 	return true;
 }

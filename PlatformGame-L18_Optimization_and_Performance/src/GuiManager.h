@@ -4,6 +4,8 @@
 #include "GuiControl.h"
 
 #include <list>
+#include "List.h"
+#include "SString.h"
 
 class GuiManager : public Module
 {
@@ -21,6 +23,8 @@ public:
 	 // Called each loop iteration
 	 bool Update(float dt);
 
+	bool Draw();
+
 	// Called before quitting
 	bool CleanUp();
 
@@ -30,6 +34,8 @@ public:
 public:
 
 	std::list<GuiControl*> guiControlsList;
+	List<GuiControl*> guiControlsList_;
+
 	SDL_Texture* texture;
 
 };

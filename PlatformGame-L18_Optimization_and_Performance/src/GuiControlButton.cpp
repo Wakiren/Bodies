@@ -3,10 +3,11 @@
 #include "Engine.h"
 #include "Audio.h"
 
-GuiControlButton::GuiControlButton(int id, SDL_Rect bounds, const char* text) : GuiControl(GuiControlType::BUTTON, id)
+GuiControlButton::GuiControlButton(int id, SDL_Rect bounds, const char* text, int fontSize) : GuiControl(GuiControlType::BUTTON, id)
 {
 	this->bounds = bounds;
 	this->text = text;
+	this->fontSize = fontSize;
 
 	canClick = true;
 	drawBasic = false;
@@ -41,26 +42,69 @@ bool GuiControlButton::Update(float dt)
 			state = GuiControlState::NORMAL;
 		}
 
-		//L16: TODO 4: Draw the button according the GuiControl State
-		switch (state)
-		{
-		case GuiControlState::DISABLED:
-			Engine::GetInstance().render->DrawRectangle(bounds, 200, 200, 200, 255, true, false);
-			break;
-		case GuiControlState::NORMAL:
-			Engine::GetInstance().render->DrawRectangle(bounds, 0, 0, 255, 255, true, false);
-			break;
-		case GuiControlState::FOCUSED:
-			Engine::GetInstance().render->DrawRectangle(bounds, 0, 0, 20, 255, true, false);
-			break;
-		case GuiControlState::PRESSED:
-			Engine::GetInstance().render->DrawRectangle(bounds, 0, 255, 0, 255, true, false);
-			break;
-		}
+		////L16: TODO 4: Draw the button according the GuiControl State
+		//switch (state)
+		//{
+		//case GuiControlState::DISABLED:
+		//	Engine::GetInstance().render->DrawRectangle(bounds, 200, 200, 200, 255, true, false);
+		//	break;
+		//case GuiControlState::NORMAL:
+		//	Engine::GetInstance().render->DrawRectangle(bounds, 0, 0, 255, 255, true, false);
+		//	break;
+		//case GuiControlState::FOCUSED:
+		//	Engine::GetInstance().render->DrawRectangle(bounds, 0, 0, 20, 255, true, false);
+		//	break;
+		//case GuiControlState::PRESSED:
+		//	Engine::GetInstance().render->DrawRectangle(bounds, 0, 255, 0, 255, true, false);
+		//	break;
+		//}
 
-		Engine::GetInstance().render->DrawText(text.c_str(), bounds.x, bounds.y, bounds.w, bounds.h);
+		//Engine::GetInstance().render->DrawText(text.c_str(), bounds.x, bounds.y, bounds.w, bounds.h);
 
 	}
+
+	return false;
+}
+
+bool GuiControlButton::Draw(Render* render)
+{
+	// Draw the right button depending on state
+	switch (state)
+	{
+
+	case GuiControlState::DISABLED:
+	{
+		render->DrawRectangle({ bounds.x, bounds.y, bounds.w, bounds.h }, 200, 200, 200, 255, true, false);
+
+	} break;
+
+	case GuiControlState::NORMAL:
+	{
+		render->DrawRectangle({ bounds.x, bounds.y, bounds.w, bounds.h }, 0, 128, 255, 255, true, false);
+
+	}	break;
+
+	case GuiControlState::FOCUSED:
+	{
+		render->DrawRectangle({ bounds.x, bounds.y, bounds.w, bounds.h }, 255, 0, 255, 255, true, false);
+
+	} break;
+
+	case GuiControlState::PRESSED:
+	{
+		render->DrawRectangle({ bounds.x, bounds.y, bounds.w, bounds.h }, 0, 255, 0, 255, true, false);
+
+	} break;
+
+	case GuiControlState::SELECTED:
+		break;
+	}
+
+	int size = fontSize;
+	int x = bounds.w / size * 0.5;
+	int y = bounds.h - size / 4;
+
+	Engine::GetInstance().render.get()->DrawText(text.GetString(), bounds.x + x, bounds.y, size);
 
 	return false;
 }
