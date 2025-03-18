@@ -106,6 +106,19 @@ void Render::SetBackgroundColor(SDL_Color color)
 	background = color;
 }
 
+bool Render::LoadState(pugi::xml_node& data)
+{
+	camera.x = data.child("camera").attribute("x").as_int();
+	camera.y = data.child("camera").attribute("y").as_int();
+}
+
+bool Render::SaveState(pugi::xml_node& data)
+{
+	pugi::xml_node cam = data.append_child("camera");
+	cam.append_attribute("x") = camera.x;
+	cam.append_attribute("y") = camera.y;
+}
+
 void Render::SetViewPort(const SDL_Rect& rect)
 {
 	SDL_RenderSetViewport(renderer, &rect);
