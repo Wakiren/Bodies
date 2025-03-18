@@ -68,7 +68,7 @@ bool Player::Update(float dt)
 		velocity = b2Vec2(0,0);
 	}
 	
-	//MoveToMousePos(1);
+	MoveToMousePos(1);
 
 	b2Transform pbodyPos = pbody->body->GetTransform();
 	position.setX(METERS_TO_PIXELS(pbodyPos.p.x) - texH / 2);
@@ -77,6 +77,10 @@ bool Player::Update(float dt)
 	Engine::GetInstance().render.get()->DrawTexture(texture, (int)position.getX(), (int)position.getY(),
 	&currentAnimation->GetCurrentFrame(), 1, spriteAngle);
 	currentAnimation->Update();
+
+	//Draw the Trees
+	Engine::GetInstance().map.get()->DrawTrees();
+
 	return true;
 }
 

@@ -179,6 +179,8 @@ public:
         return mapData.tileHeight;
     }
 
+    void DrawTrees();
+
     MapLayer* GetNavigationLayer();
 
 
@@ -186,7 +188,7 @@ public:
     std::string mapFileName;
     std::string mapPath;
 	SDL_Texture* Filter = nullptr;
-
+    SDL_Texture* Trees = nullptr;
 private:
     bool mapLoaded;
     // L06: DONE 1: Declare a variable data of the struct MapData

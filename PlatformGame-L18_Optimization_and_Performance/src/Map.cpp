@@ -30,6 +30,7 @@ bool Map::Awake()
 bool Map::Start() {
 
     Filter = Engine::GetInstance().textures->Load("Assets/UI/Filter.png");
+	Trees = Engine::GetInstance().textures->Load("Assets/Maps/Trees.png");
     return true;
 }
 
@@ -91,20 +92,16 @@ bool Map::Update(float dt)
                 }
             }
         }
-        for (const auto& Image : mapData.bgImages) {
-            if (Image->properties.GetProperty("DrawTop") != NULL && Image->properties.GetProperty("DrawTop")->value == true)
-            {
-                Engine::GetInstance().render->DrawTexture(Image->texture, 0, 0);
-            }
-        }
-
-        //Draw Filter
-        
-        Engine::GetInstance().render->DrawUIimage(Filter, 0, 0);
 
     }
 
     return ret;
+}
+
+void Map::DrawTrees()
+{
+    Engine::GetInstance().render->DrawTexture(Trees, 0, 0);
+    Engine::GetInstance().render->DrawUIimage(Filter, 0, 0);
 }
 
 // L09: TODO 2: Implement function to the Tileset based on a tile id

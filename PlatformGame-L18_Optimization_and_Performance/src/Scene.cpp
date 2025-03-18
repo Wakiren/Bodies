@@ -113,7 +113,6 @@ bool Scene::Update(float dt)
 
 		Engine::GetInstance().render.get()->camera.x = Slower(Engine::GetInstance().render.get()->camera.x, (-player->position.getX() * scale) + WWidth / 2, 1.0f);
 
-
 	// L10 TODO 6: Implement a method that repositions the player in the map with a mouse click
 
 	//Get mouse position and obtain the map coordinate
