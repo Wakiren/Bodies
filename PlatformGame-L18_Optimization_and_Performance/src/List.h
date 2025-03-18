@@ -4,8 +4,11 @@
 
 #include <stdio.h>
 
+typedef unsigned int uint;
+
 // Contains items from double linked list
 template<class tdata>
+// int to uint
 struct ListItem
 {
 	tdata data;
@@ -273,7 +276,7 @@ public:
 		return (-1);
 	}
 
-	void InsertAfter(int position, const List<tdata>& list)
+	void InsertAfter(uint position, const List<tdata>& list)
 	{
 		ListItem<tdata>* pMyList = At(position);
 		ListItem<tdata>* pOtherList = list.start;

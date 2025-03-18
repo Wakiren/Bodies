@@ -85,7 +85,5 @@ public:
 	SDL_Texture* texture;   // Texture atlas reference
 	SDL_Rect section;       // Texture atlas base section
 
-	int fontSize;		   // Font size (if required)
-
 	Module* observer;        // Observer 
 };

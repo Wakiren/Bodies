@@ -3,11 +3,10 @@
 #include "Engine.h"
 #include "Audio.h"
 
-GuiControlButton::GuiControlButton(int id, SDL_Rect bounds, const char* text, int fontSize) : GuiControl(GuiControlType::BUTTON, id)
+GuiControlButton::GuiControlButton(int id, SDL_Rect bounds, const char* text) : GuiControl(GuiControlType::BUTTON, id)
 {
 	this->bounds = bounds;
 	this->text = text;
-	this->fontSize = fontSize;
 
 	canClick = true;
 	drawBasic = false;
