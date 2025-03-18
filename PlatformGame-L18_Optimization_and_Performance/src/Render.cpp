@@ -240,24 +240,53 @@ bool Render::DrawCircle(int x, int y, int radius, Uint8 r, Uint8 g, Uint8 b, Uin
 	return ret;
 }
 
-bool Render::DrawText(const char* text, int posx, int posy, int w, int h) const
+bool Render::DrawText(const char* text, int x, int y, int size, SDL_Color color)
 {
+	bool ret = true;
+	//load a font into memory
+	ttf_font = TTF_OpenFont("Assets/Fonts/Typo_Light.ttf", size);
 
-	SDL_Color color = { 255, 255, 255 };
-	SDL_Surface* surface = TTF_RenderText_Solid(font, text, color);
-	SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
+	if (!ttf_font)
+	{
+		LOG("Cannot open font. TTF_OpenFont error: %s", TTF_GetError());
+		return false;
+	}
 
-	int texW = 0;
-	int texH = 0;
-	SDL_QueryTexture(texture, NULL, NULL, &texW, &texH);
-	SDL_Rect dstrect = { posx, posy, w, h };
+	SDL_Color ttf_color;
+	ttf_color.r = color.r;
+	ttf_color.g = color.g;
+	ttf_color.b = color.b;
+	ttf_color.a = color.a;
 
-	SDL_RenderCopy(renderer, texture, NULL, &dstrect);
+	SDL_Rect ttf_rect;
+	ttf_surface = TTF_RenderText_Solid(ttf_font, text, ttf_color);
+	ttf_texture = SDL_CreateTextureFromSurface(renderer, ttf_surface);
 
-	SDL_DestroyTexture(texture);
-	SDL_FreeSurface(surface);
+	if (ttf_surface == nullptr)
+	{
+		LOG("Cannot open font. SDL_Surface* error: %s", SDL_GetError());
+		ret = false;
+	}
+	else
+	{
+		ttf_rect.x = x * Engine::GetInstance().window.get()->GetScale();
+		ttf_rect.y = y * Engine::GetInstance().window.get()->GetScale();
+		ttf_rect.w = ttf_surface->w * Engine::GetInstance().window.get()->GetScale();
+		ttf_rect.h = ttf_surface->h * Engine::GetInstance().window.get()->GetScale();
 
-	return true;
+		SDL_FreeSurface(ttf_surface);
+		if (SDL_RenderCopy(renderer, ttf_texture, NULL, &ttf_rect) != 0)
+		{
+			LOG("Cannot render text to screen. SDL_RenderCopy error: %s", SDL_GetError());
+			ret = false;
+		}
+
+		SDL_DestroyTexture(ttf_texture);
+		ttf_texture = nullptr;
+		TTF_CloseFont(ttf_font);
+	}
+
+	return ret;
 }
 
 bool Render::DrawUIimage(SDL_Texture* texture, int x, int y, const SDL_Rect* section, float speed, double angle, int pivotX, int pivotY) const
