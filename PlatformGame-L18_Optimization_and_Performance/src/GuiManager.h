@@ -29,12 +29,16 @@ public:
 	bool CleanUp();
 
 	// Additional methods
-	GuiControl* CreateGuiControl(GuiControlType type, int id, const char* text, SDL_Rect bounds, Module* observer, SDL_Rect sliderBounds = { 0,0,0,0 });
+	GuiControl* CreateGuiControl(GuiControlType type, int id, const char* text, SDL_Rect bounds, int fontSize, Module* observer, SDL_Rect sliderBounds = { 0,0,0,0 });
 
 public:
 
-	std::list<GuiControl*> guiControlsList;
+	//std::list<GuiControl*> guiControlsList;
 	List<GuiControl*> guiControlsList_;
+
+	float accumulatedTime = 0.0f;
+	float updateMsCycle = 0.0f;
+	bool doLogic = false;
 
 	SDL_Texture* texture;
 

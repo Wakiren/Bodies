@@ -5,7 +5,11 @@
 #include "SDL2/SDL_rect.h"
 #include "Vector2D.h"
 
+#define MAX_CHARS 10
+
 #define NUM_MOUSE_BUTTONS 5
+
+struct SDL_Rect;
 
 enum EventWindow
 {
@@ -62,6 +66,8 @@ public:
 	// Get mouse / axis position
 	Vector2D GetMousePosition();
 	Vector2D GetMouseMotion();
+
+	void HandleInput(SDL_Event event);
 
 	std::string playerName;
 	bool nameEntered = false;

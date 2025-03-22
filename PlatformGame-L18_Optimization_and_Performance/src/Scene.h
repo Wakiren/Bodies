@@ -70,4 +70,6 @@ private:
 
 	// L16: TODO 2: Declare a GUI Control Button 
 	GuiControlButton* guiBt;
+	int dialogueID;
+	bool exit;
 };

@@ -2,6 +2,7 @@
 #include "Input.h"
 #include "Window.h"
 #include "Log.h"
+#include "DialogueSystem.h"
 
 #define MAX_KEYS 300
 
@@ -109,6 +110,10 @@ bool Input::PreUpdate()
 				mouseButtons[event.button.button - 1] = KEY_DOWN;
 			break;
 
+			case SDL_KEYDOWN:
+				if (getInput) { HandleInput(event); }
+				break;
+
 			case SDL_MOUSEBUTTONUP:
 				mouseButtons[event.button.button - 1] = KEY_UP;
 			break;
@@ -148,4 +153,40 @@ Vector2D Input::GetMousePosition()
 Vector2D Input::GetMouseMotion()
 {
 	return Vector2D(mouseMotionX, mouseMotionY);
+}
+
+void Input::HandleInput(SDL_Event event)
+{
+	// Keep a copy of the current version of the string
+	std::string temp = playerName;
+
+	// If the string less than maximum size
+	if (playerName.length() <= MAX_CHARS)
+	{
+		//Append the character
+		playerName += (char)event.key.keysym.sym;
+	}
+
+	// If backspace was pressed and the string isn't blank
+	if ((event.key.keysym.sym == SDLK_BACKSPACE) && !playerName.empty())
+	{
+		// Remove a character from the end
+		playerName.erase(playerName.length() - 1);
+		playerName.erase(playerName.length() - 1);
+	}
+
+	if ((event.key.keysym.sym == SDLK_RETURN) && !playerName.empty())
+	{
+		playerName.erase(playerName.length() - 1);
+		Engine::GetInstance().dialogueSystem.get()->SaveDialogueState();
+		nameEntered = true;
+		getInput = false;
+	}
+
+	// Ignore shift
+	if (event.key.keysym.sym == SDLK_LSHIFT || event.key.keysym.sym == SDLK_RSHIFT)
+	{
+		// Append the character
+		playerName.erase(playerName.length() - 1);
+	}
 }

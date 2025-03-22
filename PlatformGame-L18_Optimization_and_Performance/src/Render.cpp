@@ -53,9 +53,6 @@ bool Render::Awake()
 	//initialise the SDL_ttf library
 	TTF_Init();
 
-	//load a font into memory
-	font = TTF_OpenFont("Assets/Fonts/arial/arial.ttf", 25);
-
 	return ret;
 }
 
@@ -164,6 +161,44 @@ bool Render::DrawTexture(SDL_Texture* texture, int x, int y, const SDL_Rect* sec
 	}
 
 	if(SDL_RenderCopyEx(renderer, texture, section, &rect, angle, p, SDL_FLIP_NONE) != 0)
+	{
+		LOG("Cannot blit to screen. SDL_RenderCopy error: %s", SDL_GetError());
+		ret = false;
+	}
+
+	return ret;
+}
+
+bool Render::DrawUIimage(SDL_Texture* texture, int x, int y, const SDL_Rect* section, float speed, double angle, int pivotX, int pivotY) const
+{
+	bool ret = true;
+	int scale = Engine::GetInstance().window.get()->GetScale();
+
+	SDL_Rect rect;
+	rect.x = (int)(camera.x * speed) + y - camera.x;
+	rect.y = (int)(camera.y * speed) + x - camera.y;
+
+	if (section != NULL)
+	{
+		rect.w = section->w;
+		rect.h = section->h;
+	}
+	else
+	{
+		SDL_QueryTexture(texture, NULL, NULL, &rect.w, &rect.h);
+	}
+
+	SDL_Point* p = NULL;
+	SDL_Point pivot;
+
+	if (pivotX != INT_MAX && pivotY != INT_MAX)
+	{
+		pivot.x = pivotX;
+		pivot.y = pivotY;
+		p = &pivot;
+	}
+
+	if (SDL_RenderCopyEx(renderer, texture, section, &rect, angle, p, SDL_FLIP_NONE) != 0)
 	{
 		LOG("Cannot blit to screen. SDL_RenderCopy error: %s", SDL_GetError());
 		ret = false;
@@ -288,7 +323,6 @@ bool Render::DrawText(const char* text, int x, int y, int size, SDL_Color color)
 		ttf_rect.w = ttf_surface->w * Engine::GetInstance().window.get()->GetScale();
 		ttf_rect.h = ttf_surface->h * Engine::GetInstance().window.get()->GetScale();
 
-		SDL_FreeSurface(ttf_surface);
 		if (SDL_RenderCopy(renderer, ttf_texture, NULL, &ttf_rect) != 0)
 		{
 			LOG("Cannot render text to screen. SDL_RenderCopy error: %s", SDL_GetError());
@@ -296,46 +330,9 @@ bool Render::DrawText(const char* text, int x, int y, int size, SDL_Color color)
 		}
 
 		SDL_DestroyTexture(ttf_texture);
+		SDL_FreeSurface(ttf_surface);
 		ttf_texture = nullptr;
 		TTF_CloseFont(ttf_font);
-	}
-
-	return ret;
-}
-
-bool Render::DrawUIimage(SDL_Texture* texture, int x, int y, const SDL_Rect* section, float speed, double angle, int pivotX, int pivotY) const
-{
-	bool ret = true;
-	int scale = Engine::GetInstance().window.get()->GetScale();
-
-	SDL_Rect rect;
-	rect.x = (int)(camera.x * speed) + y - camera.x;
-	rect.y = (int)(camera.y * speed) + x - camera.y;
-
-	if (section != NULL)
-	{
-		rect.w = section->w;
-		rect.h = section->h;
-	}
-	else
-	{
-		SDL_QueryTexture(texture, NULL, NULL, &rect.w, &rect.h);
-	}
-
-	SDL_Point* p = NULL;
-	SDL_Point pivot;
-
-	if (pivotX != INT_MAX && pivotY != INT_MAX)
-	{
-		pivot.x = pivotX;
-		pivot.y = pivotY;
-		p = &pivot;
-	}
-
-	if (SDL_RenderCopyEx(renderer, texture, section, &rect, angle, p, SDL_FLIP_NONE) != 0)
-	{
-		LOG("Cannot blit to screen. SDL_RenderCopy error: %s", SDL_GetError());
-		ret = false;
 	}
 
 	return ret;

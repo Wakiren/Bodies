@@ -18,7 +18,7 @@ bool GuiManager::Start()
 }
 
 // L16: TODO 1: Implement CreateGuiControl function that instantiates a new GUI control and add it to the list of controls
-GuiControl* GuiManager::CreateGuiControl(GuiControlType type, int id, const char* text, SDL_Rect bounds, Module* observer, SDL_Rect sliderBounds)
+GuiControl* GuiManager::CreateGuiControl(GuiControlType type, int id, const char* text, SDL_Rect bounds, int fontSize, Module* observer, SDL_Rect sliderBounds)
 {
 	GuiControl* guiControl = nullptr;
 
@@ -26,7 +26,7 @@ GuiControl* GuiManager::CreateGuiControl(GuiControlType type, int id, const char
 	switch (type)
 	{
 	case GuiControlType::BUTTON:
-		guiControl = new GuiControlButton(id, bounds, text);
+		guiControl = (GuiControl*) new GuiControlButton(id, bounds, text, fontSize);
 		break;
 	}
 
@@ -34,7 +34,7 @@ GuiControl* GuiManager::CreateGuiControl(GuiControlType type, int id, const char
 	guiControl->SetObserver(observer);
 
 	// Created GuiControls are add it to the list of controls
-	guiControlsList.push_back(guiControl);
+	/*guiControlsList.push_back(guiControl);*/
 	guiControlsList_.Add(guiControl);
 
 	return guiControl;
@@ -42,9 +42,22 @@ GuiControl* GuiManager::CreateGuiControl(GuiControlType type, int id, const char
 
 bool GuiManager::Update(float dt)
 {	
-	for (const auto& control : guiControlsList)
+	accumulatedTime += dt;
+	if (accumulatedTime >= updateMsCycle) doLogic = true;
+
+	// We control how often the GUI is updated to optimize the performance
+	if (doLogic == true)
 	{
-		control->Update(dt);
+		ListItem<GuiControl*>* control = guiControlsList_.start;
+
+		while (control != nullptr)
+		{
+			if (control->data->state != GuiControlState::NONE) { control->data->Update(dt); }
+			control = control->next;
+		}
+
+		accumulatedTime = 0.0f;
+		doLogic = false;
 	}
 
 	return true;
@@ -58,6 +71,7 @@ bool GuiManager::Draw()
 		if (control_->data->state != GuiControlState::NONE) {
 			control_->data->Draw(Engine::GetInstance().render.get());
 		}
+		control_ = control_->next;
 	}
 
 	return true;
@@ -65,12 +79,13 @@ bool GuiManager::Draw()
 
 bool GuiManager::CleanUp()
 {
-	for (const auto& control : guiControlsList)
-	{
-		delete control;
-	}
+	ListItem<GuiControl*>* control = guiControlsList_.start;
 
-	ListItem<GuiControl*>* control_ = guiControlsList_.start;
+	/*while (control != nullptr)
+	{
+		RELEASE(control);
+	}*/
+
 	guiControlsList_.Clear();
 
 	return true;

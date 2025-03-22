@@ -23,6 +23,12 @@ public:
 		return true;
 	}
 
+	// Called before render is available
+	virtual bool Awake(pugi::xml_node&)
+	{
+		return true;
+	}
+
 	// Called before the first frame
 	virtual bool Start()
 	{

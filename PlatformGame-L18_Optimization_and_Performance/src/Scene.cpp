@@ -14,6 +14,7 @@
 #include "Enemy.h"
 #include "GuiControl.h"
 #include "GuiManager.h"
+#include "DialogueSystem.h"
 #include "Map.h"
 
 Scene::Scene() : Module()
@@ -89,29 +90,32 @@ bool Scene::PreUpdate()
 // Called each loop iteration
 bool Scene::Update(float dt)
 {
-
+	
 	//L03 TODO 3: Make the camera movement independent of framerate
 	float camSpeed = 2;
 	int scale = Engine::GetInstance().window.get()->GetScale();
 
-	//if(Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
-	//	Engine::GetInstance().render.get()->camera.y += ceil(camSpeed * dt);
+	if (Engine::GetInstance().physics.get()->debug) {
+		if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
+			Engine::GetInstance().render.get()->camera.y += ceil(camSpeed * dt);
 
-	//if(Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
-	//	Engine::GetInstance().render.get()->camera.y -= ceil(camSpeed * dt);
+		if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
+			Engine::GetInstance().render.get()->camera.y -= ceil(camSpeed * dt);
 
-	//if(Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
-	//	Engine::GetInstance().render.get()->camera.x += ceil(camSpeed * dt);
+		if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
+			Engine::GetInstance().render.get()->camera.x += ceil(camSpeed * dt);
 
-	//if(Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
-	//	Engine::GetInstance().render.get()->camera.x -= ceil(camSpeed * dt);
+		if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
+			Engine::GetInstance().render.get()->camera.x -= ceil(camSpeed * dt);
+	}
 
 	Vector2D mapLimit = Engine::GetInstance().map->MapToWorld(Engine::GetInstance().map->GetWidth(), Engine::GetInstance().map->GetHeight());
 
-
+	if (!Engine::GetInstance().physics.get()->debug) {
 		Engine::GetInstance().render.get()->camera.y = (-player->position.getY() * scale) + WHeight / 2;
 
 		Engine::GetInstance().render.get()->camera.x = Slower(Engine::GetInstance().render.get()->camera.x, (-player->position.getX() * scale) + WWidth / 2, 1.0f);
+	}
 
 	// L10 TODO 6: Implement a method that repositions the player in the map with a mouse click
 
@@ -128,10 +132,10 @@ bool Scene::Update(float dt)
 	{
 		Engine::GetInstance().render.get()->DrawTexture(mouseTileTex, highlightTile.getX(), highlightTile.getY(), &rect);
 		//If mouse button is pressed modify enemy position
-		if (Engine::GetInstance().input.get()->GetMouseButtonDown(1) == KEY_DOWN) {
+		/*if (Engine::GetInstance().input.get()->GetMouseButtonDown(1) == KEY_DOWN) {
 			enemyList[0]->SetPosition(Vector2D(highlightTile.getX(), highlightTile.getY()));
 			enemyList[0]->ResetPath();
-		}
+		}*/
 	}
 
 	// saves the tile pos for debugging purposes
@@ -149,11 +153,40 @@ bool Scene::PostUpdate()
 
 	if(Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 		ret = false;
-	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_F6) == KEY_DOWN)
+	/*if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_F6) == KEY_DOWN)
 		LoadState();
 
 	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_F5) == KEY_DOWN)
-		SaveState();
+		SaveState();*/
+
+	
+	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && Engine::GetInstance().dialogueSystem->activeTree == nullptr)
+		Engine::GetInstance().dialogueSystem->LoadDialogue("dialogues.xml", 0);
+	Engine::GetInstance().render.get()->DrawText("Press Space to start dialogue", 10, 10, 20, { 255, 255, 255, 255 });
+
+	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
+	{
+		Engine::GetInstance().dialogueSystem.get()->CleanUp();
+		dialogueID = Engine::GetInstance().dialogueSystem.get()->LoadDialogue("dialogues.xml", 0);
+	}
+
+	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_F3) == KEY_DOWN)
+	{
+		Engine::GetInstance().dialogueSystem.get()->CleanUp();
+		dialogueID = Engine::GetInstance().dialogueSystem.get()->LoadDialogue("dialogues.xml", 1);
+		Engine::GetInstance().dialogueSystem.get()->LoadDialogueState();
+	}
+
+
+	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_F5) == KEY_DOWN)
+	{
+		Engine::GetInstance().dialogueSystem.get()->SaveDialogueState();
+	}
+
+	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_F6) == KEY_DOWN)
+	{
+		Engine::GetInstance().dialogueSystem.get()->LoadDialogueState();
+	}
 
 	return ret;
 }

@@ -8,7 +8,7 @@
 		<vsync value="false" />
 	</render>
 	<window>
-		<resolution width="1920" height="1080" scale="4" />
+		<resolution width="960" height="540" scale="1" />
 		<fullscreen value="false" />
 		<borderless value="false" />
 		<resizable value="false" />
@@ -43,4 +43,5 @@
 			</enemies>
 		</entities>
 	</scene>
+	<dialogueSystem textBoxBg="Assets/Textures/textBox.png"/>
 </config>
