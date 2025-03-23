@@ -4,7 +4,9 @@
 #include "SDL2/SDL.h"
 #include "Animation.h"
 #include "Pathfinding.h"
+#include "CombatStats.h"
 
+struct CombatStats;
 struct SDL_Texture;
 
 class Enemy : public Entity
@@ -37,6 +39,8 @@ public:
 	void OnCollisionEnd(PhysBody* physA, PhysBody* physB);
 
 public:
+
+	CombatStats combatStats;
 
 private:
 

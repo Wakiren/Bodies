@@ -4,7 +4,9 @@
 #include "SDL2/SDL.h"
 #include "Box2D/Box2D.h"
 #include "Animation.h"
+#include "CombatStats.h"
 
+struct CombatStats;
 struct SDL_Texture;
 
 class Player : public Entity
@@ -39,6 +41,8 @@ public:
 	Vector2D GetPosition();
 
 public:
+
+	CombatStats combatStats;
 
 	//Declare player parameters
 	float speed = 5.0f;
