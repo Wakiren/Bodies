@@ -31,6 +31,9 @@
 						<frame x="256" y="0" w="32" h="32" />
 					</idle>
 				</animations>
+        <combat>
+          <attack value ="10"/>
+        </combat>
 			</player>
 			<enemies>
 				<enemy name="badguy" x="2610" y="3180" w="32" h="32" texture="Assets/Textures/player/Idle.png" gravity="true">

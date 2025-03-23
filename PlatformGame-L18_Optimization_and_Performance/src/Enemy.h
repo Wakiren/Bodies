@@ -40,7 +40,7 @@ public:
 
 public:
 
-	CombatStats combatStats;
+	CombatStats* combatStats;
 
 private:
 

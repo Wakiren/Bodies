@@ -30,25 +30,25 @@ bool CombatSystem::CleanUp()
 }
 
 //THESE FUNCTIONS ARE REDUNDANT AND TEMPORARY, MUST FIND A WAY TO UNIFY
-void CombatSystem::PlayerAttack(Player& player, Enemy& enemy) {
+void CombatSystem::PlayerAttack(Player* player, Enemy* enemy) {
 
-    int damage = player.combatStats.attackPoints - enemy.combatStats.defensePoints;
+    int damage = player->combatStats->attackPoints - enemy->combatStats->defensePoints;
     if (damage < 0)
     {
         damage = 0;
     }
-    enemy.combatStats.TakeDamage(damage);
+    enemy->combatStats->TakeDamage(damage);
 }
-void CombatSystem::EnemyAttack(Player& player, Enemy& enemy) {
-
-    int damage = enemy.combatStats.attackPoints - player.combatStats.defensePoints;
-    if (damage < 0)
-    {
-        damage = 0;
-    }
-    player.combatStats.TakeDamage(damage);
-
-}
+//void CombatSystem::EnemyAttack(Player& player, Enemy& enemy) {
+//
+//    int damage = enemy.combatStats.attackPoints - player.combatStats.defensePoints;
+//    if (damage < 0)
+//    {
+//        damage = 0;
+//    }
+//    player.combatStats.TakeDamage(damage);
+//
+//}
 void CombatSystem::MainLoop()
 {
     if (!isCombatOver(player, enemy)) 
@@ -83,11 +83,11 @@ void CombatSystem::PlayerTurn()
 
 bool CombatSystem::isCombatOver(Player* player, Enemy* enemy)
 {
-    if (!player->combatStats.isAlive()) {
+    if (!player->combatStats->isAlive()) {
         cout << "Player defeated!\n";
         return true;
     }
-    if (!enemy->combatStats.isAlive()) {
+    if (!enemy->combatStats->isAlive()) {
         cout << "Enemy defeated!\n";
         return true;
     }

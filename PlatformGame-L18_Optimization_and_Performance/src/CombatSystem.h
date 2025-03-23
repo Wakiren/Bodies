@@ -1,7 +1,9 @@
 #include "DialogueSystem.h"
 #include "Enemy.h"
 #include "Player.h"
+#include "CombatStats.h"
 
+struct CombatStats;
 class CombatSystem : public Module
 {
 public:
@@ -19,7 +21,7 @@ public:
 	void PlayerTurn();
 
 	//THESE FUNCTIONS ARE REDUNDANT AND TEMPORARY, MUST FIND A WAY TO UNIFY
-	void PlayerAttack(Player& player, Enemy& enemy);
+	void PlayerAttack(Player* player, Enemy* enemy);
 	void EnemyAttack(Player& player, Enemy& enemy);
 	void Guard();
 
