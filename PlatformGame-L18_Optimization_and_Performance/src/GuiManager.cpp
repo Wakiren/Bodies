@@ -49,7 +49,6 @@ bool GuiManager::Update(float dt)
 	if (doLogic == true)
 	{
 		ListItem<GuiControl*>* control = guiControlsList_.start;
-
 		while (control != nullptr)
 		{
 			if (control->data->state != GuiControlState::NONE) { control->data->Update(dt); }
@@ -59,6 +58,28 @@ bool GuiManager::Update(float dt)
 		accumulatedTime = 0.0f;
 		doLogic = false;
 	}
+
+	switch (state)
+	{
+		case GuiManager::INTRO:
+			break;
+		case GuiManager::TITLE:
+			break;
+		case GuiManager::GAME:
+			break;
+		case GuiManager::COMBAT:
+			break;
+		case GuiManager::PAUSE:
+			break;
+		case GuiManager::CREDIT:
+			break;
+		case GuiManager::GAMEOVER:
+			break;
+		default:
+			break;
+	}
+
+
 
 	return true;
 }

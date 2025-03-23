@@ -35,12 +35,26 @@ public:
 
 	//std::list<GuiControl*> guiControlsList;
 	List<GuiControl*> guiControlsList_;
+	SDL_Texture* texture;
 
 	float accumulatedTime = 0.0f;
 	float updateMsCycle = 0.0f;
 	bool doLogic = false;
 
-	SDL_Texture* texture;
+
+
+	enum UIState
+	{
+		INTRO,
+		TITLE,
+		GAME,
+		COMBAT,
+		PAUSE,
+		CREDIT,
+		GAMEOVER
+	};
+
+	UIState state = INTRO;
 
 };
 

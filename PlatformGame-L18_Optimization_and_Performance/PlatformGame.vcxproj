@@ -148,6 +148,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Audio.cpp" />
+    <ClCompile Include="src\CombatSystem.cpp" />
     <ClCompile Include="src\DialogueSystem.cpp" />
     <ClCompile Include="src\DialogueTree.cpp" />
     <ClCompile Include="src\Enemy.cpp" />
@@ -172,6 +173,8 @@
     <ClCompile Include="src\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\CombatStats.h" />
+    <ClInclude Include="src\CombatSystem.h" />
     <ClInclude Include="src\Defs.h" />
     <ClInclude Include="src\DialogueSystem.h" />
     <ClInclude Include="src\DialogueTree.h" />
