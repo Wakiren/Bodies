@@ -55,6 +55,8 @@ bool Player::Start() {
 	//initialize audio effect
 	pickCoinFxId = Engine::GetInstance().audio.get()->LoadFx("Assets/Audio/Fx/retro-video-game-coin-pickup-38299.ogg");
 
+	//ASK HOW TO DO THIS, BECAUSE COMBATSTATS IS NULLPTR AT THIS MOMENT 
+	//combatStats->attackPoints = parameters.child("combat").attribute("attackPoints").as_int();
 	return true;
 }
 

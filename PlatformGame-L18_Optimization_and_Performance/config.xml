@@ -31,9 +31,7 @@
 						<frame x="256" y="0" w="32" h="32" />
 					</idle>
 				</animations>
-        <combat>
-          <attack value ="10"/>
-        </combat>
+        <combat health ="100" maxHealth ="150" attackPoints ="25" defensePoints ="50"/>
 			</player>
 			<enemies>
 				<enemy name="badguy" x="2610" y="3180" w="32" h="32" texture="Assets/Textures/player/Idle.png" gravity="true">
@@ -42,6 +40,7 @@
 							<frame x="0" y="0" w="32" h="32" />
 						</idle>
 					</animations>
+          <combat health ="100" maxHealth ="150" attackPoints ="25" defensePoints ="50"/>
 				</enemy>
 			</enemies>
 		</entities>
