@@ -58,4 +58,6 @@ public:
 	SDL_Surface* ttf_surface = nullptr;
 	SDL_Texture* ttf_texture = nullptr;
 	TTF_Font* ttf_font = nullptr;
+
+	int scale;
 };
