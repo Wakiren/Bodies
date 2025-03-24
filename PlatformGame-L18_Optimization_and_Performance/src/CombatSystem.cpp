@@ -39,16 +39,7 @@ void CombatSystem::PlayerAttack(Player* player, Enemy* enemy) {
     }
     enemy->combatStats->TakeDamage(damage);
 }
-//void CombatSystem::EnemyAttack(Player& player, Enemy& enemy) {
-//
-//    int damage = enemy.combatStats.attackPoints - player.combatStats.defensePoints;
-//    if (damage < 0)
-//    {
-//        damage = 0;
-//    }
-//    player.combatStats.TakeDamage(damage);
-//
-//}
+
 void CombatSystem::MainLoop()
 {
     if (!isCombatOver(player, enemy)) 
