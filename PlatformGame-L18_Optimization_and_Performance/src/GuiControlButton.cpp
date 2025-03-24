@@ -80,7 +80,7 @@ bool GuiControlButton::Draw(Render* render)
 
 	case GuiControlState::NORMAL:
 	{
-		render->DrawRectangle({ bounds.x, bounds.y, bounds.w, bounds.h }, 0, 128, 255, 255, true, false);
+		render->DrawRectangle({ bounds.x, bounds.y, bounds.w, bounds.h}, 0, 128, 255, 255, true, false);
 
 	}	break;
 

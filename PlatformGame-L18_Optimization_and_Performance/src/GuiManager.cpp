@@ -90,7 +90,7 @@ bool GuiManager::Draw()
 	while (control_ != NULL)
 	{
 		if (control_->data->state != GuiControlState::NONE) {
-			control_->data->Draw(Engine::GetInstance().render.get());
+ 			control_->data->Draw(Engine::GetInstance().render.get());
 		}
 		control_ = control_->next;
 	}
