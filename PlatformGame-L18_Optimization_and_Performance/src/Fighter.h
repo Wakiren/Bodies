@@ -10,8 +10,8 @@ class Fighter
 	Fighter();
 	~Fighter();
 
-	void Attack(Fighter attacker, Fighter Target);
+	void Attack(Fighter* attacker, Fighter* target);
+	void Guard(Fighter* fighter);
 
-	string name;
 	CombatStats* combatStats;
 };

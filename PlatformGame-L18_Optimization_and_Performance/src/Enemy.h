@@ -6,11 +6,13 @@
 #include "Animation.h"
 #include "Pathfinding.h"
 #include "CombatStats.h"
+#include "Fighter.h"
 
+class Fighter;
 struct CombatStats;
 struct SDL_Texture;
 
-class Enemy : public Entity
+class Enemy : public Entity//, public Fighter
 {
 public:
 

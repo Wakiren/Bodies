@@ -5,11 +5,13 @@
 #include "Box2D/Box2D.h"
 #include "Animation.h"
 #include "CombatStats.h"
+#include "Fighter.h"
 
+class Fighter;
 struct CombatStats;
 struct SDL_Texture;
 
-class Player : public Entity
+class Player : public Entity//, public Fighter
 {
 public:
 

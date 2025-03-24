@@ -29,17 +29,6 @@ bool CombatSystem::CleanUp()
 	return false;
 }
 
-//THESE FUNCTIONS ARE REDUNDANT AND TEMPORARY, MUST FIND A WAY TO UNIFY
-void CombatSystem::PlayerAttack(Player* player, Enemy* enemy) {
-
-    int damage = player->combatStats->attackPoints - enemy->combatStats->defensePoints;
-    if (damage < 0)
-    {
-        damage = 0;
-    }
-    enemy->combatStats->TakeDamage(damage);
-}
-
 void CombatSystem::MainLoop()
 {
     if (!isCombatOver(player, enemy)) 

@@ -20,11 +20,6 @@ public:
 	void EnemyTurn();
 	void PlayerTurn();
 
-	//THESE FUNCTIONS ARE REDUNDANT AND TEMPORARY, MUST FIND A WAY TO UNIFY
-	void PlayerAttack(Player* player, Enemy* enemy);
-	void EnemyAttack(Player& player, Enemy& enemy);
-	void Guard();
-
 
 public:
 
