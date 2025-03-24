@@ -17,7 +17,7 @@
 	<scene>
 		<map path="Assets/Maps/" name="MainMap.tmx" />
 		<entities>
-			<player x="2610" y="3192" w="32" h="32" texture="Assets/Textures/player/Idle.png" gravity="true">
+			<player x="2609" y="3192" w="32" h="32" texture="Assets/Textures/player/Idle.png" gravity="true">
 				<animations>
 					<idle loop="true" speed="0.5">
 						<frame x="0" y="0" w="32" h="32" />
@@ -31,19 +31,19 @@
 						<frame x="256" y="0" w="32" h="32" />
 					</idle>
 				</animations>
-        <combat health ="100" maxHealth ="150" attackPoints ="25" defensePoints ="50"/>
+				<combat health="100" maxHealth="150" attackPoints="25" defensePoints="50" />
 			</player>
 			<enemies>
-				<enemy name="badguy" x="2610" y="3180" w="32" h="32" texture="Assets/Textures/player/Idle.png" gravity="true">
+				<enemy name="badguy" x="2620" y="3180" w="32" h="32" texture="Assets/Textures/player/Idle.png" gravity="true">
 					<animations>
 						<idle loop="true" speed="0.1">
 							<frame x="0" y="0" w="32" h="32" />
 						</idle>
 					</animations>
-          <combat health ="100" maxHealth ="150" attackPoints ="25" defensePoints ="50"/>
+					<combat health="100" maxHealth="150" attackPoints="25" defensePoints="50" />
 				</enemy>
 			</enemies>
 		</entities>
 	</scene>
-	<dialogueSystem textBoxBg="Assets/Textures/textBox.png"/>
+	<dialogueSystem textBoxBg="Assets/Textures/textBox.png" />
 </config>

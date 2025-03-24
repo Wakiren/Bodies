@@ -132,10 +132,10 @@ bool Scene::Update(float dt)
 	{
 		Engine::GetInstance().render.get()->DrawTexture(mouseTileTex, highlightTile.getX(), highlightTile.getY(), &rect);
 		//If mouse button is pressed modify enemy position
-		/*if (Engine::GetInstance().input.get()->GetMouseButtonDown(1) == KEY_DOWN) {
+		if (Engine::GetInstance().input.get()->GetMouseButtonDown(SDL_BUTTON_RIGHT) == KEY_DOWN) {
 			enemyList[0]->SetPosition(Vector2D(highlightTile.getX(), highlightTile.getY()));
 			enemyList[0]->ResetPath();
-		}*/
+		}
 	}
 
 	// saves the tile pos for debugging purposes
@@ -153,11 +153,11 @@ bool Scene::PostUpdate()
 
 	if(Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 		ret = false;
-	/*if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_F6) == KEY_DOWN)
+	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_F6) == KEY_DOWN)
 		LoadState();
 
 	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_F5) == KEY_DOWN)
-		SaveState();*/
+		SaveState();
 
 	
 	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && Engine::GetInstance().dialogueSystem->activeTree == nullptr)
