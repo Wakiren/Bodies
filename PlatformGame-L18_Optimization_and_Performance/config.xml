@@ -8,7 +8,7 @@
 		<vsync value="false" />
 	</render>
 	<window>
-		<resolution width="1700" height="900" scale="1" />
+		<resolution width="1700" height="900" scale="4" />
 		<fullscreen value="false" />
 		<borderless value="false" />
 		<resizable value="false" />
@@ -34,14 +34,22 @@
 				<combat health="100" maxHealth="150" attackPoints="25" defensePoints="50" />
 			</player>
 			<enemies>
-				<enemy name="badguy" x="2700" y="3180" w="32" h="32" speed ="0.01" texture="Assets/Textures/player/Idle.png" gravity="true">
+				<Cannibal name="Cannibal" x="2700" y="3180" w="32" h="32" speed ="0.01" texture="Assets/Textures/player/Idle.png" gravity="true" SpawnRate="3">
 					<animations>
 						<idle loop="true" speed="0.1">
 							<frame x="0" y="0" w="32" h="32" />
 						</idle>
 					</animations>
 					<combat health="100" maxHealth="150" attackPoints="25" defensePoints="50" />
-				</enemy>
+				</Cannibal>
+				<Narcissist name="Narcissist" x="2700" y="3180" w="32" h="32" speed ="0.01" texture="Assets/Textures/player/Idle.png" gravity="true" SpawnRate="30">
+					<animations>
+						<idle loop="true" speed="0.1">
+							<frame x="0" y="0" w="32" h="32" />
+						</idle>
+					</animations>
+					<combat health="100" maxHealth="150" attackPoints="25" defensePoints="50" />
+				</Narcissist>
 			</enemies>
 		</entities>
 	</scene>

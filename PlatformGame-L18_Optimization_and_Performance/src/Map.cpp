@@ -396,5 +396,15 @@ Properties::Property* Properties::GetProperty(const char* name)
     return nullptr;
 }
 
+MapLayer* Map::GetDataLayer() {
 
+    for (const auto& layer : mapData.layers) {
+        if (layer->name == "MapDataUpper" != NULL &&
+            layer->name == "MapDataUpper") {
+            return layer;
+        }
+    }
+
+    return nullptr;
+}
 

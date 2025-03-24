@@ -29,8 +29,7 @@ bool Enemy::Start() {
 	
 	//initilize textures
 	texture = Engine::GetInstance().textures.get()->Load(parameters.attribute("texture").as_string());
-	position.setX(parameters.attribute("x").as_int());
-	position.setY(parameters.attribute("y").as_int());
+	position = OGPosition;
 	texW = parameters.attribute("w").as_int();
 	texH = parameters.attribute("h").as_int();
 	speed = parameters.attribute("speed").as_float();

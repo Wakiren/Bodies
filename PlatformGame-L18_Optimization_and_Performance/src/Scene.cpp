@@ -43,14 +43,6 @@ bool Scene::Awake()
 		item->SetParameters(itemNode);
 	}
 
-	// Create a enemy using the entity manager 
-	for (pugi::xml_node enemyNode = configParameters.child("entities").child("enemies").child("enemy"); enemyNode; enemyNode = enemyNode.next_sibling("enemy"))
-	{
-		Enemy* enemy = (Enemy*)Engine::GetInstance().entityManager->CreateEntity(EntityType::ENEMY);
-		enemy->SetParameters(enemyNode);
-		enemyList.push_back(enemy);
-	}
-
 
 	// L16: TODO 2: Instantiate a new GuiControlButton in the Scene
 	/*SDL_Rect btPos = { 520, 350, 120,20 };
@@ -78,6 +70,47 @@ bool Scene::Start()
 	WWidth = Engine::GetInstance().window.get()->width;
 	WHeight = Engine::GetInstance().window.get()->height;
 
+	if (Engine::GetInstance().map.get()->GetDataLayer() != nullptr)
+	{
+		for (int i = 0; i < Engine::GetInstance().map.get()->GetDataLayer()->width; i++)
+		{
+			for (int j = 0; j < Engine::GetInstance().map.get()->GetDataLayer()->height; j++)
+			{
+				//CANNIBALS
+				if (Engine::GetInstance().map.get()->GetDataLayer()->Get(i, j) == 1951)
+				{
+					pugi::xml_node enemyNode = configParameters.child("entities").child("enemies").child("Cannibal");
+					
+					Vector2D enemyPos = Engine::GetInstance().map->MapToWorld(i, j);
+
+					if (RandomValue(1, enemyNode.attribute("SpawnRate").as_int()) == 1)
+					{
+						Enemy* enemy = (Enemy*)Engine::GetInstance().entityManager->CreateEntity(EntityType::ENEMY);
+						enemy->SetParameters(enemyNode);
+						enemy->OGPosition = enemyPos;
+						enemyList.push_back(enemy);
+					}
+				}
+
+				//NARCISSISTS
+				if (Engine::GetInstance().map.get()->GetDataLayer()->Get(i, j) == 1952)
+				{
+					pugi::xml_node enemyNode = configParameters.child("entities").child("enemies").child("Narcissist");
+
+					Vector2D enemyPos = Engine::GetInstance().map->MapToWorld(i, j);
+
+					if (RandomValue(1, enemyNode.attribute("SpawnRate").as_int()) == 1)
+					{
+						Enemy* enemy = (Enemy*)Engine::GetInstance().entityManager->CreateEntity(EntityType::ENEMY);
+						enemy->SetParameters(enemyNode);
+						enemy->OGPosition = enemyPos;
+						enemyList.push_back(enemy);
+					}
+				}
+			}
+		}
+	}
+
 	return true;
 }
 
@@ -95,7 +128,6 @@ bool Scene::Update(float dt)
 	float camSpeed = 2;
 	int scale = Engine::GetInstance().window.get()->GetScale();
 
-	LOG("%f , %f", Engine::GetInstance().input.get()->GetMousePosition().getX(), Engine::GetInstance().input.get()->GetMousePosition().getY());
 
 	if (Engine::GetInstance().physics.get()->debug) {
 		if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
@@ -272,4 +304,9 @@ float Scene::Slower(float ogPos, float goalPos, float time)
 	float acceleration = goalPos - ogPos;
 	float speed = ogPos + time * acceleration;
 	return speed;
+}
+
+int Scene::RandomValue(int min, int max)
+{
+	return rand() % (max - min + 1) + min;
 }

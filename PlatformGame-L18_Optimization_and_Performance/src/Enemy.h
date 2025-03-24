@@ -46,6 +46,7 @@ public:
 public:
 
 	CombatStats* combatStats = new CombatStats;
+	Vector2D OGPosition;
 
 private:
 

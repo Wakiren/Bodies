@@ -56,6 +56,8 @@ public:
 
 	}
 
+	int RandomValue(int min, int max);
+
 	int WWidth;
 	int WHeight;
 
