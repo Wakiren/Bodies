@@ -31,7 +31,7 @@ bool DialogueSystem::Update(float dt)
 	if (activeTree != nullptr)
 	{
 		//Text box
-		Vector2D pos = { 0, (float)(Engine::GetInstance().window.get()->width - 353)};
+		Vector2D pos = { 0, (float)(Engine::GetInstance().window.get()->height )};
 		
 
 
