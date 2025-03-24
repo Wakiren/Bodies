@@ -42,7 +42,7 @@ public:
 
 public:
 
-	CombatStats* combatStats;
+	CombatStats* combatStats = new CombatStats;
 
 	//Declare player parameters
 	float speed = 5.0f;

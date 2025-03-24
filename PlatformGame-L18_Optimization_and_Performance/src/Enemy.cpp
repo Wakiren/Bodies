@@ -33,7 +33,7 @@ bool Enemy::Start() {
 	position.setY(parameters.attribute("y").as_int());
 	texW = parameters.attribute("w").as_int();
 	texH = parameters.attribute("h").as_int();
-
+	speed = parameters.attribute("speed").as_float();
 	//Load animations
 	idle.LoadAnimations(parameters.child("animations").child("idle"));
 	currentAnimation = &idle;
@@ -48,6 +48,12 @@ bool Enemy::Start() {
 
 	// Set the gravity of the body
 	pbody->body->SetGravityScale(0);
+
+	//Combat Stats
+	combatStats->attackPoints = parameters.child("combat").attribute("attackPoints").as_int();
+	combatStats->health = parameters.child("combat").attribute("health").as_int();
+	combatStats->maxHealth = parameters.child("combat").attribute("maxHealth").as_int();
+	combatStats->defensePoints = parameters.child("combat").attribute("defensePoints").as_int();
 
 	// Initialize pathfinding
 	pathfinding = new Pathfinding();
@@ -72,7 +78,7 @@ bool Enemy::Update(float dt)
 	distance.setX(abs(target.getX() - GetPosition().getX()));
 	distance.setY(abs(target.getY() - GetPosition().getY()));
 
-	visionLimit = Engine::GetInstance().map.get()->MapToWorld(16, 16);
+	visionLimit = Engine::GetInstance().map.get()->MapToWorld(2, 2);
 
 	if (IsInVision())
 	{
@@ -91,7 +97,7 @@ bool Enemy::Update(float dt)
 			Vector2D nextPos = Engine::GetInstance().map->MapToWorld(nextTile.getX(), nextTile.getY());
 			Vector2D direction = nextPos - GetPosition();
 			direction.normalized();
-			eVelocity = b2Vec2(direction.getX() * 0.02f, direction.getY() * 0.02f);
+			eVelocity = b2Vec2(direction.getX() * speed, direction.getY() * speed);
 			
 
 

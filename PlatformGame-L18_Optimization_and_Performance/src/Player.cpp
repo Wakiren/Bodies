@@ -55,8 +55,11 @@ bool Player::Start() {
 	//initialize audio effect
 	pickCoinFxId = Engine::GetInstance().audio.get()->LoadFx("Assets/Audio/Fx/retro-video-game-coin-pickup-38299.ogg");
 
-	//ASK HOW TO DO THIS, BECAUSE COMBATSTATS IS NULLPTR AT THIS MOMENT 
-	//combatStats->attackPoints = parameters.child("combat").attribute("attackPoints").as_int();
+	//Combat Stats
+	combatStats->attackPoints = parameters.child("combat").attribute("attackPoints").as_int();
+	combatStats->health = parameters.child("combat").attribute("health").as_int();
+	combatStats->maxHealth = parameters.child("combat").attribute("maxHealth").as_int();
+	combatStats->defensePoints = parameters.child("combat").attribute("defensePoints").as_int();
 	return true;
 }
 

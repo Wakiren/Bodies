@@ -43,7 +43,7 @@ public:
 
 public:
 
-	CombatStats* combatStats;
+	CombatStats* combatStats = new CombatStats;
 
 private:
 
@@ -61,6 +61,7 @@ private:
 	b2Vec2 eVelocity;
 	Vector2D distance;
 	Vector2D visionLimit;
+	float speed;
 
 	int check = 0;
 };

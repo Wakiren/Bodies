@@ -56,6 +56,7 @@ void CombatSystem::MainLoop()
         PlayerTurn();
         if (isCombatOver(player, enemy)) 
         {
+            //PlayerAttack(player, enemy);
             //END COMBAT
             cout << "COMBAT OVER" << endl;
         }
