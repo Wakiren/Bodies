@@ -34,7 +34,7 @@
 				<combat health="100" maxHealth="150" attackPoints="25" defensePoints="50" />
 			</player>
 			<enemies>
-				<enemy name="badguy" x="2620" y="3180" w="32" h="32" texture="Assets/Textures/player/Idle.png" gravity="true">
+				<enemy name="badguy" x="2700" y="3180" w="32" h="32" texture="Assets/Textures/player/Idle.png" gravity="true">
 					<animations>
 						<idle loop="true" speed="0.1">
 							<frame x="0" y="0" w="32" h="32" />

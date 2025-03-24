@@ -2,6 +2,7 @@
 
 #include "Entity.h"
 #include "SDL2/SDL.h"
+#include "Box2D/Box2D.h"
 #include "Animation.h"
 #include "Pathfinding.h"
 #include "CombatStats.h"
@@ -38,6 +39,8 @@ public:
 
 	void OnCollisionEnd(PhysBody* physA, PhysBody* physB);
 
+	bool IsInVision();
+
 public:
 
 	CombatStats* combatStats;
@@ -52,4 +55,12 @@ private:
 	Animation idle;
 	PhysBody* pbody;
 	Pathfinding* pathfinding;
+
+	bool propagatePath = false;
+
+	b2Vec2 eVelocity;
+	Vector2D distance;
+	Vector2D visionLimit;
+
+	int check = 0;
 };

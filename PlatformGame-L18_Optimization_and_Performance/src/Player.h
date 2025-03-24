@@ -66,6 +66,6 @@ private:
 	const Vector2D vecZero = {0,0};
 	Vector2D destination;
 	Vector2D movementVector = {0,0};
-	
+
 	double spriteAngle;
 };

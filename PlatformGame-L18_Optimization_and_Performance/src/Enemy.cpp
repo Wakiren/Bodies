@@ -26,6 +26,7 @@ bool Enemy::Awake() {
 
 bool Enemy::Start() {
 
+	
 	//initilize textures
 	texture = Engine::GetInstance().textures.get()->Load(parameters.attribute("texture").as_string());
 	position.setX(parameters.attribute("x").as_int());
@@ -59,83 +60,68 @@ bool Enemy::Start() {
 bool Enemy::Update(float dt)
 {
 	ZoneScoped;
-	// Pathfinding testing inputs
-	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_R) == KEY_DOWN) {
-		Vector2D pos = GetPosition();
-		Vector2D tilePos = Engine::GetInstance().map.get()->WorldToMap(pos.getX(),pos.getY());
-		pathfinding->ResetPath(tilePos);
+
+	if (pbody->body == nullptr)
+	{
+		return true;
 	}
 
-	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_J) == KEY_DOWN) {
-		pathfinding->PropagateBFS();
+
+	Vector2D target = Engine::GetInstance().scene.get()->GetPlayerPosition();
+
+	distance.setX(abs(target.getX() - GetPosition().getX()));
+	distance.setY(abs(target.getY() - GetPosition().getY()));
+
+	visionLimit = Engine::GetInstance().map.get()->MapToWorld(16, 16);
+
+	if (IsInVision())
+	{
+		if (check < 20)
+		{
+			pathfinding->PropagateAStar(SQUARED);
+			check += 1;
+		}
+		else {
+			Vector2D tilePos = Engine::GetInstance().map.get()->WorldToMap(GetPosition().getX(), GetPosition().getY());
+			pathfinding->ResetPath(tilePos);
+			check = 0;
+		}
+		if (pathfinding->pathTiles.size() > 0) {
+			Vector2D nextTile = pathfinding->pathTiles.front();
+			Vector2D nextPos = Engine::GetInstance().map->MapToWorld(nextTile.getX(), nextTile.getY());
+			Vector2D direction = nextPos - GetPosition();
+			direction.normalized();
+			eVelocity = b2Vec2(direction.getX() * 0.02f, direction.getY() * 0.02f);
+			
+
+
+
+			pbody->body->SetLinearVelocity(eVelocity);
+		}
+		else {
+			pbody->body->SetLinearVelocity(b2Vec2_zero);
+		}
 	}
-
-	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_J) == KEY_REPEAT &&
-		Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT) {
-		pathfinding->PropagateBFS();
+	else
+	{
+		pbody->body->SetLinearVelocity(b2Vec2_zero);
 	}
-
-	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_K) == KEY_DOWN) {
-		pathfinding->PropagateDijkstra();
-	}
-
-	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_K) == KEY_REPEAT &&
-		Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT) {
-		pathfinding->PropagateDijkstra();
-	}
-
-	// L13: TODO 3:	Add the key inputs to propagate the A* algorithm with different heuristics (Manhattan, Euclidean, Squared)
-
-	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_B) == KEY_DOWN) {
-		pathfinding->PropagateAStar(MANHATTAN);
-	}
-
-	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_B) == KEY_REPEAT &&
-		Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT) {
-		pathfinding->PropagateAStar(MANHATTAN);
-	}
-
-	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_N) == KEY_DOWN) {
-		pathfinding->PropagateAStar(EUCLIDEAN);
-	}
-
-	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_N) == KEY_REPEAT &&
-		Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT) {
-		pathfinding->PropagateAStar(EUCLIDEAN);
-	}
-
-	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_M) == KEY_DOWN) {
-		pathfinding->PropagateAStar(SQUARED);
-	}
-
-	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_M) == KEY_REPEAT &&
-		Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT) {
-		pathfinding->PropagateAStar(SQUARED);
-	}
-
-	// Propagate the pathfinding algorithm using A* with the selected heuristic
-	ResetPath();
-	//while (pathfinding->pathTiles.empty())
-	//{
-	//	pathfinding->PropagateAStar(SQUARED);
-	//}
 
 	// L08 TODO 4: Add a physics to an item - update the position of the object from the physics.  
 	b2Transform pbodyPos = pbody->body->GetTransform();
 	position.setX(METERS_TO_PIXELS(pbodyPos.p.x) - texH / 2);
 	position.setY(METERS_TO_PIXELS(pbodyPos.p.y) - texH / 2);
 
-	Engine::GetInstance().render.get()->DrawTexture(texture, (int)position.getX(), (int)position.getY(), &currentAnimation->GetCurrentFrame());
+
+	Engine::GetInstance().render.get()->DrawTexture(texture, (int)position.getX(), (int)position.getY() - 2, &currentAnimation->GetCurrentFrame());
 	currentAnimation->Update();
 
-	// Draw pathfinding 
-	
-	if (Engine::GetInstance().physics.get()->debug) 
+	if (Engine::GetInstance().physics.get()->debug)
 	{
+		// Draw pathfinding 
 		pathfinding->DrawPath();
 	}
-
-
+	
 	return true;
 }
 
@@ -182,4 +168,9 @@ void Enemy::OnCollisionEnd(PhysBody* physA, PhysBody* physB)
 		LOG("Collision player");
 		break;
 	}
+}
+
+bool Enemy::IsInVision()
+{
+	return distance.getX() <= visionLimit.getX() && distance.getY() <= visionLimit.getY();
 }
