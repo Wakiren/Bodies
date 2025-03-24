@@ -36,7 +36,7 @@ DialogueTree::DialogueTree(bool a)
 
 bool DialogueTree::UpdateTree(float dt, Module* mod, Vector2D pos)
 {
-	fontSize = 24;
+	fontSize = 25;
 	max_chars_line = fontSize * 3;
 
 	// TODO 6: Substitute player's name in text and choices if needed
@@ -54,7 +54,7 @@ bool DialogueTree::UpdateTree(float dt, Module* mod, Vector2D pos)
 	size_t lines = activeNode->texts.size();
 	for (size_t i = 0; i < lines; i++)
 	{
-		Engine::GetInstance().render.get()->DrawText(activeNode->texts[i].GetString(),100, 350 + 50 * i, fontSize, {100, 255, 255});
+		Engine::GetInstance().render.get()->DrawText(activeNode->texts[i].GetString(),100, 350 +50* i, fontSize, {100, 255, 255});
 	}
 
 	EventReturn(mod, pos);

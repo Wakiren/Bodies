@@ -95,6 +95,8 @@ bool Scene::Update(float dt)
 	float camSpeed = 2;
 	int scale = Engine::GetInstance().window.get()->GetScale();
 
+	LOG("%f , %f", Engine::GetInstance().input.get()->GetMousePosition().getX(), Engine::GetInstance().input.get()->GetMousePosition().getY());
+
 	if (Engine::GetInstance().physics.get()->debug) {
 		if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
 			Engine::GetInstance().render.get()->camera.y += ceil(camSpeed * dt);
