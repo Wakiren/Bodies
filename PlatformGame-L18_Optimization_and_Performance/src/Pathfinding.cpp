@@ -199,7 +199,7 @@ void Pathfinding::PropagateBFS() {
 				frontier.push(neighbor);
 				visited.push_back(neighbor);
                 //L12 TODO 1: store the position from where the neighbor was reached in the breadcrumbs list
-                breadcrumbs.push_back(frontierTile);
+                //breadcrumbs.push_back(frontierTile);
 			}
 		}
 

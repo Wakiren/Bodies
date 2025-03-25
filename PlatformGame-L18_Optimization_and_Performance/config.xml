@@ -34,7 +34,7 @@
 				<combat health="100" maxHealth="150" attackPoints="25" defensePoints="50" />
 			</player>
 			<enemies>
-				<Cannibal name="Cannibal" x="2700" y="3180" w="32" h="32" speed ="0.01" texture="Assets/Textures/player/Idle.png" gravity="true" SpawnRate="3">
+				<Cannibal name="Cannibal" x="2700" y="3180" w="32" h="32" speed ="0.01" texture="Assets/Textures/player/Idle.png" gravity="true" SpawnRate="3" HelpDistance="10">
 					<animations>
 						<idle loop="true" speed="0.1">
 							<frame x="0" y="0" w="32" h="32" />
@@ -42,7 +42,7 @@
 					</animations>
 					<combat health="100" maxHealth="150" attackPoints="25" defensePoints="50" />
 				</Cannibal>
-				<Narcissist name="Narcissist" x="2700" y="3180" w="32" h="32" speed ="0.01" texture="Assets/Textures/player/Idle.png" gravity="true" SpawnRate="30">
+				<Narcissist name="Narcissist" x="2700" y="3180" w="32" h="32" speed ="0.01" texture="Assets/Textures/player/Idle.png" gravity="true" SpawnRate="30" HelpDistance="3">
 					<animations>
 						<idle loop="true" speed="0.1">
 							<frame x="0" y="0" w="32" h="32" />

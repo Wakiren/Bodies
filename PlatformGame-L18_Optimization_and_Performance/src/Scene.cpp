@@ -12,6 +12,8 @@
 #include "Map.h"
 #include "Item.h"
 #include "Enemy.h"
+#include "Narcissist.h"
+#include "Cannibal.h"
 #include "GuiControl.h"
 #include "GuiManager.h"
 #include "DialogueSystem.h"
@@ -33,13 +35,13 @@ bool Scene::Awake()
 	bool ret = true;
 
 	//L04: TODO 3b: Instantiate the player using the entity manager
-	player = (Player*)Engine::GetInstance().entityManager->CreateEntity(EntityType::PLAYER);
+	player = (Player*)Engine::GetInstance().entityManager->CreateEntity(EntityType::PLAYER, "");
 	player->SetParameters(configParameters.child("entities").child("player"));
 	
 	//L08 Create a new item using the entity manager and set the position to (200, 672) to test
 	for(pugi::xml_node itemNode = configParameters.child("entities").child("items").child("item"); itemNode; itemNode = itemNode.next_sibling("item"))
 	{
-		Item* item = (Item*) Engine::GetInstance().entityManager->CreateEntity(EntityType::ITEM);
+		Item* item = (Item*)Engine::GetInstance().entityManager->CreateEntity(EntityType::ITEM, itemNode.name());
 		item->SetParameters(itemNode);
 	}
 
@@ -85,7 +87,7 @@ bool Scene::Start()
 
 					if (RandomValue(1, enemyNode.attribute("SpawnRate").as_int()) == 1)
 					{
-						Enemy* enemy = (Enemy*)Engine::GetInstance().entityManager->CreateEntity(EntityType::ENEMY);
+						Cannibal* enemy = (Cannibal*)Engine::GetInstance().entityManager->CreateEntity(EntityType::ENEMY, enemyNode.name());
 						enemy->SetParameters(enemyNode);
 						enemy->OGPosition = enemyPos;
 						enemyList.push_back(enemy);
@@ -101,7 +103,7 @@ bool Scene::Start()
 
 					if (RandomValue(1, enemyNode.attribute("SpawnRate").as_int()) == 1)
 					{
-						Enemy* enemy = (Enemy*)Engine::GetInstance().entityManager->CreateEntity(EntityType::ENEMY);
+						Narcissist* enemy = (Narcissist*)Engine::GetInstance().entityManager->CreateEntity(EntityType::ENEMY, enemyNode.name());
 						enemy->SetParameters(enemyNode);
 						enemy->OGPosition = enemyPos;
 						enemyList.push_back(enemy);

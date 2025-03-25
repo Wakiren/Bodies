@@ -6,6 +6,8 @@
 #include "Log.h"
 #include "Item.h"
 #include "Enemy.h"
+#include "Cannibal.h"
+#include "Narcissist.h"
 #include "tracy/Tracy.hpp"
 
 EntityManager::EntityManager() : Module()
@@ -64,7 +66,7 @@ bool EntityManager::CleanUp()
 	return ret;
 }
 
-Entity* EntityManager::CreateEntity(EntityType type)
+Entity* EntityManager::CreateEntity(EntityType type, string name)
 {
 	Entity* entity = nullptr; 
 
@@ -78,7 +80,12 @@ Entity* EntityManager::CreateEntity(EntityType type)
 		entity = new Item();
 		break;
 	case EntityType::ENEMY:
-		entity = new Enemy();
+
+		if (name == "Narcissist")
+			entity = new Narcissist();
+		else if (name == "Cannibal")
+			entity = new Cannibal();
+
 		break;
 	default:
 		break;

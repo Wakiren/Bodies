@@ -36,18 +36,23 @@ public:
 
 	void ResetPath();
 
-	void OnCollision(PhysBody* physA, PhysBody* physB);
+	virtual void OnCollision(PhysBody* physA, PhysBody* physB);
 
 	void OnCollisionEnd(PhysBody* physA, PhysBody* physB);
 
 	bool IsInVision();
 
+	float CheckDistance(Vector2D pos);
+
+	std::vector<Enemy*> GetNumOfCombatants()
+	{
+		return Combatants;
+	}
+
 public:
 
 	CombatStats* combatStats = new CombatStats;
 	Vector2D OGPosition;
-
-private:
 
 	SDL_Texture* texture;
 	const char* texturePath;
@@ -63,7 +68,18 @@ private:
 	b2Vec2 eVelocity;
 	Vector2D distance;
 	Vector2D visionLimit;
+	Vector2D HelpDistance;
 	float speed;
 
 	int check = 0;
+
+	enum class EnemyType
+	{
+		CANNIBAL,
+		NARCISSIST
+	};
+
+	//Search for combatants
+	std::vector<Enemy*> Combatants;
+	bool CombatantsFound = false;
 };

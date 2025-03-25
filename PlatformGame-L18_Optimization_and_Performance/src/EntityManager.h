@@ -4,6 +4,8 @@
 #include "Entity.h"
 #include <list>
 
+using namespace std;
+
 class EntityManager : public Module
 {
 public:
@@ -26,7 +28,7 @@ public:
 	bool CleanUp();
 
 	// Additional methods
-	Entity* CreateEntity(EntityType type);
+	Entity* CreateEntity(EntityType type, string name);
 
 	void DestroyEntity(Entity* entity);
 

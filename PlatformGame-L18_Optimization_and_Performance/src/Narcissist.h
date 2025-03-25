@@ -1,10 +1,10 @@
 #pragma once
 #include "Enemy.h"
-class Cannibal : public Enemy 
+class Narcissist : public Enemy
 {
 public:
 
-	Cannibal();
+	Narcissist();
 
 	bool Update(float dt) override;
 
@@ -14,7 +14,6 @@ public:
 	}
 
 private:
-	
-	EnemyType enemyType = EnemyType::CANNIBAL;
 
+	EnemyType enemyType = EnemyType::NARCISSIST;
 };

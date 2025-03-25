@@ -61,6 +61,8 @@ public:
 	int WWidth;
 	int WHeight;
 
+	std::vector<Enemy*> enemyList;
+
 private:
 	SDL_Texture* mouseTileTex = nullptr;
 	std::string tilePosDebug = "[0,0]";
@@ -68,7 +70,7 @@ private:
 
 	//L03: TODO 3b: Declare a Player attribute
 	Player* player;
-	std::vector<Enemy*> enemyList;
+
 
 	// L16: TODO 2: Declare a GUI Control Button 
 	GuiControlButton* guiBt;
