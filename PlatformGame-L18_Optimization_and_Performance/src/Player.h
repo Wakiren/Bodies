@@ -1,17 +1,16 @@
 #pragma once
 
-#include "Entity.h"
+#include "Fighter.h"
 #include "SDL2/SDL.h"
 #include "Box2D/Box2D.h"
 #include "Animation.h"
 #include "CombatStats.h"
-#include "Fighter.h"
 
-class Fighter;
+
 struct CombatStats;
 struct SDL_Texture;
 
-class Player : public Entity//, public Fighter
+class Player : public Fighter
 {
 public:
 
@@ -44,7 +43,6 @@ public:
 
 public:
 
-	CombatStats* combatStats = new CombatStats;
 
 	//Declare player parameters
 	float speed = 5.0f;

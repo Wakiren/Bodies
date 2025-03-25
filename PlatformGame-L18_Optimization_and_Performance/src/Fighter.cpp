@@ -1,7 +1,8 @@
 #include "Fighter.h"
 
-Fighter::Fighter()
+Fighter::Fighter(EntityType _type):Entity(_type)
 {
+   
 }
 
 Fighter::~Fighter()

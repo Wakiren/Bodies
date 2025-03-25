@@ -11,7 +11,7 @@
 #include "EntityManager.h"
 #include "tracy/Tracy.hpp"
 
-Enemy::Enemy() : Entity(EntityType::ENEMY)
+Enemy::Enemy() : Fighter(EntityType::ENEMY)
 {
 
 }

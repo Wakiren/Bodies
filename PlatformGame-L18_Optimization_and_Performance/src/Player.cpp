@@ -13,7 +13,8 @@
 #include <iostream>
 using namespace std;
 
-Player::Player() : Entity(EntityType::PLAYER)
+
+Player::Player() : Fighter(EntityType::PLAYER)
 {
 	name = "Player";
 }
@@ -24,6 +25,7 @@ Player::~Player() {
 
 bool Player::Awake() {
 
+	combatStats = new CombatStats;
 	return true;
 }
 

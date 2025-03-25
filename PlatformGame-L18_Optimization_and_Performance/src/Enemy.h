@@ -8,11 +8,10 @@
 #include "CombatStats.h"
 #include "Fighter.h"
 
-class Fighter;
 struct CombatStats;
 struct SDL_Texture;
 
-class Enemy : public Entity//, public Fighter
+class Enemy : public Fighter
 {
 public:
 

@@ -1,13 +1,12 @@
 #pragma once
-#include "Enemy.h"
-#include "Player.h"
+#include "Entity.h"
 #include "CombatStats.h"
 #include <iostream>
 
-class Fighter 
+class Fighter: public Entity
 {
 	public:
-	Fighter();
+	Fighter(EntityType _type);
 	~Fighter();
 
 	void Attack(Fighter* attacker, Fighter* target);
