@@ -74,4 +74,5 @@ private:
 	GuiControlButton* guiBt;
 	int dialogueID;
 	bool exit;
+
 };

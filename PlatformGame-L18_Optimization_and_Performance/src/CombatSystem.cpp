@@ -1,7 +1,9 @@
 #include "CombatSystem.h"
 
-CombatSystem::CombatSystem()
+CombatSystem::CombatSystem(Player* _player, Enemy* _enemy)
 {
+    player = _player;
+    enemy = _enemy;
 }
 
 CombatSystem::~CombatSystem()
@@ -33,33 +35,44 @@ void CombatSystem::MainLoop()
 {
     if (!isCombatOver(player, enemy)) 
     {
-        PlayerTurn();
-        if (isCombatOver(player, enemy)) 
+        if(isPlayerTurn) 
         {
-            //PlayerAttack(player, enemy);
-            //END COMBAT
-            cout << "COMBAT OVER" << endl;
+            PlayerTurn();
+            if (isCombatOver(player, enemy))
+            {
+                cout << "COMBAT OVER" << endl;
+            }
         }
-
-        EnemyTurn();
-        if (isCombatOver(player, enemy)) 
+        else
         {
-            //END COMBAT
-            cout << "COMBAT OVER" << endl;
+            EnemyTurn();
+            if (isCombatOver(player, enemy))
+            {
+                //END COMBAT
+                cout << "COMBAT OVER" << endl;
+            }
         }
-
-        round++;
     }
 }
 
 void CombatSystem::EnemyTurn()
 {
-    //TO IMPLEMENT: ENEMY IA/ BEHAVIOUR
+    cout << "ENEMY TURN:" << endl;
+    if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_Y) == KEY_DOWN)
+    {
+        cout << "ENEMY ATTACKS!" << endl;
+        isPlayerTurn = true;
+    }
 }
 
 void CombatSystem::PlayerTurn()
 {
-    //PLAYER CHOOSES WHAT TO DO
+    cout << "PLAYER TURN:" << endl;
+    if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_P) == KEY_DOWN)
+    {
+        cout << "PLAYER ATTACKS!" << endl;
+        isPlayerTurn = false;
+    }
 }
 
 bool CombatSystem::isCombatOver(Player* player, Enemy* enemy)

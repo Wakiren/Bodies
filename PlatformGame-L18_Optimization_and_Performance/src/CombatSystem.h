@@ -7,7 +7,7 @@ struct CombatStats;
 class CombatSystem : public Module
 {
 public:
-	CombatSystem();
+	CombatSystem(Player* _player, Enemy* _enemy);
 	~CombatSystem();
 
 	// Called before render is available
@@ -20,12 +20,13 @@ public:
 	void EnemyTurn();
 	void PlayerTurn();
 
+	bool isCombatOver(Player* player, Enemy* enemy);
 
 public:
 
-	Enemy* enemy;
 	Player* player;
+	Enemy* enemy;
 
-	bool isCombatOver(Player* player, Enemy* enemy);
 	int round;
+	bool isPlayerTurn = true;
 };

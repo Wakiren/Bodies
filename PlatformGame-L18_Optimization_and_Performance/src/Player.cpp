@@ -9,6 +9,7 @@
 #include "Physics.h"
 #include "EntityManager.h"
 #include "tracy/Tracy.hpp"
+#include "CombatSystem.h"
 #include <cmath>
 #include <iostream>
 using namespace std;
@@ -110,6 +111,12 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		Engine::GetInstance().physics.get()->DeletePhysBody(physB); // Deletes the body of the item from the physics world
 		break;
 	case ColliderType::UNKNOWN:
+		break;
+	case ColliderType::ENEMY:
+		
+		Fighter* player = new Fighter(pbody->listener->type);
+		Fighter* enemy = new Fighter(physB->listener->type);
+		CombatSystem* combatSystem = new CombatSystem((Player*)player,(Enemy*)enemy);
 		break;
 	}
 }
