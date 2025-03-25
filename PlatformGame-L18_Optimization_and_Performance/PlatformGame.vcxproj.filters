@@ -206,6 +206,7 @@
     <ClInclude Include="src\Fighter.h">
       <Filter>Source Files\Engine</Filter>
     </ClInclude>
+    <ClInclude Include="src\Cannibal.h" />
   </ItemGroup>
   <ItemGroup>
     <Xml Include="config.xml">

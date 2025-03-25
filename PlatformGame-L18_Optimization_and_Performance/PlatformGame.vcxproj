@@ -174,6 +174,7 @@
     <ClCompile Include="src\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Cannibal.h" />
     <ClInclude Include="src\CombatStats.h" />
     <ClInclude Include="src\CombatSystem.h" />
     <ClInclude Include="src\Defs.h" />

@@ -22,7 +22,7 @@ public:
 
 	bool Start();
 
-	bool Update(float dt);
+	virtual bool Update(float dt);
 
 	bool CleanUp();
 
