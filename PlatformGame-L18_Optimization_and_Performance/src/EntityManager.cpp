@@ -86,6 +86,7 @@ Entity* EntityManager::CreateEntity(EntityType type, string name)
 		else if (name == "Cannibal")
 			entity = new Cannibal();
 
+
 		break;
 	default:
 		break;

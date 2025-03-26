@@ -9,6 +9,8 @@
 #include <math.h>
 #include "tracy/Tracy.hpp"
 
+using namespace std;
+
 Map::Map() : Module(), mapLoaded(false)
 {
     name = "map";
@@ -264,6 +266,18 @@ bool Map::Load(std::string path, std::string fileName)
 				// you should push the object itself and not the pointer
 				objectLayer->object_list.push_back(*object);
 			}
+            for (pugi::xml_node objectNode = objectLayerNode.child("object").child("polygon"); objectNode != NULL; objectNode = objectLayerNode.child("object").next_sibling("polygon")) {
+				std::string pointsStr = objectNode.attribute("points").as_string();
+				objectLayer->points = ConvertStringToPoints(pointsStr);
+
+                for (int i = 0; i < objectLayer->points.size(); i++)
+                {
+                    objectLayer->points[i].setX(objectLayer->points[i].getX() + objectNode.parent().attribute("x").as_int());
+                    objectLayer->points[i].setY(objectLayer->points[i].getY() + objectNode.parent().attribute("y").as_int());
+                }
+            }
+
+
 			mapData.objectLayers.push_back(objectLayer);
 		}
 
@@ -408,3 +422,51 @@ MapLayer* Map::GetDataLayer() {
     return nullptr;
 }
 
+MapObjectLayer* Map::GetNarPath() {
+	for (const auto& objectLayer : mapData.objectLayers) {
+		if (objectLayer->name == "NarPath" != NULL && objectLayer->name == "NarPath") {
+			return objectLayer;
+		}
+	}
+	return nullptr;
+}
+
+vector<Vector2D> Map:: ConvertStringToPoints(std::string pointsStr) {
+    vector<Vector2D> points;
+    size_t start = 0;
+    size_t end = pointsStr.find(' ');
+
+    // Loop through the string, processing each "x,y" pair
+    while (end != string::npos) {
+        // Extract the current "x,y" pair
+        string point = pointsStr.substr(start, end - start);
+
+        // Find the comma separating x and y
+        size_t commaPos = point.find(',');
+        if (commaPos != string::npos) {
+            // Extract x and y from the point
+            float x = stof(point.substr(0, commaPos));
+            float y = stof(point.substr(commaPos + 1));
+
+            // Add the point to the list
+            points.push_back(Vector2D(x, y));
+        }
+
+        // Move to the next point
+        start = end + 1;
+        end = pointsStr.find(' ', start);
+    }
+
+    // Handle the last point (after the final space)
+    if (start < pointsStr.length()) {
+        string point = pointsStr.substr(start);
+        size_t commaPos = point.find(',');
+        if (commaPos != string::npos) {
+            float x = stof(point.substr(0, commaPos));
+            float y = stof(point.substr(commaPos + 1));
+            points.push_back(Vector2D(x, y));
+        }
+    }
+
+    return points;
+}

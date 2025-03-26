@@ -77,6 +77,7 @@ struct MapObjectLayer
     int id;
     std::string name;
     std::vector<Object> object_list;
+	std::vector<Vector2D> points;
     Properties properties;
 };
 
@@ -185,6 +186,9 @@ public:
 
     MapLayer* GetDataLayer();
 
+	MapObjectLayer* GetNarPath();
+
+	std::vector<Vector2D> ConvertStringToPoints(std::string points);
 
 public: 
     std::string mapFileName;

@@ -26,6 +26,12 @@ bool Narcissist::Update(float dt)
 		return true;
 	}
 
+	if (BackToPath == false)
+	{
+		GetPath();
+		GetClosestPoint();
+		BackToPath = true;
+	}
 
 	Vector2D target = Engine::GetInstance().scene.get()->GetPlayerPosition();
 
@@ -54,9 +60,6 @@ bool Narcissist::Update(float dt)
 			direction.normalized();
 			eVelocity = b2Vec2(direction.getX() * speed, direction.getY() * speed);
 
-
-
-
 			pbody->body->SetLinearVelocity(eVelocity);
 		}
 		else {
@@ -66,7 +69,7 @@ bool Narcissist::Update(float dt)
 	//SCOUTING AND TRAVERSING
 	else
 	{
-		pbody->body->SetLinearVelocity(b2Vec2_zero);
+		MoveToNextPoint();
 	}
 
 	// L08 TODO 4: Add a physics to an item - update the position of the object from the physics.  
@@ -85,4 +88,52 @@ bool Narcissist::Update(float dt)
 	}
 
 	return true;
+}
+
+void Narcissist::MoveToNextPoint()
+{
+	ZoneScoped;
+
+	if (( abs(GetPosition().getX()) - abs(path[NextPoint].getX()) ) < 1  &&
+		(abs(GetPosition().getY()) - abs(path[NextPoint].getY())) < 1)
+	{
+		NextPoint++;
+	}
+
+	if (NextPoint > path.size())
+	{
+		NextPoint = 0;
+	}
+
+	Vector2D direction = path[NextPoint] - GetPosition();
+	direction.normalized();
+	eVelocity = b2Vec2(direction.getX() * speed, direction.getY() * speed);
+
+	pbody->body->SetLinearVelocity(eVelocity);
+}
+
+Vector2D Narcissist::GetClosestPoint()
+{
+	ZoneScoped;
+	Vector2D closestPoint;
+	for (int i = 0; i < path.size(); i++)
+	{
+		if (CheckDistance(path[i]) < closestPoint.magnitude())
+		{
+			closestPoint = path[i];
+		}
+		NextPoint = i;
+	}
+
+
+	return closestPoint;
+}
+
+vector<Vector2D> Narcissist::GetPath()
+{
+	ZoneScoped;
+
+	path = Engine::GetInstance().map.get()->GetNarPath()->points;
+
+	return path;
 }
