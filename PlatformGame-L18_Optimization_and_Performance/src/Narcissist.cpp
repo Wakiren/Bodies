@@ -100,7 +100,7 @@ void Narcissist::MoveToNextPoint()
 		NextPoint++;
 	}
 
-	if (NextPoint > path.size())
+	if (NextPoint >= path.size())
 	{
 		NextPoint = 0;
 	}
