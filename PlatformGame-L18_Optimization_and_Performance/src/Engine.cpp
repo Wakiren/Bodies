@@ -15,6 +15,7 @@
 #include "Physics.h"
 #include "GuiManager.h"
 #include "DialogueSystem.h"
+#include "CombatSystem.h"
 
 #include "tracy/Tracy.hpp"
 
@@ -59,6 +60,7 @@ Engine::Engine() {
     AddModule(std::static_pointer_cast<Module>(entityManager));
 	AddModule(std::static_pointer_cast<Module>(guiManager));
 	AddModule(std::static_pointer_cast<Module>(dialogueSystem));
+
 
     // Render last 
     AddModule(std::static_pointer_cast<Module>(render));

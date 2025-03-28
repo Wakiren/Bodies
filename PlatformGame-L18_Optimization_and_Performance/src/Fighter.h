@@ -13,4 +13,5 @@ class Fighter: public Entity
 	void Guard(Fighter* fighter);
 
 	CombatStats* combatStats;
+
 };

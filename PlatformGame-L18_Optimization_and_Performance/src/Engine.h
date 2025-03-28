@@ -20,6 +20,7 @@ class Map;
 class Physics;
 class GuiManager;
 class DialogueSystem;
+class CombatSystem;
 
 class Engine
 {
@@ -104,7 +105,7 @@ public:
 	std::shared_ptr<Physics> physics;
 	std::shared_ptr<GuiManager> guiManager;
 	std::shared_ptr<DialogueSystem> dialogueSystem;
-
+	std::shared_ptr<CombatSystem> combatSystem;
 
 private: 
 

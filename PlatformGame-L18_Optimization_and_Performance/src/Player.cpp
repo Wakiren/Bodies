@@ -115,8 +115,15 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::ENEMY:
 		
 		Fighter* player = new Fighter(pbody->listener->type);
+		player->combatStats = combatStats;
 		Fighter* enemy = new Fighter(physB->listener->type);
+		enemy->combatStats = new CombatStats;
+		enemy->combatStats->health = 100;
+		enemy->combatStats->attackPoints = 100;
+		enemy->combatStats->defensePoints = 100;
+		enemy->combatStats->maxHealth = 100;
 		CombatSystem* combatSystem = new CombatSystem((Player*)player,(Enemy*)enemy);
+		//combatSystem->Update(1);
 		break;
 	}
 }
@@ -147,6 +154,11 @@ void Player::MoveToMousePos(float speed)
 	Vector2D mousePos = Engine::GetInstance().input.get()->GetMousePosition();
 	mousePos.setX(mousePos.getX() - Engine::GetInstance().render.get()->camera.x / Engine::GetInstance().render.get()->scale);
 	mousePos.setY(mousePos.getY() - Engine::GetInstance().render.get()->camera.y / Engine::GetInstance().render.get()->scale);
+
+	if (Engine::GetInstance().physics.get()->debug == true) 
+	{
+		speed = 10;
+	}
 
 	if (Engine::GetInstance().input.get()->GetMouseButtonDown(1)) 
 	{
