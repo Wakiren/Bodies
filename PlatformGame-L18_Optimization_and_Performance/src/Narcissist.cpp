@@ -26,11 +26,12 @@ bool Narcissist::Update(float dt)
 		return true;
 	}
 
-	if (BackToPath == false)
+	if (BackToPath == true)
 	{
 		GetPath();
 		GetClosestPoint();
-		BackToPath = true;
+		BackToPath = false;
+
 	}
 
 	Vector2D target = Engine::GetInstance().scene.get()->GetPlayerPosition();
@@ -64,6 +65,7 @@ bool Narcissist::Update(float dt)
 		}
 		else {
 			pbody->body->SetLinearVelocity(b2Vec2_zero);
+			BackToPath = true;
 		}
 	}
 	//SCOUTING AND TRAVERSING
@@ -94,8 +96,7 @@ void Narcissist::MoveToNextPoint()
 {
 	ZoneScoped;
 
-	if (( abs(GetPosition().getX()) - abs(path[NextPoint].getX()) ) < 1  &&
-		(abs(GetPosition().getY()) - abs(path[NextPoint].getY())) < 1)
+	if (CheckDistance(path[NextPoint])<0.1f)
 	{
 		NextPoint++;
 	}
@@ -106,8 +107,7 @@ void Narcissist::MoveToNextPoint()
 	}
 
 	Vector2D direction = path[NextPoint] - GetPosition();
-	direction.normalized();
-	eVelocity = b2Vec2(direction.getX() * speed, direction.getY() * speed);
+	eVelocity = b2Vec2(direction.normalized().getX() * speed, direction.normalized().getY() * speed);
 
 	pbody->body->SetLinearVelocity(eVelocity);
 }
@@ -115,17 +115,17 @@ void Narcissist::MoveToNextPoint()
 Vector2D Narcissist::GetClosestPoint()
 {
 	ZoneScoped;
-	Vector2D closestPoint;
+	Vector2D closestPoint = path[0];
+	float distance = CheckDistance(path[0]);
 	for (int i = 0; i < path.size(); i++)
 	{
-		if (CheckDistance(path[i]) < closestPoint.magnitude())
+		if (CheckDistance(path[i]) < distance)
 		{
 			closestPoint = path[i];
+			distance = CheckDistance(path[i]);
+			NextPoint = i;
 		}
-		NextPoint = i;
 	}
-
-
 	return closestPoint;
 }
 

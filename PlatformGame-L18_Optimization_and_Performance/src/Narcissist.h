@@ -26,5 +26,5 @@ private:
 	int NextPoint;
 	vector<Vector2D> path;
 	
-	bool BackToPath = false;
+	bool BackToPath = true;
 };
