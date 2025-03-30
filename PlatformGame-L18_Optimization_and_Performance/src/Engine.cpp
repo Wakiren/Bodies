@@ -16,6 +16,7 @@
 #include "GuiManager.h"
 #include "DialogueSystem.h"
 #include "CombatSystem.h"
+#include "MainMenu.h"
 
 #include "tracy/Tracy.hpp"
 
@@ -46,6 +47,7 @@ Engine::Engine() {
     entityManager = std::make_shared<EntityManager>();
     guiManager = std::make_shared<GuiManager>();
 	dialogueSystem = std::make_shared<DialogueSystem>();
+	mainMenu = std::make_shared<MainMenu>();
 
     // Ordered for awake / Start / Update
     // Reverse order of CleanUp
@@ -54,6 +56,7 @@ Engine::Engine() {
     AddModule(std::static_pointer_cast<Module>(textures));
     AddModule(std::static_pointer_cast<Module>(audio));
     // L08: TODO 2: Add Physics module
+	AddModule(std::static_pointer_cast<Module>(mainMenu));
     AddModule(std::static_pointer_cast<Module>(physics));
     AddModule(std::static_pointer_cast<Module>(map));
     AddModule(std::static_pointer_cast<Module>(scene));
@@ -61,6 +64,10 @@ Engine::Engine() {
 	AddModule(std::static_pointer_cast<Module>(guiManager));
 	AddModule(std::static_pointer_cast<Module>(dialogueSystem));
 
+    scene->active = false;
+    entityManager->active = false;
+    physics->active = false;
+    map->active = false;
 
     // Render last 
     AddModule(std::static_pointer_cast<Module>(render));
@@ -249,6 +256,7 @@ bool Engine::PreUpdate()
     //Iterates the module list and calls PreUpdate on each module
     bool result = true;
     for (const auto& module : moduleList) {
+		if (!module.get()->active) continue; // L03: TODO 1: Add a check to see if the module is active before calling PreUpdate(
         result = module.get()->PreUpdate();
         if (!result) {
             break;
@@ -265,6 +273,7 @@ bool Engine::DoUpdate()
     //Iterates the module list and calls Update on each module
     bool result = true;
     for (const auto& module : moduleList) {
+		if (!module.get()->active) continue; // L03: TODO 1: Add a check to see if the module is active before calling Update(
         result = module.get()->Update(dt);
         if (!result) {
             break;
@@ -280,6 +289,7 @@ bool Engine::PostUpdate()
     //Iterates the module list and calls PostUpdate on each module
     bool result = true;
     for (const auto& module : moduleList) {
+		if (!module.get()->active) continue; // L03: TODO 1: Add a check to see if the module is active before calling PostUpdate(
         result = module.get()->PostUpdate();
         if (!result) {
             break;
