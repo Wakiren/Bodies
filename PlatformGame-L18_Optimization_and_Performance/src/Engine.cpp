@@ -48,6 +48,7 @@ Engine::Engine() {
     guiManager = std::make_shared<GuiManager>();
 	dialogueSystem = std::make_shared<DialogueSystem>();
 	mainMenu = std::make_shared<MainMenu>();
+   combatSystem = std::make_shared<CombatSystem>();
 
     // Ordered for awake / Start / Update
     // Reverse order of CleanUp
@@ -63,6 +64,7 @@ Engine::Engine() {
     AddModule(std::static_pointer_cast<Module>(entityManager));
 	AddModule(std::static_pointer_cast<Module>(guiManager));
 	AddModule(std::static_pointer_cast<Module>(dialogueSystem));
+   AddModule(std::static_pointer_cast<Module>(combatSystem));
 
     scene->active = false;
     entityManager->active = false;
@@ -103,7 +105,7 @@ bool Engine::Awake() {
     maxFrameDuration = configFile.child("config").child("engine").child("maxFrameDuration").attribute("value").as_int();
 
     //Iterates the module list and calls Awake on each module
-    bool result = true;
+    bool result = false;
     for (const auto& module : moduleList) {
         module.get()->LoadParameters(configFile.child("config").child(module.get()->name.c_str()));
         result =  module.get()->Awake();

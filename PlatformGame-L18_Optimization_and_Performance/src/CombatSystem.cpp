@@ -1,34 +1,36 @@
 #include "CombatSystem.h"
 
-CombatSystem::CombatSystem(Player* _player, Enemy* _enemy)
+CombatSystem::CombatSystem()//(Player* _player, Enemy* _enemy)
 {
-    player = _player;
-    enemy = _enemy;
+    //player = _player;
+    //enemy = _enemy;
 }
 
 CombatSystem::~CombatSystem()
 {
+
 }
 
 bool CombatSystem::Awake()
 {
-	return false;
+    LOG("LOADING COMBAT SYSTEM");
+	return true;
 }
 
 bool CombatSystem::Start()
 {
-	return false;
+	return true;
 }
 
 bool CombatSystem::Update(float dt)
 {
-	MainLoop();
-	return false;
+
+	return true;
 }
 
 bool CombatSystem::CleanUp()
 {
-	return false;
+	return true;
 }
 
 void CombatSystem::MainLoop()

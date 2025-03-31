@@ -7,7 +7,7 @@ struct CombatStats;
 class CombatSystem : public Module
 {
 public:
-	CombatSystem(Player* _player, Enemy* _enemy);
+	CombatSystem();//(Player* _player, Enemy* _enemy);
 	~CombatSystem();
 
 	// Called before render is available

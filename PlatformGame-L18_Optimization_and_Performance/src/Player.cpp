@@ -76,7 +76,11 @@ bool Player::Update(float dt)
 		velocity = b2Vec2(0,0);
 	}
 	
-	MoveToMousePos(1);
+	if (!inCombat) 
+	{
+		MoveToMousePos(1);
+	}
+
 
 	b2Transform pbodyPos = pbody->body->GetTransform();
 	position.setX(METERS_TO_PIXELS(pbodyPos.p.x) - texH / 2);
@@ -122,7 +126,9 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		enemy->combatStats->attackPoints = 100;
 		enemy->combatStats->defensePoints = 100;
 		enemy->combatStats->maxHealth = 100;
-		CombatSystem* combatSystem = new CombatSystem((Player*)player,(Enemy*)enemy);
+		CombatSystem* combatSystem = new CombatSystem();
+		combatSystem->enemy = (Enemy*)enemy;
+		combatSystem->player = (Player*)player;
 		//combatSystem->Update(1);
 		break;
 	}
