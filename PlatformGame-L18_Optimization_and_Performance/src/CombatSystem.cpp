@@ -2,8 +2,6 @@
 
 CombatSystem::CombatSystem()
 {
-    player = nullptr;
-    enemy = nullptr;
     round = 0;
 }
 CombatSystem::~CombatSystem()
@@ -35,6 +33,10 @@ bool CombatSystem::CleanUp()
 
 void CombatSystem::MainLoop()
 {
+    if (player != nullptr) 
+    {
+        cout << player << endl;
+    }
     if (!isCombatOver(player, enemy)) 
     {
         if(isPlayerTurn) 
@@ -91,6 +93,7 @@ bool CombatSystem::isCombatOver(Player* player, Enemy* enemy)
         cout << "Enemy defeated!\n";
         return true;
     }
+
     return false;
 
 }

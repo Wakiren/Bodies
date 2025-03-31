@@ -24,8 +24,8 @@ public:
 
 public:
 
-	Player* player;
-	Enemy* enemy;
+	Player* player = nullptr;
+	Enemy* enemy = nullptr;
 
 	int round;
 	bool isPlayerTurn = true;

@@ -108,7 +108,6 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	switch (physB->ctype)
 	{
 	case ColliderType::PLATFORM:
-		isJumping = false;
 		break;
 	case ColliderType::ITEM:
 		Engine::GetInstance().audio.get()->PlayFx(pickCoinFxId);
@@ -117,7 +116,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::UNKNOWN:
 		break;
 	case ColliderType::ENEMY:
-		
+	
 		Fighter* player = new Fighter(pbody->listener->type);
 		player->combatStats = combatStats;
 		Fighter* enemy = new Fighter(physB->listener->type);
@@ -126,9 +125,12 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		enemy->combatStats->attackPoints = 100;
 		enemy->combatStats->defensePoints = 100;
 		enemy->combatStats->maxHealth = 100;
+
 		CombatSystem* combatSystem = new CombatSystem();
 		combatSystem->player = (Player*)player;
+		cout << "player in combatsystem" << combatSystem->player << endl;
 		combatSystem->enemy = (Enemy*)enemy;
+		cout << "Combat Created" << endl;
 		break;
 	}
 }
