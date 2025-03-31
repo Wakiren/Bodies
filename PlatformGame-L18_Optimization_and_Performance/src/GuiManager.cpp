@@ -14,6 +14,7 @@ GuiManager::~GuiManager() {}
 
 bool GuiManager::Start()
 {
+		Filter = Engine::GetInstance().textures->Load("Assets/UI/Filter.png");
 	return true;
 }
 
@@ -42,6 +43,8 @@ GuiControl* GuiManager::CreateGuiControl(GuiControlType type, int id, const char
 
 bool GuiManager::Update(float dt)
 {	
+	Engine::GetInstance().render->DrawUIimage(Filter, 0, 0);
+
 	accumulatedTime += dt;
 	if (accumulatedTime >= updateMsCycle) doLogic = true;
 
@@ -64,6 +67,7 @@ bool GuiManager::Update(float dt)
 		case GuiManager::INTRO:
 			break;
 		case GuiManager::TITLE:
+			filterActive = false;
 			break;
 		case GuiManager::GAME:
 			break;
@@ -78,8 +82,6 @@ bool GuiManager::Update(float dt)
 		default:
 			break;
 	}
-
-
 
 	return true;
 }

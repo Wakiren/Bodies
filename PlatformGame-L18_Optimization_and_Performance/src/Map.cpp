@@ -31,7 +31,6 @@ bool Map::Awake()
 
 bool Map::Start() {
 
-    Filter = Engine::GetInstance().textures->Load("Assets/UI/Filter.png");
 	Trees = Engine::GetInstance().textures->Load("Assets/Maps/Trees.png");
     return true;
 }
@@ -103,7 +102,7 @@ bool Map::Update(float dt)
 void Map::DrawTrees()
 {
     Engine::GetInstance().render->DrawTexture(Trees, 0, 0);
-    Engine::GetInstance().render->DrawUIimage(Filter, 0, 0);
+
 }
 
 // L09: TODO 2: Implement function to the Tileset based on a tile id

@@ -32,8 +32,6 @@ bool DialogueSystem::Update(float dt)
 	{
 		//Text box
 		Vector2D pos = { 0, (float)(Engine::GetInstance().window.get()->height )};
-		
-
 
 		activeTree->UpdateTree(dt, Engine::GetInstance().dialogueSystem.get(), pos);
 		Engine::GetInstance().guiManager.get()->Draw();

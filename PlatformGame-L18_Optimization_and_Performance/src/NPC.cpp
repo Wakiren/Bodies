@@ -13,7 +13,7 @@
 
 NPC::NPC(NPCType type) : Entity(EntityType::NPC)
 {
-
+	this->type = type;
 }
 
 NPC::~NPC() {
@@ -57,7 +57,7 @@ bool NPC::Update(float dt)
 
 	if (CheckDistance(Engine::GetInstance().scene.get()->GetPlayerPosition()) < 100)
 	{
-		//Display option for dialog
+		Engine::GetInstance().scene.get()->StartDialogue(type);
 	}
 
 	return true;

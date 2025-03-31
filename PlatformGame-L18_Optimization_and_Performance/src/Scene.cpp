@@ -203,10 +203,6 @@ bool Scene::PostUpdate()
 	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_F5) == KEY_DOWN)
 		SaveState();
 
-	
-	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && Engine::GetInstance().dialogueSystem->activeTree == nullptr)
-		Engine::GetInstance().dialogueSystem->LoadDialogue("dialogues.xml", 0);
-	Engine::GetInstance().render.get()->DrawText("Press Space to start dialogue", 10, 10, 20, { 255, 255, 255, 255 });
 
 	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
 	{
@@ -319,4 +315,11 @@ float Scene::Slower(float ogPos, float goalPos, float time)
 int Scene::RandomValue(int min, int max)
 {
 	return rand() % (max - min + 1) + min;
+}
+
+void Scene::StartDialogue(NPCType type)
+{
+	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && Engine::GetInstance().dialogueSystem->activeTree == nullptr)
+		Engine::GetInstance().dialogueSystem->LoadDialogue("dialogues.xml", 0);
+	Engine::GetInstance().render.get()->DrawText("Press Space to start dialogue", 10, 10, 50, { 255, 255, 255, 255 });
 }

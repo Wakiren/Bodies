@@ -52,4 +52,5 @@ public:
 	Animation idle;
 	PhysBody* pbody;
 
+	NPCType type;
 };

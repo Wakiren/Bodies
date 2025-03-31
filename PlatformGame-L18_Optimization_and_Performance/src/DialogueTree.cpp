@@ -32,11 +32,12 @@ void DialogueNode::SplitText(SString text, int fontSize_, int max_chars_line_)
 DialogueTree::DialogueTree(bool a)
 {
 	active = a;
+	TextBox = Engine::GetInstance().textures.get()->Load("Assets/Textures/TextBox.png");
 }
 
 bool DialogueTree::UpdateTree(float dt, Module* mod, Vector2D pos)
 {
-	fontSize = 25;
+	fontSize = 50;
 	max_chars_line = fontSize * 3;
 
 	// TODO 6: Substitute player's name in text and choices if needed
@@ -52,9 +53,12 @@ bool DialogueTree::UpdateTree(float dt, Module* mod, Vector2D pos)
 
 	// TODO 6: Render dialogue in text box
 	size_t lines = activeNode->texts.size();
+	Engine::GetInstance().render.get()->DrawUIimage(TextBox, 0, (Engine::GetInstance().window.get()->height - DIALOGUE_H)- SPACING,2);
 	for (size_t i = 0; i < lines; i++)
 	{
-		Engine::GetInstance().render.get()->DrawText(activeNode->texts[i].GetString(),100, 350 +50* i, fontSize, {100, 255, 255});
+		//THE X IN HERE SHOULD BE THE HITBOX OF THE TALKING CHARCATER
+		Engine::GetInstance().render.get()->DrawText(activeNode->texts[i].GetString(), SPACING, (Engine::GetInstance().window.get()->height - DIALOGUE_H) + 50* i, fontSize, {100, 255, 255});
+
 	}
 
 	EventReturn(mod, pos);

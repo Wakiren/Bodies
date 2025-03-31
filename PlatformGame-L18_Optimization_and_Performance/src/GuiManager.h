@@ -40,8 +40,9 @@ public:
 	float accumulatedTime = 0.0f;
 	float updateMsCycle = 0.0f;
 	bool doLogic = false;
+	bool filterActive = false;
 
-
+	SDL_Texture* Filter = nullptr;
 
 	enum UIState
 	{

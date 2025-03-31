@@ -57,7 +57,7 @@ bool MainMenu::Update(float dt)
 	// Draw the background
 	//Section to draw the background (window size)
 	SDL_Rect backgroundRect = { 0, 0, 1920, 1080 };
-	Engine::GetInstance().render.get()->DrawUIimage(background, 0, 0,&backgroundRect);
+	Engine::GetInstance().render.get()->DrawUIimage(background, 0, 0,1,&backgroundRect);
 
 	Engine::GetInstance().render.get()->camera.x = 0;
 	Engine::GetInstance().render.get()->camera.y = 0;
@@ -82,8 +82,8 @@ bool MainMenu::Update(float dt)
 	}
 
 	//Button textures
-	Engine::GetInstance().render.get()->DrawTexture(buttons, 180, 150, &Button1);
-	Engine::GetInstance().render.get()->DrawTexture(buttons, 180, 200, &Button2);
+	Engine::GetInstance().render.get()->DrawUIimage(buttons, 180, 150, 4 ,&Button1);
+	Engine::GetInstance().render.get()->DrawUIimage(buttons, 180, 200, 4 ,&Button2);
 
 	int x, y;
 	
@@ -98,6 +98,7 @@ bool MainMenu::Update(float dt)
 	if (x >= 180 && x <= 300 && y >= 150 && y <= 180) {
 
 		option = SELECTED::START;
+		
 	}
 	else if (x >= 180 && x <= 300 && y >= 200 && y <= 240) {
 

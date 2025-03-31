@@ -193,7 +193,6 @@ public:
 public: 
     std::string mapFileName;
     std::string mapPath;
-	SDL_Texture* Filter = nullptr;
     SDL_Texture* Trees = nullptr;
 
 private:

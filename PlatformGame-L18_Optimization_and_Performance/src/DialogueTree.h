@@ -11,11 +11,15 @@
 #include "Vector2D.h"
 #include "SString.h"
 #include <vector>
+#include "Textures.h"
 
 
 #define DIALOGUE_INPUT 2
 #define DIALOGUE_SAVE 3
 #define DIALOGUE_IF 4
+
+#define DIALOGUE_H 300
+#define SPACING 100
 
 using namespace std;
 
@@ -80,6 +84,7 @@ public:
 	vector <DialogueNode*> nodeList;
 	DialogueNode* activeNode;
 
+	SDL_Texture* TextBox = NULL;
 
 	List <GuiControl*> listDialogueButtons;
 

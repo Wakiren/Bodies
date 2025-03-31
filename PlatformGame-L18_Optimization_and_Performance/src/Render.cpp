@@ -171,13 +171,15 @@ bool Render::DrawTexture(SDL_Texture* texture, int x, int y, const SDL_Rect* sec
 	return ret;
 }
 
-bool Render::DrawUIimage(SDL_Texture* texture, int x, int y, const SDL_Rect* section, float speed, double angle, int pivotX, int pivotY) const
+bool Render::DrawUIimage(SDL_Texture* texture, int x, int y, int scale_, const SDL_Rect* section, float speed, double angle, int pivotX, int pivotY) const
 {
 	bool ret = true;
 
 	SDL_Rect rect;
-	rect.x = (int)(camera.x * speed) + y - camera.x;
-	rect.y = (int)(camera.y * speed) + x - camera.y;
+
+	rect.x = ((int)(camera.x * speed) + x - camera.x);
+	rect.y = ((int)(camera.y * speed) + y - camera.y);
+
 
 	if (section != NULL)
 	{
@@ -187,6 +189,12 @@ bool Render::DrawUIimage(SDL_Texture* texture, int x, int y, const SDL_Rect* sec
 	else
 	{
 		SDL_QueryTexture(texture, NULL, NULL, &rect.w, &rect.h);
+	}
+
+	if (scale != 1)
+	{
+		rect.w *= scale_;
+		rect.h *= scale_;
 	}
 
 	SDL_Point* p = NULL;
@@ -316,10 +324,10 @@ bool Render::DrawText(const char* text, int x, int y, int size, SDL_Color color)
 	}
 	else
 	{
-		ttf_rect.x = x * Engine::GetInstance().window.get()->GetScale();
-		ttf_rect.y = y * Engine::GetInstance().window.get()->GetScale();
-		ttf_rect.w = ttf_surface->w * Engine::GetInstance().window.get()->GetScale();
-		ttf_rect.h = ttf_surface->h * Engine::GetInstance().window.get()->GetScale();
+		ttf_rect.x = x ;
+		ttf_rect.y = y;
+		ttf_rect.w = ttf_surface->w ;
+		ttf_rect.h = ttf_surface->h ;
 
 		if (SDL_RenderCopy(renderer, ttf_texture, NULL, &ttf_rect) != 0)
 		{

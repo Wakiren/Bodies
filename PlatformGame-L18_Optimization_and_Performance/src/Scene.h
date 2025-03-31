@@ -3,6 +3,7 @@
 #include "Module.h"
 #include "Player.h"
 #include "Enemy.h"
+#include "NPC.h"
 #include <vector>
 #include "GuiControlButton.h"
 #include "Physics.h"
@@ -48,6 +49,8 @@ public:
 	bool OnGuiMouseClickEvent(GuiControl* control);
 
 	float Slower(float ogPos, float goalPos, float time);
+
+	void StartDialogue(NPCType type);
 
 public:
 	// Get tilePosDebug value
