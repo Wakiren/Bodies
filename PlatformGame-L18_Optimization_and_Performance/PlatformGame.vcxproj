@@ -161,9 +161,12 @@
     <ClCompile Include="src\Input.cpp" />
     <ClCompile Include="src\Item.cpp" />
     <ClCompile Include="src\Log.cpp" />
-    <ClCompile Include="src\MainMenu.cpp" />
+    <ClCompile Include="src\MainMenu.cpp">
+      <DeploymentContent>true</DeploymentContent>
+    </ClCompile>
     <ClCompile Include="src\Map.cpp" />
     <ClCompile Include="src\Narcissist.cpp" />
+    <ClCompile Include="src\NPC.cpp" />
     <ClCompile Include="src\Pathfinding.cpp" />
     <ClCompile Include="src\PerfTimer.cpp" />
     <ClCompile Include="src\Physics.cpp" />
@@ -181,7 +184,9 @@
     <ClInclude Include="src\CombatStats.h" />
     <ClInclude Include="src\CombatSystem.h" />
     <ClInclude Include="src\Defs.h" />
-    <ClInclude Include="src\DialogueSystem.h" />
+    <ClInclude Include="src\DialogueSystem.h">
+      <DeploymentContent>true</DeploymentContent>
+    </ClInclude>
     <ClInclude Include="src\DialogueTree.h" />
     <ClInclude Include="src\Animation.h" />
     <ClInclude Include="src\Audio.h" />
@@ -201,6 +206,7 @@
     <ClInclude Include="src\Map.h" />
     <ClInclude Include="src\Module.h" />
     <ClInclude Include="src\Narcissist.h" />
+    <ClInclude Include="src\NPC.h" />
     <ClInclude Include="src\Pathfinding.h" />
     <ClInclude Include="src\PerfTimer.h" />
     <ClInclude Include="src\Physics.h" />

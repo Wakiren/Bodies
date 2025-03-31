@@ -14,6 +14,7 @@
 #include "Enemy.h"
 #include "Narcissist.h"
 #include "Cannibal.h"
+#include "NPC.h"
 #include "GuiControl.h"
 #include "GuiManager.h"
 #include "DialogueSystem.h"
@@ -44,7 +45,11 @@ bool Scene::Awake()
 		Item* item = (Item*)Engine::GetInstance().entityManager->CreateEntity(EntityType::ITEM, itemNode.name());
 		item->SetParameters(itemNode);
 	}
-
+	for (pugi::xml_node NPCnode = configParameters.child("entities").child("NPCs").child("NPC"); NPCnode; NPCnode = NPCnode.next_sibling("NPC"))
+	{
+		NPC* npc = (NPC*)Engine::GetInstance().entityManager->CreateEntity(EntityType::NPC, NPCnode.attribute("name").as_string());
+		npc->SetParameters(NPCnode);
+	}
 
 	// L16: TODO 2: Instantiate a new GuiControlButton in the Scene
 	/*SDL_Rect btPos = { 520, 350, 120,20 };

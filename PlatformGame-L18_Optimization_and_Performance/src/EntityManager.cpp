@@ -8,6 +8,7 @@
 #include "Enemy.h"
 #include "Cannibal.h"
 #include "Narcissist.h"
+#include "NPC.h"
 #include "tracy/Tracy.hpp"
 
 EntityManager::EntityManager() : Module()
@@ -86,6 +87,14 @@ Entity* EntityManager::CreateEntity(EntityType type, string name)
 		else if (name == "Cannibal")
 			entity = new Cannibal();
 
+	case EntityType::NPC:
+
+		if (name == "Sally")
+			entity = new NPC(NPCType::SALLY);
+		else if (name == "Henry")
+			entity = new NPC(NPCType::HENRY);
+		else if (name == "Billy")
+			entity = new NPC(NPCType::BILLY);
 
 		break;
 	default:

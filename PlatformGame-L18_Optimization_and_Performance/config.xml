@@ -51,6 +51,29 @@
 					<combat health="100" maxHealth="150" attackPoints="25" defensePoints="50" />
 				</Narcissist>
 			</enemies>
+			<NPCs>
+				<NPC name="Sally" x="0" y="0" w="32" h="32" speed ="0.01" texture="Assets/Textures/player/Idle.png" gravity="true">
+					<animations>
+						<idle loop="true" speed="0.1">
+							<frame x="0" y="0" w="32" h="32" />
+						</idle>
+					</animations>
+				</NPC>
+				<NPC name="Billy" x="3105" y="2592" w="32" h="32" speed ="0.01" texture="Assets/Textures/player/Idle.png" gravity="true">
+					<animations>
+						<idle loop="true" speed="0.1">
+							<frame x="0" y="0" w="32" h="32" />
+						</idle>
+					</animations>
+				</NPC>
+				<NPC name="Henry" x="2369" y="2913" w="32" h="32" speed ="0.01" texture="Assets/Textures/player/Idle.png" gravity="true">
+					<animations>
+						<idle loop="true" speed="0.1">
+							<frame x="0" y="0" w="32" h="32" />
+						</idle>
+					</animations>
+				</NPC>
+			</NPCs>
 		</entities>
 	</scene>
 	<dialogueSystem textBoxBg="Assets/Textures/textBox.png" />
