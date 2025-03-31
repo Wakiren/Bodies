@@ -76,7 +76,7 @@ bool Player::Update(float dt)
 		velocity = b2Vec2(0,0);
 	}
 	
-	if (!inCombat) 
+	if (!isInCombat) 
 	{
 		MoveToMousePos(1);
 	}
@@ -127,9 +127,8 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		enemy->combatStats->defensePoints = 100;
 		enemy->combatStats->maxHealth = 100;
 		CombatSystem* combatSystem = new CombatSystem();
-		combatSystem->enemy = (Enemy*)enemy;
 		combatSystem->player = (Player*)player;
-		//combatSystem->Update(1);
+		combatSystem->enemy = (Enemy*)enemy;
 		break;
 	}
 }

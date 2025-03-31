@@ -1,11 +1,11 @@
 #include "CombatSystem.h"
 
-CombatSystem::CombatSystem()//(Player* _player, Enemy* _enemy)
+CombatSystem::CombatSystem()
 {
-    //player = _player;
-    //enemy = _enemy;
+    player = nullptr;
+    enemy = nullptr;
+    round = 0;
 }
-
 CombatSystem::~CombatSystem()
 {
 
@@ -24,7 +24,7 @@ bool CombatSystem::Start()
 
 bool CombatSystem::Update(float dt)
 {
-
+    MainLoop();
 	return true;
 }
 
@@ -79,6 +79,10 @@ void CombatSystem::PlayerTurn()
 
 bool CombatSystem::isCombatOver(Player* player, Enemy* enemy)
 {
+    if(player == nullptr || enemy == nullptr)
+    {
+        return true;
+    }
     if (!player->combatStats->isAlive()) {
         cout << "Player defeated!\n";
         return true;

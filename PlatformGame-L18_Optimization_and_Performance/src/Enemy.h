@@ -82,4 +82,5 @@ public:
 	//Search for combatants
 	std::vector<Enemy*> Combatants;
 	bool CombatantsFound = false;
+	bool isInCombat = false;
 };

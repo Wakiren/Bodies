@@ -100,6 +100,7 @@ void Enemy::OnCollision(PhysBody* physA, PhysBody* physB) {
 	{
 	case ColliderType::PLAYER:
 
+		isInCombat = true;
 		if (CombatantsFound == true)
 		{
 			break;

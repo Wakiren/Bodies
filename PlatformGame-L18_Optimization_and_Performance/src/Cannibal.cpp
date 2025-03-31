@@ -34,7 +34,7 @@ bool Cannibal::Update(float dt)
 
 	visionLimit = Engine::GetInstance().map.get()->MapToWorld(2, 2);
 
-	if (IsInVision())
+	if (IsInVision() && !isInCombat)
 	{
 		if (check < 20)
 		{
