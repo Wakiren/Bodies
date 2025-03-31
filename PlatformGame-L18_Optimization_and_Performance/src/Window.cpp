@@ -43,7 +43,13 @@ bool Window::Awake()
 		if(resizable == true) flags |= SDL_WINDOW_RESIZABLE;
 		if(fullscreen_window == true) flags |= SDL_WINDOW_FULLSCREEN_DESKTOP;
 
-		window = SDL_CreateWindow("Platform Game", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, flags);
+		SDL_Rect window_rect;
+
+		SDL_GetDisplayBounds(0, &window_rect);
+
+		window = SDL_CreateWindow("Platform Game", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, window_rect.w-100, window_rect.h-100, flags);
+
+		
 
 		if(window == NULL)
 		{

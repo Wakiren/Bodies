@@ -36,7 +36,7 @@ bool MainMenu::Awake()
 // Called before the first frame
 bool MainMenu::Start()
 {
-	//background = Engine::GetInstance().textures.get()->Load("Assets/Textures/Background.png");
+	background = Engine::GetInstance().textures.get()->Load("Assets/Textures/MainMenu.png");
 
 	buttons = Engine::GetInstance().textures.get()->Load("Assets/Textures/Buttons.png");
 
@@ -53,6 +53,11 @@ bool MainMenu::PreUpdate()
 bool MainMenu::Update(float dt)
 {
 	bool ret = true;
+
+	// Draw the background
+	//Section to draw the background (window size)
+	SDL_Rect backgroundRect = { 0, 0, 1920, 1080 };
+	Engine::GetInstance().render.get()->DrawUIimage(background, 0, 0,&backgroundRect);
 
 	Engine::GetInstance().render.get()->camera.x = 0;
 	Engine::GetInstance().render.get()->camera.y = 0;
@@ -77,8 +82,8 @@ bool MainMenu::Update(float dt)
 	}
 
 	//Button textures
-	Engine::GetInstance().render.get()->DrawTexture(buttons, 300, 140, &Button1);
-	Engine::GetInstance().render.get()->DrawTexture(buttons, 300, 300, &Button2);
+	Engine::GetInstance().render.get()->DrawTexture(buttons, 180, 150, &Button1);
+	Engine::GetInstance().render.get()->DrawTexture(buttons, 180, 200, &Button2);
 
 	int x, y;
 	
@@ -87,13 +92,19 @@ bool MainMenu::Update(float dt)
 	x = mousePos.getX();
 	y = mousePos.getY();
 	
-	if (x >= 300 && x <= 556 && y >= 140 && y <= 178) {
+	//Check wher is the mouse
+	LOG("X: %d Y: %d", x, y);
+
+	if (x >= 180 && x <= 300 && y >= 150 && y <= 180) {
 
 		option = SELECTED::START;
 	}
-	else if (x >= 300 && x <= 556 && y >= 300 && y <= 338) {
+	else if (x >= 180 && x <= 300 && y >= 200 && y <= 240) {
 
 		option = SELECTED::EXIT;
+	}
+	else {
+		option = SELECTED::NONE;
 	}
 
 	return ret;

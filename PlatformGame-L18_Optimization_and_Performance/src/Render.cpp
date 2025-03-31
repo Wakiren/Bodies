@@ -3,6 +3,7 @@
 #include "Render.h"
 #include "Log.h"
 #include "tracy/Tracy.hpp"
+#include "SDL2/SDL.h"
 
 #define VSYNC true
 
@@ -37,6 +38,7 @@ bool Render::Awake()
 
 	SDL_Window* window = Engine::GetInstance().window.get()->window;
 	renderer = SDL_CreateRenderer(window, -1, flags);
+	SDL_RenderSetLogicalSize(renderer, Engine::GetInstance().window.get()->width, Engine::GetInstance().window.get()->height);
 
 	if(renderer == NULL)
 	{
