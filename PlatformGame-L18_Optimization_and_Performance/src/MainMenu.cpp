@@ -57,7 +57,7 @@ bool MainMenu::Update(float dt)
 	// Draw the background
 	//Section to draw the background (window size)
 	SDL_Rect backgroundRect = { 0, 0, 1920, 1080 };
-	Engine::GetInstance().render.get()->DrawUIimage(background, 0, 0,1,&backgroundRect);
+	Engine::GetInstance().render.get()->DrawUIimage(background, 0, 0,1, &backgroundRect);
 
 	Engine::GetInstance().render.get()->camera.x = 0;
 	Engine::GetInstance().render.get()->camera.y = 0;
@@ -82,8 +82,8 @@ bool MainMenu::Update(float dt)
 	}
 
 	//Button textures
-	Engine::GetInstance().render.get()->DrawUIimage(buttons, 180, 150, 4 ,&Button1);
-	Engine::GetInstance().render.get()->DrawUIimage(buttons, 180, 200, 4 ,&Button2);
+	Engine::GetInstance().render.get()->DrawTexture(buttons, 360, 300, &Button1);
+	Engine::GetInstance().render.get()->DrawTexture(buttons, 360, 400, &Button2);
 
 	int x, y;
 	
@@ -95,12 +95,12 @@ bool MainMenu::Update(float dt)
 	//Check wher is the mouse
 	LOG("X: %d Y: %d", x, y);
 
-	if (x >= 180 && x <= 300 && y >= 150 && y <= 180) {
+	if (x >= 360 && x <= 600 && y >= 300 && y <= 360) {
 
 		option = SELECTED::START;
 		
 	}
-	else if (x >= 180 && x <= 300 && y >= 200 && y <= 240) {
+	else if (x >= 360 && x <= 600 && y >= 400 && y <= 480) {
 
 		option = SELECTED::EXIT;
 	}
