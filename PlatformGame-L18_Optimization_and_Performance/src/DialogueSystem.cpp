@@ -161,10 +161,10 @@ void DialogueSystem::LoadChoices(pugi::xml_node& xml_node, DialogueNode* node)
 		option->text = choice.attribute("option").as_string();
 		option->eventReturn = choice.attribute("eventReturn").as_int();
 
-		if (choice.find_attribute("path").as_int())
-		{
-			option->path = choice.attribute("path").as_int();
-		}
+		//if (choice.find_attribute("path").as_int() == true)
+		//{
+		//	option->path = choice.attribute("path").as_int();
+		//}
 
 		node->choicesList.push_back(option);
 	}
