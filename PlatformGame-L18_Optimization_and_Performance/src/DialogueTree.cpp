@@ -1,12 +1,12 @@
 #include "DialogueTree.h"
 #include "Engine.h"
 
-void DialogueNode::SplitText(SString text, int fontSize_, int max_chars_line_)
+void DialogueNode::SplitText(SString text, int fontSize_, int max_chars_line_, int limit)
 {
 	string line = text.GetString();
 
 	// TODO 6: adapt text to the text box
-	if (text.Length() > max_chars_line_)
+	if (DIALOGUE_W + SPACING + text.Length() * fontSize_ > limit)
 	{
 		int a, b, startIndex = 0;
 		for (int j = 0; j <= line.length() / max_chars_line_; j++)	// <= -> in case of decimal, get the round up number 
@@ -32,12 +32,11 @@ void DialogueNode::SplitText(SString text, int fontSize_, int max_chars_line_)
 DialogueTree::DialogueTree(bool a)
 {
 	active = a;
-	TextBox = Engine::GetInstance().textures.get()->Load("Assets/Textures/TextBox.png");
 }
 
 bool DialogueTree::UpdateTree(float dt, Module* mod, Vector2D pos)
 {
-	max_chars_line = fontSize * 3;
+	max_chars_line = fontSize*2 ;
 
 	// TODO 6: Substitute player's name in text and choices if needed
 	if (!Engine::GetInstance().input.get()->playerName.empty())
@@ -47,16 +46,15 @@ bool DialogueTree::UpdateTree(float dt, Module* mod, Vector2D pos)
 
 	if (!activeNode->trimmed)
 	{
-		activeNode->SplitText(activeNode->text, fontSize, max_chars_line);
+		activeNode->SplitText(activeNode->text, fontSize, max_chars_line, DIALOGUE_W + SPACING + 500);
 	}
 
 	// TODO 6: Render dialogue in text box
 	size_t lines = activeNode->texts.size();
-	Engine::GetInstance().render.get()->DrawUIimage(TextBox, 0, (Engine::GetInstance().window.get()->height - DIALOGUE_H)- SPACING,2);
 	for (size_t i = 0; i < lines; i++)
 	{
 		//THE X IN HERE SHOULD BE THE HITBOX OF THE TALKING CHARCATER
-		Engine::GetInstance().render.get()->DrawText(activeNode->texts[i].GetString(), SPACING, (Engine::GetInstance().window.get()->height - DIALOGUE_H) + 50* i, fontSize, {100, 255, 255});
+		Engine::GetInstance().render.get()->DrawText(activeNode->texts[i].GetString(), DIALOGUE_W + SPACING, (Engine::GetInstance().window.get()->height - DIALOGUE_H) + 50* i + SPACING, fontSize, { 0, 0, 0});
 
 	}
 

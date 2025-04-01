@@ -76,5 +76,5 @@
 			</NPCs>
 		</entities>
 	</scene>
-	<dialogueSystem textBoxBg="Assets/Textures/textBox.png" />
+	<dialogueSystem textBoxBg="Assets/UI/Dialogue Box.png" />
 </config>

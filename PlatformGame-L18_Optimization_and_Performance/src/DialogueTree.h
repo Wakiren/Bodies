@@ -18,8 +18,9 @@
 #define DIALOGUE_SAVE 3
 #define DIALOGUE_IF 4
 
-#define DIALOGUE_H 300
-#define SPACING 100
+#define DIALOGUE_H 400
+#define DIALOGUE_W 575
+#define SPACING 175
 
 using namespace std;
 
@@ -83,8 +84,6 @@ public:
 	bool active = false;
 	vector <DialogueNode*> nodeList;
 	DialogueNode* activeNode;
-
-	SDL_Texture* TextBox = NULL;
 
 	List <GuiControl*> listDialogueButtons;
 
