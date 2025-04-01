@@ -3,6 +3,8 @@
 #include <string>
 #include "pugixml.hpp"
 
+#define FONT_SIZE 36
+
 class GuiControl;
 
 class Module

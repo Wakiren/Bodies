@@ -89,7 +89,7 @@ public:
 	List <GuiControl*> listDialogueButtons;
 
 	bool updateOptions;
-	int fontSize;
+	int fontSize = FONT_SIZE;
 	int max_chars_line;
 };
 

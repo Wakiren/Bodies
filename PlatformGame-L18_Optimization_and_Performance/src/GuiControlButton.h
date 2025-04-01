@@ -8,7 +8,7 @@ class GuiControlButton : public GuiControl
 
 public:
 
-	GuiControlButton(int id, SDL_Rect bounds, const char* text = "", int fontSize = 12);
+	GuiControlButton(int id, SDL_Rect bounds, const char* text = "", int fontSize = FONT_SIZE);
 	virtual ~GuiControlButton();
 
 	// Called each loop iteration
