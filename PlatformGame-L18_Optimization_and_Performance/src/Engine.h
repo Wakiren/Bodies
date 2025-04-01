@@ -6,7 +6,6 @@
 #include "Timer.h"
 #include "PerfTimer.h"
 #include "pugixml.hpp"
-#include "MainMenu.h"
 
 // Modules
 class Window;
@@ -23,6 +22,7 @@ class GuiManager;
 class DialogueSystem;
 class CombatSystem;
 class MainMenu;
+class PauseMenu;
 
 class Engine
 {
@@ -109,6 +109,7 @@ public:
 	std::shared_ptr<DialogueSystem> dialogueSystem;
 	std::shared_ptr<CombatSystem> combatSystem;
 	std::shared_ptr<MainMenu> mainMenu;
+	std::shared_ptr<PauseMenu> pauseMenu;
 
 private: 
 

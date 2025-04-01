@@ -42,10 +42,11 @@ public:
 
 	SELECTED option = SELECTED::NONE;
 
+	SDL_Texture* buttons;
+
 private:
 	
 	SDL_Texture* background;
-	SDL_Texture* buttons;
 
 	SDL_Rect Button1 = { 0,0,106,38 };
 	SDL_Rect Button2 = { 0,111,106,38 };

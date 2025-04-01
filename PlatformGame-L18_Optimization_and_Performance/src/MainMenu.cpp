@@ -69,6 +69,7 @@ bool MainMenu::Update(float dt)
 		Engine::GetInstance().scene.get()->active = true;
 		Engine::GetInstance().entityManager.get()->active = true;
 		Engine::GetInstance().mainMenu.get()->active = false;
+		haveToChange = false;
 	}
 
 	// Function to detect the mouse click
@@ -82,25 +83,25 @@ bool MainMenu::Update(float dt)
 	}
 
 	//Button textures
-	Engine::GetInstance().render.get()->DrawTexture(buttons, 360, 300, &Button1);
-	Engine::GetInstance().render.get()->DrawTexture(buttons, 360, 400, &Button2);
+	Engine::GetInstance().render.get()->DrawTexture(buttons, 200, 150, &Button1);
+	Engine::GetInstance().render.get()->DrawTexture(buttons, 200, 200, &Button2);
 
 	int x, y;
 	
 	Vector2D mousePos = Engine::GetInstance().input.get()->GetMousePosition();
 	
+	LOG("X: %f Y: %f", mousePos.getX(), mousePos.getY());
+
 	x = mousePos.getX();
 	y = mousePos.getY();
 	
-	//Check wher is the mouse
-	LOG("X: %d Y: %d", x, y);
 
-	if (x >= 360 && x <= 600 && y >= 300 && y <= 360) {
+	if (x >= 200 && x <= 270 && y >= 150 && y <= 180) {
 
 		option = SELECTED::START;
 		
 	}
-	else if (x >= 360 && x <= 600 && y >= 400 && y <= 480) {
+	else if (x >= 200 && x <= 260 && y >= 200 && y <= 220) {
 
 		option = SELECTED::EXIT;
 	}

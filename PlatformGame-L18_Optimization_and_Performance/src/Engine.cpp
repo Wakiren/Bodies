@@ -17,6 +17,7 @@
 #include "DialogueSystem.h"
 #include "CombatSystem.h"
 #include "MainMenu.h"
+#include "PauseMenu.h"
 
 #include "tracy/Tracy.hpp"
 
@@ -48,7 +49,8 @@ Engine::Engine() {
     guiManager = std::make_shared<GuiManager>();
 	dialogueSystem = std::make_shared<DialogueSystem>();
 	mainMenu = std::make_shared<MainMenu>();
-   combatSystem = std::make_shared<CombatSystem>();
+    combatSystem = std::make_shared<CombatSystem>();
+    pauseMenu = std::make_shared<PauseMenu>();
 
     // Ordered for awake / Start / Update
     // Reverse order of CleanUp
@@ -58,6 +60,7 @@ Engine::Engine() {
     AddModule(std::static_pointer_cast<Module>(audio));
     // L08: TODO 2: Add Physics module
 	AddModule(std::static_pointer_cast<Module>(mainMenu));
+	AddModule(std::static_pointer_cast<Module>(pauseMenu));
     AddModule(std::static_pointer_cast<Module>(physics));
     AddModule(std::static_pointer_cast<Module>(map));
     AddModule(std::static_pointer_cast<Module>(scene));
@@ -66,6 +69,7 @@ Engine::Engine() {
 	AddModule(std::static_pointer_cast<Module>(dialogueSystem));
    AddModule(std::static_pointer_cast<Module>(combatSystem));
 
+    pauseMenu->active = false;
     scene->active = false;
     entityManager->active = false;
     physics->active = false;

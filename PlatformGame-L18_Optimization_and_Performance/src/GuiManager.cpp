@@ -4,6 +4,8 @@
 
 #include "GuiControlButton.h"
 #include "Audio.h"
+#include "MainMenu.h"
+#include "PauseMenu.h"
 
 GuiManager::GuiManager() :Module()
 {
@@ -43,7 +45,7 @@ GuiControl* GuiManager::CreateGuiControl(GuiControlType type, int id, const char
 
 bool GuiManager::Update(float dt)
 {	
-	if(Engine::GetInstance().mainMenu->active ==false)
+	if(Engine::GetInstance().mainMenu->active == false && Engine::GetInstance().pauseMenu->active == false)
 		Engine::GetInstance().render->DrawUIimage(Filter, 0, 0);
 
 	accumulatedTime += dt;

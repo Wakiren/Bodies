@@ -102,7 +102,6 @@ bool Map::Update(float dt)
 void Map::DrawTrees()
 {
     Engine::GetInstance().render->DrawTexture(Trees, 0, 0);
-
 }
 
 // L09: TODO 2: Implement function to the Tileset based on a tile id

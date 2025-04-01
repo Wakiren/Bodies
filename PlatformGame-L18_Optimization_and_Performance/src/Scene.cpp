@@ -19,6 +19,7 @@
 #include "GuiManager.h"
 #include "DialogueSystem.h"
 #include "Map.h"
+#include "PauseMenu.h"
 
 Scene::Scene() : Module()
 {
@@ -226,6 +227,12 @@ bool Scene::PostUpdate()
 	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_F6) == KEY_DOWN)
 	{
 		Engine::GetInstance().dialogueSystem.get()->LoadDialogueState();
+	}
+
+	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_8) == KEY_DOWN)
+	{
+		Engine::GetInstance().pauseMenu.get()->active = true;
+		Engine::GetInstance().pauseMenu.get()->once = true;
 	}
 
 	return ret;

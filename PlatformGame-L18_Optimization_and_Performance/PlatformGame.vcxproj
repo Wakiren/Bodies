@@ -168,6 +168,7 @@
     <ClCompile Include="src\Narcissist.cpp" />
     <ClCompile Include="src\NPC.cpp" />
     <ClCompile Include="src\Pathfinding.cpp" />
+    <ClCompile Include="src\PauseMenu.cpp" />
     <ClCompile Include="src\PerfTimer.cpp" />
     <ClCompile Include="src\Physics.cpp" />
     <ClCompile Include="src\PlatformGame.cpp" />
@@ -208,6 +209,7 @@
     <ClInclude Include="src\Narcissist.h" />
     <ClInclude Include="src\NPC.h" />
     <ClInclude Include="src\Pathfinding.h" />
+    <ClInclude Include="src\PauseMenu.h" />
     <ClInclude Include="src\PerfTimer.h" />
     <ClInclude Include="src\Physics.h" />
     <ClInclude Include="src\Player.h" />
