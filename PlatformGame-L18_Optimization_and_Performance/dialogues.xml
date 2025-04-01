@@ -42,21 +42,23 @@
     </node>
 
     <node id="4" text="That's understandable. It's not for everyone. Have a safe journey ahead!">
-      <choice id="0" option="Goodbye. " nextNode="-1" eventReturn="1"/>
+      <choice id="0" option="Goodbye. " nextNode="7" eventReturn="1"/>
     </node>
 
     <node id="5" text="Good luck out there, and be careful!">
-        <choice id="0" option="Of course! I'll do my best to take care of that beast." nextNode="-1" eventReturn="1"/>
+        <choice id="0" option="Of course! I'll do my best to take care of that beast." nextNode="7" eventReturn="1"/>
     </node>
 
     <node id="6" text="There have been rumors that the beast is being controlled by someone. If that's true, you'll need to be extra cautious.">
-        <choice id="0" option="Got it. I'll keep my guard up. I'll be on my way now." nextNode="-1" eventReturn="1"/>
+        <choice id="0" option="Got it. I'll keep my guard up. I'll be on my way now." nextNode="7" eventReturn="1"/>
         <choice id="1" option="Actually, I've changed my mind." nextNode="4" eventReturn="3"/>
     </node>
 
     
 
-    <node id="-1" text ="End of conversation -F1- to talk again"></node>
+    <node id="7" text ="End of conversation -F1- to talk again">
+		<choice id="0" option="Bye" nextNode="-1"  eventReturn="1"/>
+	</node>
   </dialogueTree>
 
 

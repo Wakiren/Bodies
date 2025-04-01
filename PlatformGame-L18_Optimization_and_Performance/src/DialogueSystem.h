@@ -38,6 +38,8 @@ public:
 	DialogueChoice* playerInput;
 	DialogueTree* activeTree = nullptr;
 
+	bool inDialog = false;
+
 	SDL_Texture* textBox_tex;
 	const char* textBox_path;
 

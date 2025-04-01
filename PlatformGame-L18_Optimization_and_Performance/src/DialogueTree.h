@@ -39,6 +39,7 @@ public:
 	SString text;
 	int nextNode;
 	int eventReturn;
+	int path;
 };
 
 

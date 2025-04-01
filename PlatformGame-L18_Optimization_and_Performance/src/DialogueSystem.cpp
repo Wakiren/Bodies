@@ -28,13 +28,14 @@ bool DialogueSystem::Start()
 
 bool DialogueSystem::Update(float dt)
 {
-	if (activeTree != nullptr)
+	if (activeTree != nullptr && inDialog == true)
 	{
 		//Text box
 		Vector2D pos = { 0, (float)(Engine::GetInstance().window.get()->height )};
 		Engine::GetInstance().render.get()->DrawUIimage(textBox_tex, DIALOGUE_W, (Engine::GetInstance().window.get()->height - DIALOGUE_H));
 		activeTree->UpdateTree(dt, Engine::GetInstance().dialogueSystem.get(), pos);
 		Engine::GetInstance().guiManager.get()->Draw();
+		
 	}
 
 	return true;
@@ -63,7 +64,9 @@ bool DialogueSystem::OnGuiMouseClickEvent(GuiControl* control)
 	}
 	else // If choice leads to the end of the conversation, change active node to last node
 	{
+		
 		activeTree->activeNode = activeTree->nodeList.at(activeTree->nodeList.size() - 1);
+		inDialog = false;
 	}
 
 	Engine::GetInstance().guiManager.get()->CleanUp();
@@ -156,8 +159,12 @@ void DialogueSystem::LoadChoices(pugi::xml_node& xml_node, DialogueNode* node)
 		DialogueChoice* option = new DialogueChoice;
 		option->nextNode = choice.attribute("nextNode").as_int();
 		option->text = choice.attribute("option").as_string();
-
 		option->eventReturn = choice.attribute("eventReturn").as_int();
+
+		if (choice.find_attribute("path").as_int())
+		{
+			option->path = choice.attribute("path").as_int();
+		}
 
 		node->choicesList.push_back(option);
 	}

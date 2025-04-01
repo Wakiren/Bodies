@@ -17,6 +17,7 @@ GuiManager::~GuiManager() {}
 bool GuiManager::Start()
 {
 		Filter = Engine::GetInstance().textures->Load("Assets/UI/Filter.png");
+		Trees = Engine::GetInstance().textures->Load("Assets/Maps/Trees.png");
 	return true;
 }
 
@@ -45,8 +46,11 @@ GuiControl* GuiManager::CreateGuiControl(GuiControlType type, int id, const char
 
 bool GuiManager::Update(float dt)
 {	
-	if(Engine::GetInstance().mainMenu->active == false && Engine::GetInstance().pauseMenu->active == false)
+	if (Engine::GetInstance().mainMenu->active == false && Engine::GetInstance().pauseMenu->active == false)
+	{
+		Engine::GetInstance().render->DrawTexture(Trees, 0, 0);
 		Engine::GetInstance().render->DrawUIimage(Filter, 0, 0);
+	}
 
 	accumulatedTime += dt;
 	if (accumulatedTime >= updateMsCycle) doLogic = true;

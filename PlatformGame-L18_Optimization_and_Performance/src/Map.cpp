@@ -31,7 +31,6 @@ bool Map::Awake()
 
 bool Map::Start() {
 
-	Trees = Engine::GetInstance().textures->Load("Assets/Maps/Trees.png");
     return true;
 }
 
@@ -99,10 +98,6 @@ bool Map::Update(float dt)
     return ret;
 }
 
-void Map::DrawTrees()
-{
-    Engine::GetInstance().render->DrawTexture(Trees, 0, 0);
-}
 
 // L09: TODO 2: Implement function to the Tileset based on a tile id
 TileSet* Map::GetTilesetFromTileId(int gid) const

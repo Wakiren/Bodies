@@ -86,7 +86,7 @@ bool Player::Update(float dt)
 	currentAnimation->Update();
 
 
-	if (!isInCombat && !Engine::GetInstance().dialogueSystem.get()->activeTree)
+	if (!isInCombat && Engine::GetInstance().dialogueSystem.get()->inDialog == false)
 	{
 		MoveToMousePos(1);
 
@@ -96,8 +96,6 @@ bool Player::Update(float dt)
 		pbody->body->SetEnabled(false);
 	}
 
-	//Draw the Trees
-	Engine::GetInstance().map.get()->DrawTrees();
 
 	return true;
 }

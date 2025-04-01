@@ -43,6 +43,7 @@ public:
 	bool filterActive = false;
 
 	SDL_Texture* Filter = nullptr;
+	SDL_Texture* Trees = nullptr;
 
 	enum UIState
 	{

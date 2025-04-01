@@ -180,8 +180,6 @@ public:
         return mapData.tileHeight;
     }
 
-    void DrawTrees();
-
     MapLayer* GetNavigationLayer();
 
     MapLayer* GetDataLayer();
@@ -193,7 +191,6 @@ public:
 public: 
     std::string mapFileName;
     std::string mapPath;
-    SDL_Texture* Trees = nullptr;
 
 private:
     bool mapLoaded;
