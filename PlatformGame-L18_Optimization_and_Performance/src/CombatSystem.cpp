@@ -1,5 +1,6 @@
 #include "CombatSystem.h"
 #include "Fighter.h"
+#include "Scene.h"
 
 CombatSystem::CombatSystem()
 {
@@ -38,6 +39,7 @@ void CombatSystem::MainLoop()
     {
         if(isPlayerTurn) 
         {
+            Engine::GetInstance().scene.get()->player->isInCombat = true;
             PlayerTurn();
             if (isCombatOver(player, enemy))
             {
@@ -84,10 +86,13 @@ bool CombatSystem::isCombatOver(Player* player, Enemy* enemy)
     }
     if (!player->isAlive(player)) {
         cout << "Player defeated!\n";
+        Engine::GetInstance().scene.get()->player->isInCombat = false;
         return true;
     }
-    if (!enemy->isAlive(player)) {
+    if (!enemy->isAlive(enemy)) {
         cout << "Enemy defeated!\n";
+        //Engine::GetInstance().scene.get()->enemyList[0]->Disable();
+        Engine::GetInstance().scene.get()->player->isInCombat = false;
         return true;
     }
 
