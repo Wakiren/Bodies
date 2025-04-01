@@ -31,7 +31,7 @@
 						<frame x="256" y="0" w="32" h="32" />
 					</idle>
 				</animations>
-				<combat health="100" maxHealth="150" attackPoints="25" defensePoints="50" />
+				<combat health="100" maxHealth="150" attackPoints="50" defensePoints="50" />
 			</player>
 			<enemies>
 				<Cannibal name="Cannibal" x="2700" y="3180" w="32" h="32" speed ="0.01" texture="Assets/Textures/player/Idle.png" gravity="true" SpawnRate="3" HelpDistance="10">

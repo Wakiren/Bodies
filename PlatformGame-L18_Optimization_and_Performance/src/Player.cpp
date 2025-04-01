@@ -88,12 +88,12 @@ bool Player::Update(float dt)
 
 	if (!isInCombat && !Engine::GetInstance().dialogueSystem.get()->activeTree)
 	{
+		Enable();
 		MoveToMousePos(1);
-
 	}
 	else
 	{
-		pbody->body->SetEnabled(false);
+		Disable();
 	}
 
 	//Draw the Trees
@@ -128,7 +128,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		Fighter* enemy = new Fighter(physB->listener->type);
 		enemy->combatStats = new CombatStats;
 		enemy->combatStats->health = 100;
-		enemy->combatStats->attackPoints = 100;
+		enemy->combatStats->attackPoints = 10;
 		enemy->combatStats->defensePoints = 100;
 		enemy->combatStats->maxHealth = 100;
 
