@@ -83,6 +83,7 @@ public:
 public:
 	// DONE: Create tree structure
 	int treeID;
+	string NPC;
 	bool active = false;
 	vector <DialogueNode*> nodeList;
 	DialogueNode* activeNode;

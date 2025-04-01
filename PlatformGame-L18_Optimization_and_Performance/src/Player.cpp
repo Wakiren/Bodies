@@ -88,12 +88,7 @@ bool Player::Update(float dt)
 
 	if (!isInCombat && Engine::GetInstance().dialogueSystem.get()->inDialog == false)
 	{
-		Enable();
 		MoveToMousePos(1);
-	}
-	else
-	{
-		Disable();
 	}
 
 

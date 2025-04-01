@@ -115,6 +115,7 @@ int DialogueSystem::LoadDialogue(const char* file, int dialogueID)
 			if (pugiNode.attribute("ID").as_int() == dialogueID)
 			{
 				tree->treeID = pugiNode.attribute("ID").as_int();
+				tree->NPC = pugiNode.attribute("NPC").as_string();
 				tree->activeNode = LoadNodes(pugiNode, tree);
 				activeTree = tree;
 				break;

@@ -19,7 +19,7 @@
 -->
 
 <dialogues>
-  <dialogueTree ID="0">
+  <dialogueTree ID="0" NPC = "name">
 
     <node id="0" text="Hey there, traveler. Who are you and what brings you here?">
         <choice id="0" option="My name is %%x. I'm just seeking out new adventures." nextNode="1" eventReturn="2"/>
@@ -63,7 +63,7 @@
 
 
 
-  <dialogueTree ID="1">
+  <dialogueTree ID="1" NPC = "name">
     <node id="0" text="Hey, welcome back %%x! Anything exciting to report?">
         <choice id="0" option="Hi! You won't have problems with the beast anymore." nextNode="1" eventReturn="4"/>
         <choice id="1" option="The beast has been taken care of. Now about the reward..." nextNode="2" eventReturn="4"/>
@@ -89,7 +89,7 @@
 
 
   <!--TODO: Create your own dialogue-->
-  <dialogueTree ID="2">
+  <dialogueTree ID="2" NPC = "name">
 
   </dialogueTree>
 
