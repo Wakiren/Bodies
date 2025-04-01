@@ -76,11 +76,6 @@ bool Player::Update(float dt)
 		velocity = b2Vec2(0,0);
 	}
 	
-	if (!isInCombat) 
-	{
-		MoveToMousePos(1);
-	}
-
 
 	b2Transform pbodyPos = pbody->body->GetTransform();
 	position.setX(METERS_TO_PIXELS(pbodyPos.p.x) - texH / 2);
@@ -89,6 +84,17 @@ bool Player::Update(float dt)
 	Engine::GetInstance().render.get()->DrawTexture(texture, (int)position.getX(), (int)position.getY(),
 	&currentAnimation->GetCurrentFrame(), 1, spriteAngle);
 	currentAnimation->Update();
+
+
+	if (!isInCombat)
+	{
+		MoveToMousePos(1);
+
+	}
+	else
+	{
+		pbody->body->SetEnabled(false);
+	}
 
 	//Draw the Trees
 	Engine::GetInstance().map.get()->DrawTrees();
@@ -126,10 +132,8 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		enemy->combatStats->defensePoints = 100;
 		enemy->combatStats->maxHealth = 100;
 
-		CombatSystem* combatSystem = new CombatSystem();
-		combatSystem->player = (Player*)player;
-		cout << "player in combatsystem" << combatSystem->player << endl;
-		combatSystem->enemy = (Enemy*)enemy;
+		Engine::GetInstance().combatSystem.get()->player = (Player*)player;
+		Engine::GetInstance().combatSystem.get()->enemy = (Enemy*)enemy;
 		cout << "Combat Created" << endl;
 		break;
 	}

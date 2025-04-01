@@ -11,6 +11,9 @@ class Fighter: public Entity
 
 	void Attack(Fighter* attacker, Fighter* target);
 	void Guard(Fighter* fighter);
+	bool isAlive(Fighter* Fighter);
+	void TakeDamage(Fighter* fighter, int amount);
+	void Heal(Fighter* fighter, int amount);
 
 	CombatStats* combatStats;
 

@@ -1,4 +1,5 @@
 #include "CombatSystem.h"
+#include "Fighter.h"
 
 CombatSystem::CombatSystem()
 {
@@ -33,10 +34,6 @@ bool CombatSystem::CleanUp()
 
 void CombatSystem::MainLoop()
 {
-    if (player != nullptr) 
-    {
-        cout << player << endl;
-    }
     if (!isCombatOver(player, enemy)) 
     {
         if(isPlayerTurn) 
@@ -61,20 +58,20 @@ void CombatSystem::MainLoop()
 
 void CombatSystem::EnemyTurn()
 {
-    cout << "ENEMY TURN:" << endl;
-    if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_Y) == KEY_DOWN)
+    if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
     {
         cout << "ENEMY ATTACKS!" << endl;
+        enemy->Attack(enemy, player);
         isPlayerTurn = true;
     }
 }
 
 void CombatSystem::PlayerTurn()
 {
-    cout << "PLAYER TURN:" << endl;
     if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_P) == KEY_DOWN)
     {
         cout << "PLAYER ATTACKS!" << endl;
+        player->Attack(player, enemy);
         isPlayerTurn = false;
     }
 }
@@ -85,11 +82,11 @@ bool CombatSystem::isCombatOver(Player* player, Enemy* enemy)
     {
         return true;
     }
-    if (!player->combatStats->isAlive()) {
+    if (!player->isAlive(player)) {
         cout << "Player defeated!\n";
         return true;
     }
-    if (!enemy->combatStats->isAlive()) {
+    if (!enemy->isAlive(player)) {
         cout << "Enemy defeated!\n";
         return true;
     }

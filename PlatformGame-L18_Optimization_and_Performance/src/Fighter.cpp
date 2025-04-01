@@ -16,10 +16,31 @@ void Fighter::Attack(Fighter* attacker, Fighter* target)
     {
         damage = 0;
     }
-    target->combatStats->TakeDamage(damage);
+    target->TakeDamage(target, damage);
 }
 
 void Fighter::Guard(Fighter* fighter)
 {
     fighter->combatStats->isGuarding = true;
+}
+
+bool Fighter::isAlive(Fighter* fighter)
+{ 
+    return fighter->combatStats->health > 0; 
+}
+
+void Fighter::TakeDamage(Fighter* fighter, int amount) {
+	fighter->combatStats->health -= amount;
+	if (fighter->combatStats->health < 0)
+	{
+		fighter->combatStats->health = 0;
+	}
+}
+
+void Fighter::Heal(Fighter* fighter, int amount) {
+	fighter->combatStats->health += amount;
+	if (fighter->combatStats->health > fighter->combatStats->maxHealth)
+	{
+		fighter->combatStats->health = fighter->combatStats->maxHealth;
+	}
 }

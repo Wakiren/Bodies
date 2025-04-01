@@ -14,23 +14,6 @@ struct CombatStats {
 	bool isGuarding = false;
 	list <int> abilities;
 
-	bool isAlive() const { return health > 0; }
-
-	void TakeDamage(int amount) {
-		health -= amount;
-		if (health < 0)
-		{
-			health = 0;
-		}
-	}
-
-	void Heal(int amount) {
-		health += amount;
-		if (health > maxHealth)
-		{
-			health = maxHealth;
-		}
-	}
 };
 
 #endif
