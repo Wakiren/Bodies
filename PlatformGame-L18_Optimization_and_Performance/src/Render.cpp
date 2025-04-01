@@ -299,7 +299,7 @@ bool Render::DrawText(const char* text, int x, int y, int size, SDL_Color color)
 {
 	bool ret = true;
 	//load a font into memory
-	ttf_font = TTF_OpenFont("Assets/Fonts/Typo_Light.ttf", size);
+	ttf_font = TTF_OpenFont("Assets/Fonts/MyFont.ttf", size);
 
 	if (!ttf_font)
 	{

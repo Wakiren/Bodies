@@ -1,6 +1,7 @@
 #include "GuiControlButton.h"
 #include "Render.h"
 #include "Engine.h"
+#include "Window.h"
 #include "Audio.h"
 
 GuiControlButton::GuiControlButton(int id, SDL_Rect bounds, const char* text, int fontSize) : GuiControl(GuiControlType::BUTTON, id)
@@ -23,7 +24,7 @@ bool GuiControlButton::Update(float dt)
 	if (state != GuiControlState::DISABLED)
 	{
 		// L16: TODO 3: Update the state of the GUiButton according to the mouse position
-		Vector2D mousePos = Engine::GetInstance().input->GetMousePosition()*2;
+		Vector2D mousePos = Engine::GetInstance().input->GetMousePosition() * Engine::GetInstance().window.get()->GetScale();
 
 		LOG("X: %f Y: %f", mousePos.getX(), mousePos.getY());
 		LOG("X: %d Y: %d", bounds.x, bounds.y);
