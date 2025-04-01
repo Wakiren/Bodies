@@ -86,7 +86,7 @@ bool Player::Update(float dt)
 	currentAnimation->Update();
 
 
-	if (!isInCombat)
+	if (!isInCombat && !Engine::GetInstance().dialogueSystem.get()->activeTree)
 	{
 		MoveToMousePos(1);
 

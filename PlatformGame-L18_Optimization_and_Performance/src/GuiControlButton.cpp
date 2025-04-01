@@ -78,25 +78,25 @@ bool GuiControlButton::Draw(Render* render)
 
 	case GuiControlState::DISABLED:
 	{
-		render->DrawRectangle({ bounds.x, bounds.y, bounds.w, bounds.h }, 200, 200, 200, 255, true, false);
+		render->DrawRectangle({ bounds.x, bounds.y, bounds.w, bounds.h }, 0, 0, 0, 0, true, false);
 
 	} break;
 
 	case GuiControlState::NORMAL:
 	{
-		render->DrawRectangle({ bounds.x, bounds.y, bounds.w, bounds.h}, 0, 128, 255, 255, true, false);
+		render->DrawRectangle({ bounds.x, bounds.y, bounds.w, bounds.h}, 0, 0, 0, 125, true, false);
 
 	}	break;
 
 	case GuiControlState::FOCUSED:
 	{
-		render->DrawRectangle({ bounds.x, bounds.y, bounds.w, bounds.h }, 255, 0, 255, 255, true, false);
+		render->DrawRectangle({ bounds.x, bounds.y, bounds.w, bounds.h }, 255, 255, 255, 100, true, false);
 
 	} break;
 
 	case GuiControlState::PRESSED:
 	{
-		render->DrawRectangle({ bounds.x, bounds.y, bounds.w, bounds.h }, 0, 255, 0, 255, true, false);
+		render->DrawRectangle({ bounds.x, bounds.y, bounds.w, bounds.h }, 255, 255, 255, 150, true, false);
 
 	} break;
 
@@ -108,7 +108,7 @@ bool GuiControlButton::Draw(Render* render)
 	int x = bounds.w / size * 0.5;
 	int y = bounds.h - size / 4;
 
-	Engine::GetInstance().render.get()->DrawText(text.GetString(), bounds.x + x, bounds.y, size);
+	Engine::GetInstance().render.get()->DrawText(text.GetString(), bounds.x + x, bounds.y, size, {255,255,255});
 
 	return false;
 }

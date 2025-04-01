@@ -21,6 +21,7 @@
 #define DIALOGUE_H 400
 #define DIALOGUE_W 575
 #define SPACING 175
+#define MaxCharsInLine 15
 
 using namespace std;
 
