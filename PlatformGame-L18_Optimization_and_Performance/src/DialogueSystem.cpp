@@ -94,7 +94,7 @@ bool DialogueSystem::CleanUp()
 }
 
 
-int DialogueSystem::LoadDialogue(const char* file, int dialogueID)
+int DialogueSystem::LoadDialogue(const char* file, int dialogueID, int NPC)
 {
 	pugi::xml_parse_result result = dialogues.load_file(file);
 
@@ -110,12 +110,12 @@ int DialogueSystem::LoadDialogue(const char* file, int dialogueID)
 		// TODO 1: Load the dialogue tree
 		pugi::xml_node pugiNode = dialogues.first_child().first_child();
 
-		for (int i = 0; i <= dialogueID && pugiNode != NULL; i++)
+		while (pugiNode != NULL)
 		{
-			if (pugiNode.attribute("ID").as_int() == dialogueID)
+			if (pugiNode.attribute("ID").as_int() == dialogueID && pugiNode.attribute("NPC").as_int() == NPC)
 			{
 				tree->treeID = pugiNode.attribute("ID").as_int();
-				tree->NPC = pugiNode.attribute("NPC").as_string();
+				tree->NPC = pugiNode.attribute("NPC").as_int();
 				tree->activeNode = LoadNodes(pugiNode, tree);
 				activeTree = tree;
 				break;

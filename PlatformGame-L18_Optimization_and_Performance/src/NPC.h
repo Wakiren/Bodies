@@ -52,5 +52,8 @@ public:
 	Animation idle;
 	PhysBody* pbody;
 
+	//For dialogue
 	NPCType type;
+	bool hasDialogue = true;
+	bool Interactable = true;
 };

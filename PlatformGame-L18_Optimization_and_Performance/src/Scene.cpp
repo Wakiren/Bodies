@@ -205,19 +205,7 @@ bool Scene::PostUpdate()
 		SaveState();
 
 
-	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
-	{
-		Engine::GetInstance().dialogueSystem.get()->CleanUp();
-		dialogueID = Engine::GetInstance().dialogueSystem.get()->LoadDialogue("dialogues.xml", 0);
 
-	}
-
-	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_F3) == KEY_DOWN)
-	{
-		Engine::GetInstance().dialogueSystem.get()->CleanUp();
-		dialogueID = Engine::GetInstance().dialogueSystem.get()->LoadDialogue("dialogues.xml", 1);
-		Engine::GetInstance().dialogueSystem.get()->LoadDialogueState();
-	}
 
 
 	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_F5) == KEY_DOWN)
@@ -327,9 +315,9 @@ int Scene::RandomValue(int min, int max)
 
 void Scene::StartDialogue(NPCType type)
 {
-	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && Engine::GetInstance().dialogueSystem->activeTree == nullptr)
+	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && Engine::GetInstance().dialogueSystem->inDialog == false)
 	{
-		Engine::GetInstance().dialogueSystem.get()->LoadDialogue("dialogues.xml", 0);
+		Engine::GetInstance().dialogueSystem.get()->LoadDialogue("dialogues.xml", 0, (int)type);
 		Engine::GetInstance().dialogueSystem.get()->inDialog = true;
 	}
 	Engine::GetInstance().render.get()->DrawText("Press Space to start dialogue", 10, 10, 50, { 255, 255, 255, 255 });

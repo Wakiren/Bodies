@@ -8,6 +8,12 @@
 4 - conditional
 -->
 
+<!-- NPC ID
+1 - Henry
+2 - Billy
+3 - Sally
+-->
+
 <!--
   IMPORTANT. Some special characters may crash the game
   Ex. % -> use %% (it will only show 1 %)
@@ -19,7 +25,7 @@
 -->
 
 <dialogues>
-  <dialogueTree ID="0" NPC = "name">
+  <dialogueTree ID="0" NPC = "1">
 
     <node id="0" text="Hey there, traveler. Who are you and what brings you here?">
         <choice id="0" option="My name is %%x. I'm just seeking out new adventures." nextNode="1" eventReturn="2"/>
@@ -63,7 +69,7 @@
 
 
 
-  <dialogueTree ID="1" NPC = "name">
+  <dialogueTree ID="0" NPC = "2">
     <node id="0" text="Hey, welcome back %%x! Anything exciting to report?">
         <choice id="0" option="Hi! You won't have problems with the beast anymore." nextNode="1" eventReturn="4"/>
         <choice id="1" option="The beast has been taken care of. Now about the reward..." nextNode="2" eventReturn="4"/>
@@ -85,12 +91,6 @@
 
 
     <node id="-1" text ="End of conversation -F2- to talk again"></node>
-  </dialogueTree>
-
-
-  <!--TODO: Create your own dialogue-->
-  <dialogueTree ID="2" NPC = "name">
-
   </dialogueTree>
 
 </dialogues>
