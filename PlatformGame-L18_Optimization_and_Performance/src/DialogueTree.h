@@ -12,6 +12,7 @@
 #include "SString.h"
 #include <vector>
 #include "Textures.h"
+#include "NPC.h"
 
 
 #define DIALOGUE_INPUT 2
@@ -83,7 +84,7 @@ public:
 public:
 	// DONE: Create tree structure
 	int treeID;
-	unsigned int NPC;
+	NPC* npc = nullptr;
 	bool FinalDialog = false;
 	bool active = false;
 	vector <DialogueNode*> nodeList;

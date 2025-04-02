@@ -54,6 +54,7 @@ public:
 
 	//For dialogue
 	NPCType type;
+	unsigned int NextID = 0;
 	bool hasDialogue = true;
 	bool Interactable = true;
 };

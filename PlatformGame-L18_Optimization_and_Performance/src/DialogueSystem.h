@@ -24,7 +24,7 @@ public:
 	bool CleanUp();
 
 
-	int LoadDialogue(const char* file, int dialogueID, int NPC);
+	int LoadDialogue(const char* file, NPC &npc);
 	DialogueNode* LoadNodes(pugi::xml_node& xml_trees, DialogueTree* tree);
 	void LoadChoices(pugi::xml_node& xml_node, DialogueNode* node);
 

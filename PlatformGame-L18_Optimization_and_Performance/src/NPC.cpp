@@ -57,7 +57,7 @@ bool NPC::Update(float dt)
 
 	if (CheckDistance(Engine::GetInstance().scene.get()->GetPlayerPosition()) < 100)
 	{
-		Engine::GetInstance().scene.get()->StartDialogue(type);
+		Engine::GetInstance().scene.get()->StartDialogue(*this);
 	}
 
 	return true;

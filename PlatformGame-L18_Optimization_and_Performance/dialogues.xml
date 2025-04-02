@@ -63,7 +63,7 @@
     
 
     <node id="7" text ="End of conversation -F1- to talk again">
-		<choice id="0" option="Bye" nextNode="-1"  eventReturn="1"/>
+		<choice id="0" option="Bye" nextNode="-1"  eventReturn="1" NextID="1"/>
 	</node>
   </dialogueTree>
 

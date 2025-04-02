@@ -313,11 +313,11 @@ int Scene::RandomValue(int min, int max)
 	return rand() % (max - min + 1) + min;
 }
 
-void Scene::StartDialogue(NPCType type)
+void Scene::StartDialogue(NPC &npc)
 {
-	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && Engine::GetInstance().dialogueSystem->inDialog == false)
+	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && Engine::GetInstance().dialogueSystem->inDialog == false && npc.Interactable == true)
 	{
-		Engine::GetInstance().dialogueSystem.get()->LoadDialogue("dialogues.xml", 0, (int)type);
+		Engine::GetInstance().dialogueSystem.get()->LoadDialogue("dialogues.xml", npc);
 		Engine::GetInstance().dialogueSystem.get()->inDialog = true;
 	}
 	Engine::GetInstance().render.get()->DrawText("Press Space to start dialogue", 10, 10, 50, { 255, 255, 255, 255 });

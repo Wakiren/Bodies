@@ -3,6 +3,7 @@
 #include "Engine.h"
 #include "Textures.h"
 #include "Render.h"
+#include "Scene.h"
 
 DialogueSystem::DialogueSystem()
 {
@@ -64,6 +65,7 @@ bool DialogueSystem::OnGuiMouseClickEvent(GuiControl* control)
 	}
 	else // If choice leads to the end of the conversation, change active node to last node
 	{
+		activeTree->npc->NextID = activeTree->activeNode->choicesList[control->id]->path;
 		
 		activeTree->activeNode = activeTree->nodeList.at(activeTree->nodeList.size() - 1);
 		inDialog = false;
@@ -94,7 +96,7 @@ bool DialogueSystem::CleanUp()
 }
 
 
-int DialogueSystem::LoadDialogue(const char* file, int dialogueID, int NPC)
+int DialogueSystem::LoadDialogue(const char* file, NPC &npc)
 {
 	pugi::xml_parse_result result = dialogues.load_file(file);
 
@@ -112,10 +114,10 @@ int DialogueSystem::LoadDialogue(const char* file, int dialogueID, int NPC)
 
 		while (pugiNode != NULL)
 		{
-			if (pugiNode.attribute("ID").as_int() == dialogueID && pugiNode.attribute("NPC").as_int() == NPC)
+			if (pugiNode.attribute("ID").as_int() == npc.NextID && pugiNode.attribute("NPC").as_int() == (int)npc.type)
 			{
 				tree->treeID = pugiNode.attribute("ID").as_int();
-				tree->NPC = pugiNode.attribute("NPC").as_int();
+				tree->npc = &npc;
 				tree->activeNode = LoadNodes(pugiNode, tree);
 				activeTree = tree;
 				break;
@@ -127,7 +129,7 @@ int DialogueSystem::LoadDialogue(const char* file, int dialogueID, int NPC)
 		}
 	}
 
-	return dialogueID;
+	return npc.NextID;
 }
 
 DialogueNode* DialogueSystem::LoadNodes(pugi::xml_node& xml_trees, DialogueTree* tree)
@@ -161,11 +163,8 @@ void DialogueSystem::LoadChoices(pugi::xml_node& xml_node, DialogueNode* node)
 		option->nextNode = choice.attribute("nextNode").as_int();
 		option->text = choice.attribute("option").as_string();
 		option->eventReturn = choice.attribute("eventReturn").as_int();
-
-		//if (choice.find_attribute("path").as_int() == true)
-		//{
-		//	option->path = choice.attribute("path").as_int();
-		//}
+		option->path = choice.attribute("NextID").as_int();
+	
 
 		node->choicesList.push_back(option);
 	}

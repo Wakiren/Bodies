@@ -50,7 +50,7 @@ public:
 
 	float Slower(float ogPos, float goalPos, float time);
 
-	void StartDialogue(NPCType type);
+	void StartDialogue(NPC &npc);
 
 public:
 	// Get tilePosDebug value
