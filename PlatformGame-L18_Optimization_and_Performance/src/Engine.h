@@ -23,6 +23,7 @@ class DialogueSystem;
 class CombatSystem;
 class MainMenu;
 class PauseMenu;
+class FadeManager;
 
 class Engine
 {
@@ -110,6 +111,7 @@ public:
 	std::shared_ptr<CombatSystem> combatSystem;
 	std::shared_ptr<MainMenu> mainMenu;
 	std::shared_ptr<PauseMenu> pauseMenu;
+	std::shared_ptr<FadeManager> fadeManager;
 
 private: 
 

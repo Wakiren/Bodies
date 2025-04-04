@@ -155,6 +155,7 @@
     <ClCompile Include="src\Enemy.cpp" />
     <ClCompile Include="src\Engine.cpp" />
     <ClCompile Include="src\EntityManager.cpp" />
+    <ClCompile Include="src\FadeManager.cpp" />
     <ClCompile Include="src\Fighter.cpp" />
     <ClCompile Include="src\GuiControlButton.cpp" />
     <ClCompile Include="src\GuiManager.cpp" />
@@ -181,6 +182,7 @@
     <ClCompile Include="src\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\FadeManager.h" />
     <ClInclude Include="src\Cannibal.h" />
     <ClInclude Include="src\CombatStats.h" />
     <ClInclude Include="src\CombatSystem.h" />

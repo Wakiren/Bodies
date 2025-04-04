@@ -18,6 +18,7 @@
 #include "CombatSystem.h"
 #include "MainMenu.h"
 #include "PauseMenu.h"
+#include "FadeManager.h"
 
 #include "tracy/Tracy.hpp"
 
@@ -51,6 +52,7 @@ Engine::Engine() {
 	mainMenu = std::make_shared<MainMenu>();
     combatSystem = std::make_shared<CombatSystem>();
     pauseMenu = std::make_shared<PauseMenu>();
+	fadeManager = std::make_shared<FadeManager>();
 
     // Ordered for awake / Start / Update
     // Reverse order of CleanUp
@@ -67,7 +69,8 @@ Engine::Engine() {
     AddModule(std::static_pointer_cast<Module>(entityManager));
 	AddModule(std::static_pointer_cast<Module>(guiManager));
 	AddModule(std::static_pointer_cast<Module>(dialogueSystem));
-   AddModule(std::static_pointer_cast<Module>(combatSystem));
+    AddModule(std::static_pointer_cast<Module>(combatSystem));
+    AddModule(std::static_pointer_cast<Module>(fadeManager));
 
     pauseMenu->active = false;
     scene->active = false;

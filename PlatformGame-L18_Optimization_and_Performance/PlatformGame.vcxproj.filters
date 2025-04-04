@@ -120,6 +120,12 @@
     <ClCompile Include="src\MainMenu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\PauseMenu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\FadeManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Audio.h">
@@ -228,6 +234,10 @@
       <Filter>Source Files\Game</Filter>
     </ClInclude>
     <ClInclude Include="src\MainMenu.h" />
+    <ClInclude Include="src\PauseMenu.h" />
+    <ClInclude Include="src\FadeManager.h">
+      <Filter>Source Files\Engine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="config.xml">

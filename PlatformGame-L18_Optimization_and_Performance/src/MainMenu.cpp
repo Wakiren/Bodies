@@ -8,6 +8,7 @@
 #include "Scene.h"
 #include "Physics.h"
 #include "Engine.h"
+#include "FadeManager.h"
 
 
 #include "Defs.h"
@@ -76,6 +77,7 @@ bool MainMenu::Update(float dt)
 	if (Engine::GetInstance().input.get()->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_UP) {
 		if (option == SELECTED::START) {
 			haveToChange = true;
+			Engine::GetInstance().fadeManager.get()->Fade(1.0f);
 		}
 		if (option == SELECTED::EXIT) {
 			ret = false;
