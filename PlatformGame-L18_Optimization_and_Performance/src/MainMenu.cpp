@@ -77,7 +77,7 @@ bool MainMenu::Update(float dt)
 	if (Engine::GetInstance().input.get()->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_UP) {
 		if (option == SELECTED::START) {
 			haveToChange = true;
-			Engine::GetInstance().fadeManager.get()->Fade(1.0f);
+			Engine::GetInstance().fadeManager.get()->Fade(1.0f,300);
 		}
 		if (option == SELECTED::EXIT) {
 			ret = false;

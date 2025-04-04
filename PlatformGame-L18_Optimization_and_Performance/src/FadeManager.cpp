@@ -38,16 +38,47 @@ bool FadeManager::PreUpdate()
 // Called each loop iteration
 bool FadeManager::Update(float dt)
 {
+	if (isFading)
+	{
+		cooldownCounter++;
+		if (currentFadeType == FadeType::FADE_OUT)
+		{
+			if (cooldownCounter <= cooldown)
+			{
+				fadeAlpha -= fadeSpeed;
+				if (fadeAlpha <= 0.0f)
+				{
+					fadeAlpha = 0.0f;
+					currentFadeType = FadeType::FADE_IN;
+					cooldownCounter = 0;
+				}
+			}
+		}
+		else if (currentFadeType == FadeType::FADE_IN)
+		{
+			if (cooldownCounter >= cooldown)
+			{
+				fadeAlpha += fadeSpeed;
+				if (fadeAlpha >= 255.0f)
+				{
+					fadeAlpha = 255.0f;
+					isFading = false;
+				}
+			}
+		}
+	}
+
+	if (isFading)
+	{
+		Engine::GetInstance().render.get()->DrawRectangle(fadeRect, 0, 0, 0, (Uint8)(fadeAlpha));
+	}
+
 	return true;
 }
 
 // Called each loop iteration
 bool FadeManager::PostUpdate()
 {
-	if (isFading)
-	{
-		Engine::GetInstance().render.get()->DrawRectangle(fadeRect,0,0,0,(Uint8)(fadeAlpha));
-	}
 	return true;
 }
 
@@ -66,4 +97,5 @@ void FadeManager::Fade(float speed, int cooldown)
 	fadeAlpha = 255.0f;
 	currentFadeType = FadeType::FADE_OUT;
 	isFading = true;
+	cooldownCounter = 0;
 }

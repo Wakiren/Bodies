@@ -1,7 +1,6 @@
 #pragma once
 #include "Module.h"
 #include "SDL2/SDL.h"
-#include <chrono>
 
 
 enum class FadeType
@@ -34,5 +33,6 @@ private:
 	FadeType currentFadeType = FadeType::FADE_IN;
 
 	int cooldown = 0;
+	int cooldownCounter = 0;
 	bool isFading = false;
 };
