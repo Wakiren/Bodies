@@ -45,7 +45,7 @@ public:
 
 
 	//Declare player parameters
-	float speed = 10.0f;
+	float speed = 20.0f;
 	SDL_Texture* texture = NULL;
 	int texW, texH;
 
@@ -61,6 +61,7 @@ public:
 	pugi::xml_node parameters;
 	Animation* currentAnimation = nullptr;
 	Animation idle;
+	Animation walk;
 
 private:
 

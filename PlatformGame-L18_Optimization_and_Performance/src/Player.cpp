@@ -41,6 +41,7 @@ bool Player::Start() {
 
 	//Load animations
 	idle.LoadAnimations(parameters.child("animations").child("idle"));
+	walk.LoadAnimations(parameters.child("animations").child("walk"));
 	currentAnimation = &idle;
 
 	// L08 TODO 5: Add physics to the player - initialize physics body
@@ -169,6 +170,7 @@ void Player::MoveToMousePos(float speed)
 		destination = mousePos;
 		movementVector = destination - playerPos;
 		movementVector = movementVector.normalized();
+		currentAnimation = &walk;
 	}
 
 	if (movementVector != vecZero)
@@ -188,6 +190,7 @@ void Player::MoveToMousePos(float speed)
 	else 
 	{
 		spriteAngle = atan2(mousePos.getX() - playerPos.getX(), mousePos.getY() - playerPos.getY()) * -180 / b2_pi;
+		currentAnimation = &idle;
 	}
 	
 	pbody->body->SetTransform({ pbody->body->GetPosition().x, pbody->body->GetPosition().y }, spriteAngle);

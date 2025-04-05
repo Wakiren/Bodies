@@ -39,7 +39,7 @@ bool Narcissist::Update(float dt)
 	distance.setX(abs(target.getX() - GetPosition().getX()));
 	distance.setY(abs(target.getY() - GetPosition().getY()));
 
-	visionLimit = Engine::GetInstance().map.get()->MapToWorld(2, 2);
+	visionLimit = Engine::GetInstance().map.get()->MapToWorld(15, 15);
 
 	//IF THE PLAYER IS DETECTED
 	if (IsInVision() && !isInCombat)
@@ -59,19 +59,27 @@ bool Narcissist::Update(float dt)
 			Vector2D nextPos = Engine::GetInstance().map->MapToWorld(nextTile.getX(), nextTile.getY());
 			Vector2D direction = nextPos - GetPosition();
 			direction.normalized();
-			eVelocity = b2Vec2(direction.getX() * speed, direction.getY() * speed);
 
+			spriteAngle = atan2(direction.getX(), direction.getY()) * -180 / b2_pi;
+
+			eVelocity = b2Vec2(direction.getX() * speed, direction.getY() * speed);
+			currentAnimation = &walk;
 			pbody->body->SetLinearVelocity(eVelocity);
 		}
 		else {
 			pbody->body->SetLinearVelocity(b2Vec2_zero);
+			currentAnimation = &idle;
 			BackToPath = true;
 		}
+
+		pbody->body->SetTransform({ pbody->body->GetPosition().x, pbody->body->GetPosition().y }, spriteAngle);
 	}
 	//SCOUTING AND TRAVERSING
 	else
 	{
 		MoveToNextPoint();
+		currentAnimation = &walk;
+		pbody->body->SetTransform({ pbody->body->GetPosition().x, pbody->body->GetPosition().y }, spriteAngle);
 	}
 
 	// L08 TODO 4: Add a physics to an item - update the position of the object from the physics.  
@@ -80,7 +88,8 @@ bool Narcissist::Update(float dt)
 	position.setY(METERS_TO_PIXELS(pbodyPos.p.y) - texH / 2);
 
 
-	Engine::GetInstance().render.get()->DrawTexture(texture, (int)position.getX(), (int)position.getY() - 2, &currentAnimation->GetCurrentFrame());
+	Engine::GetInstance().render.get()->DrawTexture(texture, (int)position.getX(), (int)position.getY(),
+		&currentAnimation->GetCurrentFrame(), 1, spriteAngle);
 	currentAnimation->Update();
 
 	if (Engine::GetInstance().physics.get()->debug)
@@ -99,6 +108,7 @@ void Narcissist::MoveToNextPoint()
 	if (CheckDistance(path[NextPoint])<0.1f)
 	{
 		NextPoint++;
+		spriteAngle = atan2(path[NextPoint].getX() - position.getX(), path[NextPoint].getY() - position.getY()) * -180 / b2_pi;
 	}
 
 	if (NextPoint >= path.size())

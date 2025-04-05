@@ -37,6 +37,7 @@ bool Enemy::Start() {
 	HelpDistance.setY(parameters.attribute("HelpDistance").as_int());
 	//Load animations
 	idle.LoadAnimations(parameters.child("animations").child("idle"));
+	walk.LoadAnimations(parameters.child("animations").child("walk"));
 	currentAnimation = &idle;
 	
 	//Add a physics to an item - initialize the physics body
@@ -66,6 +67,7 @@ bool Enemy::Start() {
 
 bool Enemy::Update(float dt)
 {
+
 	return true;
 }
 

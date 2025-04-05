@@ -32,7 +32,7 @@ bool Cannibal::Update(float dt)
 	distance.setX(abs(target.getX() - GetPosition().getX()));
 	distance.setY(abs(target.getY() - GetPosition().getY()));
 
-	visionLimit = Engine::GetInstance().map.get()->MapToWorld(2, 2);
+	visionLimit = Engine::GetInstance().map.get()->MapToWorld(10, 10);
 
 	if (IsInVision() && !isInCombat)
 	{
@@ -47,20 +47,25 @@ bool Cannibal::Update(float dt)
 			check = 0;
 		}
 		if (pathfinding->pathTiles.size() > 0) {
+
 			Vector2D nextTile = pathfinding->pathTiles.front();
 			Vector2D nextPos = Engine::GetInstance().map->MapToWorld(nextTile.getX(), nextTile.getY());
 			Vector2D direction = nextPos - GetPosition();
 			direction.normalized();
+
+			spriteAngle = atan2(direction.getX(), direction.getY()) * -180 / b2_pi;
+
 			eVelocity = b2Vec2(direction.getX() * speed, direction.getY() * speed);
-
-
-
+			currentAnimation = &walk;
 
 			pbody->body->SetLinearVelocity(eVelocity);
 		}
 		else {
+			currentAnimation = &idle;
 			pbody->body->SetLinearVelocity(b2Vec2_zero);
 		}
+
+		pbody->body->SetTransform({ pbody->body->GetPosition().x, pbody->body->GetPosition().y }, spriteAngle);
 	}
 	else
 	{
@@ -72,8 +77,8 @@ bool Cannibal::Update(float dt)
 	position.setX(METERS_TO_PIXELS(pbodyPos.p.x) - texH / 2);
 	position.setY(METERS_TO_PIXELS(pbodyPos.p.y) - texH / 2);
 
-
-	Engine::GetInstance().render.get()->DrawTexture(texture, (int)position.getX(), (int)position.getY() - 2, &currentAnimation->GetCurrentFrame());
+	Engine::GetInstance().render.get()->DrawTexture(texture, (int)position.getX(), (int)position.getY(),
+		&currentAnimation->GetCurrentFrame(), 1, spriteAngle);
 	currentAnimation->Update();
 
 	if (Engine::GetInstance().physics.get()->debug)

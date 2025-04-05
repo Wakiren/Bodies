@@ -60,6 +60,7 @@ public:
 	pugi::xml_node parameters;
 	Animation* currentAnimation = nullptr;
 	Animation idle;
+	Animation walk;
 	PhysBody* pbody;
 	Pathfinding* pathfinding;
 
@@ -69,9 +70,11 @@ public:
 	Vector2D distance;
 	Vector2D visionLimit;
 	Vector2D HelpDistance;
-	float speed;
+	float speed = 10;
 
 	int check = 0;
+
+	double spriteAngle;
 
 	enum class EnemyType
 	{
