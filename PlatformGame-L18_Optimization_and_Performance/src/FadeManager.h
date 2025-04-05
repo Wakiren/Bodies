@@ -23,6 +23,8 @@ public:
 	bool CleanUp();
 
 	void Fade(float speed, int cooldown);
+	bool IsFading() const { return isFading; }
+	FadeType GetCurrentFadeType() const { return currentFadeType; }
 
 private:
 	SDL_Rect fadeRect = { 0, 0, 1280, 720 };

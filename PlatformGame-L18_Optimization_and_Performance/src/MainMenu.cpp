@@ -64,23 +64,29 @@ bool MainMenu::Update(float dt)
 	Engine::GetInstance().render.get()->camera.y = 0;
 
 	// Active the scene and the entity manager, and deactivate the main menu
-	if (haveToChange) {
-		Engine::GetInstance().physics.get()->active = true;
-		Engine::GetInstance().map.get()->active = true;
-		Engine::GetInstance().scene.get()->active = true;
-		Engine::GetInstance().entityManager.get()->active = true;
-		Engine::GetInstance().mainMenu.get()->active = false;
-		haveToChange = false;
+	if (haveToChange && Engine::GetInstance().fadeManager.get()->GetCurrentFadeType() == FadeType::FADE_IN) {
+		if (option == SELECTED::START) {
+			Engine::GetInstance().physics.get()->active = true;
+			Engine::GetInstance().map.get()->active = true;
+			Engine::GetInstance().scene.get()->active = true;
+			Engine::GetInstance().entityManager.get()->active = true;
+			Engine::GetInstance().mainMenu.get()->active = false;
+			haveToChange = false;
+		}
+		else if (option == SELECTED::EXIT) {
+			ret = false;
+		}
 	}
 
 	// Function to detect the mouse click
 	if (Engine::GetInstance().input.get()->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_UP) {
 		if (option == SELECTED::START) {
 			haveToChange = true;
-			Engine::GetInstance().fadeManager.get()->Fade(1.0f,300);
+			Engine::GetInstance().fadeManager.get()->Fade(3.0f,300);
 		}
 		if (option == SELECTED::EXIT) {
-			ret = false;
+			haveToChange = true;
+			Engine::GetInstance().fadeManager.get()->Fade(3.0f, 300);
 		}
 	}
 

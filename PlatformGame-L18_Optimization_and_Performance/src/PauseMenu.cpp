@@ -5,6 +5,7 @@
 #include "Scene.h"
 #include "EntityManager.h"
 #include "MainMenu.h"
+#include "FadeManager.h"
 
 PauseMenu::PauseMenu()
 {
@@ -61,7 +62,7 @@ bool PauseMenu::Update(float dt)
 	Engine::GetInstance().render.get()->camera.y = 0;*/
 
 	// Active the scene and the entity manager, and deactivate the main menu
-	if (haveToChange) {
+	if (haveToChange && Engine::GetInstance().fadeManager.get()->GetCurrentFadeType() == FadeType::FADE_IN) {
 		if (option == SELECTED::EXIT) {
 			Engine::GetInstance().pauseMenu.get()->active = false;
 			Engine::GetInstance().map.get()->active = false;
@@ -83,9 +84,11 @@ bool PauseMenu::Update(float dt)
 	if (Engine::GetInstance().input.get()->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_UP) {
 		if (option == SELECTED::CONTINUE) {
 			haveToChange = true;
+			Engine::GetInstance().fadeManager.get()->Fade(3.0f, 300);
 		}
 		if (option == SELECTED::EXIT) {
 			haveToChange = true;
+			Engine::GetInstance().fadeManager.get()->Fade(3.0f, 300);
 		}
 	}
 
