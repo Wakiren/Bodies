@@ -12,6 +12,7 @@
 #include "CombatSystem.h"
 #include <cmath>
 #include <iostream>
+#include "Pathfinding.h"
 using namespace std;
 
 
@@ -64,6 +65,12 @@ bool Player::Start() {
 	combatStats->health = parameters.child("combat").attribute("health").as_int();
 	combatStats->maxHealth = parameters.child("combat").attribute("maxHealth").as_int();
 	combatStats->defensePoints = parameters.child("combat").attribute("defensePoints").as_int();
+
+	// Initialize pathfinding
+	pathfinding = new Pathfinding();
+	Engine::GetInstance().render.get()->DrawTexture(texture, (int)position.getX(), (int)position.getY(), &currentAnimation->GetCurrentFrame());
+	ResetPath();
+
 	return true;
 }
 
@@ -89,7 +96,7 @@ bool Player::Update(float dt)
 
 	if (!isInCombat && Engine::GetInstance().dialogueSystem.get()->inDialog == false)
 	{
-		MoveToMousePos(1);
+		MoveToMousePos();
 	}
 
 
@@ -153,47 +160,72 @@ void Player::SetPosition(Vector2D pos) {
 	pbody->body->SetTransform(bodyPos,0);
 }
 
-void Player::MoveToMousePos(float speed)
+void Player::MoveToMousePos()
 {
-	Vector2D playerPos =  GetPosition();
+	//All variables needed
+	Vector2D playerPos = GetPosition();
 	Vector2D mousePos = Engine::GetInstance().input.get()->GetMousePosition();
 	mousePos.setX(mousePos.getX() - Engine::GetInstance().render.get()->camera.x / Engine::GetInstance().render.get()->scale);
 	mousePos.setY(mousePos.getY() - Engine::GetInstance().render.get()->camera.y / Engine::GetInstance().render.get()->scale);
+	Vector2D mouseTile = Engine::GetInstance().map.get()->WorldToMap(mousePos.getX(), mousePos.getY());
 
-	if (Engine::GetInstance().physics.get()->debug == true) 
+	//Get the path to the mouse
+	if (Engine::GetInstance().input.get()->GetMouseButtonDown(1))
 	{
-		speed = 10;
-	}
-
-	if (Engine::GetInstance().input.get()->GetMouseButtonDown(1)) 
-	{
-		destination = mousePos;
-		movementVector = destination - playerPos;
-		movementVector = movementVector.normalized();
-		currentAnimation = &walk;
-	}
-
-	if (movementVector != vecZero)
-	{
-		spriteAngle = atan2(destination.getX() - playerPos.getX(), destination.getY() - playerPos.getY()) * -180 / b2_pi;
-		pbody->body->SetLinearVelocity({ movementVector.getX() * speed, movementVector.getY() * speed});
-		//cout << "PlayerPos: " << playerPos << endl;
-		//cout << "Destination: " << destination << endl;
-
-		if (playerPos == destination) 
+		if (pathfinding->foundMouse == true)
 		{
-			movementVector = vecZero;
-			pbody->body->SetLinearVelocity({ 0,0 });
-			//cout << "ARRIVED";
+			pathfinding->foundMouse = false;
+			ResetPath();
+		}
+		if (pathfinding->IsWalkable(mouseTile.getX(),mouseTile.getY()) == false)
+		{
+			return;
+		}
+
+		while (pathfinding->foundMouse == false)
+		{
+			pathfinding->PropagateAStarToMouse(EUCLIDEAN);
 		}
 	}
-	else 
-	{
+
+	//Start the movement
+	if (pathfinding->foundMouse == true && pathfinding->pathTiles.size() > 0) {
+
+		destination = pathfinding->pathTiles.front();
+		Vector2D nextTile = pathfinding->pathTiles.back();
+		Vector2D nextPos = Engine::GetInstance().map->MapToWorld(nextTile.getX(), nextTile.getY());
+		nextPos.setX(nextPos.getX() + texW / 2);
+		nextPos.setY(nextPos.getY() + texH / 2);
+		Vector2D direction = nextPos - GetPosition();
+		direction = direction.normalized();
+
+		spriteAngle = atan2(direction.getX(), direction.getY()) * -180 / b2_pi;
+
+		movementVector = b2Vec2(direction.getX() * speed, direction.getY() * speed);
+		currentAnimation = &walk;
+
+		pbody->body->SetLinearVelocity(movementVector);
+
+		if (nextTile == Engine::GetInstance().map->WorldToMap(playerPos.getX(), playerPos.getY()))
+		{
+			pathfinding->pathTiles.pop_back();
+		}
+		if (destination == Engine::GetInstance().map->WorldToMap(playerPos.getX(), playerPos.getY()))
+		{
+			pathfinding->foundMouse = false;
+			ResetPath();
+		}
+	}
+	//Stop the movement
+	else {
+		pbody->body->SetLinearVelocity(b2Vec2_zero);
 		spriteAngle = atan2(mousePos.getX() - playerPos.getX(), mousePos.getY() - playerPos.getY()) * -180 / b2_pi;
 		currentAnimation = &idle;
 	}
-	
+
+	//Set the direction
 	pbody->body->SetTransform({ pbody->body->GetPosition().x, pbody->body->GetPosition().y }, spriteAngle);
+	pathfinding->DrawPath();
 }
 
 Vector2D Player::GetPosition() {
@@ -202,3 +234,8 @@ Vector2D Player::GetPosition() {
 	return pos;
 }
 
+void Player::ResetPath() {
+	Vector2D pos = GetPosition();
+	Vector2D tilePos = Engine::GetInstance().map.get()->WorldToMap(pos.getX(), pos.getY());
+	pathfinding->ResetPath(tilePos);
+}

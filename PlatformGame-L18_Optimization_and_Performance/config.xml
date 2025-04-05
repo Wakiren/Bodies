@@ -32,7 +32,7 @@
 				<combat health="100" maxHealth="150" attackPoints="50" defensePoints="50" />
 			</player>
 			<enemies>
-				<Cannibal name="Cannibal" x="2700" y="3180" w="32" h="32" speed ="0.01" texture="Assets/Characters/AnimationSpriteSheet.png" gravity="true" SpawnRate="3" HelpDistance="10">
+				<Cannibal name="Cannibal" x="2700" y="3180" w="32" h="32" speed ="2.5" texture="Assets/Characters/AnimationSpriteSheet.png" gravity="true" SpawnRate="3" HelpDistance="10">
 					<animations>
 						<walk loop="true" speed="0.1">
 							<frame x="32" y="160" w="32" h="32" />
@@ -46,7 +46,7 @@
 					</animations>
 					<combat health="100" maxHealth="150" attackPoints="25" defensePoints="50" />
 				</Cannibal>
-				<Narcissist name="Narcissist" x="2700" y="3180" w="32" h="32" speed ="1" texture="Assets/Characters/AnimationSpriteSheet.png" gravity="true" SpawnRate="1" HelpDistance="3">
+				<Narcissist name="Narcissist" x="2700" y="3180" w="32" h="32" speed ="2" texture="Assets/Characters/AnimationSpriteSheet.png" gravity="true" SpawnRate="1" HelpDistance="3">
 					<animations>
 						<walk loop="true" speed="0.1">
 							<frame x="32" y="192" w="32" h="32" />

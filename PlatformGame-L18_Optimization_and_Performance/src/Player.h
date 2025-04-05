@@ -5,6 +5,7 @@
 #include "Box2D/Box2D.h"
 #include "Animation.h"
 #include "CombatStats.h"
+#include "Pathfinding.h"
 
 
 struct CombatStats;
@@ -37,15 +38,17 @@ public:
 
 	void SetPosition(Vector2D pos);
 
-	void MoveToMousePos(float speed);
+	void MoveToMousePos();
 
 	Vector2D GetPosition();
+
+	void ResetPath();
 
 public:
 
 
 	//Declare player parameters
-	float speed = 20.0f;
+	float speed = 3.0f;
 	SDL_Texture* texture = NULL;
 	int texW, texH;
 
@@ -67,9 +70,11 @@ private:
 
 	const Vector2D vecZero = {0,0};
 	Vector2D destination;
-	Vector2D movementVector = {0,0};
+	b2Vec2 movementVector = {0,0};
 
 	double spriteAngle;
 
-
+	//Pathfincing
+	Pathfinding* pathfinding;
+	bool propagatePath = false;
 };
