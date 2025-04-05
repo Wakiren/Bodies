@@ -43,6 +43,8 @@ private:
 
 	bool haveToFade = false;
 
+	bool debugMode = false;
+
 	SDL_Rect backgroundRect = { 0, 0, 1920, 1080 };
 
 	SDL_Texture* title;

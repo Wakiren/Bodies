@@ -5,6 +5,7 @@
 #include "Render.h"
 #include "FadeManager.h"
 #include "MainMenu.h"
+#include "Input.h"
 
 IntroScene::IntroScene()
 {
@@ -97,6 +98,17 @@ bool IntroScene::Update(float dt)
 
 bool IntroScene::PostUpdate()
 {
+	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_F4) == KeyState::KEY_DOWN)
+	{
+		debugMode = true;
+	}
+
+	if (debugMode)
+	{
+		Engine::GetInstance().introScene.get()->active = false;
+		Engine::GetInstance().mainMenu.get()->active = true;
+	}
+
 	return true;
 }
 
