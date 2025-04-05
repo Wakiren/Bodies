@@ -90,7 +90,6 @@ bool FadeManager::PostUpdate()
 bool FadeManager::CleanUp()
 {
 	LOG("Freeing fade manager");
-
 	return true;
 }
 

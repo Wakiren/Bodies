@@ -6,6 +6,7 @@
 #include "Audio.h"
 #include "MainMenu.h"
 #include "PauseMenu.h"
+#include "IntroScene.h"
 
 GuiManager::GuiManager() :Module()
 {
@@ -69,7 +70,8 @@ GuiControl* GuiManager::CreateGuiControl1(GuiControlType type, int id, const cha
 
 bool GuiManager::Update(float dt)
 {	
-	if (Engine::GetInstance().mainMenu->active == false && Engine::GetInstance().pauseMenu->active == false)
+	if (Engine::GetInstance().mainMenu->active == false && Engine::GetInstance().pauseMenu->active == false
+		&& Engine::GetInstance().introScene->active == false)
 	{
 		Engine::GetInstance().render->DrawTexture(Trees, 0, 0);
 		Engine::GetInstance().render->DrawUIimage(Filter, 0, 0);

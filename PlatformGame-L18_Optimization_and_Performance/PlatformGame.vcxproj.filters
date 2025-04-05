@@ -126,8 +126,12 @@
     <ClCompile Include="src\FadeManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+
     <ClCompile Include="src\CombatUI.cpp">
       <Filter>Source Files\Engine</Filter>
+
+    <ClCompile Include="src\IntroScene.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -241,9 +245,12 @@
     <ClInclude Include="src\FadeManager.h">
       <Filter>Source Files\Engine</Filter>
     </ClInclude>
+
     <ClInclude Include="src\CombatUI.h">
       <Filter>Source Files\Engine</Filter>
-    </ClInclude>
+
+    <ClInclude Include="src\IntroScene.h" />
+
   </ItemGroup>
   <ItemGroup>
     <Xml Include="config.xml">

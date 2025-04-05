@@ -7,7 +7,7 @@ enum class FadeType
 {
 	FADE_IN,
 	FADE_OUT,
-	FADE_IN_OUT
+	FADE_NONE
 };
 
 class FadeManager : public Module
@@ -32,7 +32,7 @@ private:
 	
 	float fadeAlpha = 255.0f;
 	float fadeSpeed = 1.0f;
-	FadeType currentFadeType = FadeType::FADE_IN;
+	FadeType currentFadeType = FadeType::FADE_NONE;
 
 	int cooldown = 0;
 	int cooldownCounter = 0;

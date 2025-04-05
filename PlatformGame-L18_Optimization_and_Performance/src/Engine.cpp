@@ -19,7 +19,11 @@
 #include "MainMenu.h"
 #include "PauseMenu.h"
 #include "FadeManager.h"
+
 #include "CombatUI.h"
+
+#include "IntroScene.h"
+
 
 #include "tracy/Tracy.hpp"
 
@@ -54,7 +58,10 @@ Engine::Engine() {
     combatSystem = std::make_shared<CombatSystem>();
     pauseMenu = std::make_shared<PauseMenu>();
 	fadeManager = std::make_shared<FadeManager>();
+
     combatui = std::make_shared<CombatUI>();
+	introScene = std::make_shared<IntroScene>();
+
 
     // Ordered for awake / Start / Update
     // Reverse order of CleanUp
@@ -63,6 +70,8 @@ Engine::Engine() {
     AddModule(std::static_pointer_cast<Module>(textures));
     AddModule(std::static_pointer_cast<Module>(audio));
     // L08: TODO 2: Add Physics module
+    AddModule(std::static_pointer_cast<Module>(fadeManager));
+	AddModule(std::static_pointer_cast<Module>(introScene));
 	AddModule(std::static_pointer_cast<Module>(mainMenu));
 	AddModule(std::static_pointer_cast<Module>(pauseMenu));
     AddModule(std::static_pointer_cast<Module>(physics));
@@ -72,9 +81,12 @@ Engine::Engine() {
 	AddModule(std::static_pointer_cast<Module>(guiManager));
 	AddModule(std::static_pointer_cast<Module>(dialogueSystem));
     AddModule(std::static_pointer_cast<Module>(combatSystem));
+
     AddModule(std::static_pointer_cast<Module>(fadeManager));
     AddModule(std::static_pointer_cast<Module>(combatui));
 
+
+	mainMenu->active = false;
     pauseMenu->active = false;
     scene->active = false;
     entityManager->active = false;
