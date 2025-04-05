@@ -26,8 +26,8 @@ bool GuiControlButton::Update(float dt)
 		// L16: TODO 3: Update the state of the GUiButton according to the mouse position
 		Vector2D mousePos = Engine::GetInstance().input->GetMousePosition() * Engine::GetInstance().window.get()->GetScale();
 
-		LOG("X: %f Y: %f", mousePos.getX(), mousePos.getY());
-		LOG("X: %d Y: %d", bounds.x, bounds.y);
+		//LOG("X: %f Y: %f", mousePos.getX(), mousePos.getY());
+		//LOG("X: %d Y: %d", bounds.x, bounds.y);
 
 		//If the position of the mouse if inside the bounds of the button 
 		if (mousePos.getX() > bounds.x && mousePos.getX() < bounds.x + bounds.w && mousePos.getY() > bounds.y && mousePos.getY() < bounds.y + bounds.h) {
@@ -97,6 +97,7 @@ bool GuiControlButton::Draw(Render* render)
 	case GuiControlState::PRESSED:
 	{
 		render->DrawRectangle({ bounds.x, bounds.y, bounds.w, bounds.h }, 255, 255, 255, 150, true, false);
+		std::cout << "CLICK" << std::endl;
 
 	} break;
 

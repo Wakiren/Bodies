@@ -98,7 +98,7 @@ bool MainMenu::Update(float dt)
 	
 	Vector2D mousePos = Engine::GetInstance().input.get()->GetMousePosition();
 	
-	LOG("X: %f Y: %f", mousePos.getX(), mousePos.getY());
+	//LOG("X: %f Y: %f", mousePos.getX(), mousePos.getY());
 
 	x = mousePos.getX();
 	y = mousePos.getY();

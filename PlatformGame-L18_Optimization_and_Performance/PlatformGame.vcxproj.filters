@@ -126,6 +126,9 @@
     <ClCompile Include="src\FadeManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\CombatUI.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Audio.h">
@@ -236,6 +239,9 @@
     <ClInclude Include="src\MainMenu.h" />
     <ClInclude Include="src\PauseMenu.h" />
     <ClInclude Include="src\FadeManager.h">
+      <Filter>Source Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CombatUI.h">
       <Filter>Source Files\Engine</Filter>
     </ClInclude>
   </ItemGroup>

@@ -150,6 +150,7 @@
     <ClCompile Include="src\Audio.cpp" />
     <ClCompile Include="src\Cannibal.cpp" />
     <ClCompile Include="src\CombatSystem.cpp" />
+    <ClCompile Include="src\CombatUI.cpp" />
     <ClCompile Include="src\DialogueSystem.cpp" />
     <ClCompile Include="src\DialogueTree.cpp" />
     <ClCompile Include="src\Enemy.cpp" />
@@ -182,6 +183,7 @@
     <ClCompile Include="src\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\CombatUI.h" />
     <ClInclude Include="src\FadeManager.h" />
     <ClInclude Include="src\Cannibal.h" />
     <ClInclude Include="src\CombatStats.h" />

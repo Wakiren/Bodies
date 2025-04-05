@@ -94,11 +94,12 @@ bool Player::Update(float dt)
 	currentAnimation->Update();
 
 
-	if (!isInCombat && Engine::GetInstance().dialogueSystem.get()->inDialog == false)
-	{
-		MoveToMousePos();
-	}
+	//if (!isInCombat && Engine::GetInstance().dialogueSystem.get()->inDialog == false)
+	//{
+	//	MoveToMousePos();
+	//}
 
+	MoveToMousePos();
 
 	return true;
 }
@@ -130,7 +131,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		enemy->combatStats = new CombatStats;
 		enemy->combatStats->health = 100;
 		enemy->combatStats->attackPoints = 10;
-		enemy->combatStats->defensePoints = 100;
+		enemy->combatStats->defensePoints = 0;
 		enemy->combatStats->maxHealth = 100;
 
 		Engine::GetInstance().combatSystem.get()->player = (Player*)player;

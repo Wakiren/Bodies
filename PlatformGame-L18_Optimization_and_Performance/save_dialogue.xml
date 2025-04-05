@@ -1,6 +1,4 @@
 <?xml version="1.0"?>
 <save_choices>
-	<player player_name="a" />
-	<node id="1" answer="0" text="I just got here, what is this place? What has happened to my body?" />
-	<node id="6" answer="0" text="*Leave" />
+	<player player_name="aaa" />
 </save_choices>

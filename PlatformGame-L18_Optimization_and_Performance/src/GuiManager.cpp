@@ -43,6 +43,29 @@ GuiControl* GuiManager::CreateGuiControl(GuiControlType type, int id, const char
 
 	return guiControl;
 }
+GuiControl* GuiManager::CreateGuiControl1(GuiControlType type, int id, const char* text, SDL_Rect bounds, Module* observer, SDL_Rect sliderBounds)
+{
+	GuiControl* guiControl = nullptr;
+
+	switch (type)
+	{
+	case GuiControlType::BUTTON:
+		guiControl = new GuiControlButton(id, bounds, text);
+		break;
+	//case GuiControlType::SLIDER:
+	//	guiControl = new GuiSlider(id,bounds,text,observer, 0, 200);
+	//	break;
+	//case GuiControlType::TOGGLE:
+	//	guiControl = new GuiToggle(id, bounds, text);
+	//	break;
+	}
+
+	guiControl->observer = observer;
+
+	guiControlsList_.Add(guiControl);
+
+	return guiControl;
+}
 
 bool GuiManager::Update(float dt)
 {	
