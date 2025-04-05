@@ -20,7 +20,7 @@
 #define DIALOGUE_IF 4
 
 #define DIALOGUE_H 400
-#define DIALOGUE_W 575
+#define DIALOGUE_W 550
 #define SPACING 175
 #define MaxCharsInLine 15
 

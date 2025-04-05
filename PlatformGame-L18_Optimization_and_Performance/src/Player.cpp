@@ -225,7 +225,6 @@ void Player::MoveToMousePos()
 
 	//Set the direction
 	pbody->body->SetTransform({ pbody->body->GetPosition().x, pbody->body->GetPosition().y }, spriteAngle);
-	pathfinding->DrawPath();
 }
 
 Vector2D Player::GetPosition() {
