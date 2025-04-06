@@ -19,6 +19,17 @@ public:
 
 	bool active = false;
 
+	enum class CombatInput
+	{
+		ATTACK,
+		GUARD,
+		SKILL,
+		FLEE,
+		NONE
+	};
+
+	CombatInput combatInput = CombatInput::NONE;
+
 private:
 
 	// Textures
