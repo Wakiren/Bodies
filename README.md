@@ -14,14 +14,19 @@ Fco. Javier Pedreño (Wakiren): Technical Leader & Developer
 # Features implemented so far
 
 - Main Character
-- Functional Dialogue System
+- Functional Dialog System
 - 2 NPCs 
-- 2 Enemies with diferent behaviours
+- 2 Enemyes with diferent behabiours
 - Simplified Combat system
 - Main map with 3 main parts to visit
 - Main theme
 - Main Menu and Options (8 on the keyboard)
 - The main narrative
+
+#Regarding Combat System:
+
+Right now, we found issues to reset player input, so the player is always attacking no matter what after the attack button is pressed. 
+Despite that, the system itself works and it is visible on the console LOGS in case you want to check. Thank you for your understanding.
 
 # Links to Documentation
 <a href="https://drive.google.com/drive/folders/1i3_Qv9t4M01fuHDAjrKHgk-LapJa3BmO">Main Documentation</a>
