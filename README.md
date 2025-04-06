@@ -41,4 +41,8 @@ Despite that, the system itself works and it is visible on the console LOGS in c
 # Links to The postmortems
 <a href="https://drive.google.com/drive/folders/1Pq1wpdmgUc9QCzvDuu38sorp-46hsnoc?usp=drive_link">Main Documentation</a>
 
+<a href="https://drive.google.com/file/d/1RQf_ZKt4rYNIz6EUPasPGfreY9whvUxV/view?usp=drive_link"> Alba Fernández </a>
+
+<a href="https://drive.google.com/file/d/1GU7KtNfZuJqCq395F8nCleXkUOWtPxcx/view?usp=drive_link"> Fco Javier Pedreño </a>
+
 
