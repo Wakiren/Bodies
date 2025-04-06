@@ -18,8 +18,8 @@ public:
 	bool CleanUp();
 
 	bool active = false;
-
-	enum class CombatInput
+  
+	enum CombatInput
 	{
 		ATTACK,
 		GUARD,
@@ -29,7 +29,6 @@ public:
 	};
 
 	CombatInput combatInput = CombatInput::EMPTY;
-
 private:
 
 	// Textures

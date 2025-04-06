@@ -94,7 +94,6 @@ bool CombatUI::Update(float dt)
 				combatInput = CombatInput::FLEE;
 			}
 		}
-
 	}
 
 	return true;
