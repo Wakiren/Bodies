@@ -35,3 +35,6 @@ Despite that, the system itself works and it is visible on the console LOGS in c
 # Links to Documentation
 <a href="https://drive.google.com/drive/folders/1i3_Qv9t4M01fuHDAjrKHgk-LapJa3BmO">Main Documentation</a>
 
+# Links to Latest Release
+<a href="https://github.com/Wakiren/Bodies/releases/tag/VerticalSlice">Main Documentation</a>
+
