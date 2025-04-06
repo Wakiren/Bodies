@@ -6,7 +6,7 @@ Will you find your flesh? Or will you lose your mind?
 # Members and Roles
 
 Ton Casals (Tontito05): Game and Level Designer, Technical Artist & Developer (if necessary)  
-Mario Martos (MarioPrincesita): Game and Level Designer, Audio & Artist  
+Mario Martos (MarioPrincesita): Game and Level Designer, UI Designer, Audio Producer & Artist  
 Didac Sillue (digui048): Developer  
 Alba Fernández (aria00015): Art Team Leader & Artist  
 Fco. Javier Pedreño (Wakiren): Technical Leader & Developer  
