@@ -11,6 +11,21 @@ Didac Sillue (digui048): Developer
 Alba Fernández (aria00015): Art Team Leader & Artist  
 Fco. Javier Pedreño (Wakiren): Technical Leader & Developer  
 
+# Features implemented so far
+
+- Main Character
+- Functional Dialog System
+- 2 NPCs 
+- 2 Enemyes with diferent behabiours
+- Simplified Combat system
+- Main map with 3 main parts to visit
+- Main theme
+- Main Menu and Options (8 on the keyboard)
+- The main narrative
+
 # Links to Documentation
-<a href="https://drive.google.com/drive/folders/1i3_Qv9t4M01fuHDAjrKHgk-LapJa3BmO">Documentation</a>
+<a href="https://drive.google.com/drive/folders/1i3_Qv9t4M01fuHDAjrKHgk-LapJa3BmO">Main Documentation</a>
+
+# Links to Postmortems
+<a href="https://drive.google.com/drive/folders/1iJJMehak__NBb3rgJWWJ315b6cgff5e3">Postmortems</a>
 
