@@ -57,6 +57,8 @@ public:
 		GAMEOVER
 	};
 
+	bool once = true;
+
 	UIState state = INTRO;
 
 };

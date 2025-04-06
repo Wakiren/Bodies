@@ -22,7 +22,7 @@ bool GuiManager::Start()
 
 	// Play the sound effect right at the fokin start --------------------------------------------- MUSIC
 		// uncomment to play
-	//Engine::GetInstance().audio->PlayMusic("Assets/Audio/Music/MainTheme.wav", 0.0f);
+	Engine::GetInstance().audio->PlayMusic("Assets/Audio/Music/MainTheme.wav", 0.0f);
 
 	return true;
 }
@@ -78,6 +78,10 @@ bool GuiManager::Update(float dt)
 	if (Engine::GetInstance().mainMenu->active == false && Engine::GetInstance().pauseMenu->active == false
 		&& Engine::GetInstance().introScene->active == false)
 	{
+		if (once)
+		{
+			Engine::GetInstance().audio.get()->StopMusic();
+		}
 		Engine::GetInstance().render->DrawTexture(Trees, 0, 0);
 		Engine::GetInstance().render->DrawUIimage(Filter, 0, 0);
 	}
