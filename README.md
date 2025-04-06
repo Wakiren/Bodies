@@ -14,9 +14,9 @@ Fco. Javier Pedreño (Wakiren): Technical Leader & Developer
 # Features implemented so far
 
 - Main Character
-- Functional Dialog System
+- Functional Dialogue System
 - 2 NPCs 
-- 2 Enemyes with diferent behabiours
+- 2 Enemies with diferent behaviours
 - Simplified Combat system
 - Main map with 3 main parts to visit
 - Main theme
