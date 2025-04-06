@@ -26,7 +26,7 @@ bool IntroScene::Awake()
 
 bool IntroScene::Start()
 {
-	title = Engine::GetInstance().textures.get()->Load("Assets/Textures/IntroTitle.png");
+	title = Engine::GetInstance().textures.get()->Load("Assets/Textures/TeamLogo22.png");
 
 	teamMembers = Engine::GetInstance().textures.get()->Load("Assets/Textures/TeamMembers.png");
 

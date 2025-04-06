@@ -1,4 +1,7 @@
 <?xml version="1.0"?>
 <save_choices>
+
 	<player player_name=" aaa " />
+	<node id="6" answer="0" text="*Leave " />
+
 </save_choices>
