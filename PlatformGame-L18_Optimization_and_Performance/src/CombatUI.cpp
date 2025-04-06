@@ -49,7 +49,20 @@ bool CombatUI::Update(float dt)
 		Engine::GetInstance().render.get()->DrawUIimage(background, Engine::GetInstance().render.get()->camera.w / 3.25,
 		Engine::GetInstance().render.get()->camera.h / 2, 1, &backgroundRect);
 
-		Engine::GetInstance().render.get()->DrawTexture(buttons, 0, 0, &button1Rect);
+		Engine::GetInstance().render.get()->DrawUIimage(buttons, Engine::GetInstance().render.get()->camera.w / 3.1,
+		Engine::GetInstance().render.get()->camera.h / 1.9,1, &button1Rect);
+
+
+		Engine::GetInstance().render.get()->DrawUIimage(buttons, Engine::GetInstance().render.get()->camera.w / 3.1,
+		Engine::GetInstance().render.get()->camera.h / 1.9 + 64*1.8f, 1, &button2Rect);
+
+
+		Engine::GetInstance().render.get()->DrawUIimage(buttons, Engine::GetInstance().render.get()->camera.w / 3.1,
+		Engine::GetInstance().render.get()->camera.h / 1.9 + 128*1.8f, 1, &button3Rect);
+
+
+		Engine::GetInstance().render.get()->DrawUIimage(buttons, Engine::GetInstance().render.get()->camera.w / 3.1,
+			Engine::GetInstance().render.get()->camera.h / 1.9 + 192*1.8f, 1, &button4Rect);
 	}
 
 

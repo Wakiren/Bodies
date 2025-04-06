@@ -171,7 +171,7 @@ bool Render::DrawTexture(SDL_Texture* texture, int x, int y, const SDL_Rect* sec
 	return ret;
 }
 
-bool Render::DrawUIimage(SDL_Texture* texture, int x, int y, int scale_, const SDL_Rect* section, float speed, double angle, int pivotX, int pivotY) const
+bool Render::DrawUIimage(SDL_Texture* texture, int x, int y, float scale_, const SDL_Rect* section, float speed, double angle, int pivotX, int pivotY) const
 {
 	bool ret = true;
 
