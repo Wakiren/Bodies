@@ -17,8 +17,13 @@ GuiManager::~GuiManager() {}
 
 bool GuiManager::Start()
 {
-		Filter = Engine::GetInstance().textures->Load("Assets/UI/Filter.png");
-		Trees = Engine::GetInstance().textures->Load("Assets/Maps/Trees.png");
+	Filter = Engine::GetInstance().textures->Load("Assets/UI/Filter.png");
+	Trees = Engine::GetInstance().textures->Load("Assets/Maps/Trees.png");
+
+	// Play the sound effect right at the fokin start --------------------------------------------- MUSIC
+		// uncomment to play
+	//Engine::GetInstance().audio->PlayMusic("Assets/Audio/Music/MainTheme.wav", 0.0f);
+
 	return true;
 }
 
@@ -100,6 +105,7 @@ bool GuiManager::Update(float dt)
 			break;
 		case GuiManager::TITLE:
 			filterActive = false;
+			//Engine::GetInstance().audio->PlayFx(MainTheme);
 			break;
 		case GuiManager::GAME:
 			break;
