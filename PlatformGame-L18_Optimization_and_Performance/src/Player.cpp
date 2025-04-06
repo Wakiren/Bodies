@@ -94,12 +94,10 @@ bool Player::Update(float dt)
 	currentAnimation->Update();
 
 
-	//if (!isInCombat && Engine::GetInstance().dialogueSystem.get()->inDialog == false)
-	//{
-	//	MoveToMousePos();
-	//}
-
-	MoveToMousePos();
+	if (Engine::GetInstance().dialogueSystem.get()->inDialog == false)
+	{
+		MoveToMousePos();
+	}
 
 	return true;
 }
