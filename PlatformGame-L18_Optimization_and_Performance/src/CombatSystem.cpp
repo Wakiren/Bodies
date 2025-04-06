@@ -39,6 +39,7 @@ void CombatSystem::MainLoop()
 {
     if (!isCombatOver(player, enemy)) 
     {
+        Engine::GetInstance().combatui.get()->active = true;
         if(isPlayerTurn) 
         {
             Engine::GetInstance().scene.get()->player->isInCombat = true;
@@ -55,6 +56,7 @@ void CombatSystem::MainLoop()
             {
                 //END COMBAT
                 cout << "COMBAT OVER" << endl;
+                Engine::GetInstance().combatui.get()->active = false;
             }
         }
     }
