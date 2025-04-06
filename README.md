@@ -26,6 +26,3 @@ Fco. Javier Pedreño (Wakiren): Technical Leader & Developer
 # Links to Documentation
 <a href="https://drive.google.com/drive/folders/1i3_Qv9t4M01fuHDAjrKHgk-LapJa3BmO">Main Documentation</a>
 
-# Links to Postmortems
-<a href="https://drive.google.com/drive/folders/1iJJMehak__NBb3rgJWWJ315b6cgff5e3">Postmortems</a>
-
