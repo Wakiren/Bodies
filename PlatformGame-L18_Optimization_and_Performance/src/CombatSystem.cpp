@@ -47,6 +47,7 @@ void CombatSystem::MainLoop()
             if (isCombatOver(player, enemy))
             {
                 cout << "COMBAT OVER" << endl;
+                Engine::GetInstance().combatui.get()->active = false;
             }
         }
         else
