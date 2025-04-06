@@ -73,7 +73,7 @@ void CombatSystem::EnemyTurn()
 
 void CombatSystem::PlayerTurn()
 {
-    if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_P) == KEY_DOWN || /*THIS SHIT: Engine::GetInstance().combatui.get().combatInput*/)
+    if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_P) == KEY_DOWN  /*THIS SHIT: Engine::GetInstance().combatui.get().combatInput*/)
     {
         cout << "PLAYER ATTACKS!" << endl;
         player->Attack(player, enemy);
