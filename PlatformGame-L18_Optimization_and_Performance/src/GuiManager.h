@@ -45,6 +45,7 @@ public:
 	SDL_Texture* Filter = nullptr;
 	SDL_Texture* Trees = nullptr;
 
+
 	enum UIState
 	{
 		INTRO,
