@@ -60,17 +60,20 @@ void CombatSystem::MainLoop()
 
 void CombatSystem::EnemyTurn()
 {
-    if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
+    /*if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
     {
         cout << "ENEMY ATTACKS!" << endl;
         enemy->Attack(enemy, player);
         isPlayerTurn = true;
-    }
+    }*/
+    cout << "ENEMY ATTACKS!" << endl;
+    enemy->Attack(enemy, player);
+    isPlayerTurn = true;
 }
 
 void CombatSystem::PlayerTurn()
 {
-    if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_P) == KEY_DOWN)
+    if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_P) == KEY_DOWN || /*THIS SHIT: Engine::GetInstance().combatui.get().combatInput*/)
     {
         cout << "PLAYER ATTACKS!" << endl;
         player->Attack(player, enemy);

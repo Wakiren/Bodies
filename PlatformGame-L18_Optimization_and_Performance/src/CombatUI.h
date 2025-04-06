@@ -25,10 +25,10 @@ public:
 		GUARD,
 		SKILL,
 		FLEE,
-		NONE
+		EMPTY
 	};
 
-	CombatInput combatInput = CombatInput::NONE;
+	CombatInput combatInput = CombatInput::EMPTY;
 
 private:
 
