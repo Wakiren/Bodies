@@ -72,7 +72,7 @@ bool CombatUI::Update(float dt)
 		Engine::GetInstance().render.get()->camera.h / 1.9 + 192 * 1.8f, 1, &button4Rect);
 
 
-		if (Engine::GetInstance().input.get()->GetMouseButtonDown(1)) 
+		if (Engine::GetInstance().input.get()->GetMouseButtonDown(1) == KEY_UP) 
 		{
 			if (mouseX >= 150 && mouseX <= 210 && mouseY >= 140 && mouseY <= 160)
 			{

@@ -78,11 +78,13 @@ void CombatSystem::EnemyTurn()
 
 void CombatSystem::PlayerTurn()
 {
-    if (Engine::GetInstance().combatui.get()->combatInput == 0)
+    if (Engine::GetInstance().combatui.get()->combatInput == CombatUI::CombatInput::ATTACK)
     {
         cout << "PLAYER ATTACKS!" << endl;
         player->Attack(player, enemy);
         isPlayerTurn = false;
+        Engine::GetInstance().combatui.get()->combatInput = CombatUI::CombatInput::EMPTY;
+        cout << "inputValue" << Engine::GetInstance().combatui.get()->combatInput << endl;
     }
 }
 

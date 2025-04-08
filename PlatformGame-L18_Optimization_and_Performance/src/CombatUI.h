@@ -21,14 +21,16 @@ public:
   
 	enum CombatInput
 	{
+		EMPTY,
 		ATTACK,
 		GUARD,
 		SKILL,
 		FLEE,
-		EMPTY
+
 	};
 
 	CombatInput combatInput = CombatInput::EMPTY;
+
 private:
 
 	// Textures
