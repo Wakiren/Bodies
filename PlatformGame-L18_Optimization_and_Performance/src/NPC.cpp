@@ -11,6 +11,8 @@
 #include "EntityManager.h"
 #include "tracy/Tracy.hpp"
 
+using namespace std;
+
 NPC::NPC(NPCType type) : Entity(EntityType::NPC)
 {
 	this->type = type;

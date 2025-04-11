@@ -157,9 +157,10 @@ bool Scene::Update(float dt)
 	Vector2D mapLimit = Engine::GetInstance().map->MapToWorld(Engine::GetInstance().map->GetWidth(), Engine::GetInstance().map->GetHeight());
 
 	if (!Engine::GetInstance().physics.get()->debug) {
-		Engine::GetInstance().render.get()->camera.y = (-player->position.getY() * scale) + WHeight / 2;
 
-		Engine::GetInstance().render.get()->camera.x = Slower(Engine::GetInstance().render.get()->camera.x, (-player->position.getX() * scale) + WWidth / 2, 1.0f);
+		Engine::GetInstance().render.get()->camera.y = Slower(Engine::GetInstance().render.get()->camera.y, (-player->position.getY() * scale) + WHeight / 2, 0.2f);
+
+		Engine::GetInstance().render.get()->camera.x = Slower(Engine::GetInstance().render.get()->camera.x, (-player->position.getX() * scale) + WWidth / 2, 0.2f);
 	}
 
 	// L10 TODO 6: Implement a method that repositions the player in the map with a mouse click

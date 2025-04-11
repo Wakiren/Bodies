@@ -41,6 +41,8 @@ public:
 	int nextNode;
 	int eventReturn;
 	int path;
+	bool bloked = false;
+	string object;
 };
 
 

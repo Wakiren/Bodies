@@ -7,6 +7,8 @@
 
 struct SDL_Texture;
 
+using namespace std;
+
 enum class NPCType
 {
 	SALLY,
@@ -55,6 +57,7 @@ public:
 	//For dialogue
 	NPCType type;
 	unsigned int NextID = 0;
-	bool hasDialogue = true;
 	bool Interactable = true;
+	string ObjectToGive;
+
 };

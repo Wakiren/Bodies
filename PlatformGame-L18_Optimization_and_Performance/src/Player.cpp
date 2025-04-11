@@ -12,7 +12,6 @@
 #include "CombatSystem.h"
 #include <cmath>
 #include <iostream>
-#include "Pathfinding.h"
 using namespace std;
 
 
@@ -65,11 +64,6 @@ bool Player::Start() {
 	combatStats->health = parameters.child("combat").attribute("health").as_int();
 	combatStats->maxHealth = parameters.child("combat").attribute("maxHealth").as_int();
 	combatStats->defensePoints = parameters.child("combat").attribute("defensePoints").as_int();
-
-	// Initialize pathfinding
-	pathfinding = new Pathfinding();
-	Engine::GetInstance().render.get()->DrawTexture(texture, (int)position.getX(), (int)position.getY(), &currentAnimation->GetCurrentFrame());
-	ResetPath();
 
 	return true;
 }
@@ -161,79 +155,35 @@ void Player::SetPosition(Vector2D pos) {
 
 void Player::MoveToMousePos()
 {
-	//All variables needed
 	Vector2D playerPos = GetPosition();
 	Vector2D mousePos = Engine::GetInstance().input.get()->GetMousePosition();
 	mousePos.setX(mousePos.getX() - Engine::GetInstance().render.get()->camera.x / Engine::GetInstance().render.get()->scale);
 	mousePos.setY(mousePos.getY() - Engine::GetInstance().render.get()->camera.y / Engine::GetInstance().render.get()->scale);
-	Vector2D mouseTile = Engine::GetInstance().map.get()->WorldToMap(mousePos.getX(), mousePos.getY());
 
-	//Get the path to the mouse
 	if (Engine::GetInstance().input.get()->GetMouseButtonDown(1))
 	{
-		if (pathfinding->foundMouse == true)
-		{
-			pathfinding->foundMouse = false;
-			ResetPath();
-		}
-		if (pathfinding->IsWalkable(mouseTile.getX(),mouseTile.getY()) == false)
-		{
-			return;
-		}
-
-		while (pathfinding->foundMouse == false)
-		{
-			pathfinding->PropagateAStarToMouse(EUCLIDEAN);
-		}
+		destination = mousePos;
+		movementVector = destination - playerPos;
+		movementVector = movementVector.normalized();
 	}
 
-	//Start the movement
-	if (pathfinding->foundMouse == true && pathfinding->pathTiles.size() > 0) {
-
-		destination = pathfinding->pathTiles.front();
-		Vector2D nextTile = pathfinding->pathTiles.back();
-		Vector2D nextPos = Engine::GetInstance().map->MapToWorld(nextTile.getX(), nextTile.getY());
-		nextPos.setX(nextPos.getX() + texW / 2);
-		nextPos.setY(nextPos.getY() + texH / 2);
-		Vector2D direction = nextPos - GetPosition();
-		direction = direction.normalized();
-
-		spriteAngle = atan2(direction.getX(), direction.getY()) * -180 / b2_pi;
-
-		movementVector = b2Vec2(direction.getX() * speed, direction.getY() * speed);
+	if (abs(destination.getX() - playerPos.getX()) > 1 || abs(destination.getY() - playerPos.getY()) > 1)
+	{
+		spriteAngle = atan2(destination.getX() - playerPos.getX(), destination.getY() - playerPos.getY()) * -180 / b2_pi;
+		pbody->body->SetLinearVelocity({ movementVector.getX() * speed, movementVector.getY() * speed });
 		currentAnimation = &walk;
-
-		pbody->body->SetLinearVelocity(movementVector);
-
-		if (nextTile == Engine::GetInstance().map->WorldToMap(playerPos.getX(), playerPos.getY()))
-		{
-			pathfinding->pathTiles.pop_back();
-		}
-		if (destination == Engine::GetInstance().map->WorldToMap(playerPos.getX(), playerPos.getY()))
-		{
-			pathfinding->foundMouse = false;
-			ResetPath();
-		}
 	}
-	//Stop the movement
-	else {
-		pbody->body->SetLinearVelocity(b2Vec2_zero);
+	else
+	{
+		movementVector = vecZero;
+		pbody->body->SetLinearVelocity({ 0,0 });
 		spriteAngle = atan2(mousePos.getX() - playerPos.getX(), mousePos.getY() - playerPos.getY()) * -180 / b2_pi;
 		currentAnimation = &idle;
 	}
-
-	//Set the direction
-	pbody->body->SetTransform({ pbody->body->GetPosition().x, pbody->body->GetPosition().y }, spriteAngle);
 }
 
 Vector2D Player::GetPosition() {
 	b2Vec2 bodyPos = pbody->body->GetTransform().p;
 	Vector2D pos = Vector2D(METERS_TO_PIXELS(bodyPos.x), METERS_TO_PIXELS(bodyPos.y));
 	return pos;
-}
-
-void Player::ResetPath() {
-	Vector2D pos = GetPosition();
-	Vector2D tilePos = Engine::GetInstance().map.get()->WorldToMap(pos.getX(), pos.getY());
-	pathfinding->ResetPath(tilePos);
 }

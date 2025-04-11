@@ -66,6 +66,8 @@ bool DialogueSystem::OnGuiMouseClickEvent(GuiControl* control)
 	else // If choice leads to the end of the conversation, change active node to last node
 	{
 		activeTree->npc->NextID = activeTree->activeNode->choicesList[control->id]->path;
+		activeTree->npc->ObjectToGive = activeTree->activeNode->choicesList[control->id]->object;
+		activeTree->npc->Interactable = activeTree->activeNode->choicesList[control->id]->bloked;
 		
 		activeTree->activeNode = activeTree->nodeList.at(activeTree->nodeList.size() - 1);
 		inDialog = false;
@@ -163,9 +165,11 @@ void DialogueSystem::LoadChoices(pugi::xml_node& xml_node, DialogueNode* node)
 		option->nextNode = choice.attribute("nextNode").as_int();
 		option->text = choice.attribute("option").as_string();
 		option->eventReturn = choice.attribute("eventReturn").as_int();
-		option->path = choice.attribute("NextID").as_int();
-	
 
+		option->path = choice.attribute("NextID").as_int();
+		option->object = choice.attribute("object").as_string();
+		option->bloked = choice.attribute("bloked").as_bool();
+	
 		node->choicesList.push_back(option);
 	}
 }

@@ -5,7 +5,6 @@
 #include "Box2D/Box2D.h"
 #include "Animation.h"
 #include "CombatStats.h"
-#include "Pathfinding.h"
 
 
 struct CombatStats;
@@ -70,11 +69,7 @@ private:
 
 	const Vector2D vecZero = {0,0};
 	Vector2D destination;
-	b2Vec2 movementVector = {0,0};
+	Vector2D movementVector = {0,0};
 
 	double spriteAngle;
-
-	//Pathfincing
-	Pathfinding* pathfinding;
-	bool propagatePath = false;
 };
