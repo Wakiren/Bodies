@@ -55,20 +55,24 @@ bool Narcissist::Update(float dt)
 			check = 0;
 		}
 		if (pathfinding->pathTiles.size() > 0) {
-			Vector2D nextTile = pathfinding->pathTiles.front();
+
+			Vector2D nextTile = pathfinding->pathTiles.back();
 			Vector2D nextPos = Engine::GetInstance().map->MapToWorld(nextTile.getX(), nextTile.getY());
+			nextPos.setX(nextPos.getX() + (texW / 2));
+			nextPos.setY(nextPos.getY() + (texH / 2));
 			Vector2D direction = nextPos - GetPosition();
-			direction.normalized();
+			direction = direction.normalized();
 
 			spriteAngle = atan2(direction.getX(), direction.getY()) * -180 / b2_pi;
 
 			eVelocity = b2Vec2(direction.getX() * speed, direction.getY() * speed);
 			currentAnimation = &walk;
+
 			pbody->body->SetLinearVelocity(eVelocity);
 		}
 		else {
-			pbody->body->SetLinearVelocity(b2Vec2_zero);
 			currentAnimation = &idle;
+			pbody->body->SetLinearVelocity(b2Vec2_zero);
 			BackToPath = true;
 		}
 

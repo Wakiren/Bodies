@@ -48,10 +48,12 @@ bool Cannibal::Update(float dt)
 		}
 		if (pathfinding->pathTiles.size() > 0) {
 
-			Vector2D nextTile = pathfinding->pathTiles.front();
+			Vector2D nextTile = pathfinding->pathTiles.back();
 			Vector2D nextPos = Engine::GetInstance().map->MapToWorld(nextTile.getX(), nextTile.getY());
+			nextPos.setX(nextPos.getX() + (texW / 2));
+			nextPos.setY(nextPos.getY() + (texH / 2));
 			Vector2D direction = nextPos - GetPosition();
-			direction.normalized();
+			direction = direction.normalized();
 
 			spriteAngle = atan2(direction.getX(), direction.getY()) * -180 / b2_pi;
 

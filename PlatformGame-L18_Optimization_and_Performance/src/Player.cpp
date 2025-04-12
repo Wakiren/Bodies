@@ -105,6 +105,17 @@ bool Player::CleanUp()
 
 // L08 TODO 6: Define OnCollision function for the player. 
 void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
+	
+	Vector2D playerPos = GetPosition();
+	Vector2D mousePos = Engine::GetInstance().input.get()->GetMousePosition();
+	mousePos.setX(mousePos.getX() - Engine::GetInstance().render.get()->camera.x / Engine::GetInstance().render.get()->scale);
+	mousePos.setY(mousePos.getY() - Engine::GetInstance().render.get()->camera.y / Engine::GetInstance().render.get()->scale);
+
+	movementVector = vecZero;
+	pbody->body->SetLinearVelocity({ 0,0 });
+	spriteAngle = atan2(mousePos.getX() - playerPos.getX(), mousePos.getY() - playerPos.getY()) * -180 / b2_pi;
+	currentAnimation = &idle;
+
 	switch (physB->ctype)
 	{
 	case ColliderType::PLATFORM:
@@ -135,6 +146,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 
 void Player::OnCollisionEnd(PhysBody* physA, PhysBody* physB)
 {
+
 	switch (physB->ctype)
 	{
 	case ColliderType::PLATFORM:
