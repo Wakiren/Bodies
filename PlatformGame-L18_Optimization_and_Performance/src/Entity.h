@@ -67,6 +67,8 @@ public:
 
 	};
 
+	virtual void OnPause() {};
+
 public:
 
 	std::string name;

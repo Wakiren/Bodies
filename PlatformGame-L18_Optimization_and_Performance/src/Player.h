@@ -43,6 +43,8 @@ public:
 
 	void ResetPath();
 
+	void OnPause() override;
+
 public:
 
 

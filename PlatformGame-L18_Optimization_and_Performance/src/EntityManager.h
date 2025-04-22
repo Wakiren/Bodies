@@ -34,6 +34,8 @@ public:
 
 	void AddEntity(Entity* entity);
 
+	bool pauseEntities = false;
+
 public:
 
 	std::list<Entity*> entities;

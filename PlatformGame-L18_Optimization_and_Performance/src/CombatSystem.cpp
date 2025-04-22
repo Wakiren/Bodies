@@ -26,6 +26,7 @@ bool CombatSystem::Start()
 
 bool CombatSystem::Update(float dt)
 {
+
     MainLoop();
 	return true;
 }

@@ -99,6 +99,7 @@ bool Player::Update(float dt)
 bool Player::CleanUp()
 {
 	LOG("Cleanup player");
+	pbody->body->SetLinearVelocity(b2Vec2_zero);
 	Engine::GetInstance().textures.get()->UnLoad(texture);
 	return true;
 }
@@ -198,4 +199,9 @@ Vector2D Player::GetPosition() {
 	b2Vec2 bodyPos = pbody->body->GetTransform().p;
 	Vector2D pos = Vector2D(METERS_TO_PIXELS(bodyPos.x), METERS_TO_PIXELS(bodyPos.y));
 	return pos;
+}
+
+void Player::OnPause()
+{
+	pbody->body->SetLinearVelocity(b2Vec2_zero);
 }

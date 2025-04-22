@@ -127,8 +127,30 @@ void EntityManager::AddEntity(Entity* entity)
 bool EntityManager::Update(float dt)
 {
 	ZoneScoped;
+	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_P) == KEY_DOWN)
+	{
+		Engine::GetInstance().entityManager.get()->pauseEntities = !Engine::GetInstance().entityManager.get()->pauseEntities;
+	}
 	// Code you want to profile
 	bool ret = true;
+	
+	if (pauseEntities) 
+	{
+		for (const auto entity : entities)
+		{
+			entity->OnPause();
+			entity->active = false;
+
+		}
+	}
+	else
+	{
+		for (const auto entity : entities)
+		{
+			entity->active = true;
+		}
+	}
+	
 	for(const auto entity : entities)
 	{
 		if (entity->active == false) continue;
