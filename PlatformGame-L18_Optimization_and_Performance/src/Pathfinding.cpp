@@ -271,7 +271,7 @@ void Pathfinding::PropagateAStar(ASTAR_HEURISTICS heuristic) {
     Vector2D playerPos = Engine::GetInstance().scene.get()->GetPlayerPosition();
     Vector2D playerPosTile = Engine::GetInstance().map.get()->WorldToMap((int)playerPos.getX(), (int)playerPos.getY());
 
-    bool foundDestination = false;
+    foundDestination = false;
     if (frontierAStar.size() > 0) {
         Vector2D frontierTile = frontierAStar.top().second;
 

@@ -36,17 +36,8 @@ bool Cannibal::Update(float dt)
 
 	if (IsInVision() && !isInCombat)
 	{
-		if (check < 20)
-		{
-			pathfinding->PropagateAStar(SQUARED);
-			check += 1;
-		}
-		else {
-			Vector2D tilePos = Engine::GetInstance().map.get()->WorldToMap(GetPosition().getX(), GetPosition().getY());
-			pathfinding->ResetPath(tilePos);
-			check = 0;
-		}
-		if (pathfinding->pathTiles.size() > 0) {
+
+		if (pathfinding->pathTiles.size() > 0 ) {
 
 			Vector2D nextTile = pathfinding->pathTiles.back();
 			Vector2D nextPos = Engine::GetInstance().map->MapToWorld(nextTile.getX(), nextTile.getY());
@@ -62,10 +53,19 @@ bool Cannibal::Update(float dt)
 
 			pbody->body->SetLinearVelocity(eVelocity);
 		}
-		else {
+		else
+		{
 			currentAnimation = &idle;
 			pbody->body->SetLinearVelocity(b2Vec2_zero);
 		}
+
+		ResetPath();
+		while (check < 20)
+		{
+			pathfinding->PropagateAStar(SQUARED);
+			check += 1;
+		}
+		check = 0;
 
 		pbody->body->SetTransform({ pbody->body->GetPosition().x, pbody->body->GetPosition().y }, spriteAngle);
 	}
