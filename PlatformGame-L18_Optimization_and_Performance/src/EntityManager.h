@@ -34,6 +34,9 @@ public:
 
 	void AddEntity(Entity* entity);
 
+	void PauseEntities();
+	void UnPauseEntities();
+
 	bool pauseEntities = false;
 
 public:

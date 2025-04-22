@@ -2,6 +2,7 @@
 #include "Fighter.h"
 #include "Scene.h"
 #include "CombatUI.h"
+#include "EntityManager.h"
 
 
 CombatSystem::CombatSystem()
@@ -40,6 +41,7 @@ void CombatSystem::MainLoop()
 {
     if (!isCombatOver(player, enemy)) 
     {
+        Engine::GetInstance().entityManager.get()->PauseEntities();
         Engine::GetInstance().combatui.get()->active = true;
         if(isPlayerTurn) 
         {
@@ -61,6 +63,10 @@ void CombatSystem::MainLoop()
                 Engine::GetInstance().combatui.get()->active = false;
             }
         }
+    }
+    else 
+    {
+        Engine::GetInstance().entityManager.get()->UnPauseEntities();
     }
 }
 
