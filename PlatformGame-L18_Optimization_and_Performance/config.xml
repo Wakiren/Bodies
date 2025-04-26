@@ -87,6 +87,38 @@
 					</animations>
 				</NPC>
 			</NPCs>
+			<items>
+				<item name="MixedMeat" x="0" y="0" w="16" h="16" texture="Assets/Items/Items.png">
+					<effect type="heal" amount="25" />
+				</item>
+				<item name="AnimalSkin" x="16" y="0" w="16" h="16" texture="Assets/Items/Items.png">
+					<effect type="heal" amount="10" />
+				</item>
+				<item name="HumanFlesh" x="32" y="0" w="16" h="16" texture="Assets/Items/Items.png">
+					<effect type="heal" amount="15" />
+				</item>
+				<item name="Eye" x="48" y="0" w="16" h="16" texture="Assets/Items/Items.png">
+					<effect type="Upgrade"/>
+				</item>
+				<item name="Sedative" x="64" y="0" w="16" h="16" texture="Assets/Items/Items.png">
+					<effect type="Narcotic" amount="50" />
+				</item>
+				<item name="CookedMixedMeat" x="80" y="0" w="16" h="16" texture="Assets/Items/Items.png">
+					<effect type="heal" amount="25" />
+				</item>
+				<item name="CookedAnimalSkin" x="96" y="0" w="16" h="16" texture="Assets/Items/Items.png">
+					<effect type="heal" amount="10" />
+				</item>
+				<item name="CookedHumanFlesh" x="112" y="0" w="16" h="16" texture="Assets/Items/Items.png">
+					<effect type="heal" amount="15" />
+				</item>
+				<item name="Sizors" x="128" y="0" w="16" h="16" texture="Assets/Items/Items.png">
+					<effect type="Weapon" amount="50" />
+				</item>
+				<item name="Torch" x="144" y="0" w="16" h="16" texture="Assets/Items/Items.png">
+					<effect type="Equipable"/>
+				</item>
+			</items>
 		</entities>
 	</scene>
 	<dialogueSystem textBoxBg="Assets/UI/Dialogue Box.png" />
