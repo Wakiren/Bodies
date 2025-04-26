@@ -118,6 +118,19 @@
 				<item name="Torch" x="144" y="0" w="16" h="16" texture="Assets/Items/Items.png">
 					<effect type="Equipable"/>
 				</item>
+				<item name="Alpha" x="160" y="0" w="16" h="16" texture="Assets/Items/Items.png">
+					<effect type="Puzzle"/>
+				</item>
+				<item name="Beta" x="176" y="0" w="16" h="16" texture="Assets/Items/Items.png">
+					<effect type="Puzzle"/>
+				</item>
+				<item name="Omega" x="192" y="0" w="16" h="16" texture="Assets/Items/Items.png">
+					<effect type="Puzzle"/>
+				</item>
+				<item name="Sigma" x="208" y="0" w="16" h="16" texture="Assets/Items/Items.png">
+					<effect type="Puzzle"/>
+				</item>
+				
 			</items>
 		</entities>
 	</scene>
