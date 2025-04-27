@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="172" height="152" tilewidth="32" tileheight="32" infinite="0" nextlayerid="24" nextobjectid="814">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="172" height="152" tilewidth="32" tileheight="32" infinite="0" nextlayerid="24" nextobjectid="815">
  <editorsettings>
   <chunksize width="32" height="32"/>
  </editorsettings>
@@ -81819,8 +81819,8 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="1511"/>
-   <tile gid="1512"/>
+   <tile gid="328"/>
+   <tile gid="329"/>
    <tile/>
    <tile/>
    <tile/>
@@ -81991,8 +81991,8 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="1576"/>
-   <tile gid="1577"/>
+   <tile gid="393"/>
+   <tile gid="394"/>
    <tile gid="460"/>
    <tile/>
    <tile/>
@@ -91110,8 +91110,8 @@
    <tile/>
    <tile/>
    <tile gid="457"/>
-   <tile gid="1383"/>
-   <tile gid="1384"/>
+   <tile gid="330"/>
+   <tile gid="331"/>
    <tile gid="335"/>
    <tile/>
    <tile/>
@@ -91282,8 +91282,8 @@
    <tile/>
    <tile/>
    <tile gid="457"/>
-   <tile gid="1448"/>
-   <tile gid="1449"/>
+   <tile gid="395"/>
+   <tile gid="396"/>
    <tile gid="328"/>
    <tile gid="329"/>
    <tile/>
@@ -112153,8 +112153,8 @@
    <tile/>
    <tile/>
    <tile gid="265"/>
-   <tile gid="1513"/>
-   <tile gid="1514"/>
+   <tile gid="330"/>
+   <tile gid="331"/>
    <tile/>
    <tile/>
    <tile/>
@@ -112325,8 +112325,8 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="1578"/>
-   <tile gid="1579"/>
+   <tile gid="395"/>
+   <tile gid="396"/>
    <tile/>
    <tile/>
    <tile/>
@@ -120903,8 +120903,8 @@
    <tile gid="72"/>
    <tile/>
    <tile gid="199"/>
-   <tile gid="1381"/>
-   <tile gid="1382"/>
+   <tile gid="330"/>
+   <tile gid="331"/>
    <tile/>
    <tile gid="272"/>
    <tile/>
@@ -121075,8 +121075,8 @@
    <tile gid="10"/>
    <tile/>
    <tile gid="4"/>
-   <tile gid="1446"/>
-   <tile gid="1447"/>
+   <tile gid="395"/>
+   <tile gid="396"/>
    <tile/>
    <tile/>
    <tile gid="131"/>
@@ -209853,6 +209853,6 @@
   <object id="799" x="704" y="2304" width="64" height="64"/>
   <object id="800" x="608" y="576" width="64" height="64"/>
   <object id="801" x="2368" y="1344" width="64" height="64"/>
-  <object id="805" x="2560" y="1152" width="128" height="32"/>
+  <object id="814" x="2528" y="1120" width="192" height="64"/>
  </objectgroup>
 </map>

@@ -69,7 +69,6 @@ public:
 	Animation walk;
 
 	Puzzle PlayerPuzzle = Puzzle::TREE_PUZZLE;
-
 	PhysBody* EnemyInCombat = nullptr;
 
 

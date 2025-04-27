@@ -5,6 +5,7 @@
 #include "Physics.h"
 #include "Item.h"
 #include "Entity.h"
+#include "Textures.h"
 
 class Symbol;
 
@@ -26,6 +27,14 @@ public:
 
 	list<Symbol*> symbols;
 	PhysBody* Altar = nullptr;
+	SDL_Texture* AltarCompleated = nullptr;
+	Vector2D AltarPos;
+
+	int numKeys = 0;
+
+	//COMPLETAEEEED!!
+
+	bool Compleated = false;
 };
 
 class Symbol : public Entity
@@ -47,4 +56,5 @@ public:
 
 	PhysBody* symbolBody = nullptr;
 	string name;
+	SDL_Texture* texture = nullptr;
 };

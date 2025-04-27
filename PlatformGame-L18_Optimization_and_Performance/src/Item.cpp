@@ -55,6 +55,7 @@ bool Item::Start() {
 bool Item::Update(float dt)
 {
 	// L08 TODO 4: Add a physics to an item - update the position of the object from the physics.  
+	if (pbody->body == nullptr) return true;
 
 	b2Transform pbodyPos = pbody->body->GetTransform();
 	position.setX(METERS_TO_PIXELS(pbodyPos.p.x) - texH / 2);
@@ -95,9 +96,11 @@ void Item::Stabilize()
 	{
 		b2Vec2 Vel = pbody->body->GetLinearVelocity();
 		pbody->body->ApplyForceToCenter(b2Vec2(-Vel.x/5, -Vel.y/5), true);
+		pbody->listener = nullptr;
 	}
 	else
 	{
 		pbody->body->SetLinearVelocity(b2Vec2_zero);
+		pbody->listener = this;
 	}
 }

@@ -51,26 +51,33 @@ bool TreePuzzle::Start() {
 				{
 				case 0:
 					sym->Start(collider,"Alpha");
-					sym->position = { mapObject.x + mapObject.width / 2, mapObject.y + mapObject.height / 2 };
+					sym->position = { mapObject.x , mapObject.y  };
+					sym->texture = Engine::GetInstance().textures.get()->Load("Assets/Puzzles/Alpha.png");
 					symbols.push_back(sym);
 					break;
 				case 1:
 					sym->Start(collider, "Beta");
-					sym->position = { mapObject.x + mapObject.width / 2, mapObject.y + mapObject.height / 2 };
+					sym->position = { mapObject.x , mapObject.y };
+					sym->texture = Engine::GetInstance().textures.get()->Load("Assets/Puzzles/Beta.png");	
 					symbols.push_back(sym);
 					break;
 				case 2:
 					sym->Start(collider, "Omega");
-					sym->position = { mapObject.x + mapObject.width / 2, mapObject.y + mapObject.height / 2 };
+					sym->position = { mapObject.x , mapObject.y  };
+					sym->texture = Engine::GetInstance().textures.get()->Load("Assets/Puzzles/Omega.png");
 					symbols.push_back(sym);
 					break;
 				case 3:
 					sym->Start(collider, "Sigma");
-					sym->position = { mapObject.x + mapObject.width / 2, mapObject.y + mapObject.height / 2 };
+					sym->position = { mapObject.x , mapObject.y  };
+					sym->texture = Engine::GetInstance().textures.get()->Load("Assets/Puzzles/Sigma.png");
 					symbols.push_back(sym);
 					break;
 				case 4:
 					Altar = collider;
+					AltarCompleated = Engine::GetInstance().textures.get()->Load("Assets/Puzzles/Altar.png");
+					AltarPos.setX(mapObject.x);
+					AltarPos.setY(mapObject.y);
 					break;
 				}
 				i++;
@@ -97,15 +104,37 @@ bool TreePuzzle::Update(float dt)
 	for (auto it = symbols.begin(); it != symbols.end(); ++it) {
 
 
-		if ((*it)->IsInZone() == true)
+		if ((*it)->taken == false)
+		{
+			Engine::GetInstance().render.get()->DrawTexture((*it)->texture, (*it)->position.getX(), (*it)->position.getY());
+		}
+
+		if ((*it)->IsInZone() == true && (*it)->taken == false)
 		{
 			DysplayText();
-			if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_E) == KEY_DOWN && (*it)->taken == false)
+			if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_E) == KEY_DOWN )
 			{
 				Item Key = Engine::GetInstance().scene.get()->CreateItem((*it)->name, (*it)->position);
 				Key.SpawnFromEnemy();
 				(*it)->taken = true;
+				
+				numKeys++;
 			}
+		}
+
+		if (Altar->Contains(Engine::GetInstance().scene.get()->player->GetPosition().getX(),
+			Engine::GetInstance().scene.get()->player->GetPosition().getY()))
+		{
+			DysplayText();
+			if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_E) == KEY_DOWN && numKeys == 4)
+			{
+				Compleated = true;
+			}
+		}
+
+		if (Compleated)
+		{
+			Engine::GetInstance().render.get()->DrawTexture(AltarCompleated, AltarPos.getX(), AltarPos.getY());
 		}
 	}
 
