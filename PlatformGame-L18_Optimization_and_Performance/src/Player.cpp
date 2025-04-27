@@ -138,6 +138,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		Engine::GetInstance().render.get()->DrawText("Press E to interact", Engine::GetInstance().window.get()->width / 2, (Engine::GetInstance().window.get()->height / 2) - texH, 25, { 255,255,255 });		break;
 	case ColliderType::ENEMY:
 	
+		EnemyInCombat = physB;
 		Fighter* player = new Fighter(pbody->listener->type);
 		player->combatStats = combatStats;
 		Fighter* enemy = new Fighter(physB->listener->type);

@@ -19,6 +19,7 @@ public:
 	void MainLoop();
 	void EnemyTurn();
 	void PlayerTurn();
+	void DeletePhysicalEnemy(PhysBody* enemy);
 
 	bool isCombatOver(Player* player, Enemy* enemy);
 

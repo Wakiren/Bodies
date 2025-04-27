@@ -70,6 +70,9 @@ public:
 
 	Puzzle PlayerPuzzle = Puzzle::TREE_PUZZLE;
 
+	PhysBody* EnemyInCombat = nullptr;
+
+
 private:
 
 	const Vector2D vecZero = {0,0};
