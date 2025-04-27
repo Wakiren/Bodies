@@ -3,6 +3,7 @@
 #include "Scene.h"
 #include "CombatUI.h"
 #include "EntityManager.h"
+#include "Physics.h"
 
 
 CombatSystem::CombatSystem()
@@ -95,6 +96,11 @@ void CombatSystem::PlayerTurn()
     }
 }
 
+void CombatSystem::DeletePhysicalEnemy(PhysBody* enemy)
+{
+    Engine::GetInstance().physics.get()->DeletePhysBody(enemy);
+}
+
 bool CombatSystem::isCombatOver(Player* player, Enemy* enemy)
 {
     if(player == nullptr || enemy == nullptr)
@@ -108,7 +114,17 @@ bool CombatSystem::isCombatOver(Player* player, Enemy* enemy)
     }
     if (!enemy->isAlive(enemy)) {
         cout << "Enemy defeated!\n";
-        //Engine::GetInstance().scene.get()->enemyList[0]->Disable();
+
+        if (Engine::GetInstance().scene.get()->player->EnemyInCombat != nullptr) 
+        {
+            if (Engine::GetInstance().scene.get()->player->EnemyInCombat->body != nullptr)
+            {
+                DeletePhysicalEnemy(Engine::GetInstance().scene.get()->player->EnemyInCombat);
+                Engine::GetInstance().scene.get()->player->EnemyInCombat = nullptr;
+
+            }
+        }
+
         Engine::GetInstance().scene.get()->player->isInCombat = false;
         return true;
     }

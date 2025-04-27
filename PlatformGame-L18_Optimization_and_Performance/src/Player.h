@@ -67,6 +67,8 @@ public:
 	Animation idle;
 	Animation walk;
 
+	PhysBody* EnemyInCombat = nullptr;
+
 private:
 
 	const Vector2D vecZero = {0,0};
