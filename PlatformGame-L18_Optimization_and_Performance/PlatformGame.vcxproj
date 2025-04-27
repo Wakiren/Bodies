@@ -147,6 +147,7 @@
     <None Include="vcpkg.json" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\GuiControlSlider.cpp" />
     <ClCompile Include="src\Audio.cpp" />
     <ClCompile Include="src\Cannibal.cpp" />
     <ClCompile Include="src\CombatSystem.cpp" />
@@ -159,6 +160,7 @@
     <ClCompile Include="src\FadeManager.cpp" />
     <ClCompile Include="src\Fighter.cpp" />
     <ClCompile Include="src\GuiControlButton.cpp" />
+    <ClCompile Include="src\GuiControlToggle.cpp" />
     <ClCompile Include="src\GuiManager.cpp" />
     <ClCompile Include="src\Input.cpp" />
     <ClCompile Include="src\IntroScene.cpp" />
@@ -179,6 +181,7 @@
     <ClCompile Include="src\PuzzleManager.cpp" />
     <ClCompile Include="src\Render.cpp" />
     <ClCompile Include="src\Scene.cpp" />
+    <ClCompile Include="src\SettingsMenu.cpp" />
     <ClCompile Include="src\Textures.cpp" />
     <ClCompile Include="src\Timer.cpp" />
     <ClCompile Include="src\TreePuzzle.cpp" />
@@ -186,6 +189,9 @@
     <ClCompile Include="src\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\GuiControlSlider.h" />
+    <ClInclude Include="src\GuiControlToggle.h" />
+    <ClInclude Include="src\SettingsMenu.h" />
     <ClInclude Include="src\CombatUI.h" />
     <ClInclude Include="src\FadeManager.h" />
     <ClInclude Include="src\Cannibal.h" />

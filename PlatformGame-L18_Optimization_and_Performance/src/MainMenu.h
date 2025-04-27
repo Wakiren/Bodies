@@ -3,6 +3,7 @@
 
 #include "Module.h"
 #include "SDL2/SDL.h"
+#include "GuiControlButton.h"
 
 class MainMenu : public Module
 {
@@ -50,6 +51,9 @@ private:
 
 	SDL_Rect Button1 = { 0,0,106,38 };
 	SDL_Rect Button2 = { 0,111,106,38 };
+
+	GuiControlButton* startButton = nullptr;
+	GuiControlButton* exitButton = nullptr;
 
 	bool haveToChange = false;
 };

@@ -9,6 +9,7 @@
 #include "Physics.h"
 #include "Engine.h"
 #include "FadeManager.h"
+#include "GuiManager.h"
 
 
 #include "Defs.h"
@@ -41,6 +42,9 @@ bool MainMenu::Start()
 
 	buttons = Engine::GetInstance().textures.get()->Load("Assets/Textures/Buttons.png");
 
+	startButton = (GuiControlButton*)Engine::GetInstance().guiManager.get()->CreateGuiControl(GuiControlType::BUTTON, 1,"Start", { 200, 150, 106, 38 }, 50, this);
+	exitButton = (GuiControlButton*)Engine::GetInstance().guiManager.get()->CreateGuiControl(GuiControlType::BUTTON, 2, "Exit", { 200, 200, 106, 38 }, 50, this);
+
 	return true;
 }
 
@@ -65,7 +69,7 @@ bool MainMenu::Update(float dt)
 
 	// Active the scene and the entity manager, and deactivate the main menu
 	if (haveToChange && Engine::GetInstance().fadeManager.get()->GetCurrentFadeType() == FadeType::FADE_IN) {
-		if (option == SELECTED::START) {
+		if (startButton->state == GuiControlState::PRESSED) {
 			Engine::GetInstance().physics.get()->active = true;
 			Engine::GetInstance().map.get()->active = true;
 			Engine::GetInstance().scene.get()->active = true;
@@ -74,18 +78,18 @@ bool MainMenu::Update(float dt)
 			Engine::GetInstance().mainMenu.get()->active = false;
 			haveToChange = false;
 		}
-		else if (option == SELECTED::EXIT) {
+		else if (exitButton->state == GuiControlState::PRESSED) {
 			ret = false;
 		}
 	}
 
 	// Function to detect the mouse click
 	if (Engine::GetInstance().input.get()->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_UP) {
-		if (option == SELECTED::START) {
+		if (startButton->state == GuiControlState::PRESSED) {
 			haveToChange = true;
 			Engine::GetInstance().fadeManager.get()->Fade(3.0f,300);
 		}
-		if (option == SELECTED::EXIT) {
+		if (exitButton->state == GuiControlState::PRESSED) {
 			haveToChange = true;
 			Engine::GetInstance().fadeManager.get()->Fade(3.0f, 300);
 		}
@@ -94,6 +98,10 @@ bool MainMenu::Update(float dt)
 	//Button textures
 	Engine::GetInstance().render.get()->DrawTexture(buttons, 200, 150, &Button1);
 	Engine::GetInstance().render.get()->DrawTexture(buttons, 200, 200, &Button2);
+
+	// Draw the buttons
+	startButton->Draw(Engine::GetInstance().render.get());
+	exitButton->Draw(Engine::GetInstance().render.get());
 
 	int x, y;
 	

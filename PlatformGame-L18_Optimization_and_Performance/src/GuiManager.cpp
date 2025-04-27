@@ -3,6 +3,8 @@
 #include "Textures.h"
 
 #include "GuiControlButton.h"
+#include "GuiControlSlider.h"
+#include "GuiControlToggle.h"
 #include "Audio.h"
 #include "MainMenu.h"
 #include "PauseMenu.h"
@@ -37,6 +39,12 @@ GuiControl* GuiManager::CreateGuiControl(GuiControlType type, int id, const char
 	{
 	case GuiControlType::BUTTON:
 		guiControl = (GuiControl*) new GuiControlButton(id, bounds, text, fontSize);
+		break;
+	case GuiControlType::SLIDER:
+		guiControl = (GuiControl*) new GuiControlSlider(id, bounds, text, fontSize);
+		break;
+	case GuiControlType::TOGGLE:
+		guiControl = (GuiControl*) new GuiControlToggle(id, bounds, text, fontSize);
 		break;
 	}
 
