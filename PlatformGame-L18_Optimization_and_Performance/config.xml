@@ -88,49 +88,118 @@
 				</NPC>
 			</NPCs>
 			<items>
-				<item name="MixedMeat" x="0" y="0" w="16" h="16" texture="Assets/Items/Items.png">
+				<MixedMeat name="MixedMeat" x="0" y="0" w="16" h="16" texture="Assets/Items/Items.png">
 					<effect type="heal" amount="25" />
-				</item>
-				<item name="AnimalSkin" x="16" y="0" w="16" h="16" texture="Assets/Items/Items.png">
+					<animations>
+						<idle loop="true" speed="0.1">
+							<frame x="0" y="0" w="16" h="16" />
+						</idle>
+					</animations>
+				</MixedMeat>
+				<AnimalSkin name="AnimalSkin" x="0" y="0" w="16" h="16" texture="Assets/Items/Items.png">
 					<effect type="heal" amount="10" />
-				</item>
-				<item name="HumanFlesh" x="32" y="0" w="16" h="16" texture="Assets/Items/Items.png">
+					<animations>
+						<idle loop="true" speed="0.1">
+							<frame x="16" y="0" w="16" h="16" />
+						</idle>
+					</animations>
+				</AnimalSkin>
+				<HumanFlesh name="HumanFlesh" x="32" y="0" w="16" h="16" texture="Assets/Items/Items.png">
 					<effect type="heal" amount="15" />
-				</item>
-				<item name="Eye" x="48" y="0" w="16" h="16" texture="Assets/Items/Items.png">
+					<animations>
+						<idle loop="true" speed="0.1">
+							<frame x="32" y="0" w="16" h="16" />
+						</idle>
+					</animations>
+				</HumanFlesh>
+				<Eye name="Eye" x="48" y="0" w="16" h="16" texture="Assets/Items/Items.png">
 					<effect type="Upgrade"/>
-				</item>
-				<item name="Sedative" x="64" y="0" w="16" h="16" texture="Assets/Items/Items.png">
+					<animations>
+						<idle loop="true" speed="0.1">
+							<frame x="48" y="0" w="16" h="16" />
+						</idle>
+					</animations>
+				</Eye>
+				<Sedative name="Sedative" x="64" y="0" w="16" h="16" texture="Assets/Items/Items.png">
 					<effect type="Narcotic" amount="50" />
-				</item>
-				<item name="CookedMixedMeat" x="80" y="0" w="16" h="16" texture="Assets/Items/Items.png">
+					<animations>
+						<idle loop="true" speed="0.1">
+							<frame x="64" y="0" w="16" h="16" />
+						</idle>
+					</animations>
+				</Sedative>
+				<CookedMixedMeat name="CookedMixedMeat" x="80" y="0" w="16" h="16" texture="Assets/Items/Items.png">
 					<effect type="heal" amount="25" />
-				</item>
-				<item name="CookedAnimalSkin" x="96" y="0" w="16" h="16" texture="Assets/Items/Items.png">
+					<animations>
+						<idle loop="true" speed="0.1">
+							<frame x="80" y="0" w="16" h="16" />
+						</idle>
+					</animations>
+				</CookedMixedMeat>
+				<CookedAnimalSkin name="CookedAnimalSkin" x="96" y="0" w="16" h="16" texture="Assets/Items/Items.png">
 					<effect type="heal" amount="10" />
-				</item>
-				<item name="CookedHumanFlesh" x="112" y="0" w="16" h="16" texture="Assets/Items/Items.png">
+					<animations>
+						<idle loop="true" speed="0.1">
+							<frame x="96" y="0" w="16" h="16" />
+						</idle>
+					</animations>
+				</CookedAnimalSkin>
+				<CookedHumanFlesh name="CookedHumanFlesh" x="112" y="0" w="16" h="16" texture="Assets/Items/Items.png">
 					<effect type="heal" amount="15" />
-				</item>
-				<item name="Sizors" x="128" y="0" w="16" h="16" texture="Assets/Items/Items.png">
+					<animations>
+						<idle loop="true" speed="0.1">
+							<frame x="112" y="0" w="16" h="16" />
+						</idle>
+					</animations>
+				</CookedHumanFlesh>
+				<Sizors name="Sizors" x="128" y="0" w="16" h="16" texture="Assets/Items/Items.png">
 					<effect type="Weapon" amount="50" />
-				</item>
-				<item name="Torch" x="144" y="0" w="16" h="16" texture="Assets/Items/Items.png">
+					<animations>
+						<idle loop="true" speed="0.1">
+							<frame x="128" y="0" w="16" h="16" />
+						</idle>
+					</animations>
+				</Sizors>
+				<Torch name="Torch" x="144" y="0" w="16" h="16" texture="Assets/Items/Items.png">
 					<effect type="Equipable"/>
-				</item>
-				<item name="Alpha" x="160" y="0" w="16" h="16" texture="Assets/Items/Items.png">
+					<animations>
+						<idle loop="true" speed="0.1">
+							<frame x="144" y="0" w="16" h="16" />
+						</idle>
+					</animations>
+				</Torch>
+				<Alpha name="Alpha" x="160" y="0" w="16" h="16" texture="Assets/Items/Items.png">
 					<effect type="Puzzle"/>
-				</item>
-				<item name="Beta" x="176" y="0" w="16" h="16" texture="Assets/Items/Items.png">
+					<animations>
+						<idle loop="true" speed="0.1">
+							<frame x="160" y="0" w="16" h="16" />
+						</idle>
+					</animations>
+				</Alpha>
+				<Beta name="Beta" x="176" y="0" w="16" h="16" texture="Assets/Items/Items.png">
 					<effect type="Puzzle"/>
-				</item>
-				<item name="Omega" x="192" y="0" w="16" h="16" texture="Assets/Items/Items.png">
+					<animations>
+						<idle loop="true" speed="0.1">
+							<frame x="176" y="0" w="16" h="16" />
+						</idle>
+					</animations>
+				</Beta>
+				<Omega name="Omega" x="192" y="0" w="16" h="16" texture="Assets/Items/Items.png">
 					<effect type="Puzzle"/>
-				</item>
-				<item name="Sigma" x="208" y="0" w="16" h="16" texture="Assets/Items/Items.png">
+					<animations>
+						<idle loop="true" speed="0.1">
+							<frame x="192" y="0" w="16" h="16" />
+						</idle>
+					</animations>
+				</Omega>
+				<Sigma name="Sigma" x="208" y="0" w="16" h="16" texture="Assets/Items/Items.png">
 					<effect type="Puzzle"/>
-				</item>
-				
+					<animations>
+						<idle loop="true" speed="0.1">
+							<frame x="208" y="0" w="16" h="16" />
+						</idle>
+					</animations>
+				</Sigma>
 			</items>
 		</entities>
 	</scene>

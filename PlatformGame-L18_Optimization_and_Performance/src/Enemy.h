@@ -49,6 +49,8 @@ public:
 		return Combatants;
 	}
 
+	virtual bool Killed();
+
 public:
 
 	CombatStats* combatStats = new CombatStats;

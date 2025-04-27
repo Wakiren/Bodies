@@ -8,6 +8,8 @@ public:
 
 	bool Update(float dt) override;
 
+	bool Killed() override;
+
 	EnemyType GetEnemyType()
 	{
 		return enemyType;

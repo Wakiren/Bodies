@@ -60,7 +60,7 @@ bool Physics::PreUpdate()
 			// If so, we call the OnCollision listener function (only of the sensor), passing as inputs our custom PhysBody classes
 			PhysBody* pb1 = (PhysBody*)c->GetFixtureA()->GetBody()->GetUserData().pointer;
 			PhysBody* pb2 = (PhysBody*)c->GetFixtureB()->GetBody()->GetUserData().pointer;
-			
+
 			if (pb1 && pb2 && pb1->listener)
 				pb1->listener->OnCollision(pb1, pb2);
 		}

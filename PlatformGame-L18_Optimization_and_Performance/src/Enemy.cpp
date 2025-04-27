@@ -71,6 +71,12 @@ bool Enemy::Update(float dt)
 	return true;
 }
 
+bool Enemy::Killed() {
+
+	LOG("Enemy killed");
+	return true;
+}
+
 bool Enemy::CleanUp()
 {
 	Engine::GetInstance().physics.get()->DeletePhysBody(pbody);

@@ -91,3 +91,10 @@ bool Cannibal::Update(float dt)
 
 	return true;
 }
+
+bool Cannibal::Killed()
+{
+	Engine::GetInstance().scene->CreateItem("MixedMeat", position).SpawnFromEnemy();
+
+	return true;
+}

@@ -77,7 +77,7 @@ bool Player::Update(float dt)
 	if (!parameters.attribute("gravity").as_bool()) {
 		velocity = b2Vec2(0,0);
 	}
-	
+
 
 	b2Transform pbodyPos = pbody->body->GetTransform();
 	position.setX(METERS_TO_PIXELS(pbodyPos.p.x) - texH / 2);
@@ -93,6 +93,11 @@ bool Player::Update(float dt)
 		MoveToMousePos();
 	}
 
+	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
+	{
+		Engine::GetInstance().physics.get()->CreateRectangleSensor((int)position.getX() - 100, (int)position.getY() - 100, 32, 32, bodyType::STATIC);
+	}
+
 	return true;
 }
 
@@ -105,6 +110,7 @@ bool Player::CleanUp()
 }
 
 // L08 TODO 6: Define OnCollision function for the player. 
+
 void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	
 	Vector2D playerPos = GetPosition();
@@ -123,10 +129,13 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::ITEM:
 		Engine::GetInstance().audio.get()->PlayFx(pickCoinFxId);
-		Engine::GetInstance().physics.get()->DeletePhysBody(physB); // Deletes the body of the item from the physics world
+		//Engine::GetInstance().physics.get()->DeletePhysBody(physB); // Deletes the body of the item from the physics world
 		break;
 	case ColliderType::UNKNOWN:
 		break;
+
+	case ColliderType::INTERACTABLE:
+		Engine::GetInstance().render.get()->DrawText("Press E to interact", Engine::GetInstance().window.get()->width / 2, (Engine::GetInstance().window.get()->height / 2) - texH, 25, { 255,255,255 });		break;
 	case ColliderType::ENEMY:
 	
 		Fighter* player = new Fighter(pbody->listener->type);

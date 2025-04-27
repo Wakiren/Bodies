@@ -8,6 +8,8 @@
 #include "Log.h"
 #include "Physics.h"
 
+using namespace std;
+
 Item::Item() : Entity(EntityType::ITEM)
 {
 	name = "item";
@@ -31,6 +33,10 @@ bool Item::Start() {
 	//Load animations
 	idle.LoadAnimations(parameters.child("animations").child("idle"));
 	currentAnimation = &idle;
+
+	//Load atributes
+	type = parameters.attribute("type").as_string();
+	amount = parameters.attribute("amount").as_int();
 	
 	// L08 TODO 4: Add a physics to an item - initialize the physics body
 	pbody = Engine::GetInstance().physics.get()->CreateCircle((int)position.getX() + texH / 2, (int)position.getY() + texH / 2, texH / 2, bodyType::DYNAMIC);
@@ -40,6 +46,8 @@ bool Item::Start() {
 
 	// Set the gravity of the body
 	if (!parameters.attribute("gravity").as_bool()) pbody->body->SetGravityScale(0);
+
+
 
 	return true;
 }
@@ -55,10 +63,41 @@ bool Item::Update(float dt)
 	Engine::GetInstance().render.get()->DrawTexture(texture, (int)position.getX(), (int)position.getY(), &currentAnimation->GetCurrentFrame());
 	currentAnimation->Update();
 
+	Stabilize();
+
 	return true;
 }
 
 bool Item::CleanUp()
 {
 	return true;
+}
+
+void Item::SpawnFromEnemy()
+{
+	angle = Engine::GetInstance().scene.get()->RandomValue(0, 360);
+
+	b2Vec2 Direction = b2Vec2(cos(angle)*Vel, sin(angle)*Vel);
+
+	pbody->body->ApplyForceToCenter(Direction,true);
+}
+
+void Item::SetPosition(Vector2D pos) {
+	pos.setX(pos.getX() + texW / 2);
+	pos.setY(pos.getY() + texH / 2);
+	b2Vec2 bodyPos = b2Vec2(PIXEL_TO_METERS(pos.getX()), PIXEL_TO_METERS(pos.getY()));
+	pbody->body->SetTransform(bodyPos, 0);
+}
+
+void Item::Stabilize()
+{
+	if (abs(pbody->body->GetLinearVelocity().Length()) > 0.1f)
+	{
+		b2Vec2 Vel = pbody->body->GetLinearVelocity();
+		pbody->body->ApplyForceToCenter(b2Vec2(-Vel.x/5, -Vel.y/5), true);
+	}
+	else
+	{
+		pbody->body->SetLinearVelocity(b2Vec2_zero);
+	}
 }

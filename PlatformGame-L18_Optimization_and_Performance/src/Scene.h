@@ -7,6 +7,7 @@
 #include <vector>
 #include "GuiControlButton.h"
 #include "Physics.h"
+#include "Item.h"
 
 struct SDL_Texture;
 
@@ -52,6 +53,8 @@ public:
 
 	void StartDialogue(NPC &npc);
 
+	Item CreateItem(string name, Vector2D pos);
+
 public:
 	// Get tilePosDebug value
 	std::string GetTilePosDebug() {
@@ -65,6 +68,7 @@ public:
 	int WHeight;
 
 	std::vector<Enemy*> enemyList;
+	std::vector<Item*> itemList;
 	Player* player;
 
 private:

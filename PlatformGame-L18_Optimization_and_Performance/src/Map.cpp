@@ -253,10 +253,6 @@ bool Map::Load(std::string path, std::string fileName)
 				object->y = objectNode.attribute("y").as_float();
 				object->width = objectNode.attribute("width").as_float();
 				object->height = objectNode.attribute("height").as_float();
-				// What is wrong here???
-				// copilot what is wrong here is that you are pushing the pointer to the object and not the object itself
-				// so you are pushing the same object in the vector and then deleting it, so you are deleting the same object multiple times
-				// you should push the object itself and not the pointer
 				objectLayer->object_list.push_back(*object);
 			}
             for (pugi::xml_node objectNode = objectLayerNode.child("object").child("polygon"); objectNode != NULL; objectNode = objectLayerNode.child("object").next_sibling("polygon")) {

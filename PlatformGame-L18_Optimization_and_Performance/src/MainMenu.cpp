@@ -70,6 +70,7 @@ bool MainMenu::Update(float dt)
 			Engine::GetInstance().map.get()->active = true;
 			Engine::GetInstance().scene.get()->active = true;
 			Engine::GetInstance().entityManager.get()->active = true;
+			Engine::GetInstance().puzzleManager.get()->active = true;
 			Engine::GetInstance().mainMenu.get()->active = false;
 			haveToChange = false;
 		}

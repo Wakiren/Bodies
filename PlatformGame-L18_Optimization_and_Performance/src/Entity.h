@@ -10,7 +10,8 @@ enum class EntityType
 	ENEMY,
 	UNKNOWN,
 	FIGHTER,
-	NPC
+	NPC,
+	PUZZLE,
 };
 
 class PhysBody;

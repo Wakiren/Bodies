@@ -40,12 +40,7 @@ bool Scene::Awake()
 	player = (Player*)Engine::GetInstance().entityManager->CreateEntity(EntityType::PLAYER, "");
 	player->SetParameters(configParameters.child("entities").child("player"));
 	
-	//L08 Create a new item using the entity manager and set the position to (200, 672) to test
-	for(pugi::xml_node itemNode = configParameters.child("entities").child("items").child("item"); itemNode; itemNode = itemNode.next_sibling("item"))
-	{
-		Item* item = (Item*)Engine::GetInstance().entityManager->CreateEntity(EntityType::ITEM, itemNode.name());
-		item->SetParameters(itemNode);
-	}
+	
 	for (pugi::xml_node NPCnode = configParameters.child("entities").child("NPCs").child("NPC"); NPCnode; NPCnode = NPCnode.next_sibling("NPC"))
 	{
 		NPC* npc = (NPC*)Engine::GetInstance().entityManager->CreateEntity(EntityType::NPC, NPCnode.attribute("name").as_string());
@@ -322,4 +317,16 @@ void Scene::StartDialogue(NPC &npc)
 		Engine::GetInstance().dialogueSystem.get()->inDialog = true;
 	}
 	Engine::GetInstance().render.get()->DrawText("Press Space to start dialogue", 10, 10, 50, { 255, 255, 255, 255 });
+}
+
+Item Scene::CreateItem(string name, Vector2D pos)
+{
+	Item* item = (Item*)Engine::GetInstance().entityManager->CreateEntity(EntityType::ITEM, name);
+	item->SetParameters(configParameters.child("entities").child("items").child(name.c_str()));
+	item->Start();
+	item->SetPosition(pos);
+
+	itemList.push_back(item);
+
+	return *item;
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="172" height="152" tilewidth="32" tileheight="32" infinite="0" nextlayerid="22" nextobjectid="798">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="172" height="152" tilewidth="32" tileheight="32" infinite="0" nextlayerid="24" nextobjectid="814">
  <editorsettings>
   <chunksize width="32" height="32"/>
  </editorsettings>
@@ -131007,7 +131007,7 @@
    <property name="DrawTop" type="bool" value="true"/>
   </properties>
  </imagelayer>
- <objectgroup id="5" name="Collisions" visible="0">
+ <objectgroup id="5" name="Collisions">
   <properties>
    <property name="Collisions_" type="bool" value="true"/>
   </properties>
@@ -131383,6 +131383,9 @@
   <object id="492" x="4288" y="1024" width="64" height="32"/>
   <object id="796" x="1792" y="3008" width="64" height="32"/>
   <object id="797" x="1728" y="2944" width="32" height="32"/>
+  <object id="810" x="2550.67" y="1137.67" width="150.667" height="15.3333"/>
+  <object id="811" x="2553" y="1153" width="9.66667" height="16.3333"/>
+  <object id="813" x="2685" y="1152.67" width="12.6667" height="16.3333"/>
  </objectgroup>
  <layer id="18" name="MapDataUnder" width="172" height="152" visible="0">
   <properties>
@@ -209841,5 +209844,15 @@
   <object id="795" x="3552" y="1182">
    <polygon points="0,0 -1,153 20,209 56,289 89,353 144,393 212,427 328,451 402,464 434,500 444,577 453,649 472,718 552,745 644,764 748,773 837,780 892,831 879,877 845,937 782,961 711,994 677,1020 672,1086 696,1182 754,1266 812,1284 918,1290 999,1351 1023,1422 1028,1551 1027,1754 1089,1771 1170,1771 1395,1794 1449,1822 1475,1886 1483,1943 1529,1991 1603,2051 1630,2091 1636,2165 1643,2235 1720,2244 1793,2238 1836,2194 1854,2111 1865,2038 1896,1957 1921,1855 1896,1792 1870,1694 1853,1628 1779,1572 1710,1508 1696,1469 1654,1343 1648,1278 1584,1221 1506,1164 1440,1128 1438,1060 1468,1007 1498,938 1506,902 1546,833 1570,756 1554,690 1520,634 1504,580 1508,515 1573,449 1651,374 1707,307 1724,243 1719,118 1719,-13 1716,-104 1687,-172 1649,-229 1611,-288 1538,-334 1436,-386 1346,-416 1226,-421 1072,-395 1023,-362 944,-327 886,-282 843,-231 731,-256 627,-244 568,-206 508,-160 449,-130 328,-128 281,-143 208,-164 169,-177 123,-177 82,-136 42,-75"/>
   </object>
+ </objectgroup>
+ <objectgroup id="23" name="Puzzle1">
+  <properties>
+   <property name="Interactable" type="bool" value="true"/>
+  </properties>
+  <object id="798" x="1664" y="2976" width="64" height="64"/>
+  <object id="799" x="704" y="2304" width="64" height="64"/>
+  <object id="800" x="608" y="576" width="64" height="64"/>
+  <object id="801" x="2368" y="1344" width="64" height="64"/>
+  <object id="805" x="2560" y="1152" width="128" height="32"/>
  </objectgroup>
 </map>

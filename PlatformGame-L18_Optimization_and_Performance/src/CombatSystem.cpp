@@ -108,7 +108,6 @@ bool CombatSystem::isCombatOver(Player* player, Enemy* enemy)
     }
     if (!enemy->isAlive(enemy)) {
         cout << "Enemy defeated!\n";
-        //Engine::GetInstance().scene.get()->enemyList[0]->Disable();
         Engine::GetInstance().scene.get()->player->isInCombat = false;
         return true;
     }

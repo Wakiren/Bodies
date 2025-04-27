@@ -192,7 +192,7 @@ public:
     std::string mapFileName;
     std::string mapPath;
 
-private:
+public:
     bool mapLoaded;
 	MapData mapData;
 };

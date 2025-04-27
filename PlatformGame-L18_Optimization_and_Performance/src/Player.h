@@ -5,6 +5,7 @@
 #include "Box2D/Box2D.h"
 #include "Animation.h"
 #include "CombatStats.h"
+#include "PuzzleManager.h"
 
 
 struct CombatStats;
@@ -66,6 +67,8 @@ public:
 	Animation* currentAnimation = nullptr;
 	Animation idle;
 	Animation walk;
+
+	Puzzle PlayerPuzzle = Puzzle::TREE_PUZZLE;
 
 private:
 
