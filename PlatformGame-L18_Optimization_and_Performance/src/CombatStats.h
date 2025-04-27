@@ -11,6 +11,7 @@ struct CombatStats {
 	int maxHealth = 0;
 	int attackPoints = 0;
 	int defensePoints = 0;
+
 	bool isGuarding = false;
 	list <int> abilities;
 

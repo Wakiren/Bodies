@@ -16,12 +16,21 @@ void Fighter::Attack(Fighter* attacker, Fighter* target)
     {
         damage = 0;
     }
-    target->TakeDamage(target, damage);
+
+	if (target->combatStats->isGuarding != true) 
+	{
+		target->TakeDamage(target, damage);
+	}
+	else 
+	{
+		cout << "Target was guarding, damage evaded " << endl;
+	}
+ 
 }
 
 void Fighter::Guard(Fighter* fighter)
 {
-    fighter->combatStats->isGuarding = true;
+	fighter->combatStats->isGuarding = true;
 }
 
 bool Fighter::isAlive(Fighter* fighter)

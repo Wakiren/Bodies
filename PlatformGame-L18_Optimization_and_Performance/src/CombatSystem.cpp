@@ -40,6 +40,7 @@ bool CombatSystem::CleanUp()
 
 void CombatSystem::MainLoop()
 {
+
     if (!isCombatOver(player, enemy)) 
     {
         Engine::GetInstance().entityManager.get()->PauseEntities();
@@ -50,6 +51,7 @@ void CombatSystem::MainLoop()
             PlayerTurn();
             if (isCombatOver(player, enemy))
             {
+                //END COMBAT
                 cout << "COMBAT OVER" << endl;
                 Engine::GetInstance().combatui.get()->active = false;
             }
@@ -73,12 +75,6 @@ void CombatSystem::MainLoop()
 
 void CombatSystem::EnemyTurn()
 {
-    /*if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
-    {
-        cout << "ENEMY ATTACKS!" << endl;
-        enemy->Attack(enemy, player);
-        isPlayerTurn = true;
-    }*/
     cout << "ENEMY ATTACKS!" << endl;
     enemy->Attack(enemy, player);
     isPlayerTurn = true;
@@ -86,14 +82,37 @@ void CombatSystem::EnemyTurn()
 
 void CombatSystem::PlayerTurn()
 {
-    if (Engine::GetInstance().combatui.get()->combatInput == CombatUI::CombatInput::ATTACK)
+    switch ((Engine::GetInstance().combatui.get()->combatInput))
     {
+
+    case  CombatUI::CombatInput::ATTACK:
+        player->combatStats->isGuarding = false;
         cout << "PLAYER ATTACKS!" << endl;
         player->Attack(player, enemy);
         isPlayerTurn = false;
-        Engine::GetInstance().combatui.get()->combatInput = CombatUI::CombatInput::EMPTY;
-        cout << "inputValue" << Engine::GetInstance().combatui.get()->combatInput << endl;
+        break;
+
+    case  CombatUI::CombatInput::GUARD:
+        player->combatStats->isGuarding = false;
+        cout << "PLAYER GUARDS!" << endl;
+        player->Guard(player);
+        isPlayerTurn = false;
+
+        break;
+
+    case  CombatUI::CombatInput::SKILL:
+        player->combatStats->isGuarding = false;
+        break;
+
+    case  CombatUI::CombatInput::FLEE:
+        break;
+        
+    default:
+        break;
     }
+    
+
+    Engine::GetInstance().combatui.get()->combatInput = CombatUI::CombatInput::EMPTY;
 }
 
 void CombatSystem::DeletePhysicalEnemy(PhysBody* enemy)
