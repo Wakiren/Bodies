@@ -69,7 +69,8 @@ bool MainMenu::Update(float dt)
 
 	// Active the scene and the entity manager, and deactivate the main menu
 	if (haveToChange && Engine::GetInstance().fadeManager.get()->GetCurrentFadeType() == FadeType::FADE_IN) {
-		if (startButton->state == GuiControlState::PRESSED) {
+		if (haveToStart) {
+			haveToStart = false;
 			Engine::GetInstance().physics.get()->active = true;
 			Engine::GetInstance().map.get()->active = true;
 			Engine::GetInstance().scene.get()->active = true;
@@ -78,7 +79,8 @@ bool MainMenu::Update(float dt)
 			Engine::GetInstance().mainMenu.get()->active = false;
 			haveToChange = false;
 		}
-		else if (exitButton->state == GuiControlState::PRESSED) {
+		else if (haveToExit) {
+			haveToExit = false;
 			ret = false;
 		}
 	}
@@ -87,10 +89,12 @@ bool MainMenu::Update(float dt)
 	if (Engine::GetInstance().input.get()->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_UP) {
 		if (startButton->state == GuiControlState::PRESSED) {
 			haveToChange = true;
+			haveToStart = true;
 			Engine::GetInstance().fadeManager.get()->Fade(3.0f,300);
 		}
 		if (exitButton->state == GuiControlState::PRESSED) {
 			haveToChange = true;
+			haveToExit = true;
 			Engine::GetInstance().fadeManager.get()->Fade(3.0f, 300);
 		}
 	}

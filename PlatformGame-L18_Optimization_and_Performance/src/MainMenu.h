@@ -56,6 +56,8 @@ private:
 	GuiControlButton* exitButton = nullptr;
 
 	bool haveToChange = false;
+	bool haveToStart = false;
+	bool haveToExit = false;
 };
 
 #endif // __MAINMENU_H__
