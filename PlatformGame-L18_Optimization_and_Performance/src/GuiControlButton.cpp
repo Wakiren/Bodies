@@ -97,7 +97,6 @@ bool GuiControlButton::Draw(Render* render)
 	case GuiControlState::PRESSED:
 	{
 		render->DrawRectangle({ bounds.x, bounds.y, bounds.w, bounds.h }, 255, 255, 255, 150, true, false);
-		std::cout << "CLICK" << std::endl;
 
 	} break;
 
