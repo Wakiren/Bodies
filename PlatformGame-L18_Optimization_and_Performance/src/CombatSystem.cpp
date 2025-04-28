@@ -23,6 +23,7 @@ bool CombatSystem::Awake()
 
 bool CombatSystem::Start()
 {
+
 	return true;
 }
 
@@ -64,6 +65,7 @@ void CombatSystem::MainLoop()
                 //END COMBAT
                 cout << "COMBAT OVER" << endl;
                 Engine::GetInstance().combatui.get()->active = false;
+                
             }
         }
     }

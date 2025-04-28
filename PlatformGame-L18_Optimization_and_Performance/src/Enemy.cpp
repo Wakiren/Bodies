@@ -115,16 +115,18 @@ void Enemy::OnCollision(PhysBody* physA, PhysBody* physB) {
 		}
 		else
 		{
-			for (int i = 0; i < Engine::GetInstance().scene.get()->enemyList.size(); i++)
-			{
-				Vector2D AllyPos = Engine::GetInstance().scene.get()->enemyList[i]->GetPosition();
-				if (CheckDistance(AllyPos) < HelpDistance.magnitude())
-				{
-					LOG("Combatant found");
-					Combatants.push_back(Engine::GetInstance().scene.get()->enemyList[i]);
-				}
-			}
-			CombatantsFound = true;
+			//for (int i = 0; i < Engine::GetInstance().scene.get()->enemyList.size(); i++)
+			//{
+			//	Vector2D AllyPos = Engine::GetInstance().scene.get()->enemyList[i]->GetPosition();
+			//	if (CheckDistance(AllyPos) < HelpDistance.magnitude())
+			//	{
+			//		LOG("Combatant found");
+			//		Combatants.push_back(Engine::GetInstance().scene.get()->enemyList[i]);
+			//	}
+			//}
+			//CombatantsFound = true;
+
+			//ERROR bc the "function" finds the enemy you just killed and is therefor null, to fix it remove killed enemies from list
 		}
 
 

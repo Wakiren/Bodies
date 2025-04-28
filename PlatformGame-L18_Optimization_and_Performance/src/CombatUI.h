@@ -39,10 +39,13 @@ private:
 
 	// Buttons
 	SDL_Rect button1Rect = {0,0,224,64};
-	SDL_Rect button2Rect = {0,64,224,52 };
-	SDL_Rect button3Rect = { 0,122,224,52 };
-	SDL_Rect button4Rect = { 0,182,224,52 };
+	SDL_Rect button2Rect = {0,64,224,52};
+	SDL_Rect button3Rect = { 0,122,224,52};
+	SDL_Rect button4Rect = { 0,182,224,52};
 
-	GuiControlButton* button1;
+	GuiControlButton* attackButton = nullptr;
+	GuiControlButton* guardButton = nullptr;
+	GuiControlButton* skillButton = nullptr;
+	GuiControlButton* fleeButton = nullptr;
 
 };

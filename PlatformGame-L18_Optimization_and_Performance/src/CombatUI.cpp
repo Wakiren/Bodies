@@ -26,6 +26,9 @@ bool CombatUI::Start()
 {
 	buttons = Engine::GetInstance().textures.get()->Load("Assets/Textures/CombatButtons.png");
 	background = Engine::GetInstance().textures.get()->Load("Assets/Textures/combatBackground.png");
+
+	attackButton = (GuiControlButton*)Engine::GetInstance().guiManager.get()->CreateGuiControl
+	(GuiControlType::BUTTON, 1, "Attack", {0,0,224,64} , 50, this);
 	
 	return true;
 }
@@ -49,7 +52,7 @@ bool CombatUI::Update(float dt)
 		float mouseY = mousePos.getY();
 
 
-		//Backgroudn
+		//Background
 		SDL_Rect backgroundRect = { 0, 0, 720, 480 };
 		Engine::GetInstance().render.get()->DrawUIimage(background, Engine::GetInstance().render.get()->camera.w / 3.25,
 		Engine::GetInstance().render.get()->camera.h / 2, 1, &backgroundRect);
