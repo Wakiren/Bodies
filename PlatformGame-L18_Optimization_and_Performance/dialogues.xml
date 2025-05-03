@@ -55,11 +55,11 @@
 		</node>
 
 		<node id="6" text="JAJJAJAJJA... *Catches breath... Honey we are already in it... ">
-			<choice id="0" option="*Leave " nextNode="-1" eventReturn="3"/>
+			<choice id="0" option="*Leave " nextNode="-1" eventReturn="3" bloked="true" NextID="1"/>
 		</node>
 
 		<node id="7" text ="It's fearly simple... just go give this present to Sally... She is on the hut next door... its just a simple present... do it for this lonley old man... come one... its harmless... then i'll tell you enything you want...  ">
-			<choice id="0" option="Shure *take the present " nextNode="-1"  eventReturn="1" NextID="1"/>
+			<choice id="0" option="Shure *take the present " nextNode="-1"  eventReturn="1" NextID="1" bloked="true"/>
 		</node>
 	</dialogueTree>
 
@@ -68,16 +68,16 @@
 			<choice id="0" option="Hello? " nextNode="1" eventReturn="1"/>
 		</node>
 
-		<node id="1" text="... Leave me alone, don't you see im working ... ">
+		<node id="1" text="... Give me one second ... ">
 			<choice id="0" option="Henry sent me here... " nextNode="2"  eventReturn="1"/>
 			<choice id="0" option="What are you working on... " nextNode="3"  eventReturn="1"/>
 		</node>
 
-		<node id="2" text="Why would Henry... *looks up... hoooo... you are new, thats why. And what does Henry exacltly want from me? ">
+		<node id="2" text="Why would Henry... *looks up... hoooo... you are new, thats why. And what does Henry want from me? ">
 			<choice id="0" option="He told me to give you this *Give present " nextNode="4"  eventReturn="1"/>
 		</node>
 
-		<node id="3" text="Im trying to conect his two tishues but... looks up... hooo... you are new i see... let me ask you a question. You've apreared here, a place compleatly unknown to you, and you are talking to a deformed figure just like yourselve, full of stitches adn open woonds... now why don't you feel eny pain ">
+		<node id="3" text="Im trying to conect his two tishues but... looks up... hooo... you are new i see... Let me gess, you've apreared here, a place compleatly unknown to you, and you are talking to a deformed figure just like yourselve, full of stitches adn open woonds... you must have a lot of questions, but first ask yourseve this one... why don't you feel eny pain? ">
 			<choice id="0" option="You'r right... i feel nothing " nextNode="5"  eventReturn="1"/>
 		</node>
 
@@ -87,26 +87,26 @@
 		</node>
 
 		<node id="6" text="You can hate him as much as you whant, but he is a valuable person here, without him most of us would be dead ">
-			<choice id="0" option="How? " nextNode="10"  eventReturn="1"/>
+			<choice id="0" option="How? " nextNode="10"  eventReturn="1" />
 		</node>
 		<node id="8" text="Don't worry, as much as I hate him he is a valuable person here, without him most of us would be dead ">
 			<choice id="0" option="How? " nextNode="10"  eventReturn="1"/>
 		</node>
 
-		<node id="10" text="Well you see, he is a trader in nature, so eaven though his morals are compleatly gone, he will give you the main tools to survive here... Now back to work...  ">
+		<node id="10" text="Well you see, he is a trader in nature, so eaven though his morals are compleatly gone, he will give you the main tools to survive here... but I still belive that he will change... some day... Give me just a second with this and I'll help you  ">
 			<choice id="0" option="What exacly are you doing? " nextNode="12"  eventReturn="1"/>
 		</node>
 
-		<node id="12" text="Let me ask you a question. You've apreared here, a place compleatly unknown to you, and you are talking to a deformed figure just like yourselve, full of stitches adn open woonds... now why don't you feel eny pain? ">
+		<node id="12" text="Let me gess, you've apreared here, a place compleatly unknown to you, and you are talking to a deformed figure just like yourselve, full of stitches adn open woonds... you must have a lot of questions, but first ask yourseve this one... why don't you feel eny pain? ">
 			<choice id="0" option="You'r right... i feel nothing... " nextNode="5"  eventReturn="1"/>
 		</node>
 
-		<node id="7" text="That's what im so busy tring to figure out, how is this possible. By the way, you are compleatlky missing an eney, and as funny as it looks, you may whant to get another one... ">
+		<node id="7" text="That's what im so busy tring to figure out, how is this possible. By the way, you are compleatly missing an eye, you may whant to get another one...I can hel you with that ">
 			<choice id="0" option="Get another one? " nextNode="9"  eventReturn="1"/>
 		</node>
 
-		<node id="9" text="Yeah... like... another one... just go a little mre further north and you will find one there, bring it back to me and i will help you... welcom to the woods... ">
-			<choice id="0" option="Thank you? " nextNode="-1"  eventReturn="1"/>
+		<node id="9" text="Yeah... like... another one... Its difficult to explain... just go a little mre further north and you will find one there, bring it back to me and i will help you understand what's going on... ">
+			<choice id="0" option="Thank you? " nextNode="-1"  eventReturn="1" NextID="1" bloked ="true"/>
 			<choice id="1" option="Henry told me something about a present for you? " nextNode="11"  eventReturn="1"/>
 		</node>
 
@@ -116,7 +116,134 @@
 
 	</dialogueTree>
 
+	<dialogueTree ID="1" NPC = "2">
+		<node id="0" text="Well done! It seems like you have found your new eye. Now lay on this operating table and let me explain while I do my work.">
+			<choice id="0" option="Wait, aren't you going to use any anesthetics? " nextNode="1"  eventReturn="1"/>
+			<choice id="1" option="Do you know what you are doing?" nextNode="2"  eventReturn="1"/>
+		</node>
+		<node id="1" text="Don't worry, little one; remember, you don't feel any pain, and I'll be fast, I promise.">
+			<choice id="0" option="I guess you are right..." nextNode="3"  eventReturn="1"/>
+		</node>
+		<node id="1" text="I used to be an excellent surgeon in my past outside this place. I'll do it quick, even though you don't feel any pain.">
+			<choice id="0" option="I guess you are right..." nextNode="3"  eventReturn="1"/>
+		</node>
+		<node id="3" text="Now let me explain. Like you, none of us remember how exactly we got here or why; all we know is that, despite all, we are very lucky.">
+			<choice id="0" option="Lucky?" nextNode="4"  eventReturn="1"/>
+		</node>
+		<node id="4" text="Yes! We've all been artificially experimented on, deformed, and left in an unescapable forest by someone we ourselves call the doctor. We don't know Its identity or why It did this; all we know is that from time to time he likes to bless us with another one of Its experiments.">
+			<choice id="0" option="How is that Lucky still..." nextNode="5"  eventReturn="1"/>
+		</node>
+		<node id="5" text="Well... do you crave human flesh?">
+			<choice id="0" option="YES!" nextNode="6"  eventReturn="1"/>
+			<choice id="1" option="No" nextNode="7"  eventReturn="1"/>
+		</node>
+		<node id="6" text="Really?">
+			<choice id="0" option="No" nextNode="7"  eventReturn="1"/>
+		</node>
+		<node id="7" text="Do you believe you are the prettiest person alive?">
+			<choice id="0" option="No" nextNode="8"  eventReturn="1"/>
+			<choice id="1" option="No, you are" nextNode="9"  eventReturn="1"/>
+		</node>
+		<node id="9" text="Im flattered, but that's not the case.">
+			<choice id="0" option="No" nextNode="8"  eventReturn="1"/>
+		</node>
+		<node id="8" text="Well, some of the experiments become... psychotic... they develop multiple personalities; they become narcissists and cannibals, but you, and me, and some others are lucky to still have our minds.">
+			<choice id="0" option="I see..." nextNode="10"  eventReturn="1"/>
+		</node>
+		<node id="10" text="Yes! Well, mentally and physically, you are all done.">
+			<choice id="0" option="That wasn't so bad" nextNode="11"  eventReturn="1"/>
+		</node>
+		<node id="11" text="Told you so. By the way, I don't know much else about this place either; I've been helping everyone in need since the first day I arrived; I don't even remember when that was... If you need anything else done... please tell me, and be careful."></node>
+			<choice id="0" option="Thank you" nextNode="-1"  eventReturn="1" NextID="2" bloked ="true"/>
+	</dialogueTree>
+
+	<dialogTree>
+		<node id="0" text="Welcome back, baby... I see you see... get it...">
+			<choice id="0" option="Shut up, Henry, and don't call me that" nextNode="1" eventReturn="1"/>
+			<choice id="1" option="I need more information about this place" nextNode="2" eventReturn="1"/>
+			<choice id="2" option="I need something (enter shop)" nextNode="3" eventReturn="1"/>
+		</node>
+
+		<node id="1" text="WOOOOW, sure... sweetie... need anything?">
+			<choice id="0" option="Don't call me that either, I need some info" nextNode="2" eventReturn="1"/>
+			<choice id="1" option="I need something (enter shop)" nextNode="3" eventReturn="1"/>
+		</node>
+
+		<node id="2" text="I can help you with that, what type of info do you need?">
+			<choice id="0" option="Who are you exactly?" nextNode="4" eventReturn="1"/>
+			<choice id="1" option="Who is the Doctor?" nextNode="5" eventReturn="1"/>
+			<choice id="2" option="Is there a way to get out of here?" nextNode="6" eventReturn="1"/>
+		</node>
+
+		<node id="4" text="Invite me to dinner first, honey...">
+			<choice id="0" option="..." nextNode="2" eventReturn="1"/>
+		</node>
+
+		<node id="5" text="Never heard of him">
+			<choice id="0" option="..." nextNode="2" eventReturn="1"/>
+		</node>
+
+		<node id="6" text="Let me be clear, gorgeous... If you want some useful information from me... it won't be that easy... I'll need a favor in return...">
+			<choice id="0" option="What is it?" nextNode="7" eventReturn="1"/>
+		</node>
+
+		<node id="7" text="There are a couple of cannibals right behind this hut... they've been stealing from me for a while... since you are... a police officer... I think you should go reprehend them... sweetie.">
+			<choice id="0" option="Do not call me that... I'll go handle the cannibals, but after that you tell me everything you know" nextNode="8" eventReturn="1"/>
+		</node>
+
+		<node id="8" text="Everything...">
+			<choice id="0" option="..." nextNode="-1"  eventReturn="1" NextID="2" bloked ="true"/>
+		</node>
+
+	</dialogTree>
+
+	<dialogTree>
+		<node id="0" text="Welcome back, baby...">
+			<choice id="0" option="I told you to not call me that... the cannibals are gone" nextNode="1" eventReturn="1"/>
+		</node>
+
+		<node id="1" text="How can I be sure of that">
+			<choice id="0" option="(Show the weird symbol you found)" nextNode="2" eventReturn="1"/>
+		</node>
+
+		<node id="2" text="I see, you managed to get one of those weirdos symbols... What do you want to know...">
+			<choice id="0" option="How can I scape from here" nextNode="3" eventReturn="1"/>
+			<choice id="1" option="Who is the Doctor" nextNode="7" eventReturn="1"/>
+			<choice id="2" option="Who are you" nextNode="8" eventReturn="1"/>
+			<choice id="3" option="Leave" nextNode="-1" eventReturn="1" NextID="3" bloked ="true"/>
+		</node>
+
+		<node id="3" text="Well... there is a really huge fence that covers all the forest that surrounds us... and the Doctor made us disabled enough to not be able to climb it...">
+			<choice id="0" option="So it's impossible to scape..." nextNode="4" eventReturn="1"/>
+		</node>
+
+		<node id="4" text="Not quite... if you manage to find pincers you would be able to cut through the fence... In fact, when just after you left to manage the cannibals, I saw ones tucked to a cadaver...">
+			<choice id="0" option="WHERE?" nextNode="5" eventReturn="1"/>
+		</node>
+
+		<node id="5" text="Well... there is a problem sweetie... It seems the cadaver is gone... most probably the cannibals took it to their sacrificial tree...">
+			<choice id="0" option="What the fuck are you talking about, are you...!" nextNode="6" eventReturn="1"/>
+		</node>
+
+		<node id="6" text="Shhh... don't scream at me... If you want to get the pincers so bad, just follow the path of symbols between cannibal camps...">
+			<choice id="0" option="..." nextNode="2" eventReturn="1"/>
+		</node>
+
+		<node id="7" text="I'm sure that Sally already told you this... what she knows is what I know... It did this to us... and now we are here, that's all...">
+			<choice id="0" option="..." nextNode="2" eventReturn="1"/>
+		</node>
+
+		<node id="8" text="My name, as you know, is Henry... that's all you need to know... but because you seem specially interested in me, I'll tell you one more thing...">
+			<choice id="0" option="What is it" nextNode="9" eventReturn="1"/>
+		</node>
+
+		<node id="9" text="You will never get a good trade from me... but you will NEVER get a better trade here...">
+			<choice id="0" option="You have an ego higher than your prices" nextNode="2" eventReturn="1"/>
+		</node>
+	</dialogTree>
+
 </dialogues>
+
 
 
 <!-- STRUCTURE 
