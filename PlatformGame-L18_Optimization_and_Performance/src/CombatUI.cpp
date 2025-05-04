@@ -92,6 +92,8 @@ bool CombatUI::Update(float dt)
 		skillButton->Draw(Engine::GetInstance().render.get());
 		fleeButton->Draw(Engine::GetInstance().render.get());
 
+		
+		Engine::GetInstance().render.get()->DrawText(text.GetString(), 900, 600, textSize, { 255,255,255 });
 	}
 
 	return true;

@@ -2,7 +2,7 @@
 #include "Module.h"
 #include "GuiControlButton.h"
 #include "SDL2/SDL.h"
-
+#include "SString.h"
 
 class CombatUI : public Module
 {
@@ -47,5 +47,9 @@ private:
 	GuiControlButton* guardButton = nullptr;
 	GuiControlButton* skillButton = nullptr;
 	GuiControlButton* fleeButton = nullptr;
+
+public:
+	SString text = "notext";
+	int textSize = 50;
 
 };

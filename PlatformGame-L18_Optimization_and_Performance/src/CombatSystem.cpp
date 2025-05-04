@@ -78,6 +78,7 @@ void CombatSystem::MainLoop()
 void CombatSystem::EnemyTurn()
 {
     cout << "ENEMY ATTACKS!" << endl;
+    Engine::GetInstance().combatui.get()->text = "ENEMY ATTACKS!";
     enemy->Attack(enemy, player);
     isPlayerTurn = true;
 }
@@ -90,6 +91,7 @@ void CombatSystem::PlayerTurn()
     case  CombatUI::CombatInput::ATTACK:
         player->combatStats->isGuarding = false;
         cout << "PLAYER ATTACKS!" << endl;
+        Engine::GetInstance().combatui.get()->text = "PLAYER ATTACKS!";
         player->Attack(player, enemy);
         isPlayerTurn = false;
         break;
@@ -97,6 +99,7 @@ void CombatSystem::PlayerTurn()
     case  CombatUI::CombatInput::GUARD:
         player->combatStats->isGuarding = false;
         cout << "PLAYER GUARDS!" << endl;
+        Engine::GetInstance().combatui.get()->text = "PLAYER GUARDS!";
         player->Guard(player);
         isPlayerTurn = false;
 
@@ -129,11 +132,13 @@ bool CombatSystem::isCombatOver(Player* player, Enemy* enemy)
         return true;
     }
     if (!player->isAlive(player)) {
+        Engine::GetInstance().combatui.get()->text = "PLAYER DEFEATED";
         cout << "Player defeated!\n";
         Engine::GetInstance().scene.get()->player->isInCombat = false;
         return true;
     }
     if (!enemy->isAlive(enemy)) {
+        Engine::GetInstance().combatui.get()->text = "ENEMY DEFEATED";
         cout << "Enemy defeated!\n";
 
         if (Engine::GetInstance().scene.get()->player->EnemyInCombat != nullptr) 

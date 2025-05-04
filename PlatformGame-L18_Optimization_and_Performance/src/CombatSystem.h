@@ -34,4 +34,6 @@ public:
 
 	int round;
 	bool isPlayerTurn = true;
+
+	bool playerAttacks, EnemyAttacks;
 };

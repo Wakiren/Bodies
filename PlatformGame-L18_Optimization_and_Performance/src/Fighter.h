@@ -1,6 +1,7 @@
 #pragma once
 #include "Entity.h"
 #include "CombatStats.h"
+#include "Engine.h"
 #include <iostream>
 
 class Fighter: public Entity
