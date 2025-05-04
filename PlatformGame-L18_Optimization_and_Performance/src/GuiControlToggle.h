@@ -12,18 +12,21 @@ public:
 
 	// Called each loop iteration
 	bool Update(float dt);
-	void Toggle(float dt);
+	SDL_Color Toggle(float dt);
+	bool Draw(Render* render);
+	bool IsToggled() const { return isToggled; }
 
 private:
 	
 	bool canClick = true;
 	bool drawBasic = false;
 
-	bool inToggle = false;   
+	bool inToggle = true;   
+	bool once = true;
 
-	SDL_Color fromColor;   
-	SDL_Color toColor;     
-	
+	SDL_Color fromColor = { 200, 200, 200, 255 };
+	SDL_Color toColor = { 10, 110, 0, 255 };
+	bool isToggled = true;
 	float toggleTime;    
 	float currentTime;       
 };

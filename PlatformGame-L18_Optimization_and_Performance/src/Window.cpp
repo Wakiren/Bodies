@@ -93,3 +93,8 @@ int Window::GetScale() const
 {
 	return scale;
 }
+
+SDL_Window* Window::GetWindow() const
+{
+	return window;
+}

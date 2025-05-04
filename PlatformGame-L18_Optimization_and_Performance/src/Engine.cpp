@@ -17,6 +17,7 @@
 #include "DialogueSystem.h"
 #include "CombatSystem.h"
 #include "MainMenu.h"
+#include "SettingsMenu.h"
 #include "PauseMenu.h"
 #include "FadeManager.h"
 #include "PuzzleManager.h"
@@ -59,6 +60,7 @@ Engine::Engine() {
 	mainMenu = std::make_shared<MainMenu>();
     combatSystem = std::make_shared<CombatSystem>();
     pauseMenu = std::make_shared<PauseMenu>();
+	settingsMenu = std::make_shared<SettingsMenu>();
 	fadeManager = std::make_shared<FadeManager>();
 
     combatui = std::make_shared<CombatUI>();
@@ -75,6 +77,8 @@ Engine::Engine() {
     AddModule(std::static_pointer_cast<Module>(fadeManager));
 	AddModule(std::static_pointer_cast<Module>(introScene));
 	AddModule(std::static_pointer_cast<Module>(mainMenu));
+	AddModule(std::static_pointer_cast<Module>(settingsMenu));
+;
 	AddModule(std::static_pointer_cast<Module>(pauseMenu));
     AddModule(std::static_pointer_cast<Module>(physics));
     AddModule(std::static_pointer_cast<Module>(map));
@@ -90,6 +94,7 @@ Engine::Engine() {
 
 
 	mainMenu->active = false;
+	settingsMenu->active = false;
     pauseMenu->active = false;
     scene->active = false;
     entityManager->active = false;

@@ -7,6 +7,7 @@
 #include "GuiControlToggle.h"
 #include "Audio.h"
 #include "MainMenu.h"
+#include "SettingsMenu.h"
 #include "PauseMenu.h"
 #include "IntroScene.h"
 
@@ -41,7 +42,7 @@ GuiControl* GuiManager::CreateGuiControl(GuiControlType type, int id, const char
 		guiControl = (GuiControl*) new GuiControlButton(id, bounds, text, fontSize);
 		break;
 	case GuiControlType::SLIDER:
-		guiControl = (GuiControl*) new GuiControlSlider(id, bounds, text, fontSize);
+		/*guiControl = (GuiControl*) new GuiControlSlider(id, bounds, text, fontSize);*/
 		break;
 	case GuiControlType::TOGGLE:
 		guiControl = (GuiControl*) new GuiControlToggle(id, bounds, text, fontSize);
@@ -84,7 +85,7 @@ GuiControl* GuiManager::CreateGuiControl1(GuiControlType type, int id, const cha
 bool GuiManager::Update(float dt)
 {	
 	if (Engine::GetInstance().mainMenu->active == false && Engine::GetInstance().pauseMenu->active == false
-		&& Engine::GetInstance().introScene->active == false)
+		&& Engine::GetInstance().introScene->active == false && Engine::GetInstance().settingsMenu.get()->active == false)
 	{
 		if (once)
 		{

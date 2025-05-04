@@ -4,6 +4,7 @@
 #include "Render.h"
 #include "Window.h"
 #include "MainMenu.h"
+#include "SettingsMenu.h"
 #include "Entitymanager.h"
 #include "Scene.h"
 #include "Physics.h"
@@ -43,7 +44,8 @@ bool MainMenu::Start()
 	buttons = Engine::GetInstance().textures.get()->Load("Assets/Textures/Buttons.png");
 
 	startButton = (GuiControlButton*)Engine::GetInstance().guiManager.get()->CreateGuiControl(GuiControlType::BUTTON, 1,"Start", { 200, 150, 106, 38 }, 50, this);
-	exitButton = (GuiControlButton*)Engine::GetInstance().guiManager.get()->CreateGuiControl(GuiControlType::BUTTON, 2, "Exit", { 200, 200, 106, 38 }, 50, this);
+	optionsButton = (GuiControlButton*)Engine::GetInstance().guiManager.get()->CreateGuiControl(GuiControlType::BUTTON, 2, "Options", { 200, 300, 106, 38 }, 50, this);
+	exitButton = (GuiControlButton*)Engine::GetInstance().guiManager.get()->CreateGuiControl(GuiControlType::BUTTON, 3, "Exit", { 200, 200, 106, 38 }, 50, this);
 
 	return true;
 }
@@ -79,8 +81,15 @@ bool MainMenu::Update(float dt)
 			Engine::GetInstance().mainMenu.get()->active = false;
 			haveToChange = false;
 		}
+		else if (haveToOptions) {
+			haveToOptions = false;
+			Engine::GetInstance().settingsMenu.get()->active = true;
+			Engine::GetInstance().mainMenu.get()->active = false;
+			haveToChange = false;
+		}
 		else if (haveToExit) {
 			haveToExit = false;
+			haveToChange = false;
 			ret = false;
 		}
 	}
@@ -91,6 +100,11 @@ bool MainMenu::Update(float dt)
 			haveToChange = true;
 			haveToStart = true;
 			Engine::GetInstance().fadeManager.get()->Fade(3.0f,300);
+		}
+		if (optionsButton->state == GuiControlState::PRESSED) {
+			haveToChange = true;
+			haveToOptions = true;
+			Engine::GetInstance().fadeManager.get()->Fade(3.0f, 300);
 		}
 		if (exitButton->state == GuiControlState::PRESSED) {
 			haveToChange = true;
@@ -106,6 +120,7 @@ bool MainMenu::Update(float dt)
 	// Draw the buttons
 	startButton->Draw(Engine::GetInstance().render.get());
 	exitButton->Draw(Engine::GetInstance().render.get());
+	optionsButton->Draw(Engine::GetInstance().render.get());
 
 	int x, y;
 	

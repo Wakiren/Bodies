@@ -10,6 +10,10 @@ GuiControlButton::GuiControlButton(int id, SDL_Rect bounds, const char* text, in
 	this->text = text;
 	this->fontSize = fontSize;
 
+	// The bounds depends on the font size
+	this->bounds.w = fontSize * 0.5 * strlen(text);
+	this->bounds.h = fontSize + 10;
+
 	canClick = true;
 	drawBasic = false;
 }

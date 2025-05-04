@@ -92,6 +92,7 @@ public:
 
 	SDL_Texture* texture;   // Texture atlas reference
 	SDL_Rect section;       // Texture atlas base section
+	SDL_Rect sectionFocused; // Texture atlas base section for focused state
 
 	int fontSize = FONT_SIZE;           // Font size (if required)
 

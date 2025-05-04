@@ -53,10 +53,12 @@ private:
 	SDL_Rect Button2 = { 0,111,106,38 };
 
 	GuiControlButton* startButton = nullptr;
+	GuiControlButton* optionsButton = nullptr;
 	GuiControlButton* exitButton = nullptr;
 
 	bool haveToChange = false;
 	bool haveToStart = false;
+	bool haveToOptions = false;
 	bool haveToExit = false;
 };
 
