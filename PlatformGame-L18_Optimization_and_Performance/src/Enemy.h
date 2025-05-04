@@ -44,6 +44,8 @@ public:
 
 	float CheckDistance(Vector2D pos);
 
+	void SetItemsInEnemy();
+
 	std::vector<Enemy*> GetNumOfCombatants()
 	{
 		return Combatants;
@@ -88,4 +90,6 @@ public:
 	std::vector<Enemy*> Combatants;
 	bool CombatantsFound = false;
 	bool isInCombat = false;
+
+	std::vector<string> ItemsInEnemy;
 };

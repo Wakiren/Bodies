@@ -6,7 +6,8 @@
 #include "Animation.h"
 #include "CombatStats.h"
 #include "PuzzleManager.h"
-
+#include <vector>
+#include <string>
 
 struct CombatStats;
 struct SDL_Texture;
@@ -42,8 +43,6 @@ public:
 
 	Vector2D GetPosition();
 
-	void ResetPath();
-
 	void OnPause() override;
 
 public:
@@ -71,6 +70,7 @@ public:
 	Puzzle PlayerPuzzle = Puzzle::TREE_PUZZLE;
 	PhysBody* EnemyInCombat = nullptr;
 
+	std::vector<string> ItemsInInventory;
 
 private:
 

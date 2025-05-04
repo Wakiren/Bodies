@@ -81,7 +81,7 @@
 			<choice id="0" option="You'r right... i feel nothing " nextNode="5"  eventReturn="1"/>
 		</node>
 
-		<node id="4" text="Haaaug... ok I think I already know where this is going *opens the present* yeah just what i expected, another small piece of his scrotoum... *Henry laughs histariusly from a far and caughfs* ... YOU WILL END UP WITH NO SKIN AROUND YOUR BALLS IF YOU CONTINUE LIKE THIS HENRY *Sally yells* ">
+		<node id="4" text="Haaaug... ok I think I already know where this is going *opens the present* yeah just what i expected, another small piece of his scrotoum... *Henry laughs histariusly from a far and caughfs* ... YOU WILL END UP WITH NO SKIN AROUND YOUR BALLS IF YOU CONTINUE LIKE THIS HENRY *Sally yells*">
 			<choice id="0" option="What a piece of shit " nextNode="6"  eventReturn="1"/>
 			<choice id="1" option="Im so sorry " nextNode="8"  eventReturn="1"/>
 		</node>
@@ -153,9 +153,11 @@
 		<node id="10" text="Yes! Well, mentally and physically, you are all done.">
 			<choice id="0" option="That wasn't so bad" nextNode="11"  eventReturn="1"/>
 		</node>
-		<node id="11" text="Told you so. By the way, I don't know much else about this place either; I've been helping everyone in need since the first day I arrived; I don't even remember when that was... If you need anything else done... please tell me, and be careful."></node>
+		<node id="11" text="Told you so. By the way, I don't know much else about this place either; I've been helping everyone in need since the first day I arrived; I don't even remember when that was... If you need anything else done... please tell me, and be careful.">
 			<choice id="0" option="Thank you" nextNode="-1"  eventReturn="1" NextID="2" bloked ="true"/>
+		</node>
 	</dialogueTree>
+
 
 	<dialogTree>
 		<node id="0" text="Welcome back, baby... I see you see... get it...">

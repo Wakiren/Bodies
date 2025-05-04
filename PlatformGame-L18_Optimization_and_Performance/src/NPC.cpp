@@ -62,6 +62,8 @@ bool NPC::Update(float dt)
 		Engine::GetInstance().scene.get()->StartDialogue(*this);
 	}
 
+	CheckForProgress();
+
 	return true;
 }
 
@@ -91,4 +93,26 @@ float NPC::CheckDistance(Vector2D pos)
 	distance.setX(abs(target.getX() - abs(GetPosition().getX())));
 	distance.setY(abs(target.getY() - abs(GetPosition().getY())));
 	return distance.magnitude();
+}
+
+void NPC::CheckForProgress()
+{
+	for (int i = 0; i < Engine::GetInstance().scene.get()->player->ItemsInInventory.size(); i++)
+	{
+		if (Engine::GetInstance().scene.get()->player->ItemsInInventory[i] == "Eye" && NextID == 1)
+		{
+			bloked = false;
+		}
+		if (Engine::GetInstance().scene.get()->player->ItemsInInventory[i] == "Alpha" && NextID == 2)
+		{
+			bloked = false;
+		}
+		if (Engine::GetInstance().scene.get()->player->ItemsInInventory[i] == "Beta" && 
+			Engine::GetInstance().scene.get()->player->ItemsInInventory[i] == "Omega"&&
+			Engine::GetInstance().scene.get()->player->ItemsInInventory[i] == "Sigma"
+			&& NextID == 3)
+		{
+			bloked = false;
+		}
+	}
 }

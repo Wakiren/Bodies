@@ -140,9 +140,9 @@ bool CombatSystem::isCombatOver(Player* player, Enemy* enemy)
         {
             if (Engine::GetInstance().scene.get()->player->EnemyInCombat->body != nullptr)
             {
+				SpawnItems();
                 DeletePhysicalEnemy(Engine::GetInstance().scene.get()->player->EnemyInCombat);
                 Engine::GetInstance().scene.get()->player->EnemyInCombat = nullptr;
-
             }
         }
 
@@ -152,4 +152,13 @@ bool CombatSystem::isCombatOver(Player* player, Enemy* enemy)
 
     return false;
 
+}
+
+void CombatSystem::SpawnItems()
+{
+	// Spawn items after combat
+	for (int i = 0; i < actualEnemy->ItemsInEnemy.size(); i++)
+	{
+		Engine::GetInstance().scene.get()->CreateItem(actualEnemy->ItemsInEnemy[i], actualEnemy->position).SpawnFromEnemy();
+	}
 }

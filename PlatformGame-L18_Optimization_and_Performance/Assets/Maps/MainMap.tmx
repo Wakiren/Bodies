@@ -62954,8 +62954,8 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="328"/>
+   <tile gid="329"/>
    <tile/>
    <tile/>
    <tile/>
@@ -63126,8 +63126,8 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="393"/>
+   <tile gid="394"/>
    <tile/>
    <tile/>
    <tile/>
@@ -89278,8 +89278,8 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="330"/>
+   <tile gid="331"/>
    <tile/>
    <tile/>
    <tile/>
@@ -89450,8 +89450,8 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="395"/>
+   <tile gid="396"/>
    <tile/>
    <tile/>
    <tile/>
@@ -115256,7 +115256,9 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="265"/>
    <tile/>
+   <tile gid="397"/>
    <tile/>
    <tile/>
    <tile/>
@@ -115427,9 +115429,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="263"/>
    <tile/>
    <tile/>
    <tile/>
@@ -115600,9 +115600,9 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="391"/>
    <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="267"/>
    <tile/>
    <tile/>
    <tile/>
@@ -157538,7 +157538,7 @@
    <tile/>
   </data>
  </layer>
- <layer id="19" name="Navigation" width="172" height="152" visible="0">
+ <layer id="19" name="Navigation" width="172" height="152">
   <properties>
    <property name="Navigation" type="bool" value="true"/>
   </properties>
@@ -163642,12 +163642,12 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="1951"/>
+   <tile gid="1951"/>
+   <tile gid="1951"/>
+   <tile gid="1951"/>
+   <tile gid="1951"/>
+   <tile gid="1951"/>
    <tile/>
    <tile/>
    <tile gid="1951"/>
@@ -163814,12 +163814,12 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="1951"/>
+   <tile gid="1951"/>
+   <tile gid="1951"/>
+   <tile gid="1951"/>
+   <tile gid="1951"/>
+   <tile gid="1951"/>
    <tile/>
    <tile/>
    <tile/>
@@ -194268,7 +194268,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
+   <tile gid="1951"/>
    <tile/>
    <tile/>
    <tile/>

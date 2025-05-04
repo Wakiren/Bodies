@@ -35,6 +35,7 @@ bool Item::Start() {
 	currentAnimation = &idle;
 
 	//Load atributes
+	name = parameters.attribute("name").as_string();
 	type = parameters.attribute("type").as_string();
 	amount = parameters.attribute("amount").as_int();
 	
@@ -96,11 +97,9 @@ void Item::Stabilize()
 	{
 		b2Vec2 Vel = pbody->body->GetLinearVelocity();
 		pbody->body->ApplyForceToCenter(b2Vec2(-Vel.x/5, -Vel.y/5), true);
-		pbody->listener = nullptr;
 	}
 	else
 	{
 		pbody->body->SetLinearVelocity(b2Vec2_zero);
-		pbody->listener = this;
 	}
 }

@@ -41,6 +41,8 @@ public:
 
 	float CheckDistance(Vector2D pos);
 
+	void CheckForProgress();
+
 
 public:
 
@@ -57,7 +59,7 @@ public:
 	//For dialogue
 	NPCType type;
 	unsigned int NextID = 0;
-	bool Interactable = true;
+	bool bloked = false;
 	string ObjectToGive;
 
 };

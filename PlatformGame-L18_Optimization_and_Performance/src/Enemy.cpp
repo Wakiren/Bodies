@@ -62,6 +62,9 @@ bool Enemy::Start() {
 	Engine::GetInstance().render.get()->DrawTexture(texture, (int)position.getX(), (int)position.getY(), &currentAnimation->GetCurrentFrame());
 	ResetPath();
 
+	//Put the items on the enemy
+	SetItemsInEnemy();
+
 	return true;
 }
 
@@ -156,4 +159,26 @@ float Enemy::CheckDistance(Vector2D pos)
 	distance.setX(abs(target.getX() - abs(GetPosition().getX())));
 	distance.setY(abs(target.getY() - abs(GetPosition().getY())));
 	return distance.magnitude();
+}
+
+void Enemy::SetItemsInEnemy()
+{
+	int NumOfItems = Engine::GetInstance().scene.get()->RandomValue(1, 4);
+	int num = Engine::GetInstance().scene.get()->RandomValue(0, 10);
+
+	for (int i = 0; i < NumOfItems; i++)
+	{
+		if (num <= 5)
+		{
+			ItemsInEnemy.push_back("MixedMeat");
+		}
+		else if (num <= 8 && num > 5)
+		{
+			ItemsInEnemy.push_back("AnimalSkin");
+		}
+		else
+		{
+			ItemsInEnemy.push_back("HumanFlesh");
+		}
+	}	
 }

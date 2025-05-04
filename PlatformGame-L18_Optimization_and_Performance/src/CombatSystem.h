@@ -21,12 +21,16 @@ public:
 	void PlayerTurn();
 	void DeletePhysicalEnemy(PhysBody* enemy);
 
+	//Items After Combat
+	void SpawnItems();
+
 	bool isCombatOver(Player* player, Enemy* enemy);
 
 public:
 
 	Player* player = nullptr;
 	Enemy* enemy = nullptr;
+	Enemy* actualEnemy = nullptr;
 
 	int round;
 	bool isPlayerTurn = true;

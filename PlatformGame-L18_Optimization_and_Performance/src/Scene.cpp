@@ -86,7 +86,16 @@ bool Scene::Start()
 					
 					Vector2D enemyPos = Engine::GetInstance().map->MapToWorld(i, j);
 
-					if (RandomValue(1, enemyNode.attribute("SpawnRate").as_int()) == 1)
+					if (i == 82 && j == 61) //Tutorial Cannibal Has to appear
+					{
+						Cannibal* enemy = (Cannibal*)Engine::GetInstance().entityManager->CreateEntity(EntityType::ENEMY, enemyNode.name());
+						enemy->SetParameters(enemyNode);
+						enemy->OGPosition = enemyPos;
+						enemy->ItemsInEnemy.push_back("Eye");
+						enemyList.push_back(enemy);
+
+					}
+					else if(RandomValue(1, enemyNode.attribute("SpawnRate").as_int()) == 1) //Other Spawns
 					{
 						Cannibal* enemy = (Cannibal*)Engine::GetInstance().entityManager->CreateEntity(EntityType::ENEMY, enemyNode.name());
 						enemy->SetParameters(enemyNode);
@@ -94,7 +103,6 @@ bool Scene::Start()
 						enemyList.push_back(enemy);
 					}
 				}
-
 				//NARCISSISTS
 				if (Engine::GetInstance().map.get()->GetDataLayer()->Get(i, j) == 1952)
 				{
@@ -184,6 +192,7 @@ bool Scene::Update(float dt)
 		tilePosDebug = "[" + std::to_string((int)mouseTile.getX()) + "," + std::to_string((int)mouseTile.getY()) + "] ";
 		once = true;
 	}
+
 	return true;
 }
 
@@ -311,12 +320,15 @@ int Scene::RandomValue(int min, int max)
 
 void Scene::StartDialogue(NPC &npc)
 {
-	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && Engine::GetInstance().dialogueSystem->inDialog == false && npc.Interactable == true)
+	if (Engine::GetInstance().dialogueSystem->inDialog == false && npc.bloked == false)
 	{
-		Engine::GetInstance().dialogueSystem.get()->LoadDialogue("dialogues.xml", npc);
-		Engine::GetInstance().dialogueSystem.get()->inDialog = true;
+		Engine::GetInstance().render.get()->DrawText("Press E to interact", Engine::GetInstance().window.get()->width / 2, (Engine::GetInstance().window.get()->height / 2) - 32, 25, { 255,255,255 });
+		if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
+		{
+			Engine::GetInstance().dialogueSystem.get()->LoadDialogue("dialogues.xml", npc);
+			Engine::GetInstance().dialogueSystem.get()->inDialog = true;
+		}
 	}
-	Engine::GetInstance().render.get()->DrawText("Press Space to start dialogue", 10, 10, 50, { 255, 255, 255, 255 });
 }
 
 Item Scene::CreateItem(string name, Vector2D pos)

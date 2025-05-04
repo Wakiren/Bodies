@@ -67,7 +67,7 @@ bool DialogueSystem::OnGuiMouseClickEvent(GuiControl* control)
 	{
 		activeTree->npc->NextID = activeTree->activeNode->choicesList[control->id]->path;
 		activeTree->npc->ObjectToGive = activeTree->activeNode->choicesList[control->id]->object;
-		activeTree->npc->Interactable = activeTree->activeNode->choicesList[control->id]->bloked;
+		activeTree->npc->bloked = activeTree->activeNode->choicesList[control->id]->bloked;
 		
 		activeTree->activeNode = activeTree->nodeList.at(activeTree->nodeList.size() - 1);
 		inDialog = false;

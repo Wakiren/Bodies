@@ -129,13 +129,33 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::ITEM:
 		Engine::GetInstance().audio.get()->PlayFx(pickCoinFxId);
+
+		//Set the Item to the player
+		for (int i = 0; i < Engine::GetInstance().scene.get()->itemList.size(); i++)
+		{
+			if (Engine::GetInstance().scene.get()->itemList[i]->pbody == physB)
+			{
+				ItemsInInventory.push_back(Engine::GetInstance().scene.get()->itemList[i]->name);
+			}
+		}
+
+		//Delete the Item from the scene
 		Engine::GetInstance().physics.get()->DeletePhysBody(physB); // Deletes the body of the item from the physics world
+
 		break;
 	case ColliderType::UNKNOWN:
 		break;
 	case ColliderType::ENEMY:
 	
 		EnemyInCombat = physB;
+
+		for (int i = 0; i < Engine::GetInstance().scene.get()->enemyList.size(); i++)
+		{
+			if (Engine::GetInstance().scene.get()->enemyList[i]->pbody == physB)
+			{
+				Engine::GetInstance().combatSystem.get()->actualEnemy = Engine::GetInstance().scene.get()->enemyList[i];
+			}
+		}
 
 		Fighter* player = new Fighter(pbody->listener->type);
 		player->combatStats = combatStats;
@@ -146,6 +166,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		enemy->combatStats->attackPoints = 10;
 		enemy->combatStats->defensePoints = 0;
 		enemy->combatStats->maxHealth = 100;
+
 
 		Engine::GetInstance().combatSystem.get()->player = (Player*)player;
 		Engine::GetInstance().combatSystem.get()->enemy = (Enemy*)enemy;
