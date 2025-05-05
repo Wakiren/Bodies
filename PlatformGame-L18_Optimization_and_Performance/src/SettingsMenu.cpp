@@ -29,6 +29,7 @@ bool SettingsMenu::Start()
 	backButton = (GuiControlButton*)Engine::GetInstance().guiManager.get()->CreateGuiControl(GuiControlType::BUTTON, 4, "Back", { 200, 150, 106, 38 }, 50, this);
 	fullscreenButton = (GuiControlToggle*)Engine::GetInstance().guiManager.get()->CreateGuiControl(GuiControlType::TOGGLE, 5, "Fullscreen", { (int)Engine::GetInstance().window.get()->width / 2 - 100 / 2, (int)(Engine::GetInstance().window.get()->height / 3 * 2.5), 100, 20}, 50, this);
 	fullscreenButton->state = GuiControlState::DISABLED;
+	volumeSlider = (GuiControlSlider*)Engine::GetInstance().guiManager.get()->CreateGuiControl(GuiControlType::SLIDER, 6, "Volume", { (int)Engine::GetInstance().window.get()->width / 2 - 100 / 2, (int)(Engine::GetInstance().window.get()->height / 3 * 2.5) - 300, 400, 50 }, 50, this, { (int)Engine::GetInstance().window.get()->width / 2 - 100 / 2, (int)(Engine::GetInstance().window.get()->height / 3 * 2.5) + 50, 100, 20 }, 0, 220, 110);
 
 	return true;
 }
@@ -106,6 +107,7 @@ bool SettingsMenu::Update(float dt)
 
 	backButton->Draw(Engine::GetInstance().render.get());
 	fullscreenButton->Draw(Engine::GetInstance().render.get());
+	volumeSlider->Draw(Engine::GetInstance().render.get());
 
 	return ret;
 }

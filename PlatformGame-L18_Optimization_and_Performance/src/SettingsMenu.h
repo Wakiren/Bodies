@@ -3,6 +3,7 @@
 #include "SDL2/SDL.h"
 #include "GuiControlButton.h"
 #include "GuiControlToggle.h"
+#include "GuiControlSlider.h"
 #include "GuiControl.h"
 #include "GuiManager.h"
 
@@ -33,6 +34,7 @@ private:
 	// Buttons
 	GuiControlButton* backButton = nullptr;
 	GuiControlToggle* fullscreenButton = nullptr;
+	GuiControlSlider* volumeSlider = nullptr;
 
 	SDL_Texture* background;
 
