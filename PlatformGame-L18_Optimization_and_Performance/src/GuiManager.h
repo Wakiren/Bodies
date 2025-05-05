@@ -7,6 +7,18 @@
 #include "List.h"
 #include "SString.h"
 
+enum UIState
+{
+	INTRO,
+	TITLE,
+	GAME,
+	COMBAT,
+	PAUSE,
+	CREDIT,
+	GAMEOVER,
+	INVENTORY
+};
+
 class GuiManager : public Module
 {
 public:
@@ -24,6 +36,7 @@ public:
 	 bool Update(float dt);
 
 	bool Draw();
+	void DrawFilter();
 
 	// Called before quitting
 	bool CleanUp();
@@ -46,20 +59,9 @@ public:
 	SDL_Texture* Trees = nullptr;
 
 
-	enum UIState
-	{
-		INTRO,
-		TITLE,
-		GAME,
-		COMBAT,
-		PAUSE,
-		CREDIT,
-		GAMEOVER
-	};
-
 	bool once = true;
 
-	UIState state = INTRO;
+	UIState state = UIState::INTRO;
 
 };
 

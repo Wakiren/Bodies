@@ -12,6 +12,7 @@
 #include "CombatSystem.h"
 #include <cmath>
 #include <iostream>
+#include "GuiManager.h"
 using namespace std;
 
 
@@ -65,6 +66,9 @@ bool Player::Start() {
 	combatStats->maxHealth = parameters.child("combat").attribute("maxHealth").as_int();
 	combatStats->defensePoints = parameters.child("combat").attribute("defensePoints").as_int();
 
+	// Initialize Inventory
+	inventory = new Inventory();
+
 	return true;
 }
 
@@ -88,7 +92,7 @@ bool Player::Update(float dt)
 	currentAnimation->Update();
 
 
-	if (Engine::GetInstance().dialogueSystem.get()->inDialog == false)
+	if (Engine::GetInstance().dialogueSystem.get()->inDialog == false && openInventory == false)
 	{
 		MoveToMousePos();
 	}
@@ -96,6 +100,21 @@ bool Player::Update(float dt)
 	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 	{
 		Engine::GetInstance().physics.get()->CreateRectangleSensor((int)position.getX() - 100, (int)position.getY() - 100, 32, 32, bodyType::STATIC);
+	}
+	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_I) == KEY_DOWN)
+	{
+		if (openInventory == false)
+		{
+			openInventory = true;
+		}
+		else
+		{
+			openInventory = false;
+		}
+	}
+	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_O) == KEY_DOWN)
+	{
+		inventory->OrganizeInventory();
 	}
 
 	return true;
@@ -133,9 +152,9 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		//Set the Item to the player
 		for (int i = 0; i < Engine::GetInstance().scene.get()->itemList.size(); i++)
 		{
-			if (Engine::GetInstance().scene.get()->itemList[i]->pbody == physB)
+			if (Engine::GetInstance().scene.get()->itemList[i]->pbody == physB && inventory->isFull == false)
 			{
-				ItemsInInventory.push_back(Engine::GetInstance().scene.get()->itemList[i]->name);
+				inventory->AddItem(Engine::GetInstance().scene.get()->itemList[i]);
 			}
 		}
 

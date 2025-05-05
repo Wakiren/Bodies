@@ -10,6 +10,7 @@
 #include "Map.h"
 #include "EntityManager.h"
 #include "tracy/Tracy.hpp"
+#include "Inventory.h"
 
 using namespace std;
 
@@ -97,19 +98,25 @@ float NPC::CheckDistance(Vector2D pos)
 
 void NPC::CheckForProgress()
 {
-	for (int i = 0; i < Engine::GetInstance().scene.get()->player->ItemsInInventory.size(); i++)
+	if (Engine::GetInstance().scene.get()->player->inventory == nullptr)
 	{
-		if (Engine::GetInstance().scene.get()->player->ItemsInInventory[i] == "Eye" && NextID == 1)
+		return;
+	}
+
+
+	for (int i = 0; i < Engine::GetInstance().scene.get()->player->inventory->items.size(); i++)
+	{
+		if (Engine::GetInstance().scene.get()->player->inventory->items[i]->name == "Eye" && NextID == 1)
 		{
 			bloked = false;
 		}
-		if (Engine::GetInstance().scene.get()->player->ItemsInInventory[i] == "Alpha" && NextID == 2)
+		if (Engine::GetInstance().scene.get()->player->inventory->items[i]->name == "Alpha" && NextID == 2)
 		{
 			bloked = false;
 		}
-		if (Engine::GetInstance().scene.get()->player->ItemsInInventory[i] == "Beta" && 
-			Engine::GetInstance().scene.get()->player->ItemsInInventory[i] == "Omega"&&
-			Engine::GetInstance().scene.get()->player->ItemsInInventory[i] == "Sigma"
+		if (Engine::GetInstance().scene.get()->player->inventory->items[i]->name == "Beta" &&
+			Engine::GetInstance().scene.get()->player->inventory->items[i]->name == "Omega"&&
+			Engine::GetInstance().scene.get()->player->inventory->items[i]->name == "Sigma"
 			&& NextID == 3)
 		{
 			bloked = false;

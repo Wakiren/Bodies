@@ -164,6 +164,7 @@
     <ClCompile Include="src\GuiManager.cpp" />
     <ClCompile Include="src\Input.cpp" />
     <ClCompile Include="src\IntroScene.cpp" />
+    <ClCompile Include="src\Inventory.cpp" />
     <ClCompile Include="src\Item.cpp" />
     <ClCompile Include="src\Log.cpp" />
     <ClCompile Include="src\MainMenu.cpp">
@@ -191,6 +192,7 @@
   <ItemGroup>
     <ClInclude Include="src\GuiControlSlider.h" />
     <ClInclude Include="src\GuiControlToggle.h" />
+    <ClInclude Include="src\Inventory.h" />
     <ClInclude Include="src\SettingsMenu.h" />
     <ClInclude Include="src\CombatUI.h" />
     <ClInclude Include="src\FadeManager.h" />

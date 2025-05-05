@@ -10,6 +10,7 @@
 #include "SettingsMenu.h"
 #include "PauseMenu.h"
 #include "IntroScene.h"
+#include "Scene.h"
 
 GuiManager::GuiManager() :Module()
 {
@@ -114,24 +115,29 @@ bool GuiManager::Update(float dt)
 
 	switch (state)
 	{
-		case GuiManager::INTRO:
+		case UIState::INTRO:
 			break;
-		case GuiManager::TITLE:
+		case UIState::TITLE:
 			filterActive = false;
 			//Engine::GetInstance().audio->PlayFx(MainTheme);
 			break;
-		case GuiManager::GAME:
+		case UIState::GAME:
 			break;
-		case GuiManager::COMBAT:
+		case UIState::COMBAT:
 			break;
-		case GuiManager::PAUSE:
+		case UIState::PAUSE:
 			break;
-		case GuiManager::CREDIT:
+		case UIState::CREDIT:
 			break;
-		case GuiManager::GAMEOVER:
+		case UIState::GAMEOVER:
 			break;
 		default:
 			break;
+	}
+
+	if (Engine::GetInstance().scene.get()->player->openInventory == true)
+	{
+		Engine::GetInstance().scene.get()->player->inventory->UpdateInventory(dt);
 	}
 
 	return true;

@@ -7,6 +7,7 @@
 #include "Scene.h"
 #include "Log.h"
 #include "Physics.h"
+#include "Window.h"
 
 using namespace std;
 
@@ -25,6 +26,8 @@ bool Item::Start() {
 
 	//initilize textures
 	texture = Engine::GetInstance().textures.get()->Load(parameters.attribute("texture").as_string());
+	Hover = Engine::GetInstance().textures.get()->Load("Assets/Items/Hover.png");
+	Selected = Engine::GetInstance().textures.get()->Load("Assets/Items/Selected.png");
 	position.setX(parameters.attribute("x").as_int());
 	position.setY(parameters.attribute("y").as_int());
 	texW = parameters.attribute("w").as_int();
@@ -101,5 +104,35 @@ void Item::Stabilize()
 	else
 	{
 		pbody->body->SetLinearVelocity(b2Vec2_zero);
+	}
+}
+
+void Item::DrawInInventory(Vector2D pos, int sacale)
+{
+	Engine::GetInstance().render.get()->DrawUIimage(texture, (int)pos.getX(), (int)pos.getY(), sacale, &currentAnimation->GetCurrentFrame());
+	currentAnimation->Update();
+
+	Vector2D mPos = Engine::GetInstance().input->GetMousePosition() * Engine::GetInstance().window.get()->GetScale();
+
+	//Hover
+	if (mPos.getX() > pos.getX() && mPos.getX() < pos.getX() + texW * sacale &&
+		mPos.getY() > pos.getY() && mPos.getY() < pos.getY() + texH * sacale)
+	{
+		Engine::GetInstance().render.get()->DrawUIimage(Hover, (int)pos.getX(), (int)pos.getY(), sacale, &currentAnimation->GetCurrentFrame());
+	}
+	if (Engine::GetInstance().input.get()->GetMouseButtonDown(1) && 
+		mPos.getX() > pos.getX() && mPos.getX() < pos.getX() + texW * sacale &&
+		mPos.getY() > pos.getY() && mPos.getY() < pos.getY() + texH * sacale)
+	{
+		InventorySelected = true;
+	}
+	else if (Engine::GetInstance().input.get()->GetMouseButtonDown(1))
+	{
+		InventorySelected = false;
+	}
+
+	if (InventorySelected == true)
+	{
+		Engine::GetInstance().render.get()->DrawUIimage(Selected, (int)pos.getX(), (int)pos.getY(), sacale, &currentAnimation->GetCurrentFrame());
 	}
 }

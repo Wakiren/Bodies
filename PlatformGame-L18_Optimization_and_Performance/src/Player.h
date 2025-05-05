@@ -6,11 +6,13 @@
 #include "Animation.h"
 #include "CombatStats.h"
 #include "PuzzleManager.h"
+#include "Inventory.h"
 #include <vector>
 #include <string>
 
 struct CombatStats;
 struct SDL_Texture;
+class Inventory;
 
 class Player : public Fighter
 {
@@ -70,7 +72,8 @@ public:
 	Puzzle PlayerPuzzle = Puzzle::TREE_PUZZLE;
 	PhysBody* EnemyInCombat = nullptr;
 
-	std::vector<string> ItemsInInventory;
+	Inventory* inventory = nullptr;
+	bool openInventory = false;
 
 private:
 

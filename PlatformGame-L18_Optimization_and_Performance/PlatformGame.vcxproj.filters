@@ -39,6 +39,7 @@
     <ClCompile Include="src\SettingsMenu.cpp" />
     <ClCompile Include="src\GuiControlSlider.cpp" />
     <ClCompile Include="src\GuiControlToggle.cpp" />
+    <ClCompile Include="src\Inventory.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\CombatUI.h" />
@@ -86,6 +87,7 @@
     <ClInclude Include="src\SettingsMenu.h" />
     <ClInclude Include="src\GuiControlSlider.h" />
     <ClInclude Include="src\GuiControlToggle.h" />
+    <ClInclude Include="src\Inventory.h" />
   </ItemGroup>
   <ItemGroup>
     <Xml Include="config.xml" />

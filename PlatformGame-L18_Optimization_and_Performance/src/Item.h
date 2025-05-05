@@ -32,23 +32,28 @@ public:
 
 	void Stabilize();
 
+	void DrawInInventory(Vector2D pos, int scale);
+
 public:
 
 	bool isPicked = false;
 	PhysBody* pbody;
 
+	//Atributes
+	string type;
+	int amount;
+	bool InventorySelected = false;
+
 private:
 
 	SDL_Texture* texture;
+	SDL_Texture* Hover;
+	SDL_Texture* Selected;
 	const char* texturePath;
 	int texW, texH;
 	pugi::xml_node parameters;
 	Animation* currentAnimation = nullptr;
 	Animation idle;
-
-	//Atributes
-	string type;
-	int amount;
 
 	//L08 TODO 4: Add a physics to an item
 	int Vel = 30; //Velocity at wich the object gets expeld
