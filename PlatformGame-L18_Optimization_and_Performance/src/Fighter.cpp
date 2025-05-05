@@ -1,5 +1,7 @@
 #include "Fighter.h"
 #include "CombatUI.h"
+#include "CombatSystem.h"
+#include "Engine.h"
 
 Fighter::Fighter(EntityType _type):Entity(_type)
 {
@@ -25,8 +27,7 @@ void Fighter::Attack(Fighter* attacker, Fighter* target)
 	else 
 	{
 		
-		Engine::GetInstance().combatui.get()->text += char(10);
-		Engine::GetInstance().combatui.get()->text += SString("\nTarget was guarding, damage evaded ");
+		//Engine::GetInstance().combatSystem.get()->displayMessageAfterDelay("Target was guarding, damage evaded", 2);
 		cout << "Target was guarding, damage evaded " << endl;
 	}
  

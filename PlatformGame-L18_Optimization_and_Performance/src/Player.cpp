@@ -160,6 +160,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		Fighter* player = new Fighter(pbody->listener->type);
 		player->combatStats = combatStats;
 
+
 		Fighter* enemy = new Fighter(physB->listener->type);
 		enemy->combatStats = new CombatStats;
 		enemy->combatStats->health = 100;

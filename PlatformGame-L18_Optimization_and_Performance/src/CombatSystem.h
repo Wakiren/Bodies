@@ -2,6 +2,9 @@
 #include "Enemy.h"
 #include "Player.h"
 #include "CombatStats.h"
+#include "SString.h"
+#include <thread>
+#include <chrono>
 
 struct CombatStats;
 class CombatSystem : public Module
@@ -25,6 +28,8 @@ public:
 	void SpawnItems();
 
 	bool isCombatOver(Player* player, Enemy* enemy);
+
+	void displayMessageAfterDelay(const SString& message, int delayInSeconds);
 
 public:
 

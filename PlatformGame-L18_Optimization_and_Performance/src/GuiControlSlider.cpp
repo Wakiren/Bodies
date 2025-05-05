@@ -64,7 +64,7 @@ bool GuiControlSlider::Update(float dt)
 		}
 	}
 
-	LOG("Value: %d", this->value);
+	//LOG("Value: %d", this->value);
 
 	return false;
 }

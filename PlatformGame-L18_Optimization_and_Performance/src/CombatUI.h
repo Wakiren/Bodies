@@ -37,11 +37,6 @@ private:
 	SDL_Texture* background;
 	SDL_Texture* buttons;
 
-	// Buttons
-	SDL_Rect button1Rect = {0,0,224,64};
-	SDL_Rect button2Rect = {0,64,224,52};
-	SDL_Rect button3Rect = { 0,122,224,52};
-	SDL_Rect button4Rect = { 0,182,224,52};
 
 	GuiControlButton* attackButton = nullptr;
 	GuiControlButton* guardButton = nullptr;
@@ -49,7 +44,7 @@ private:
 	GuiControlButton* fleeButton = nullptr;
 
 public:
-	SString text = "notext";
+	SString text = " ";
 	int textSize = 50;
 
 };
