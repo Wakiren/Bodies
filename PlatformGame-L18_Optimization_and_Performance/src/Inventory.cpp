@@ -4,14 +4,16 @@
 #include "Textures.h"
 #include "Render.h"
 #include "GuiControlButton.h"
+#include "GuiManager.h"
 
 Inventory::Inventory()
 {
 	texture = Engine::GetInstance().textures->Load("Assets/UI/InventoryPlaceHolder.png");
 	isFull = false;
 
-	Use = new GuiControlButton(0, { 1456, 512 , 100, 50 }, "Use", 100);
-	Drop = new GuiControlButton(1, { 1456, 512 + Use->bounds.h , 100, 50 }, "Drop", 100);
+	Use = (GuiControlButton*)Engine::GetInstance().guiManager.get()->CreateGuiControl(GuiControlType::BUTTON,0, "Use", { ITEM_POS_X, 512 , 100, 50 }, 100, Engine::GetInstance().scene.get());
+	Drop = (GuiControlButton*)Engine::GetInstance().guiManager.get()->CreateGuiControl(GuiControlType::BUTTON, 1, "Drop", { ITEM_POS_X - 30, 512 + Use->bounds.h + 30 , 100, 50 }, 100, Engine::GetInstance().scene.get());
+
 	items.clear();
 }
 
@@ -42,6 +44,7 @@ void Inventory::AddItem(Item* item)
 
 void Inventory::RemoveItem(Item* item)
 {
+
 	auto it = std::find(items.begin(), items.end(), item);
 	if (it != items.end())
 	{
@@ -97,18 +100,31 @@ void Inventory::UpdateInventory(float dt)
 	//Draw the inventory UI
 	for (size_t i = 0; i < items.size(); ++i)
 	{
-		if (i % 9 == 0 && i != 0)
-		{
-			rows++;
-		}
-		items[i]->DrawInInventory({ (float)ITEM_POSITION_X + (i * (ITEM_SCALE * ITEM_SIZE)), (float)ITEM_POSITION_Y + (rows *(ITEM_SCALE * ITEM_SIZE)) }, ITEM_SCALE);
-	}
-	
+		rows = i / 9;
+		items[i]->DrawInInventory({ (float)INVE_POSITION_X + ((i - (9*rows)) * (ITEM_SCALE * ITEM_SIZE)), (float)INVE_POSITION_Y + (rows * (ITEM_SCALE * ITEM_SIZE))}, ITEM_SCALE);
 
-	Use->Update(dt);
-	Use->Draw(Engine::GetInstance().render.get());
-	Drop->Update(dt);
-	Drop->Draw(Engine::GetInstance().render.get());
+		if (items[i]->InventorySelected == true)
+		{
+			currentItem = i;
+		}
+	}
+	rows = 0;
+
+	//Update Current Item
+	if (currentItem != -1)
+	{
+		Use->Update(dt);
+		Use->Draw(Engine::GetInstance().render.get());
+		Drop->Update(dt);
+		Drop->Draw(Engine::GetInstance().render.get());
+
+		if (Use->state == GuiControlState::PRESSED)
+		{
+			items[currentItem]->InventorySelected = false;
+			UseItem(items[currentItem], Engine::GetInstance().scene.get()->player);
+			currentItem = -1;
+		}
+	}
 
 }
 
@@ -130,5 +146,14 @@ void Inventory::OrganizeInventory()
 	for (size_t i = 0; i < listItems.size(); ++i)
 	{
 		items.push_back(listItems[i]);
+	}
+}
+
+void Inventory::ResetInventory()
+{
+	currentItem = -1;
+	for (size_t i = 0; i < items.size(); ++i)
+	{
+		items[i]->InventorySelected = false;
 	}
 }

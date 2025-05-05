@@ -9,11 +9,11 @@
 #include <vector>
 #include <string>
 
-#define MAX_ITEMS 10
+#define MAX_ITEMS 117
 #define ITEM_SCALE 4
 #define ITEM_SIZE 16
-#define ITEM_POSITION_X 657
-#define ITEM_POSITION_Y 97
+#define INVE_POSITION_X 657
+#define INVE_POSITION_Y 97
 
 using namespace std;
 class Player;
@@ -30,6 +30,7 @@ public:
 	void UseItem(Item* item, Player* player);
 	void UpdateInventory(float dt);
 	void OrganizeInventory();
+	void ResetInventory();
 
 	vector<Item*> items;
 	bool isFull;
@@ -61,4 +62,6 @@ public:
 private:
 
 	int rows = 0;
+	//No item is selected
+	int currentItem = -1;
 };

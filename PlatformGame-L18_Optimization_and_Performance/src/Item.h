@@ -7,6 +7,11 @@
 struct SDL_Texture;
 using namespace std;
 
+//The parameters of the item while its showing on the inventory
+#define ITEM_POS_X 1550
+#define ITEM_POS_Y 300
+#define PREVIEW_SCALE 10
+
 class Item : public Entity
 {
 public:
@@ -43,16 +48,16 @@ public:
 	string type;
 	int amount;
 	bool InventorySelected = false;
+	SDL_Texture* texture;
+	Animation* currentAnimation = nullptr;
 
 private:
 
-	SDL_Texture* texture;
 	SDL_Texture* Hover;
 	SDL_Texture* Selected;
 	const char* texturePath;
 	int texW, texH;
 	pugi::xml_node parameters;
-	Animation* currentAnimation = nullptr;
 	Animation idle;
 
 	//L08 TODO 4: Add a physics to an item

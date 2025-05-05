@@ -99,7 +99,7 @@ bool Player::Update(float dt)
 
 	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 	{
-		Engine::GetInstance().physics.get()->CreateRectangleSensor((int)position.getX() - 100, (int)position.getY() - 100, 32, 32, bodyType::STATIC);
+		Engine::GetInstance().scene.get()->CreateItem("MixedMeat",position);
 	}
 	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_I) == KEY_DOWN)
 	{
@@ -110,6 +110,7 @@ bool Player::Update(float dt)
 		else
 		{
 			openInventory = false;
+			inventory->ResetInventory();
 		}
 	}
 	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_O) == KEY_DOWN)
