@@ -99,7 +99,9 @@ bool Player::Update(float dt)
 
 	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 	{
-		Engine::GetInstance().scene.get()->CreateItem("MixedMeat",position);
+		Engine::GetInstance().scene.get()->CreateItem("MixedMeat", position);
+		Engine::GetInstance().scene.get()->CreateItem("Sizors",position);
+		Engine::GetInstance().scene.get()->CreateItem("Alpha", position);
 	}
 	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_I) == KEY_DOWN)
 	{
@@ -113,7 +115,7 @@ bool Player::Update(float dt)
 			inventory->ResetInventory();
 		}
 	}
-	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_O) == KEY_DOWN)
+	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_R) == KEY_DOWN)
 	{
 		inventory->OrganizeInventory();
 	}

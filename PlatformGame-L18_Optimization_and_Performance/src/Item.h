@@ -39,6 +39,8 @@ public:
 
 	void DrawInInventory(Vector2D pos, int scale);
 
+	bool CheckMouseHover(Vector2D pos, int scale);
+
 public:
 
 	bool isPicked = false;
@@ -47,6 +49,9 @@ public:
 	//Atributes
 	string type;
 	int amount;
+	bool equiped = false;
+
+	//Inventory
 	bool InventorySelected = false;
 	SDL_Texture* texture;
 	Animation* currentAnimation = nullptr;

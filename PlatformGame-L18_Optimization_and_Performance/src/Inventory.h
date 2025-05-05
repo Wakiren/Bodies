@@ -31,6 +31,7 @@ public:
 	void UpdateInventory(float dt);
 	void OrganizeInventory();
 	void ResetInventory();
+	bool EquipToggle(Item* item);
 
 	vector<Item*> items;
 	bool isFull;
@@ -42,7 +43,9 @@ public:
 	GuiControlButton* Use = nullptr;
 	GuiControlButton* Drop = nullptr;
 
-	vector<string> PriorityList = {
+	
+	//Diferent Organitzation Methods
+	vector<string> PriorityList1 = {
 		"MixedMeat",
 		"HumanFlesh",
 		"AnimalSkin",
@@ -57,6 +60,47 @@ public:
 		"Beta",
 		"Omega",
 		"Sigma"
+	};
+
+	vector<string> PriorityList2 = {
+		"Torch",
+		"Sizors",
+		"Eye",
+		"Alpha",
+		"Beta",
+		"Omega",
+		"Sigma",
+		"MixedMeat",
+		"HumanFlesh",
+		"AnimalSkin",
+		"CookedMixedMeat",
+		"CookedAnimalSkin",
+		"CookedHumanFlesh",
+		"Sedative"
+	};
+
+	vector<string> PriorityList3 = {
+		"Alpha",
+		"Beta",
+		"Omega",
+		"Sigma",
+		"MixedMeat",
+		"HumanFlesh",
+		"AnimalSkin",
+		"CookedMixedMeat",
+		"CookedAnimalSkin",
+		"CookedHumanFlesh",
+		"Sedative",
+		"Torch",
+		"Sizors",
+		"Eye"
+	};
+
+	int listChange = 0;
+	vector<vector<string>> PriorityList = {
+		PriorityList1,
+		PriorityList2,
+		PriorityList3
 	};
 
 private:

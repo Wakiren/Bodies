@@ -80,16 +80,30 @@ void Inventory::UseItem(Item* item, Player* player)
 	else if (item->type == "Weapon")
 	{
 		// Equip the weapon
-		player->combatStats->attackPoints += item->amount;
+		if (EquipToggle(item) == true)
+		{
+			player->combatStats->attackPoints += item->amount;
+		}
+		else
+		{
+			player->combatStats->attackPoints -= item->amount;
+		}
 	}
 	else if (item->type == "Armor")
 	{
-		// Equip the item
-		player->combatStats->defensePoints += item->amount;
+		// Equip the armor
+		if (EquipToggle(item) == true)
+		{
+			player->combatStats->defensePoints += item->amount;
+		}
+		else
+		{
+			player->combatStats->defensePoints -= item->amount;
+		}
 	}
 	else if (item->type == "Equipable")
 	{
-
+		EquipToggle(item);
 	}
 }
 
@@ -97,6 +111,7 @@ void Inventory::UpdateInventory(float dt)
 {
 	// Draw the inventory UI
 	Engine::GetInstance().render->DrawUIimage(texture, 0, 0, 1);
+
 	//Draw the inventory UI
 	for (size_t i = 0; i < items.size(); ++i)
 	{
@@ -110,33 +125,61 @@ void Inventory::UpdateInventory(float dt)
 	}
 	rows = 0;
 
+
+
 	//Update Current Item
 	if (currentItem != -1)
 	{
+		//Update the buttons
 		Use->Update(dt);
-		Use->Draw(Engine::GetInstance().render.get());
 		Drop->Update(dt);
-		Drop->Draw(Engine::GetInstance().render.get());
 
+		//Change the text of the buttons if nessessari
+		if (items[currentItem]->equiped == false)
+		{
+			Use->text = "Use";
+			Use->bounds.x = ITEM_POS_X;
+		}
+		else
+		{
+			Use->text = "Unequip";
+			Use->bounds.x = ITEM_POS_X -60;
+		}
+
+		//Check if the buttons are pressed
 		if (Use->state == GuiControlState::PRESSED)
 		{
 			items[currentItem]->InventorySelected = false;
 			UseItem(items[currentItem], Engine::GetInstance().scene.get()->player);
 			currentItem = -1;
 		}
+		else if (Drop->state == GuiControlState::PRESSED)
+		{
+			items[currentItem]->InventorySelected = false;
+			RemoveItem(items[currentItem]);
+			currentItem = -1;
+		}
+
+		Use->Draw(Engine::GetInstance().render.get());
+		Drop->Draw(Engine::GetInstance().render.get());
 	}
 
 }
 
 void Inventory::OrganizeInventory()
 {
+	if (listChange >= PriorityList.size())
+	{
+		listChange = 0;
+	}
 	vector<Item*> listItems;
 	// Organize the inventory items
-	for (size_t i = 0; i < PriorityList.size(); ++i)
+	for (size_t i = 0; i < PriorityList[listChange].size(); ++i)
 	{
 		for (size_t j = 0; j < items.size(); ++j)
 		{
-			if (items[j]->name == PriorityList[i])
+			LOG("%d", i);
+			if (items[j]->name == PriorityList[listChange][i])
 			{
 				listItems.push_back(items[j]);
 			}
@@ -147,6 +190,7 @@ void Inventory::OrganizeInventory()
 	{
 		items.push_back(listItems[i]);
 	}
+	listChange++;
 }
 
 void Inventory::ResetInventory()
@@ -155,5 +199,19 @@ void Inventory::ResetInventory()
 	for (size_t i = 0; i < items.size(); ++i)
 	{
 		items[i]->InventorySelected = false;
+	}
+}
+
+bool Inventory::EquipToggle(Item* item)
+{
+	if (item->equiped == false)
+	{
+		item->equiped = true;
+		return true;
+	}
+	else
+	{
+		item->equiped = false;
+		return false;
 	}
 }

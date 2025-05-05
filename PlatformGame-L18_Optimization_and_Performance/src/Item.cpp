@@ -107,22 +107,27 @@ void Item::Stabilize()
 	}
 }
 
-void Item::DrawInInventory(Vector2D pos, int sacale)
+void Item::DrawInInventory(Vector2D pos, int scale)
 {
-	Engine::GetInstance().render.get()->DrawUIimage(texture, (int)pos.getX(), (int)pos.getY(), sacale, &currentAnimation->GetCurrentFrame());
+	Engine::GetInstance().render.get()->DrawUIimage(texture, (int)pos.getX(), (int)pos.getY(), scale, &currentAnimation->GetCurrentFrame());
 	currentAnimation->Update();
 
-	Vector2D mPos = Engine::GetInstance().input->GetMousePosition() * Engine::GetInstance().window.get()->GetScale();
+
+	//Disable equiped item
+	if (equiped == true)
+	{
+		Engine::GetInstance().render.get()->DrawText("eq",pos.getX(),pos.getY(),25,{255,255,255});
+	}
 
 	//Hover
-	if (mPos.getX() > pos.getX() && mPos.getX() < pos.getX() + texW * sacale &&
-		mPos.getY() > pos.getY() && mPos.getY() < pos.getY() + texH * sacale)
+	if (CheckMouseHover(pos,scale) == true)
 	{
-		Engine::GetInstance().render.get()->DrawUIimage(Hover, (int)pos.getX(), (int)pos.getY(), sacale);
+		Engine::GetInstance().render.get()->DrawUIimage(Hover, (int)pos.getX(), (int)pos.getY(), scale);
 	}
-	if (Engine::GetInstance().input.get()->GetMouseButtonDown(1) && 
-		mPos.getX() > pos.getX() && mPos.getX() < pos.getX() + texW * sacale &&
-		mPos.getY() > pos.getY() && mPos.getY() < pos.getY() + texH * sacale)
+
+	//Selected
+	if ((Engine::GetInstance().input.get()->GetMouseButtonDown(1)|| Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_E) == KEY_DOWN) &&
+		CheckMouseHover(pos, scale) == true)
 	{
 		InventorySelected = true;
 	}
@@ -131,9 +136,22 @@ void Item::DrawInInventory(Vector2D pos, int sacale)
 		InventorySelected = false;
 	}
 
+	//Show selected item
 	if (InventorySelected == true)
 	{
-		Engine::GetInstance().render.get()->DrawUIimage(Selected, (int)pos.getX(), (int)pos.getY(), sacale);
+		Engine::GetInstance().render.get()->DrawUIimage(Selected, (int)pos.getX(), (int)pos.getY(), scale);
 		Engine::GetInstance().render.get()->DrawUIimage(texture, ITEM_POS_X, ITEM_POS_Y, PREVIEW_SCALE, &currentAnimation->GetCurrentFrame());
 	}
+}
+
+bool Item::CheckMouseHover(Vector2D pos, int scale)
+{
+	Vector2D mPos = Engine::GetInstance().input->GetMousePosition() * Engine::GetInstance().window.get()->GetScale();
+
+	if (mPos.getX() > pos.getX() && mPos.getX() < pos.getX() + texW * scale &&
+		mPos.getY() > pos.getY() && mPos.getY() < pos.getY() + texH * scale)
+	{
+		return true;
+	}
+	return false;
 }
