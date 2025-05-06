@@ -4,6 +4,7 @@
 #include "CombatUI.h"
 #include "EntityManager.h"
 #include "Physics.h"
+#include "Timer.h"
 
 
 CombatSystem::CombatSystem()
@@ -53,7 +54,7 @@ void CombatSystem::MainLoop()
             {
                 //END COMBAT
                 cout << "COMBAT OVER" << endl;
-                std::this_thread::sleep_for(std::chrono::seconds(1));
+                //std::this_thread::sleep_for(std::chrono::seconds(1));
                 Engine::GetInstance().combatui.get()->active = false;
                 isPlayerTurn = true;
             }
@@ -65,7 +66,7 @@ void CombatSystem::MainLoop()
             {
                 //END COMBAT
                 cout << "COMBAT OVER" << endl;
-                std::this_thread::sleep_for(std::chrono::seconds(1));
+                //std::this_thread::sleep_for(std::chrono::seconds(1));
                 Engine::GetInstance().combatui.get()->active = false;
                 isPlayerTurn = true;
                 
@@ -82,6 +83,7 @@ void CombatSystem::EnemyTurn()
 {
     cout << "ENEMY ATTACKS!" << endl;
     displayMessageAfterDelay("Enemy Attacks!", 1);
+    cout << Engine::GetInstance().combatui.get()->text.GetString() << endl;
     enemy->Attack(enemy, player);
     isPlayerTurn = true;
 }
@@ -95,6 +97,7 @@ void CombatSystem::PlayerTurn()
         player->combatStats->isGuarding = false;
         cout << "PLAYER ATTACKS!" << endl;
         displayMessageAfterDelay("Player Attacks!", 1);
+        cout << Engine::GetInstance().combatui.get()->text.GetString() << endl;
         player->Attack(player, enemy);
         isPlayerTurn = false;
         break;
@@ -103,6 +106,7 @@ void CombatSystem::PlayerTurn()
         player->combatStats->isGuarding = false;
         cout << "PLAYER GUARDS!" << endl;
         displayMessageAfterDelay("Player Guards!", 1);
+        cout << Engine::GetInstance().combatui.get()->text.GetString() << endl;
         player->Guard(player);
         isPlayerTurn = false;
 
@@ -137,6 +141,7 @@ bool CombatSystem::isCombatOver(Player* player, Enemy* enemy)
     if (!player->isAlive(player)) {
         displayMessageAfterDelay("Player Defeated!", 1);
         cout << "Player defeated!\n";
+        cout << Engine::GetInstance().combatui.get()->text.GetString() << endl;
         Engine::GetInstance().scene.get()->player->isInCombat = false;
         return true;
     }
@@ -146,6 +151,8 @@ bool CombatSystem::isCombatOver(Player* player, Enemy* enemy)
         {
             displayMessageAfterDelay("Enemy Defeated!", 1);
             cout << "Enemy defeated!\n";
+            cout << Engine::GetInstance().combatui.get()->text.GetString() << endl;
+            displayMessageAfterDelay(" ", 1);
         }
 
 
@@ -175,9 +182,28 @@ void CombatSystem::SpawnItems()
 	}
 }
 
-void CombatSystem::displayMessageAfterDelay(const SString& message, int delayInSeconds) {
+void CombatSystem::displayMessageAfterDelay(const SString& message, int delayInSeconds) 
+{
     
     std::this_thread::sleep_for(std::chrono::seconds(delayInSeconds));
 
     Engine::GetInstance().combatui.get()->text = message;
+}
+
+bool CombatSystem::DisplayMessageAfterDelay(const SString& message, int delaySeconds) {
+    Timer timer;
+    bool messageShown = false;
+
+    if (!initialized) {
+        timer.Start(); 
+        initialized = true;
+    }
+
+    if (!messageShown && timer.ReadSec() >= delaySeconds) {
+        Engine::GetInstance().combatui.get()->text = message;
+        messageShown = true;
+        return true; 
+    }
+
+    return false; 
 }

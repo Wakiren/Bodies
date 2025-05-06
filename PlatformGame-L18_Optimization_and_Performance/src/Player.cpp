@@ -185,7 +185,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 
 		Fighter* enemy = new Fighter(physB->listener->type);
 		enemy->combatStats = new CombatStats;
-		enemy->combatStats->health = 100;
+		enemy->combatStats->health = 150;
 		enemy->combatStats->attackPoints = 10;
 		enemy->combatStats->defensePoints = 0;
 		enemy->combatStats->maxHealth = 100;

@@ -32,19 +32,20 @@ bool CombatUI::Awake()
 
 bool CombatUI::Start()
 {
-	background = Engine::GetInstance().textures.get()->Load("Assets/Textures/combatBackground.png");
+	background1 = Engine::GetInstance().textures.get()->Load("Assets/Combat/CombatUI.png");
+	background = Engine::GetInstance().textures.get()->Load("Assets/Combat/CombatUI2.png");
 	CursorIdle = Engine::GetInstance().textures.get()->Load("Assets/UI/CursorIdle.png");
 	CursorPress = Engine::GetInstance().textures.get()->Load("Assets/UI/CursorPress.png");
 
 	//Create Buttons
 	attackButton = (GuiControlButton*)Engine::GetInstance().guiManager.get()->CreateGuiControl
-	(GuiControlType::BUTTON, 1, "Attack", {632,600,224,64} , 50, this);
+	(GuiControlType::BUTTON, 1, "Attack", {350,720,224,64} , 50, this);
 	guardButton = (GuiControlButton*)Engine::GetInstance().guiManager.get()->CreateGuiControl
-	(GuiControlType::BUTTON, 1, "Guard", { 632,64 + 600,224,64 }, 50, this);
+	(GuiControlType::BUTTON, 1, "Guard", { 350,64 + 720,224,64 }, 50, this);
 	skillButton = (GuiControlButton*)Engine::GetInstance().guiManager.get()->CreateGuiControl
-	(GuiControlType::BUTTON, 1, "Skill", { 632,128 + 600,224,64 }, 50, this);
+	(GuiControlType::BUTTON, 1, "Skill", { 350,128 + 720,224,64 }, 50, this);
 	fleeButton = (GuiControlButton*)Engine::GetInstance().guiManager.get()->CreateGuiControl
-	(GuiControlType::BUTTON, 1, "Flee", { 632,192 + 600,224,64 }, 50, this);
+	(GuiControlType::BUTTON, 1, "Flee", { 350,192 + 720,224,64 }, 50, this);
 
 	return true;
 }
@@ -56,20 +57,7 @@ bool CombatUI::PreUpdate()
 
 bool CombatUI::Update(float dt)
 {
-	//MOUSE TEXTURE RENER//
-	SDL_ShowCursor(0); // Hide the cursor
-	// Set the cursor to the idle texture
-	Vector2D mPos = Engine::GetInstance().input->GetMousePosition() * Engine::GetInstance().window.get()->GetScale();
 
-	if (Engine::GetInstance().input.get()->GetMouseButtonDown(1))
-	{
-		// Set the cursor to the press texture
-		Engine::GetInstance().render.get()->DrawUIimage(CursorPress, mPos.getX(), mPos.getY(), 3);
-	}
-	else
-	{
-		Engine::GetInstance().render.get()->DrawUIimage(CursorIdle, mPos.getX(), mPos.getY(), 3);
-	}
 	
 	//COMBAT UI RENDER //
 	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_1) == KEY_DOWN) 
@@ -80,9 +68,13 @@ bool CombatUI::Update(float dt)
 	{
 
 		//Background
-		SDL_Rect backgroundRect = { 0, 0, 720, 480 };
-		Engine::GetInstance().render.get()->DrawUIimage(background, Engine::GetInstance().render.get()->camera.w / 3.25,
-		Engine::GetInstance().render.get()->camera.h / 2, 1, &backgroundRect);
+		SDL_Rect backgroundRect = { 0, 0, 738, 246 };
+		Engine::GetInstance().render.get()->DrawUIimage(background, Engine::GetInstance().render.get()->camera.w / 2.75,
+		Engine::GetInstance().render.get()->camera.h / 1.6, 1.4f, &backgroundRect);
+
+		SDL_Rect background1Rect = { 0, 0, 246, 246 };
+		Engine::GetInstance().render.get()->DrawUIimage(background1, Engine::GetInstance().render.get()->camera.w / 6.5,
+		Engine::GetInstance().render.get()->camera.h / 1.6, 1.4f, &background1Rect);
 
 		//Assign a result to each button
 		if (Engine::GetInstance().input.get()->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_UP) {
@@ -110,7 +102,22 @@ bool CombatUI::Update(float dt)
 		fleeButton->Draw(Engine::GetInstance().render.get());
 
 		
-		Engine::GetInstance().render.get()->DrawText(text.GetString(), 850, 600, textSize, { 255,255,255 });
+		Engine::GetInstance().render.get()->DrawText(text.GetString(), 750, 720, textSize, { 255,255,255 });
+	}
+
+	//MOUSE TEXTURE RENDER//
+	SDL_ShowCursor(0); // Hide the cursor
+	// Set the cursor to the idle texture
+	Vector2D mPos = Engine::GetInstance().input->GetMousePosition() * Engine::GetInstance().window.get()->GetScale();
+
+	if (Engine::GetInstance().input.get()->GetMouseButtonDown(1))
+	{
+		// Set the cursor to the press texture
+		Engine::GetInstance().render.get()->DrawUIimage(CursorPress, mPos.getX(), mPos.getY(), 3);
+	}
+	else
+	{
+		Engine::GetInstance().render.get()->DrawUIimage(CursorIdle, mPos.getX(), mPos.getY(), 3);
 	}
 
 	return true;

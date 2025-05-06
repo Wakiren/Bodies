@@ -35,6 +35,7 @@ private:
 
 	// Textures
 	SDL_Texture* background;
+	SDL_Texture* background1;
 	SDL_Texture* buttons;
 
 	SDL_Texture* CursorIdle;
