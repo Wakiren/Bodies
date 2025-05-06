@@ -37,6 +37,8 @@ private:
 	SDL_Texture* background;
 	SDL_Texture* buttons;
 
+	SDL_Texture* CursorIdle;
+	SDL_Texture* CursorPress;
 
 	GuiControlButton* attackButton = nullptr;
 	GuiControlButton* guardButton = nullptr;
