@@ -33,6 +33,8 @@ bool CombatUI::Awake()
 bool CombatUI::Start()
 {
 	background = Engine::GetInstance().textures.get()->Load("Assets/Textures/combatBackground.png");
+	CursorIdle = Engine::GetInstance().textures.get()->Load("Assets/UI/CursorIdle.png");
+	CursorPress = Engine::GetInstance().textures.get()->Load("Assets/UI/CursorPress.png");
 
 	//Create Buttons
 	attackButton = (GuiControlButton*)Engine::GetInstance().guiManager.get()->CreateGuiControl
@@ -54,11 +56,26 @@ bool CombatUI::PreUpdate()
 
 bool CombatUI::Update(float dt)
 {
+	//MOUSE TEXTURE RENER//
+	SDL_ShowCursor(0); // Hide the cursor
+	// Set the cursor to the idle texture
+	Vector2D mPos = Engine::GetInstance().input->GetMousePosition() * Engine::GetInstance().window.get()->GetScale();
+
+	if (Engine::GetInstance().input.get()->GetMouseButtonDown(1))
+	{
+		// Set the cursor to the press texture
+		Engine::GetInstance().render.get()->DrawUIimage(CursorPress, mPos.getX(), mPos.getY(), 3);
+	}
+	else
+	{
+		Engine::GetInstance().render.get()->DrawUIimage(CursorIdle, mPos.getX(), mPos.getY(), 3);
+	}
+	
+	//COMBAT UI RENDER //
 	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_1) == KEY_DOWN) 
 	{
 		active = !active;
 	}
-
 	if(active) 
 	{
 
