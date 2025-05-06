@@ -36,6 +36,8 @@ public:
 	 bool Update(float dt);
 
 	bool Draw();
+	bool DrawDialogueButtons();
+
 	void DrawFilter();
 
 	// Called before quitting

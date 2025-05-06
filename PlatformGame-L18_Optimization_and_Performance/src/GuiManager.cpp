@@ -11,6 +11,7 @@
 #include "PauseMenu.h"
 #include "IntroScene.h"
 #include "Scene.h"
+#include "DialogueSystem.h"
 
 GuiManager::GuiManager() :Module()
 {
@@ -156,6 +157,22 @@ bool GuiManager::Draw()
 
 	return true;
 }
+
+bool GuiManager::DrawDialogueButtons()
+{
+	ListItem<GuiControl*>* control_ = Engine::GetInstance().dialogueSystem.get()->activeTree->listDialogueButtons.start;
+	while (control_ != NULL)
+	{
+		if (control_->data->state != GuiControlState::NONE) {
+			control_->data->Draw(Engine::GetInstance().render.get());
+		}
+		control_ = control_->next;
+	}
+
+	return true;
+}
+
+
 
 bool GuiManager::CleanUp()
 {

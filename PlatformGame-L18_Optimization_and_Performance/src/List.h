@@ -303,5 +303,9 @@ public:
 			pOtherList = pOtherList->next;
 		}
 	}
+	unsigned int GetSize()
+	{
+		return size;
+	}
 };
 #endif // __LIST_H__

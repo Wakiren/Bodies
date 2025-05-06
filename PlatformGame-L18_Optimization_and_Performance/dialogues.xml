@@ -28,8 +28,8 @@
 	<dialogueTree ID="0" NPC = "1">
 
 		<node id="0" text="You are not him… you don't smell like him… you are just another piece of flesh to his collection… at least you haven't gone psychotic  ">
-			<choice id="0" option="What are you talking about?? " nextNode="2" eventReturn="2"/>
-			<choice id="0" option="Who are you? " nextNode="1" eventReturn="2"/>
+			<choice id="0" option="What are you talking about?? " nextNode="2" eventReturn="1"/>
+			<choice id="0" option="Who are you? " nextNode="1" eventReturn="1"/>
 		</node>
 
 		<node id="1" text="Im just a lonley old fella called Henry... you must be new... you smell different...  ">
