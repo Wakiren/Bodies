@@ -5,6 +5,8 @@
 #include "Box2D/Box2D.h"
 #include "Animation.h"
 
+#define NPC_FRONT_TEXTURE_Y 100
+
 struct SDL_Texture;
 
 using namespace std;
@@ -43,14 +45,17 @@ public:
 
 	void CheckForProgress();
 
+	void DrawDialog();
 
 public:
 
 	Vector2D OGPosition;
 
 	SDL_Texture* texture;
+	SDL_Texture* frontTexture;
+
 	const char* texturePath;
-	int texW, texH;
+	int texW, texH, FtexH;
 	pugi::xml_node parameters;
 	Animation* currentAnimation = nullptr;
 	Animation idle;

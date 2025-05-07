@@ -46,6 +46,7 @@ void CombatSystem::MainLoop()
     {
         Engine::GetInstance().entityManager.get()->PauseEntities();
         Engine::GetInstance().combatui.get()->active = true;
+        actualEnemy->DrawInCombat();
         if(isPlayerTurn) 
         {
             Engine::GetInstance().scene.get()->player->isInCombat = true;

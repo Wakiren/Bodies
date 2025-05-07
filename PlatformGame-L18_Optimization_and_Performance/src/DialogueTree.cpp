@@ -60,6 +60,7 @@ bool DialogueTree::UpdateTree(float dt, Module* mod, Vector2D pos)
 		//THE X IN HERE SHOULD BE THE HITBOX OF THE TALKING CHARCATER
 		Engine::GetInstance().render.get()->DrawText(activeNode->texts[i].GetString(), DIALOGUE_W + SPACING, (Engine::GetInstance().window.get()->height - DIALOGUE_H) + 50* i + SPACING, fontSize, { 0, 0, 0});
 
+
 	}
 
 	EventReturn(mod, pos);

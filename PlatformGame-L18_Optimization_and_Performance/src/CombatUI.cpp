@@ -100,14 +100,13 @@ bool CombatUI::Update(float dt)
 		guardButton->Draw(Engine::GetInstance().render.get());
 		skillButton->Draw(Engine::GetInstance().render.get());
 		fleeButton->Draw(Engine::GetInstance().render.get());
-
 		
 		Engine::GetInstance().render.get()->DrawText(text.GetString(), 750, 720, textSize, { 255,255,255 });
 	}
 
 	//MOUSE TEXTURE RENDER//
 	SDL_ShowCursor(0); // Hide the cursor
-	// Set the cursor to the idle texture
+	//Set the cursor to the idle texture
 	Vector2D mPos = Engine::GetInstance().input->GetMousePosition() * Engine::GetInstance().window.get()->GetScale();
 
 	if (Engine::GetInstance().input.get()->GetMouseButtonDown(1))

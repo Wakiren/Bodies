@@ -32,10 +32,12 @@ bool DialogueSystem::Update(float dt)
 	if (activeTree != nullptr && inDialog == true)
 	{
 		//Text box
+		activeTree->npc->DrawDialog();
 		Vector2D pos = { 0, (float)(Engine::GetInstance().window.get()->height )};
 		Engine::GetInstance().render.get()->DrawUIimage(textBox_tex, DIALOGUE_W, (Engine::GetInstance().window.get()->height - DIALOGUE_H));
 		activeTree->UpdateTree(dt, Engine::GetInstance().dialogueSystem.get(), pos);
-		Engine::GetInstance().guiManager.get()->DrawDialogueButtons();
+		Engine::GetInstance().guiManager.get()->Draw();
+
 		
 	}
 

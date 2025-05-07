@@ -8,6 +8,9 @@
 #include "CombatStats.h"
 #include "Fighter.h"
 
+#define ENEMY_FRONT_TEXTURE_Y 150
+#define ENEMY_FRONT_TEXTURE_SIZE 256
+
 struct CombatStats;
 struct SDL_Texture;
 
@@ -53,12 +56,15 @@ public:
 
 	virtual bool Killed();
 
+	void DrawInCombat();
+
 public:
 
 	CombatStats* combatStats = new CombatStats;
 	Vector2D OGPosition;
 
 	SDL_Texture* texture;
+	SDL_Texture* frontTexture;
 	const char* texturePath;
 	int texW, texH;
 	pugi::xml_node parameters;

@@ -11,6 +11,7 @@
 #include "EntityManager.h"
 #include "tracy/Tracy.hpp"
 #include "Inventory.h"
+#include "window.h"
 
 using namespace std;
 
@@ -31,6 +32,7 @@ bool NPC::Start() {
 
 	//initilize textures
 	texture = Engine::GetInstance().textures.get()->Load(parameters.attribute("texture").as_string());
+	frontTexture = Engine::GetInstance().textures.get()->Load(parameters.attribute("frontTexture").as_string());
 	position.setX(parameters.attribute("x").as_int());
 	position.setY(parameters.attribute("y").as_int());
 	texW = parameters.attribute("w").as_int();
@@ -123,3 +125,10 @@ void NPC::CheckForProgress()
 		}
 	}
 }
+
+void NPC::DrawDialog()
+{
+	// TODO 6: Draw the dialog
+	Engine::GetInstance().render.get()->DrawUIimage(frontTexture, 0, Engine::GetInstance().window.get()->height - NPC_FRONT_TEXTURE_Y * 6, 6);
+}
+

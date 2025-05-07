@@ -10,6 +10,7 @@
 #include "Map.h"
 #include "EntityManager.h"
 #include "tracy/Tracy.hpp"
+#include "window.h"
 
 Enemy::Enemy() : Fighter(EntityType::ENEMY)
 {
@@ -29,6 +30,7 @@ bool Enemy::Start() {
 	
 	//initilize textures
 	texture = Engine::GetInstance().textures.get()->Load(parameters.attribute("texture").as_string());
+	frontTexture = Engine::GetInstance().textures.get()->Load(parameters.attribute("frontTexture").as_string());
 	position = OGPosition;
 	texW = parameters.attribute("w").as_int();
 	texH = parameters.attribute("h").as_int();
@@ -181,4 +183,10 @@ void Enemy::SetItemsInEnemy()
 			ItemsInEnemy.push_back("HumanFlesh");
 		}
 	}	
+}
+
+void Enemy::DrawInCombat()
+{
+	// Draw enemy in combat
+	Engine::GetInstance().render.get()->DrawUIimage(frontTexture, (Engine::GetInstance().window.get()->width/2)-((ENEMY_FRONT_TEXTURE_SIZE*4)/2), 0, 4);
 }
