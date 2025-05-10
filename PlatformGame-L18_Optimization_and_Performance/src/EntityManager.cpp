@@ -145,7 +145,6 @@ bool EntityManager::Update(float dt)
 	{
 		UnPauseEntities();
 	}
-	// Code you want to profile
 	bool ret = true;
 	
 	if (pauseEntities) 

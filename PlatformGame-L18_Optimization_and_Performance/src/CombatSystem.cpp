@@ -24,7 +24,7 @@ bool CombatSystem::Awake()
 
 bool CombatSystem::Start()
 {
-
+    fleed = false;
 	return true;
 }
 
@@ -118,6 +118,9 @@ void CombatSystem::PlayerTurn()
         break;
 
     case  CombatUI::CombatInput::FLEE:
+        player->combatStats->isGuarding = false;
+        enemy->isInCombat = false;
+        fleed = true;
         break;
         
     default:
@@ -136,6 +139,10 @@ void CombatSystem::DeletePhysicalEnemy(PhysBody* enemy)
 bool CombatSystem::isCombatOver(Player* player, Enemy* enemy)
 {
     if(player == nullptr || enemy == nullptr)
+    {
+        return true;
+    }
+    if (fleed) 
     {
         return true;
     }

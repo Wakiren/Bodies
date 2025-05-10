@@ -43,4 +43,5 @@ public:
 
 	bool playerAttacks, EnemyAttacks;
 	bool initialized = false;
+	bool fleed;
 };
