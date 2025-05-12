@@ -83,7 +83,7 @@ void CombatSystem::MainLoop()
 void CombatSystem::EnemyTurn()
 {
     cout << "ENEMY ATTACKS!" << endl;
-    displayMessageAfterDelay("Enemy Attacks!", 1);
+    DisplayMessageAfterDelay("Enemy Attacks!", 1);
     cout << Engine::GetInstance().combatui.get()->text.GetString() << endl;
     enemy->Attack(enemy, player);
     isPlayerTurn = true;
@@ -97,7 +97,7 @@ void CombatSystem::PlayerTurn()
     case  CombatUI::CombatInput::ATTACK:
         player->combatStats->isGuarding = false;
         cout << "PLAYER ATTACKS!" << endl;
-        displayMessageAfterDelay("Player Attacks!", 1);
+        DisplayMessageAfterDelay("Player Attacks!", 1);
         cout << Engine::GetInstance().combatui.get()->text.GetString() << endl;
         player->Attack(player, enemy);
         isPlayerTurn = false;
@@ -106,7 +106,7 @@ void CombatSystem::PlayerTurn()
     case  CombatUI::CombatInput::GUARD:
         player->combatStats->isGuarding = false;
         cout << "PLAYER GUARDS!" << endl;
-        displayMessageAfterDelay("Player Guards!", 1);
+        DisplayMessageAfterDelay("Player Guards!", 1);
         cout << Engine::GetInstance().combatui.get()->text.GetString() << endl;
         player->Guard(player);
         isPlayerTurn = false;
@@ -199,7 +199,7 @@ void CombatSystem::displayMessageAfterDelay(const SString& message, int delayInS
 }
 
 bool CombatSystem::DisplayMessageAfterDelay(const SString& message, int delaySeconds) {
-    Timer timer;
+
     bool messageShown = false;
 
     if (!initialized) {

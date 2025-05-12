@@ -44,7 +44,7 @@
 							<frame x="0" y="160" w="32" h="32" />
 						</idle>
 					</animations>
-					<combat health="100" maxHealth="150" attackPoints="25" defensePoints="50" />
+					<combat health="100" maxHealth="150" attackPoints="25" defensePoints="0" />
 				</Cannibal>
 				<Narcissist name="Narcissist" x="2700" y="3180" w="32" h="32" speed ="2" texture="Assets/Characters/AnimationSpriteSheet.png" frontTexture="Assets/Characters/NarcissistDONE.png" gravity="true" SpawnRate="1" HelpDistance="3">
 					<animations>
@@ -58,7 +58,7 @@
 							<frame x="0" y="192" w="32" h="32" />
 						</idle>
 					</animations>
-					<combat health="100" maxHealth="150" attackPoints="25" defensePoints="50" />
+					<combat health="100" maxHealth="150" attackPoints="25" defensePoints="0" />
 				</Narcissist>
 			</enemies>
 			<NPCs>

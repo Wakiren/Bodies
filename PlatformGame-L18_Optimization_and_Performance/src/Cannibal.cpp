@@ -72,7 +72,6 @@ bool Cannibal::Update(float dt)
 	else
 	{
 		pbody->body->SetLinearVelocity(b2Vec2_zero);
-		ResetPath();
 	}
 
 	// L08 TODO 4: Add a physics to an item - update the position of the object from the physics.  

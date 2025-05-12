@@ -41,7 +41,9 @@ public:
 	int round;
 	bool isPlayerTurn = true;
 
-	bool playerAttacks, EnemyAttacks;
+	Timer timer;
 	bool initialized = false;
+
+	bool playerAttacks, EnemyAttacks;
 	bool fleed;
 };

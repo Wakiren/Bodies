@@ -185,10 +185,11 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 
 		Fighter* enemy = new Fighter(physB->listener->type);
 		enemy->combatStats = new CombatStats;
-		enemy->combatStats->health = 150;
-		enemy->combatStats->attackPoints = 10;
-		enemy->combatStats->defensePoints = 0;
-		enemy->combatStats->maxHealth = 100;
+		enemy->combatStats = Engine::GetInstance().combatSystem.get()->actualEnemy->combatStats;
+		//enemy->combatStats->health = Engine::GetInstance().combatSystem.get()->actualEnemy->combatStats->health;
+		//enemy->combatStats->attackPoints = 10;
+		//enemy->combatStats->defensePoints = 0;
+		//enemy->combatStats->maxHealth = 100;
 
 
 		Engine::GetInstance().combatSystem.get()->player = (Player*)player;
