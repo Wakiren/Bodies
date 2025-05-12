@@ -45,6 +45,8 @@ public:
 
 	void CheckForProgress();
 
+	void CheckForAction();
+
 	void DrawDialog();
 
 public:

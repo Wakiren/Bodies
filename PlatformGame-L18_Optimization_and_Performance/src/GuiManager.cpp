@@ -24,6 +24,7 @@ bool GuiManager::Start()
 {
 	Filter = Engine::GetInstance().textures->Load("Assets/UI/Filter.png");
 	Trees = Engine::GetInstance().textures->Load("Assets/Maps/Trees.png");
+	NoEyeFilter = Engine::GetInstance().textures->Load("Assets/UI/NoEyeFilter.png");
 
 	// Play the sound effect right at the fokin start --------------------------------------------- MUSIC
 		// uncomment to play
@@ -95,6 +96,11 @@ bool GuiManager::Update(float dt)
 		}
 		Engine::GetInstance().render->DrawTexture(Trees, 0, 0);
 		Engine::GetInstance().render->DrawUIimage(Filter, 0, 0);
+
+		if (NoEye == true)
+		{
+			Engine::GetInstance().render->DrawUIimage(NoEyeFilter, 0, 0);
+		}
 	}
 
 	accumulatedTime += dt;

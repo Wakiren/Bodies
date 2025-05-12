@@ -327,6 +327,7 @@ void Scene::StartDialogue(NPC &npc)
 		{
 			Engine::GetInstance().dialogueSystem.get()->LoadDialogue("dialogues.xml", npc);
 			Engine::GetInstance().dialogueSystem.get()->inDialog = true;
+			npc.CheckForAction();
 		}
 	}
 }

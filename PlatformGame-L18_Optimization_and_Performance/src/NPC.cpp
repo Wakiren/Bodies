@@ -12,6 +12,7 @@
 #include "tracy/Tracy.hpp"
 #include "Inventory.h"
 #include "window.h"
+#include "GuiManager.h"
 
 using namespace std;
 
@@ -122,6 +123,22 @@ void NPC::CheckForProgress()
 			&& NextID == 3)
 		{
 			bloked = false;
+		}
+	}
+}
+
+void NPC::CheckForAction()
+{
+	if (Engine::GetInstance().scene.get()->player->inventory == nullptr)
+	{
+		return;
+	}
+
+	for (int i = 0; i < Engine::GetInstance().scene.get()->player->inventory->items.size(); i++)
+	{
+		if (Engine::GetInstance().scene.get()->player->inventory->items[i]->name == "Eye" && type == NPCType::BILLY)
+		{
+			Engine::GetInstance().guiManager.get()->NoEye = false;
 		}
 	}
 }

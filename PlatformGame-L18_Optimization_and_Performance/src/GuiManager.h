@@ -56,8 +56,10 @@ public:
 	float updateMsCycle = 0.0f;
 	bool doLogic = false;
 	bool filterActive = false;
+	bool NoEye = true;
 
 	SDL_Texture* Filter = nullptr;
+	SDL_Texture* NoEyeFilter = nullptr;
 	SDL_Texture* Trees = nullptr;
 
 
