@@ -48,6 +48,7 @@ bool Map::Update(float dt)
             if (Image->properties.GetProperty("Draw") != NULL && Image->properties.GetProperty("Draw")->value == true)
             {
                 Engine::GetInstance().render->DrawTexture(Image->texture, 0, 0);
+				LOG("Image %s loaded", Image->name.c_str());
             }
         }
         // L07 TODO 5: Prepare the loop to draw all tiles in a layer + DrawTexture()
@@ -266,7 +267,6 @@ bool Map::Load(std::string path, std::string fileName)
                 }
             }
 
-
 			mapData.objectLayers.push_back(objectLayer);
 		}
 
@@ -280,6 +280,7 @@ bool Map::Load(std::string path, std::string fileName)
                     /*LOG("pos.x = %d, pos.y = %d, width = %d, height = %d", mapObject._x, mapObject._y, mapObject.width, mapObject.height);*/
                     PhysBody* collider = Engine::GetInstance().physics.get()->CreateRectangle(mapObject.x + mapObject.width / 2, mapObject.y + mapObject.height / 2, mapObject.width - 1, mapObject.height, STATIC);
                     collider->ctype = ColliderType::PLATFORM;
+                    Colliders.push_back(collider);
                 }
             }
         }
@@ -409,6 +410,54 @@ MapLayer* Map::GetDataLayer() {
     }
 
     return nullptr;
+}
+
+MapLayer* Map::GetDataLayerUnder() {
+
+    for (const auto& layer : mapData.layers) {
+        if (layer->name == "MapDataUnder" != NULL &&
+            layer->name == "MapDataUnder") {
+            return layer;
+        }
+    }
+    return nullptr;
+}
+
+void Map::SwapUnderUpper()
+{
+    for (const auto& layer : mapData.layers) {
+		if (layer->properties.GetProperty("Draw") != nullptr)
+            layer->properties.GetProperty("Draw")->value = !layer->properties.GetProperty("Draw")->value;
+    }
+    for (const auto& Image : mapData.bgImages) {
+        if (Image->properties.GetProperty("Draw") != nullptr)
+            Image->properties.GetProperty("Draw")->value = !Image->properties.GetProperty("Draw")->value;
+    }
+    for (const auto& Image : mapData.objectLayers) {
+        if (Image->properties.GetProperty("Collisions_") != nullptr)
+            Image->properties.GetProperty("Collisions_")->value = !Image->properties.GetProperty("Collisions_")->value;
+    }
+
+    for (int i = 0; i < Colliders.size(); i++)
+    {
+		if (Colliders[i]->ctype == ColliderType::PLATFORM) {
+			Engine::GetInstance().physics.get()->DeletePhysBody(Colliders[i]);
+
+		}
+    }
+
+	Colliders.clear();
+
+    for (const auto& mapObjectGroup : mapData.objectLayers) {
+        if (mapObjectGroup->properties.GetProperty("Collisions_") != NULL && mapObjectGroup->properties.GetProperty("Collisions_")->value == true) {
+            for (const auto& mapObject : mapObjectGroup->object_list) {
+                /*LOG("pos.x = %d, pos.y = %d, width = %d, height = %d", mapObject._x, mapObject._y, mapObject.width, mapObject.height);*/
+                PhysBody* collider = Engine::GetInstance().physics.get()->CreateRectangle(mapObject.x + mapObject.width / 2, mapObject.y + mapObject.height / 2, mapObject.width - 1, mapObject.height, STATIC);
+                collider->ctype = ColliderType::PLATFORM;
+				Colliders.push_back(collider);
+            }
+        }
+    }
 }
 
 MapObjectLayer* Map::GetNarPath() {

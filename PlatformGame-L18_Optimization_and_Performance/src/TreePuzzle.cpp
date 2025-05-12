@@ -85,7 +85,11 @@ bool TreePuzzle::Start() {
 				case 5:
 					TreeBossZone = collider;
 					break;
+				case 6:
+					TunnelsEntrance = collider;
+					break;
 				}
+
 				i++;
 			}
 		}
@@ -117,7 +121,7 @@ bool TreePuzzle::Update(float dt)
 
 		if ((*it)->IsInZone() == true && (*it)->taken == false)
 		{
-			DysplayText();
+			DysplayText("Press E to take Relic");
 			if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_E) == KEY_DOWN )
 			{
 				Item Key = Engine::GetInstance().scene.get()->CreateItem((*it)->name, (*it)->position);
@@ -129,44 +133,55 @@ bool TreePuzzle::Update(float dt)
 		}
 
 		numKeys = 4;
+	}
 
-		if (Altar->Contains(Engine::GetInstance().scene.get()->player->GetPosition().getX(),
-			Engine::GetInstance().scene.get()->player->GetPosition().getY()))
+	if (Altar->Contains(Engine::GetInstance().scene.get()->player->GetPosition().getX(),
+		Engine::GetInstance().scene.get()->player->GetPosition().getY()))
+	{
+		DysplayText("Press E to set the 4 Relics");
+		if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_E) == KEY_DOWN && numKeys == 4)
 		{
-			DysplayText();
-			if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_E) == KEY_DOWN && numKeys == 4)
-			{
-				Compleated = true;
-			}
+			Compleated = true;
+		}
+	}
+
+	if (Compleated)
+	{
+		Engine::GetInstance().render.get()->DrawTexture(AltarCompleated, AltarPos.getX(), AltarPos.getY());
+	}
+
+	if (TreeBossZone->Contains(Engine::GetInstance().scene.get()->player->GetPosition().getX(),
+		Engine::GetInstance().scene.get()->player->GetPosition().getY()) && Compleated == true && BossDefeated == false)
+	{
+		DysplayText("Press E to invoke the Tree Spirit");
+		if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
+		{
+			BossDefeated = true;
+			pugi::xml_node enemyNode = Engine::GetInstance().scene->configParameters.child("entities").child("enemies").child("TreeBoss");
+
+			TreeBoss* enemy = (TreeBoss*)Engine::GetInstance().entityManager->CreateEntity(EntityType::ENEMY, enemyNode.name());
+			enemy->SetParameters(enemyNode);
+			enemy->Awake();
+			enemy->Start();
+			enemy->pbody->listener->type = EntityType::ENEMY;
+			enemy->ItemsInEnemy.push_back("Shovel"); //Set Special Items
+
+			Engine::GetInstance().combatSystem.get()->actualEnemy = enemy;
+			Engine::GetInstance().scene->player->EnterCombatWith(enemy);
+
+			Engine::GetInstance().scene->enemyList.push_back(enemy);
+		}
+	}
+
+	if (TunnelsEntrance->Contains(Engine::GetInstance().scene.get()->player->GetPosition().getX(),
+		Engine::GetInstance().scene.get()->player->GetPosition().getY()))
+	{
+		DysplayText("Press E to enter the Tunnels");
+		if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
+		{
+			Engine::GetInstance().scene.get()->StartSecondLevel();
 		}
 
-		if (Compleated)
-		{
-			Engine::GetInstance().render.get()->DrawTexture(AltarCompleated, AltarPos.getX(), AltarPos.getY());
-		}
-
-		if (TreeBossZone->Contains(Engine::GetInstance().scene.get()->player->GetPosition().getX(),
-			Engine::GetInstance().scene.get()->player->GetPosition().getY()) && Compleated == true && BossDefeated == false)
-		{
-			DysplayText();
-			if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
-			{
-				BossDefeated = true;
-				pugi::xml_node enemyNode = Engine::GetInstance().scene->configParameters.child("entities").child("enemies").child("TreeBoss");
-					
-				TreeBoss* enemy = (TreeBoss*)Engine::GetInstance().entityManager->CreateEntity(EntityType::ENEMY, enemyNode.name());
-				enemy->SetParameters(enemyNode);
-				enemy->Awake();
-				enemy->Start();
-				enemy->pbody->listener->type = EntityType::ENEMY;
-				//enemy->ItemsInEnemy.push_back("Eye"); //Set Special Items
-
-				Engine::GetInstance().combatSystem.get()->actualEnemy = enemy;
-				Engine::GetInstance().scene->player->EnterCombatWith(enemy);
-
-				Engine::GetInstance().scene->enemyList.push_back(enemy);
-			}
-		}
 	}
 
 	return ret;
@@ -189,7 +204,7 @@ bool Symbol::IsInZone()
 }
 
 
-void TreePuzzle::DysplayText()
+void TreePuzzle::DysplayText(const char* text)
 {
-	Engine::GetInstance().render.get()->DrawText("Press E to interact", Engine::GetInstance().window.get()->width / 2, (Engine::GetInstance().window.get()->height / 2) - 32, 25, { 255,255,255 });
+	Engine::GetInstance().render.get()->DrawText(text, Engine::GetInstance().window.get()->width / 2, (Engine::GetInstance().window.get()->height / 2) - 32, 25, { 255,255,255 });
 }

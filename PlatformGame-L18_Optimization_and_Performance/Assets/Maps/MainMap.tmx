@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="172" height="152" tilewidth="32" tileheight="32" infinite="0" nextlayerid="24" nextobjectid="816">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="172" height="152" tilewidth="32" tileheight="32" infinite="0" nextlayerid="24" nextobjectid="818">
  <editorsettings>
   <chunksize width="32" height="32"/>
  </editorsettings>
@@ -87,8 +87,8 @@
  <tileset firstgid="1951" name="MapData" tilewidth="32" tileheight="32" tilecount="8" columns="8">
   <image source="MapMetadata.png" width="256" height="32"/>
  </tileset>
- <imagelayer id="11" name="Tunnels" visible="0" offsetx="416" offsety="416">
-  <image source="Tunnels.png" width="5184" height="6240"/>
+ <imagelayer id="11" name="Tunnels">
+  <image source="Tunnels.png" width="6048" height="6656"/>
   <properties>
    <property name="Draw" type="bool" value="false"/>
   </properties>
@@ -209855,5 +209855,6 @@
   <object id="801" x="2368" y="1344" width="64" height="64"/>
   <object id="814" x="2528" y="1120" width="192" height="64"/>
   <object id="815" x="2752" y="768" width="192" height="192"/>
+  <object id="817" x="3040" y="3584" width="96" height="96"/>
  </objectgroup>
 </map>

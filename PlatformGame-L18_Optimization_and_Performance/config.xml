@@ -208,6 +208,22 @@
 						</idle>
 					</animations>
 				</Sigma>
+				<Shovel name="Shovel" x="224" y="0" w="16" h="16" texture="Assets/Items/Items.png">
+					<effect type="Puzzle"/>
+					<animations>
+						<idle loop="true" speed="0.1">
+							<frame x="224" y="0" w="16" h="16" />
+						</idle>
+					</animations>
+				</Shovel>
+				<Lighter name="Lighter" x="240" y="0" w="16" h="16" texture="Assets/Items/Items.png">
+					<effect type="Weapon" amount="50" />
+					<animations>
+						<idle loop="true" speed="0.1">
+							<frame x="240" y="0" w="16" h="16" />
+						</idle>
+					</animations>
+				</Lighter>
 			</items>
 		</entities>
 	</scene>

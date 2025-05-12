@@ -3,6 +3,7 @@
 #include "Module.h"
 #include <list>
 #include <vector>
+#include "Physics.h"
 
 // L10: TODO 2: Define a property to store the Map Orientation and Load it from the map
 enum MapOrientation
@@ -184,14 +185,18 @@ public:
 
     MapLayer* GetDataLayer();
 
+	MapLayer* GetDataLayerUnder();
+
+    void SwapUnderUpper();
+
 	MapObjectLayer* GetNarPath();
 
 	std::vector<Vector2D> ConvertStringToPoints(std::string points);
+	std::vector<PhysBody*> Colliders;
 
 public: 
     std::string mapFileName;
     std::string mapPath;
-
 public:
     bool mapLoaded;
 	MapData mapData;

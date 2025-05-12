@@ -21,13 +21,14 @@ public:
 	bool Update(float dt) ;
 	bool CleanUp() ;
 
-	void DysplayText();
+	void DysplayText(const char* text);
 	
 	//////////////////////////////////
 
 	list<Symbol*> symbols;
 	PhysBody* Altar = nullptr;
 	PhysBody* TreeBossZone = nullptr;
+	PhysBody* TunnelsEntrance = nullptr;
 	SDL_Texture* AltarCompleated = nullptr;
 	Vector2D AltarPos;
 
