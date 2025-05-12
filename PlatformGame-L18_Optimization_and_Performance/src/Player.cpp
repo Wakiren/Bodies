@@ -179,21 +179,19 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 			}
 		}
 
-		Fighter* player = new Fighter(pbody->listener->type);
-		player->combatStats = combatStats;
+		//Fighter* player = new Fighter(pbody->listener->type);
+		//player->combatStats = combatStats;
 
 
-		Fighter* enemy = new Fighter(physB->listener->type);
-		enemy->combatStats = new CombatStats;
-		enemy->combatStats = Engine::GetInstance().combatSystem.get()->actualEnemy->combatStats;
-		//enemy->combatStats->health = Engine::GetInstance().combatSystem.get()->actualEnemy->combatStats->health;
-		//enemy->combatStats->attackPoints = 10;
-		//enemy->combatStats->defensePoints = 0;
-		//enemy->combatStats->maxHealth = 100;
+		//Fighter* enemy = new Fighter(physB->listener->type);
+		//enemy->combatStats = new CombatStats;
+		//enemy->combatStats = Engine::GetInstance().combatSystem.get()->actualEnemy->combatStats;
 
 
-		Engine::GetInstance().combatSystem.get()->player = (Player*)player;
-		Engine::GetInstance().combatSystem.get()->enemy = (Enemy*)enemy;
+		//Engine::GetInstance().combatSystem.get()->player = (Player*)player;
+		//Engine::GetInstance().combatSystem.get()->enemy = (Enemy*)enemy;
+
+		EnterCombatWith(Engine::GetInstance().combatSystem.get()->actualEnemy);
 		cout << "Combat Created" << endl;
 		break;
 	}
@@ -258,4 +256,19 @@ Vector2D Player::GetPosition() {
 void Player::OnPause()
 {
 	pbody->body->SetLinearVelocity(b2Vec2_zero);
+}
+
+void Player::EnterCombatWith(Enemy* enemy_)
+{
+	Fighter* player = new Fighter(pbody->listener->type);
+	player->combatStats = combatStats;
+
+
+	Fighter* enemy = new Fighter(enemy_->pbody->listener->type);
+	enemy->combatStats = new CombatStats;
+	enemy->combatStats = enemy_->combatStats;
+
+
+	Engine::GetInstance().combatSystem.get()->player = (Player*)player;
+	Engine::GetInstance().combatSystem.get()->enemy = (Enemy*)enemy;
 }

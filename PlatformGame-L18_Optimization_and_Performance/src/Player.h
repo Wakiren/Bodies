@@ -7,6 +7,7 @@
 #include "CombatStats.h"
 #include "PuzzleManager.h"
 #include "Inventory.h"
+#include "Enemy.h"
 #include <vector>
 #include <string>
 
@@ -46,6 +47,8 @@ public:
 	Vector2D GetPosition();
 
 	void OnPause() override;
+
+	void EnterCombatWith(Enemy* enemy_);
 
 public:
 
