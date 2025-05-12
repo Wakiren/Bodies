@@ -261,6 +261,7 @@ void Player::OnPause()
 
 void Player::EnterCombatWith(Enemy* enemy_)
 {
+
 	Fighter* player = new Fighter(pbody->listener->type);
 	player->combatStats = combatStats;
 

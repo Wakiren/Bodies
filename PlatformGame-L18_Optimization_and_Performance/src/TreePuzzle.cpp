@@ -11,6 +11,7 @@
 #include "Window.h"
 #include "TreeBoss.h"
 #include "EntityManager.h"
+#include "CombatSystem.h"
 #include <list>
 
 TreePuzzle::TreePuzzle() 
@@ -151,13 +152,16 @@ bool TreePuzzle::Update(float dt)
 			if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
 			{
 				BossDefeated = true;
-				pugi::xml_node enemyNode = Engine::GetInstance().scene->configParameters.child("entities").child("enemies").child("Cannibal");
+				pugi::xml_node enemyNode = Engine::GetInstance().scene->configParameters.child("entities").child("enemies").child("TreeBoss");
 					
 				TreeBoss* enemy = (TreeBoss*)Engine::GetInstance().entityManager->CreateEntity(EntityType::ENEMY, enemyNode.name());
 				enemy->SetParameters(enemyNode);
+				enemy->Awake();
+				enemy->Start();
 				enemy->pbody->listener->type = EntityType::ENEMY;
 				//enemy->ItemsInEnemy.push_back("Eye"); //Set Special Items
 
+				Engine::GetInstance().combatSystem.get()->actualEnemy = enemy;
 				Engine::GetInstance().scene->player->EnterCombatWith(enemy);
 
 				Engine::GetInstance().scene->enemyList.push_back(enemy);
