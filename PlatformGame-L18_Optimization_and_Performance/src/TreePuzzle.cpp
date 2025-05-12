@@ -9,6 +9,8 @@
 #include "Physics.h"
 #include "Entity.h"
 #include "Window.h"
+#include "TreeBoss.h"
+#include "EntityManager.h"
 #include <list>
 
 TreePuzzle::TreePuzzle() 
@@ -79,6 +81,9 @@ bool TreePuzzle::Start() {
 					AltarPos.setX(mapObject.x);
 					AltarPos.setY(mapObject.y);
 					break;
+				case 5:
+					TreeBossZone = collider;
+					break;
 				}
 				i++;
 			}
@@ -122,6 +127,8 @@ bool TreePuzzle::Update(float dt)
 			}
 		}
 
+		numKeys = 4;
+
 		if (Altar->Contains(Engine::GetInstance().scene.get()->player->GetPosition().getX(),
 			Engine::GetInstance().scene.get()->player->GetPosition().getY()))
 		{
@@ -135,6 +142,26 @@ bool TreePuzzle::Update(float dt)
 		if (Compleated)
 		{
 			Engine::GetInstance().render.get()->DrawTexture(AltarCompleated, AltarPos.getX(), AltarPos.getY());
+		}
+
+		if (TreeBossZone->Contains(Engine::GetInstance().scene.get()->player->GetPosition().getX(),
+			Engine::GetInstance().scene.get()->player->GetPosition().getY()) && Compleated == true && BossDefeated == false)
+		{
+			DysplayText();
+			if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
+			{
+				BossDefeated = true;
+				pugi::xml_node enemyNode = Engine::GetInstance().scene->configParameters.child("entities").child("enemies").child("Cannibal");
+					
+				TreeBoss* enemy = (TreeBoss*)Engine::GetInstance().entityManager->CreateEntity(EntityType::ENEMY, enemyNode.name());
+				enemy->SetParameters(enemyNode);
+				enemy->pbody->listener->type = EntityType::ENEMY;
+				//enemy->ItemsInEnemy.push_back("Eye"); //Set Special Items
+
+				Engine::GetInstance().scene->player->EnterCombatWith(enemy);
+
+				Engine::GetInstance().scene->enemyList.push_back(enemy);
+			}
 		}
 	}
 

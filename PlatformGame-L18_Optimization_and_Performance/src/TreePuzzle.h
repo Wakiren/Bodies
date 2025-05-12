@@ -27,6 +27,7 @@ public:
 
 	list<Symbol*> symbols;
 	PhysBody* Altar = nullptr;
+	PhysBody* TreeBossZone = nullptr;
 	SDL_Texture* AltarCompleated = nullptr;
 	Vector2D AltarPos;
 
@@ -35,6 +36,7 @@ public:
 	//COMPLETAEEEED!!
 
 	bool Compleated = false;
+	bool BossDefeated = false;
 };
 
 class Symbol : public Entity

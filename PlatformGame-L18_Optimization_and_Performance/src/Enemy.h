@@ -89,7 +89,8 @@ public:
 	enum class EnemyType
 	{
 		CANNIBAL,
-		NARCISSIST
+		NARCISSIST,
+		TREEBOSS
 	};
 
 	//Search for combatants
