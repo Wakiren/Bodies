@@ -48,7 +48,6 @@ bool Map::Update(float dt)
             if (Image->properties.GetProperty("Draw") != NULL && Image->properties.GetProperty("Draw")->value == true)
             {
                 Engine::GetInstance().render->DrawTexture(Image->texture, 0, 0);
-				LOG("Image %s loaded", Image->name.c_str());
             }
         }
         // L07 TODO 5: Prepare the loop to draw all tiles in a layer + DrawTexture()

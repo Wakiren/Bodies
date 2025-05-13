@@ -46,8 +46,6 @@ public:
 	//L15 TODO 2: Implement the Save function
 	void SaveState();
 
-	void StartSecondLevel();
-
 	// Handles multiple Gui Event methods
 	bool OnGuiMouseClickEvent(GuiControl* control);
 

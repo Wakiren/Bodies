@@ -84,11 +84,17 @@ Entity* EntityManager::CreateEntity(EntityType type, string name)
 	case EntityType::ENEMY:
 
 		if (name == "Narcissist")
+		{
 			entity = new Narcissist();
+		}
 		else if (name == "Cannibal")
+		{
 			entity = new Cannibal();
-		else if (name == "TreeBoss");
+		}
+		else if (name == "TreeBoss")
+		{
 			entity = new TreeBoss();
+		}
 
 	case EntityType::NPC:
 

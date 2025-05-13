@@ -178,7 +178,7 @@ bool TreePuzzle::Update(float dt)
 		DysplayText("Press E to enter the Tunnels");
 		if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
 		{
-			Engine::GetInstance().scene.get()->StartSecondLevel();
+			Engine::GetInstance().map.get()->SwapUnderUpper();
 		}
 
 	}

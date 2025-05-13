@@ -80,7 +80,7 @@ bool Scene::Start()
 			for (int j = 0; j < Engine::GetInstance().map.get()->GetDataLayer()->height; j++)
 			{
 				//CANNIBALS
-				if (Engine::GetInstance().map.get()->GetDataLayer()->Get(i, j) == 1951)
+				if (Engine::GetInstance().map.get()->GetDataLayer()->Get(i, j) == 1951 || Engine::GetInstance().map.get()->GetDataLayerUnder()->Get(i, j) == 1951)
 				{
 					pugi::xml_node enemyNode = configParameters.child("entities").child("enemies").child("Cannibal");
 					
@@ -342,54 +342,4 @@ Item Scene::CreateItem(string name, Vector2D pos)
 	itemList.push_back(item);
 
 	return *item;
-}
-
-void Scene::StartSecondLevel()
-{
-
-	WWidth = Engine::GetInstance().window.get()->width;
-	WHeight = Engine::GetInstance().window.get()->height;
-
-	Engine::GetInstance().map.get()->SwapUnderUpper();
-
-	if (Engine::GetInstance().map.get()->GetDataLayerUnder() != nullptr)
-	{
-		for (int i = 0; i < Engine::GetInstance().map.get()->GetDataLayerUnder()->width; i++)
-		{
-			for (int j = 0; j < Engine::GetInstance().map.get()->GetDataLayerUnder()->height; j++)
-			{
-				//CANNIBALS
-				if (Engine::GetInstance().map.get()->GetDataLayerUnder()->Get(i, j) == 1951)
-				{
-					pugi::xml_node enemyNode = configParameters.child("entities").child("enemies").child("Cannibal");
-
-					Vector2D enemyPos = Engine::GetInstance().map->MapToWorld(i, j);
-
-					if (RandomValue(1, enemyNode.attribute("SpawnRate").as_int()) == 1) //Other Spawns
-					{
-						Cannibal* enemy = (Cannibal*)Engine::GetInstance().entityManager->CreateEntity(EntityType::ENEMY, enemyNode.name());
-						enemy->SetParameters(enemyNode);
-						enemy->OGPosition = enemyPos;
-						enemyList.push_back(enemy);
-					}
-				}
-				//NARCISSISTS
-				if (Engine::GetInstance().map.get()->GetDataLayerUnder()->Get(i, j) == 1952)
-				{
-					pugi::xml_node enemyNode = configParameters.child("entities").child("enemies").child("Narcissist");
-
-					Vector2D enemyPos = Engine::GetInstance().map->MapToWorld(i, j);
-
-					if (RandomValue(1, enemyNode.attribute("SpawnRate").as_int()) == 1)
-					{
-						Narcissist* enemy = (Narcissist*)Engine::GetInstance().entityManager->CreateEntity(EntityType::ENEMY, enemyNode.name());
-						enemy->SetParameters(enemyNode);
-						enemy->OGPosition = enemyPos;
-						enemyList.push_back(enemy);
-					}
-				}
-			}
-		}
-	}
-
 }

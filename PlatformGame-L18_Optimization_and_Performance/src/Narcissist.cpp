@@ -106,16 +106,19 @@ bool Narcissist::Update(float dt)
 void Narcissist::MoveToNextPoint()
 {
 	ZoneScoped;
+	if (path.empty()) {
+		GetPath();
+		return; // Or handle the empty path case appropriately
+	}
+	if (NextPoint >= path.size() - 1)
+	{
+		NextPoint = 0;
+	}
 
-	if (CheckDistance(path[NextPoint])<0.1f)
+	if (CheckDistance(path[NextPoint])<5.0f)
 	{
 		NextPoint++;
 		spriteAngle = atan2(path[NextPoint].getX() - position.getX(), path[NextPoint].getY() - position.getY()) * -180 / b2_pi;
-	}
-
-	if (NextPoint >= path.size())
-	{
-		NextPoint = 0;
 	}
 
 	Vector2D direction = path[NextPoint] - GetPosition();
