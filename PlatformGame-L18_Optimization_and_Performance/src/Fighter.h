@@ -17,5 +17,5 @@ class Fighter: public Entity
 	void Heal(Fighter* fighter, int amount);
 
 	CombatStats* combatStats;
-
+	int damage;
 };

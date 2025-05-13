@@ -14,7 +14,7 @@ Fighter::~Fighter()
 
 void Fighter::Attack(Fighter* attacker, Fighter* target)
 {
-    int damage = attacker->combatStats->attackPoints - target->combatStats->defensePoints;
+    damage = attacker->combatStats->attackPoints - target->combatStats->defensePoints;
     if (damage < 0)
     {
         damage = 0;

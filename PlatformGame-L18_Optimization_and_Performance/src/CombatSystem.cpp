@@ -32,6 +32,13 @@ bool CombatSystem::Update(float dt)
 {
 
     MainLoop();
+
+    if (!initialized && timer.ReadSec() >= delaySeconds) {
+        Engine::GetInstance().combatui.get()->text = messageToPut;
+        initialized = true;
+        cout << "MESSAGE DELIVERED" << endl;
+        return true;
+    }
 	return true;
 }
 
@@ -95,13 +102,22 @@ void CombatSystem::PlayerTurn()
     {
 
     case  CombatUI::CombatInput::ATTACK:
+    {
         player->combatStats->isGuarding = false;
         cout << "PLAYER ATTACKS!" << endl;
-        DisplayMessageAfterDelay("Player Attacks!", 1);
+       // snprintf(buffer, sizeof(buffer), "Player deals &d damage", player->damage);
+        SString a = "Player deals ";
+        SString b = to_string(player->damage).c_str();
+        SString c = " damage";
+        a += b;
+        a += c;
+        DisplayMessageAfterDelay(a, 1);
         cout << Engine::GetInstance().combatui.get()->text.GetString() << endl;
         player->Attack(player, enemy);
         isPlayerTurn = false;
         break;
+    }
+       
 
     case  CombatUI::CombatInput::GUARD:
         player->combatStats->isGuarding = false;
@@ -147,7 +163,7 @@ bool CombatSystem::isCombatOver(Player* player, Enemy* enemy)
         return true;
     }
     if (!player->isAlive(player)) {
-        displayMessageAfterDelay("Player Defeated!", 1);
+        DisplayMessageAfterDelay("Player Defeated!", 1);
         cout << "Player defeated!\n";
         cout << Engine::GetInstance().combatui.get()->text.GetString() << endl;
         Engine::GetInstance().scene.get()->player->isInCombat = false;
@@ -157,10 +173,10 @@ bool CombatSystem::isCombatOver(Player* player, Enemy* enemy)
     {
         if (Engine::GetInstance().scene.get()->player->EnemyInCombat != nullptr) 
         {
-            displayMessageAfterDelay("Enemy Defeated!", 1);
+            DisplayMessageAfterDelay("Enemy Defeated!", 1);
             cout << "Enemy defeated!\n";
             cout << Engine::GetInstance().combatui.get()->text.GetString() << endl;
-            displayMessageAfterDelay(" ", 1);
+            DisplayMessageAfterDelay(" ", 1);
         }
 
 
@@ -190,7 +206,7 @@ void CombatSystem::SpawnItems()
 	}
 }
 
-void CombatSystem::displayMessageAfterDelay(const SString& message, int delayInSeconds) 
+void CombatSystem::displayMessageAfterDelay(const SString& message, int delayInSeconds)
 {
     
     std::this_thread::sleep_for(std::chrono::seconds(delayInSeconds));
@@ -198,20 +214,15 @@ void CombatSystem::displayMessageAfterDelay(const SString& message, int delayInS
     Engine::GetInstance().combatui.get()->text = message;
 }
 
-bool CombatSystem::DisplayMessageAfterDelay(const SString& message, int delaySeconds) {
+void CombatSystem::DisplayMessageAfterDelay(const SString& message, int delaySeconds_) {
 
-    bool messageShown = false;
-
-    if (!initialized) {
+        delaySeconds = delaySeconds_;
         timer.Start(); 
-        initialized = true;
-    }
+        messageToPut = message;
+        cout << "currentTime: " << timer.ReadSec();
+        cout << "toDO: " << delaySeconds_;
+        initialized = false;
 
-    if (!messageShown && timer.ReadSec() >= delaySeconds) {
-        Engine::GetInstance().combatui.get()->text = message;
-        messageShown = true;
-        return true; 
-    }
 
-    return false; 
+
 }

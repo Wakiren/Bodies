@@ -30,7 +30,7 @@ public:
 	bool isCombatOver(Player* player, Enemy* enemy);
 
 	void displayMessageAfterDelay(const SString& message, int delayInSeconds);
-	bool DisplayMessageAfterDelay(const SString& message, int delaySeconds);
+	void DisplayMessageAfterDelay(const SString& message, int delaySeconds_);
 
 public:
 
@@ -42,8 +42,13 @@ public:
 	bool isPlayerTurn = true;
 
 	Timer timer;
-	bool initialized = false;
+	bool initialized = true;
 
 	bool playerAttacks, EnemyAttacks;
 	bool fleed;
+
+	char buffer[100];
+
+	SString messageToPut;
+	int delaySeconds;
 };
