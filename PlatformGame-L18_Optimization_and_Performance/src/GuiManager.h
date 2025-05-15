@@ -46,6 +46,10 @@ public:
 	// Additional methods
 	GuiControl* CreateGuiControl(GuiControlType type, int id, const char* text, SDL_Rect bounds, int fontSize, Module* observer, SDL_Rect sliderBounds = { 0,0,0,0 }, int min = 0, int max = 0, int value = 0);
 	GuiControl* CreateGuiControl1(GuiControlType type, int id, const char* text, SDL_Rect bounds, Module* observer, SDL_Rect sliderBounds = { 0,0,0,0 });
+
+	void EnableButton(GuiControl* button);
+	void DisableButton(GuiControl* button);
+
 public:
 
 	//std::list<GuiControl*> guiControlsList;

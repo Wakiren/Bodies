@@ -47,6 +47,14 @@ bool SettingsMenu::Update(float dt)
 		once = false;
 	}
 
+	if (startOptions)
+	{
+		Engine::GetInstance().guiManager.get()->EnableButton(backButton);
+		Engine::GetInstance().guiManager.get()->EnableButton(fullscreenButton);
+		Engine::GetInstance().guiManager.get()->EnableButton(volumeSlider);
+		startOptions = false;
+	}
+
 	// Draw the background
 	//Section to draw the background (window size)
 	SDL_Rect backgroundRect = { 0, 0, 1920, 1080 };
@@ -60,6 +68,10 @@ bool SettingsMenu::Update(float dt)
 		if (haveToBack) {
 			Engine::GetInstance().settingsMenu.get()->active = false;
 			Engine::GetInstance().mainMenu.get()->active = true;
+			Engine::GetInstance().guiManager.get()->DisableButton(backButton);
+			Engine::GetInstance().guiManager.get()->DisableButton(fullscreenButton);
+			Engine::GetInstance().guiManager.get()->DisableButton(volumeSlider);
+			startOptions = true;
 			haveToBack = false;
 			once = true;
 		}

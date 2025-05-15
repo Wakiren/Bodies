@@ -42,5 +42,7 @@ private:
 	bool haveToBack = false;
 	bool haveToFullscreen = false;
 
+	bool startOptions = true;
+
 	bool once = true;
 };

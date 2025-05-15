@@ -60,6 +60,8 @@ private:
 	bool haveToStart = false;
 	bool haveToOptions = false;
 	bool haveToExit = false;
+
+	bool startMenu = true;
 };
 
 #endif // __MAINMENU_H__

@@ -94,6 +94,8 @@ public:
 	SDL_Rect section;       // Texture atlas base section
 	SDL_Rect sectionFocused; // Texture atlas base section for focused state
 
+	bool active = true; // Control active state
+
 	int fontSize = FONT_SIZE;           // Font size (if required)
 
 	Module* observer;        // Observer 

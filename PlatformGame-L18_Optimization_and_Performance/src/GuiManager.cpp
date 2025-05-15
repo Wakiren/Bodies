@@ -85,6 +85,16 @@ GuiControl* GuiManager::CreateGuiControl1(GuiControlType type, int id, const cha
 	return guiControl;
 }
 
+void GuiManager::EnableButton(GuiControl* button)
+{
+	button->active = true;
+}
+
+void GuiManager::DisableButton(GuiControl* button)
+{
+	button->active = false;
+}
+
 bool GuiManager::Update(float dt)
 {	
 	if (Engine::GetInstance().mainMenu->active == false && Engine::GetInstance().pauseMenu->active == false
@@ -156,7 +166,9 @@ bool GuiManager::Draw()
 	while (control_ != NULL)
 	{
 		if (control_->data->state != GuiControlState::NONE) {
- 			control_->data->Draw(Engine::GetInstance().render.get());
+			if (control_->data->active) {
+				control_->data->Draw(Engine::GetInstance().render.get());
+			}
 		}
 		control_ = control_->next;
 	}

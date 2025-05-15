@@ -61,6 +61,14 @@ bool MainMenu::Update(float dt)
 {
 	bool ret = true;
 
+	if (startMenu)
+	{
+		Engine::GetInstance().guiManager.get()->EnableButton(startButton);
+		Engine::GetInstance().guiManager.get()->EnableButton(optionsButton);
+		Engine::GetInstance().guiManager.get()->EnableButton(exitButton);
+		startMenu = false;
+	}
+
 	// Draw the background
 	//Section to draw the background (window size)
 	SDL_Rect backgroundRect = { 0, 0, 1920, 1080 };
@@ -79,16 +87,28 @@ bool MainMenu::Update(float dt)
 			Engine::GetInstance().entityManager.get()->active = true;
 			Engine::GetInstance().puzzleManager.get()->active = true;
 			Engine::GetInstance().mainMenu.get()->active = false;
+			Engine::GetInstance().guiManager.get()->DisableButton(startButton);
+			Engine::GetInstance().guiManager.get()->DisableButton(optionsButton);
+			Engine::GetInstance().guiManager.get()->DisableButton(exitButton);
+			startMenu = true;
 			haveToChange = false;
 		}
 		else if (haveToOptions) {
 			haveToOptions = false;
 			Engine::GetInstance().settingsMenu.get()->active = true;
 			Engine::GetInstance().mainMenu.get()->active = false;
+			Engine::GetInstance().guiManager.get()->DisableButton(startButton);
+			Engine::GetInstance().guiManager.get()->DisableButton(optionsButton);
+			Engine::GetInstance().guiManager.get()->DisableButton(exitButton);
+			startMenu = true;
 			haveToChange = false;
 		}
 		else if (haveToExit) {
 			haveToExit = false;
+			Engine::GetInstance().guiManager.get()->DisableButton(startButton);
+			Engine::GetInstance().guiManager.get()->DisableButton(optionsButton);
+			Engine::GetInstance().guiManager.get()->DisableButton(exitButton);
+			startMenu = true;
 			haveToChange = false;
 			ret = false;
 		}
