@@ -30,6 +30,11 @@ bool SettingsMenu::Start()
 	fullscreenButton = (GuiControlToggle*)Engine::GetInstance().guiManager.get()->CreateGuiControl(GuiControlType::TOGGLE, 5, "Fullscreen", { (int)Engine::GetInstance().window.get()->width / 2 - 100 / 2, (int)(Engine::GetInstance().window.get()->height / 3 * 2.5), 100, 20}, 50, this);
 	volumeSlider = (GuiControlSlider*)Engine::GetInstance().guiManager.get()->CreateGuiControl(GuiControlType::SLIDER, 6, "Volume", { (int)Engine::GetInstance().window.get()->width / 2 - 100 / 2, (int)(Engine::GetInstance().window.get()->height / 3 * 2.5) - 300, 400, 50 }, 50, this, { (int)Engine::GetInstance().window.get()->width / 2 - 100 / 2, (int)(Engine::GetInstance().window.get()->height / 3 * 2.5) + 50, 100, 20 }, 0, 220, 110);
 
+	// Set the initial state of the buttons
+	backButton->active = false;
+	fullscreenButton->active = false;
+	volumeSlider->active = false;
+
 	return true;
 }
 
@@ -42,17 +47,17 @@ bool SettingsMenu::Update(float dt)
 {
 	bool ret = true;
 
-	if (once) {
-		fullscreenButton->state = GuiControlState::NORMAL;
-		once = false;
-	}
-
 	if (startOptions)
 	{
 		Engine::GetInstance().guiManager.get()->EnableButton(backButton);
 		Engine::GetInstance().guiManager.get()->EnableButton(fullscreenButton);
 		Engine::GetInstance().guiManager.get()->EnableButton(volumeSlider);
 		startOptions = false;
+	}
+
+	if (once) {
+		fullscreenButton->state = GuiControlState::NORMAL;
+		once = false;
 	}
 
 	// Draw the background
