@@ -55,6 +55,8 @@ public:
 
 	Item CreateItem(string name, Vector2D pos);
 
+	void HandleAudio();
+
 public:
 	// Get tilePosDebug value
 	std::string GetTilePosDebug() {
@@ -74,7 +76,7 @@ public:
 private:
 	SDL_Texture* mouseTileTex = nullptr;
 	std::string tilePosDebug = "[0,0]";
-	bool once = false;
+	bool once = true;
 
 // L16: TODO 2: Declare a GUI Control Button 
 	GuiControlButton* guiBt;

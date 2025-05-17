@@ -100,10 +100,6 @@ bool GuiManager::Update(float dt)
 	if (Engine::GetInstance().mainMenu->active == false && Engine::GetInstance().pauseMenu->active == false
 		&& Engine::GetInstance().introScene->active == false && Engine::GetInstance().settingsMenu.get()->active == false)
 	{
-		if (once)
-		{
-			Engine::GetInstance().audio.get()->StopMusic();
-		}
 		Engine::GetInstance().render->DrawTexture(Trees, 0, 0);
 		Engine::GetInstance().render->DrawUIimage(Filter, 0, 0);
 

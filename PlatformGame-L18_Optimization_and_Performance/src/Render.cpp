@@ -171,6 +171,46 @@ bool Render::DrawTexture(SDL_Texture* texture, int x, int y, const SDL_Rect* sec
 	return ret;
 }
 
+bool Render::DrawPlayer(SDL_Texture* texture, int x, int y, float scale_, const SDL_Rect* section, float speed, double angle, int pivotX, int pivotY) const
+{
+	bool ret = true;
+
+	SDL_Rect rect;
+	rect.x = (int)(camera.x * speed) + x * scale;
+	rect.y = (int)(camera.y * speed) + y * scale;
+
+	if (section != NULL)
+	{
+		rect.w = section->w;
+		rect.h = section->h;
+	}
+	else
+	{
+		SDL_QueryTexture(texture, NULL, NULL, &rect.w, &rect.h);
+	}
+
+	rect.w *= scale_;
+	rect.h *= scale_;
+
+	SDL_Point* p = NULL;
+	SDL_Point pivot;
+
+	if (pivotX != INT_MAX && pivotY != INT_MAX)
+	{
+		pivot.x = pivotX;
+		pivot.y = pivotY;
+		p = &pivot;
+	}
+
+	if (SDL_RenderCopyEx(renderer, texture, section, &rect, angle, p, SDL_FLIP_NONE) != 0)
+	{
+		LOG("Cannot blit to screen. SDL_RenderCopy error: %s", SDL_GetError());
+		ret = false;
+	}
+
+	return ret;
+}
+
 bool Render::DrawUIimage(SDL_Texture* texture, int x, int y, float scale_, const SDL_Rect* section, float speed, double angle, int pivotX, int pivotY) const
 {
 	bool ret = true;
@@ -299,7 +339,7 @@ bool Render::DrawText(const char* text, int x, int y, int size, SDL_Color color)
 {
 	bool ret = true;
 	//load a font into memory
-	ttf_font = TTF_OpenFont("Assets/Fonts/MyFont.ttf", size);
+	ttf_font = TTF_OpenFont("Assets/Fonts/Remnant-Regular.ttf", size);
 
 	if (!ttf_font)
 	{

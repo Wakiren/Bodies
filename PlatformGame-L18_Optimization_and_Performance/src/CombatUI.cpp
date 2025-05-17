@@ -11,7 +11,7 @@
 #include "Engine.h"
 #include "FadeManager.h"
 #include "GuiManager.h"
-
+#include <string>
 
 #include "Defs.h"
 #include "Log.h"
@@ -101,7 +101,7 @@ bool CombatUI::Update(float dt)
 		skillButton->Draw(Engine::GetInstance().render.get());
 		fleeButton->Draw(Engine::GetInstance().render.get());
 		
-		Engine::GetInstance().render.get()->DrawText(text.GetString(), 750, 720, textSize, { 255,255,255 });
+		Engine::GetInstance().render.get()->DrawText(text.c_str(), 750, 720, textSize, {255,255,255});
 	}
 
 	//MOUSE TEXTURE RENDER//

@@ -11,8 +11,8 @@ Inventory::Inventory()
 	texture = Engine::GetInstance().textures->Load("Assets/UI/InventoryPlaceHolder.png");
 	isFull = false;
 
-	Use = (GuiControlButton*)Engine::GetInstance().guiManager.get()->CreateGuiControl(GuiControlType::BUTTON,0, "Use", { ITEM_POS_X, 512 , 100, 50 }, 100, Engine::GetInstance().scene.get());
-	Drop = (GuiControlButton*)Engine::GetInstance().guiManager.get()->CreateGuiControl(GuiControlType::BUTTON, 1, "Drop", { ITEM_POS_X - 30, 512 + Use->bounds.h + 30 , 100, 50 }, 100, Engine::GetInstance().scene.get());
+	Use = (GuiControlButton*)Engine::GetInstance().guiManager.get()->CreateGuiControl(GuiControlType::BUTTON,0, "Use", { ITEM_POS_X + 50, 512 , 100, 50 }, 50, Engine::GetInstance().scene.get());
+	Drop = (GuiControlButton*)Engine::GetInstance().guiManager.get()->CreateGuiControl(GuiControlType::BUTTON, 1, "Drop", { ITEM_POS_X, 512 + Use->bounds.h + 30 , 100, 50 }, 50, Engine::GetInstance().scene.get());
 
 	items.clear();
 }
@@ -162,6 +162,23 @@ void Inventory::UpdateInventory(float dt)
 
 		Use->Draw(Engine::GetInstance().render.get());
 		Drop->Draw(Engine::GetInstance().render.get());
+	}
+
+	//Update stats
+
+	if (Engine::GetInstance().scene.get()->player != nullptr)
+	{
+		health = to_string( Engine::GetInstance().scene.get()->player->combatStats->health);
+		defense = to_string(Engine::GetInstance().scene.get()->player->combatStats->defensePoints);
+		attack = to_string(Engine::GetInstance().scene.get()->player->combatStats->attackPoints);
+
+		// Draw the stats
+		Engine::GetInstance().render->DrawText("Health", 100, 100, 50, { 255,255,255 });
+		Engine::GetInstance().render->DrawText(health.c_str(), 100, 200, 35, { 255,255,255 });
+		Engine::GetInstance().render->DrawText("Defense" , 100, 300, 50, { 255,255,255 });
+		Engine::GetInstance().render->DrawText(defense.c_str(), 100, 400, 35, { 255,255,255 });
+		Engine::GetInstance().render->DrawText("Attack" , 100, 500, 50, { 255,255,255 });
+		Engine::GetInstance().render->DrawText(attack.c_str(), 100, 600, 35, { 255,255,255 });
 	}
 
 }

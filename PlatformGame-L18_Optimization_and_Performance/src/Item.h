@@ -49,6 +49,7 @@ public:
 	//Atributes
 	string type;
 	int amount;
+	string description;
 	bool equiped = false;
 
 	//Inventory

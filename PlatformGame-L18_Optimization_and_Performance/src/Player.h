@@ -10,6 +10,7 @@
 #include "Enemy.h"
 #include <vector>
 #include <string>
+#include "Timer.h"
 
 struct CombatStats;
 struct SDL_Texture;
@@ -83,6 +84,6 @@ private:
 	const Vector2D vecZero = {0,0};
 	Vector2D destination;
 	Vector2D movementVector = {0,0};
-
+	Timer* time = nullptr;
 	double spriteAngle;
 };

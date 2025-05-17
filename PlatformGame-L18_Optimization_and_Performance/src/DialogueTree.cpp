@@ -40,7 +40,7 @@ DialogueTree::DialogueTree(bool a)
 
 bool DialogueTree::UpdateTree(float dt, Module* mod, Vector2D pos)
 {
-	max_chars_line = fontSize * 2 ;
+	max_chars_line = fontSize * 2.5f ;
 
 	// TODO 6: Substitute player's name in text and choices if needed
 	if (!Engine::GetInstance().input.get()->playerName.empty())

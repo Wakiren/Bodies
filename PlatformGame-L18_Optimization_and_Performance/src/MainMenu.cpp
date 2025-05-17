@@ -92,6 +92,8 @@ bool MainMenu::Update(float dt)
 			Engine::GetInstance().guiManager.get()->DisableButton(exitButton);
 			startMenu = true;
 			haveToChange = false;
+			Engine::GetInstance().audio.get()->StopMusic();
+			Engine::GetInstance().audio.get()->PlayMusic("Assets/Audio/Music/Ambient_Forest_BODIES.wav", 2.0f);
 		}
 		else if (haveToOptions) {
 			haveToOptions = false;

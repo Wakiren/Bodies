@@ -108,4 +108,8 @@ private:
 	int rows = 0;
 	//No item is selected
 	int currentItem = -1;
+
+	string health;
+	string attack;
+	string defense;
 };

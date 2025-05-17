@@ -61,9 +61,6 @@ bool Scene::Start()
 	//L06 TODO 3: Call the function to load the map. 
 	Engine::GetInstance().map->Load(configParameters.child("map").attribute("path").as_string(), configParameters.child("map").attribute("name").as_string());
 
-	// Texture to highligh mouse position 
-	mouseTileTex = Engine::GetInstance().textures.get()->Load("Assets/Maps/MapMetadata.png");
-
 	// Initalize the camera position
 	int w, h;
 	Engine::GetInstance().window.get()->GetWindowSize(w, h);
@@ -123,11 +120,24 @@ bool Scene::Start()
 	}
 
 
-
+	
 
 	return true;
 }
 
+void Scene::HandleAudio()
+{
+	if (player->isInCombat == true)
+	{
+		Engine::GetInstance().audio.get()->StopMusic();
+		Engine::GetInstance().audio.get()->PlayMusic("Assets/Audio/Music/Bodies Battle Theme.wav", 1.0f);
+	}
+	else
+	{
+		Engine::GetInstance().audio.get()->StopMusic();
+		Engine::GetInstance().audio.get()->PlayMusic("Assets/Audio/Music/Ambient_Forest_BODIES.wav", 2.0f);
+	}
+}
 // Called each loop iteration
 bool Scene::PreUpdate()
 {
@@ -141,7 +151,6 @@ bool Scene::Update(float dt)
 	//L03 TODO 3: Make the camera movement independent of framerate
 	float camSpeed = 2;
 	int scale = Engine::GetInstance().window.get()->GetScale();
-
 
 	if (Engine::GetInstance().physics.get()->debug) {
 		if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
@@ -321,8 +330,8 @@ int Scene::RandomValue(int min, int max)
 void Scene::StartDialogue(NPC &npc)
 {
 	if (Engine::GetInstance().dialogueSystem->inDialog == false && npc.bloked == false)
-	{
-		Engine::GetInstance().render.get()->DrawText("Press E to interact", Engine::GetInstance().window.get()->width / 2, (Engine::GetInstance().window.get()->height / 2) - 32, 25, { 255,255,255 });
+	{(
+		Engine::GetInstance().render.get()->DrawText("Press E to interact", (Engine::GetInstance().window.get()->width / 2) - SPACING, (Engine::GetInstance().window.get()->height / 2) - 32, 25, { 255,255,255 }));
 		if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
 		{
 			Engine::GetInstance().dialogueSystem.get()->LoadDialogue("dialogues.xml", npc);

@@ -28,6 +28,7 @@ Player::~Player() {
 bool Player::Awake() {
 
 	combatStats = new CombatStats;
+	time = new Timer();
 	return true;
 }
 
@@ -66,6 +67,7 @@ bool Player::Start() {
 	combatStats->maxHealth = parameters.child("combat").attribute("maxHealth").as_int();
 	combatStats->defensePoints = parameters.child("combat").attribute("defensePoints").as_int();
 
+	time->Start();
 	// Initialize Inventory
 	inventory = new Inventory();
 
@@ -82,12 +84,14 @@ bool Player::Update(float dt)
 		velocity = b2Vec2(0,0);
 	}
 
+	LOG("Time: %d", time->ReadSec());
+
 
 	b2Transform pbodyPos = pbody->body->GetTransform();
 	position.setX(METERS_TO_PIXELS(pbodyPos.p.x) - texH / 2);
 	position.setY(METERS_TO_PIXELS(pbodyPos.p.y) - texH / 2);
 
-	Engine::GetInstance().render.get()->DrawTexture(texture, (int)position.getX(), (int)position.getY(),
+	Engine::GetInstance().render.get()->DrawPlayer(texture, (int)position.getX(), (int)position.getY(),3,
 	&currentAnimation->GetCurrentFrame(), 1, spriteAngle);
 	currentAnimation->Update();
 
@@ -100,6 +104,8 @@ bool Player::Update(float dt)
 	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 	{
 		Engine::GetInstance().scene.get()->CreateItem("Eye", position);
+		Engine::GetInstance().scene.get()->CreateItem("Sizors", position);
+		Engine::GetInstance().scene.get()->CreateItem("CookedMixedMeat", position);
 
 	}
 	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_I) == KEY_DOWN)
@@ -175,22 +181,12 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 			if (Engine::GetInstance().scene.get()->enemyList[i]->pbody == physB)
 			{
 				Engine::GetInstance().combatSystem.get()->actualEnemy = Engine::GetInstance().scene.get()->enemyList[i];
+				Engine::GetInstance().scene.get()->player->isInCombat = true;
 			}
 		}
 
-		//Fighter* player = new Fighter(pbody->listener->type);
-		//player->combatStats = combatStats;
-
-
-		//Fighter* enemy = new Fighter(physB->listener->type);
-		//enemy->combatStats = new CombatStats;
-		//enemy->combatStats = Engine::GetInstance().combatSystem.get()->actualEnemy->combatStats;
-
-
-		//Engine::GetInstance().combatSystem.get()->player = (Player*)player;
-		//Engine::GetInstance().combatSystem.get()->enemy = (Enemy*)enemy;
-
 		EnterCombatWith(Engine::GetInstance().combatSystem.get()->actualEnemy);
+		Engine::GetInstance().scene.get()->HandleAudio();
 		cout << "Combat Created" << endl;
 		break;
 	}

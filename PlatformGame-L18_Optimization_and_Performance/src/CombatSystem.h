@@ -5,6 +5,7 @@
 #include "SString.h"
 #include <thread>
 #include <chrono>
+#include <string>
 
 struct CombatStats;
 class CombatSystem : public Module
@@ -29,8 +30,7 @@ public:
 
 	bool isCombatOver(Player* player, Enemy* enemy);
 
-	void displayMessageAfterDelay(const SString& message, int delayInSeconds);
-	void DisplayMessageAfterDelay(const SString& message, int delaySeconds_);
+	void DisplayMessageAfterDelay( int delaySeconds_);
 
 public:
 
@@ -49,6 +49,6 @@ public:
 
 	char buffer[100];
 
-	SString messageToPut;
+	string messageToPut;
 	int delaySeconds;
 };
