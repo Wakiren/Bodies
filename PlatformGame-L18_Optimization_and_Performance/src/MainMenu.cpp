@@ -43,9 +43,9 @@ bool MainMenu::Start()
 
 	buttons = Engine::GetInstance().textures.get()->Load("Assets/Textures/Buttons.png");
 
-	startButton = (GuiControlButton*)Engine::GetInstance().guiManager.get()->CreateGuiControl(GuiControlType::BUTTON, 1,"Start", { 200, 150, 106, 38 }, 50, this);
-	optionsButton = (GuiControlButton*)Engine::GetInstance().guiManager.get()->CreateGuiControl(GuiControlType::BUTTON, 2, "Options", { 200, 300, 106, 38 }, 50, this);
-	exitButton = (GuiControlButton*)Engine::GetInstance().guiManager.get()->CreateGuiControl(GuiControlType::BUTTON, 3, "Exit", { 200, 200, 106, 38 }, 50, this);
+	startButton = (GuiControlButton*)Engine::GetInstance().guiManager.get()->CreateGuiControl(GuiControlType::BUTTON, 1,"Start", { 848, 550, 106, 38 }, 70, this);
+	optionsButton = (GuiControlButton*)Engine::GetInstance().guiManager.get()->CreateGuiControl(GuiControlType::BUTTON, 2, "Options", { 848, 700, 106, 38 }, 70, this);
+	exitButton = (GuiControlButton*)Engine::GetInstance().guiManager.get()->CreateGuiControl(GuiControlType::BUTTON, 3, "Exit", { 848, 850, 106, 38 }, 70, this);
 
 	return true;
 }
@@ -135,9 +135,9 @@ bool MainMenu::Update(float dt)
 		}
 	}
 
-	//Button textures
-	Engine::GetInstance().render.get()->DrawTexture(buttons, 200, 150, &Button1);
-	Engine::GetInstance().render.get()->DrawTexture(buttons, 200, 200, &Button2);
+	////Button textures
+	//Engine::GetInstance().render.get()->DrawTexture(buttons, 200, 150, &Button1);
+	//Engine::GetInstance().render.get()->DrawTexture(buttons, 200, 200, &Button2);
 
 	// Draw the buttons
 	startButton->Draw(Engine::GetInstance().render.get());
