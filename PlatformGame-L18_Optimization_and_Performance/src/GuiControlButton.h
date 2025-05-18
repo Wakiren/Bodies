@@ -19,6 +19,7 @@ private:
 
 	bool canClick = true;
 	bool drawBasic = false;
+	bool hasTexture = false;
 };
 
 #pragma once

@@ -43,6 +43,11 @@ bool MainMenu::Start()
 
 	buttons = Engine::GetInstance().textures.get()->Load("Assets/Textures/Buttons.png");
 
+	// Load the button textures
+	StartButtonTexture = Engine::GetInstance().textures.get()->Load("Assets/UI/PauseManuContinue.png");
+	OptionsButtonTexture = Engine::GetInstance().textures.get()->Load("Assets/UI/PauseMenuOptions.png");
+	ExitButtonTexture = Engine::GetInstance().textures.get()->Load("Assets/UI/PauseMenuExit.png");
+
 	startButton = (GuiControlButton*)Engine::GetInstance().guiManager.get()->CreateGuiControl(GuiControlType::BUTTON, 1,"Start", { 848, 550, 106, 38 }, 70, this);
 	optionsButton = (GuiControlButton*)Engine::GetInstance().guiManager.get()->CreateGuiControl(GuiControlType::BUTTON, 2, "Options", { 848, 700, 106, 38 }, 70, this);
 	exitButton = (GuiControlButton*)Engine::GetInstance().guiManager.get()->CreateGuiControl(GuiControlType::BUTTON, 3, "Exit", { 848, 850, 106, 38 }, 70, this);
@@ -135,14 +140,15 @@ bool MainMenu::Update(float dt)
 		}
 	}
 
-	////Button textures
-	//Engine::GetInstance().render.get()->DrawTexture(buttons, 200, 150, &Button1);
-	//Engine::GetInstance().render.get()->DrawTexture(buttons, 200, 200, &Button2);
-
 	// Draw the buttons
 	startButton->Draw(Engine::GetInstance().render.get());
 	exitButton->Draw(Engine::GetInstance().render.get());
 	optionsButton->Draw(Engine::GetInstance().render.get());
+
+	////Button textures
+	//Engine::GetInstance().render.get()->DrawUIimage(StartButtonTexture, startButton->bounds.x, startButton->bounds.y, 1, &(startButton->bounds));
+	//Engine::GetInstance().render.get()->DrawUIimage(OptionsButtonTexture, optionsButton->bounds.x, optionsButton->bounds.y, 1, &(optionsButton->bounds));
+	//Engine::GetInstance().render.get()->DrawUIimage(ExitButtonTexture, exitButton->bounds.x, exitButton->bounds.y, 1, &(exitButton->bounds));
 
 	int x, y;
 	

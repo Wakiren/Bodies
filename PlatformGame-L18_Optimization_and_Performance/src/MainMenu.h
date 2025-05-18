@@ -56,6 +56,10 @@ private:
 	GuiControlButton* optionsButton = nullptr;
 	GuiControlButton* exitButton = nullptr;
 
+	SDL_Texture* StartButtonTexture = nullptr;
+	SDL_Texture* OptionsButtonTexture = nullptr;
+	SDL_Texture* ExitButtonTexture = nullptr;
+
 	bool haveToChange = false;
 	bool haveToStart = false;
 	bool haveToOptions = false;
