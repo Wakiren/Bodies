@@ -134,6 +134,8 @@ bool TreePuzzle::Update(float dt)
 
 	}
 
+	numKeys = 4;
+
 	if (Altar->Contains(Engine::GetInstance().scene.get()->player->GetPosition().getX(),
 		Engine::GetInstance().scene.get()->player->GetPosition().getY()))
 	{

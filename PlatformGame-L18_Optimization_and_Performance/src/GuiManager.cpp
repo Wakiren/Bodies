@@ -103,10 +103,10 @@ bool GuiManager::Update(float dt)
 		Engine::GetInstance().render->DrawTexture(Trees, 0, 0);
 		Engine::GetInstance().render->DrawUIimage(Filter, 0, 0);
 
-		if (NoEye == true)
-		{
-			Engine::GetInstance().render->DrawUIimage(NoEyeFilter, 0, 0);
-		}
+		//if (NoEye == true)
+		//{
+		//	Engine::GetInstance().render->DrawUIimage(NoEyeFilter, 0, 0);
+		//}
 	}
 
 	accumulatedTime += dt;

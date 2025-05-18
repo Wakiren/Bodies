@@ -47,7 +47,7 @@ bool Player::Start() {
 	currentAnimation = &idle;
 
 	// L08 TODO 5: Add physics to the player - initialize physics body
-	pbody = Engine::GetInstance().physics.get()->CreateCircle((int)position.getX(), (int)position.getY(), texW / 3, bodyType::DYNAMIC);
+	pbody = Engine::GetInstance().physics.get()->CreateCircle((int)position.getX(), (int)position.getY(), 8, bodyType::DYNAMIC);
 
 	// L08 TODO 6: Assign player class (using "this") to the listener of the pbody. This makes the Physics module to call the OnCollision method
 	pbody->listener = this;
@@ -105,7 +105,8 @@ bool Player::Update(float dt)
 	{
 		Engine::GetInstance().scene.get()->CreateItem("Eye", position);
 		Engine::GetInstance().scene.get()->CreateItem("Sizors", position);
-		Engine::GetInstance().scene.get()->CreateItem("CookedMixedMeat", position);
+		Engine::GetInstance().scene.get()->CreateItem("MixedMeat", position);
+
 
 	}
 	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_I) == KEY_DOWN)
