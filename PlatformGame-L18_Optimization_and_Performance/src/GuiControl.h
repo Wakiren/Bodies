@@ -80,6 +80,9 @@ public:
 		observer->OnGuiMouseClickEvent(this);
 	}
 
+	void DialogueButton() { dialogueButton = true; }
+
+
 public:
 
 	int id;
@@ -99,4 +102,6 @@ public:
 	int fontSize = FONT_SIZE;           // Font size (if required)
 
 	Module* observer;        // Observer 
+
+	bool dialogueButton = false; // Is a dialogue button
 };

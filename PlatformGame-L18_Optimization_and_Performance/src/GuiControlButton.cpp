@@ -87,25 +87,25 @@ bool GuiControlButton::Draw(Render* render)
 
 	case GuiControlState::DISABLED:
 	{
-		render->DrawRectangle({ bounds.x, bounds.y, bounds.w, bounds.h }, 0, 0, 0, 0, true, false);
+		render->DrawRectangle({ bounds.x - Spacing , bounds.y - Spacing, bounds.w + Spacing, bounds.h  + Spacing }, 0, 0, 0, 0, true, false);
 
 	} break;
 
 	case GuiControlState::NORMAL:
 	{
-		render->DrawRectangle({ bounds.x, bounds.y, bounds.w, bounds.h}, 0, 0, 0, 125, true, false);
+		render->DrawRectangle({ bounds.x - Spacing, bounds.y - Spacing, bounds.w + Spacing, bounds.h + Spacing }, 0, 0, 0, 125, true, false);
 
 	}	break;
 
 	case GuiControlState::FOCUSED:
 	{
-		render->DrawRectangle({ bounds.x, bounds.y, bounds.w, bounds.h }, 255, 255, 255, 100, true, false);
+		render->DrawRectangle({ bounds.x - Spacing, bounds.y - Spacing, bounds.w + Spacing, bounds.h + Spacing }, 255, 255, 255, 100, true, false);
 
 	} break;
 
 	case GuiControlState::PRESSED:
 	{
-		render->DrawRectangle({ bounds.x, bounds.y, bounds.w, bounds.h }, 255, 255, 255, 150, true, false);
+		render->DrawRectangle({ bounds.x - Spacing, bounds.y - Spacing, bounds.w + Spacing, bounds.h + Spacing }, 255, 255, 255, 150, true, false);
 
 	} break;
 

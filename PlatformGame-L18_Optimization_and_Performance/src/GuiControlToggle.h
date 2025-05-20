@@ -28,5 +28,6 @@ private:
 	SDL_Color toColor = { 10, 110, 0, 255 };
 	bool isToggled = true;
 	float toggleTime;    
-	float currentTime;       
+	float currentTime;   
+	int Spacing = 10;
 };

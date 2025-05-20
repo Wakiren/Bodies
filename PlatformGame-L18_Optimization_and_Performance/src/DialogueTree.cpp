@@ -85,7 +85,7 @@ bool DialogueTree::UpdateChoices(Module* mod, Vector2D pos, int fontSize)
 		int h = fontSize + fontSize / 4;
 		SDL_Rect bounds = { Engine::GetInstance().window.get()->width - w, pos.getY() - (h + fontSize) * (i + 1) - DIALOGUE_H , w, h};
 
-		button = (GuiControlButton*)Engine::GetInstance().guiManager.get()->CreateGuiControl(GuiControlType::BUTTON, i, ch_option, bounds, fontSize, mod);
+		button = (GuiControlButton*)Engine::GetInstance().guiManager.get()->CreateGuiControl(GuiControlType::BUTTON, i, ch_option, bounds, fontSize, mod, true);
 		button->state = GuiControlState::NORMAL;
 		listDialogueButtons.Add(button);
 	}

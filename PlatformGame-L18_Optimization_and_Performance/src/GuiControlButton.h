@@ -15,11 +15,14 @@ public:
 	bool Update(float dt);
 	bool Draw(Render* render);
 
+
 private:
 
 	bool canClick = true;
 	bool drawBasic = false;
 	bool hasTexture = false;
+	int Spacing = 10;
+	bool dialogueButton = false;
 };
 
 #pragma once

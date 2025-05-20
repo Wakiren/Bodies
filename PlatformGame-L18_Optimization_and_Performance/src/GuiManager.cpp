@@ -34,7 +34,7 @@ bool GuiManager::Start()
 }
 
 // L16: TODO 1: Implement CreateGuiControl function that instantiates a new GUI control and add it to the list of controls
-GuiControl* GuiManager::CreateGuiControl(GuiControlType type, int id, const char* text, SDL_Rect bounds, int fontSize, Module* observer, SDL_Rect sliderBounds, int min, int max, int value)
+GuiControl* GuiManager::CreateGuiControl(GuiControlType type, int id, const char* text, SDL_Rect bounds, int fontSize, Module* observer,bool IsDialog, SDL_Rect sliderBounds, int min, int max, int value)
 {
 	GuiControl* guiControl = nullptr;
 
@@ -57,30 +57,14 @@ GuiControl* GuiManager::CreateGuiControl(GuiControlType type, int id, const char
 
 	// Created GuiControls are add it to the list of controls
 	/*guiControlsList.push_back(guiControl);*/
-	guiControlsList_.Add(guiControl);
-
-	return guiControl;
-}
-GuiControl* GuiManager::CreateGuiControl1(GuiControlType type, int id, const char* text, SDL_Rect bounds, Module* observer, SDL_Rect sliderBounds)
-{
-	GuiControl* guiControl = nullptr;
-
-	switch (type)
+	if (IsDialog == true)
 	{
-	case GuiControlType::BUTTON:
-		guiControl = new GuiControlButton(id, bounds, text);
-		break;
-	//case GuiControlType::SLIDER:
-	//	guiControl = new GuiSlider(id,bounds,text,observer, 0, 200);
-	//	break;
-	//case GuiControlType::TOGGLE:
-	//	guiControl = new GuiToggle(id, bounds, text);
-	//	break;
+		guiControlsList_.Add(guiControl);
 	}
-
-	guiControl->observer = observer;
-
-	guiControlsList_.Add(guiControl);
+	else
+	{
+		guiControlList.Add(guiControl);
+	}
 
 	return guiControl;
 }
@@ -103,10 +87,10 @@ bool GuiManager::Update(float dt)
 		Engine::GetInstance().render->DrawTexture(Trees, 0, 0);
 		Engine::GetInstance().render->DrawUIimage(Filter, 0, 0);
 
-		//if (NoEye == true)
-		//{
-		//	Engine::GetInstance().render->DrawUIimage(NoEyeFilter, 0, 0);
-		//}
+		if (NoEye == true)
+		{
+			Engine::GetInstance().render->DrawUIimage(NoEyeFilter, 0, 0);
+		}
 	}
 
 	accumulatedTime += dt;
@@ -116,10 +100,16 @@ bool GuiManager::Update(float dt)
 	if (doLogic == true)
 	{
 		ListItem<GuiControl*>* control = guiControlsList_.start;
+		ListItem<GuiControl*>* control2 = guiControlList.start;
 		while (control != nullptr)
 		{
 			if (control->data->state != GuiControlState::NONE) { control->data->Update(dt); }
 			control = control->next;
+		}
+		while (control2 != nullptr)
+		{
+			if (control2->data->state != GuiControlState::NONE) { control2->data->Update(dt); }
+			control2 = control2->next;
 		}
 
 		accumulatedTime = 0.0f;
@@ -158,7 +148,7 @@ bool GuiManager::Update(float dt)
 
 bool GuiManager::Draw()
 {
-	ListItem<GuiControl*>* control_ = guiControlsList_.start;
+	ListItem<GuiControl*>* control_ = guiControlList.start;
 	while (control_ != NULL)
 	{
 		if (control_->data->state != GuiControlState::NONE) {
@@ -172,20 +162,20 @@ bool GuiManager::Draw()
 	return true;
 }
 
-bool GuiManager::DrawDialogueButtons()
+bool GuiManager::DrawDialog()
 {
-	ListItem<GuiControl*>* control_ = Engine::GetInstance().dialogueSystem.get()->activeTree->listDialogueButtons.start;
-	while (control_ != NULL)
+	ListItem<GuiControl*>* control = guiControlsList_.start;
+	while (control != NULL)
 	{
-		if (control_->data->state != GuiControlState::NONE) {
-			control_->data->Draw(Engine::GetInstance().render.get());
+		if (control->data->state != GuiControlState::NONE) {
+			if (control->data->active) {
+				control->data->Draw(Engine::GetInstance().render.get());
+			}
 		}
-		control_ = control_->next;
+		control = control->next;
 	}
-
 	return true;
 }
-
 
 
 bool GuiManager::CleanUp()

@@ -11,8 +11,8 @@ Inventory::Inventory()
 	texture = Engine::GetInstance().textures->Load("Assets/UI/InventoryPlaceHolder.png");
 	isFull = false;
 
-	Use = (GuiControlButton*)Engine::GetInstance().guiManager.get()->CreateGuiControl(GuiControlType::BUTTON,0, "Use", { ITEM_POS_X + 50, 512 , 100, 50 }, 50, Engine::GetInstance().scene.get());
-	Drop = (GuiControlButton*)Engine::GetInstance().guiManager.get()->CreateGuiControl(GuiControlType::BUTTON, 1, "Drop", { ITEM_POS_X, 512 + Use->bounds.h + 30 , 100, 50 }, 50, Engine::GetInstance().scene.get());
+	Use = (GuiControlButton*)Engine::GetInstance().guiManager.get()->CreateGuiControl(GuiControlType::BUTTON,0, "Use", { ITEM_POS_X + 50, 512 , 100, 50 }, 50, Engine::GetInstance().scene.get(), false);
+	Drop = (GuiControlButton*)Engine::GetInstance().guiManager.get()->CreateGuiControl(GuiControlType::BUTTON, 1, "Drop", { ITEM_POS_X, 512 + Use->bounds.h + 30 , 100, 50 }, 50, Engine::GetInstance().scene.get(), false);
 
 	items.clear();
 }

@@ -39,13 +39,13 @@ bool CombatUI::Start()
 
 	//Create Buttons
 	attackButton = (GuiControlButton*)Engine::GetInstance().guiManager.get()->CreateGuiControl
-	(GuiControlType::BUTTON, 1, "Attack", {350,720,224,64} , 50, this);
+	(GuiControlType::BUTTON, 1, "Attack", {350,720,224,64} , 50, this, false);
 	guardButton = (GuiControlButton*)Engine::GetInstance().guiManager.get()->CreateGuiControl
-	(GuiControlType::BUTTON, 1, "Guard", { 350,64 + 720,224,64 }, 50, this);
+	(GuiControlType::BUTTON, 1, "Guard", { 350,64 + 720,224,64 }, 50, this, false);
 	skillButton = (GuiControlButton*)Engine::GetInstance().guiManager.get()->CreateGuiControl
-	(GuiControlType::BUTTON, 1, "Skill", { 350,128 + 720,224,64 }, 50, this);
+	(GuiControlType::BUTTON, 1, "Skill", { 350,128 + 720,224,64 }, 50, this, false);
 	fleeButton = (GuiControlButton*)Engine::GetInstance().guiManager.get()->CreateGuiControl
-	(GuiControlType::BUTTON, 1, "Flee", { 350,192 + 720,224,64 }, 50, this);
+	(GuiControlType::BUTTON, 1, "Flee", { 350,192 + 720,224,64 }, 50, this, false);
 
 	return true;
 }

@@ -7,10 +7,15 @@ GuiControlToggle::GuiControlToggle(int id, SDL_Rect bounds, const char* text, in
     this->bounds = bounds;
     this->text = text;
 	this->fontSize = fontSize;
+    int length = strlen(text);
 
-	// The bounds depends on the font size
-	this->bounds.w = fontSize * 0.5 * strlen(text);
-	this->bounds.h = fontSize + 10;
+    if (length == 0)
+    {
+        length = 8;
+    }
+    // The bounds depends on the font size
+    this->bounds.w = fontSize * 0.75 * length;
+    this->bounds.h = fontSize + 10;
 
     canClick = true;
     drawBasic = false;
@@ -93,11 +98,11 @@ bool GuiControlToggle::Draw(Render* render)
     {
         if (isToggled)
         {
-            render->DrawRectangle({ bounds.x, bounds.y, bounds.w, bounds.h }, toColor.r, toColor.g, toColor.b, toColor.a, true, false);
+            render->DrawRectangle({ bounds.x -  Spacing, bounds.y - Spacing, bounds.w + Spacing, bounds.h + Spacing }, toColor.r, toColor.g, toColor.b, toColor.a, true, false);
         }
         else if (!isToggled)
         {
-            render->DrawRectangle({ bounds.x, bounds.y, bounds.w, bounds.h }, fromColor.r, fromColor.g, fromColor.b, fromColor.a, true, false);
+            render->DrawRectangle({ bounds.x - Spacing, bounds.y - Spacing, bounds.w + Spacing, bounds.h + Spacing }, fromColor.r, fromColor.g, fromColor.b, fromColor.a, true, false);
         }
 
     }break;
@@ -106,13 +111,13 @@ bool GuiControlToggle::Draw(Render* render)
     {
         LOG("FOCUSED");
         render->DrawRectangle({ bounds.x - 3, bounds.y - 3, bounds.w + 6, bounds.h + 6 }, 250, 248, 246, 255, true, false);
-        render->DrawRectangle({ bounds.x,bounds.y,bounds.w, bounds.h }, 71, 75, 78, fromColor.a, true, false);
+        render->DrawRectangle({ bounds.x - Spacing, bounds.y - Spacing, bounds.w + Spacing, bounds.h + Spacing }, 71, 75, 78, fromColor.a, true, false);
 
     } break;
 
     case GuiControlState::PRESSED:
     {
-        render->DrawRectangle({ bounds.x,bounds.y,bounds.w, bounds.h }, fromColor.r, fromColor.g, fromColor.b, fromColor.a, true, false);
+        render->DrawRectangle({ bounds.x - Spacing, bounds.y - Spacing, bounds.w + Spacing, bounds.h + Spacing }, fromColor.r, fromColor.g, fromColor.b, fromColor.a, true, false);
 
     } break;
 
