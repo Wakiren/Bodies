@@ -88,11 +88,11 @@ bool GuiManager::Update(float dt)
 		&& Engine::GetInstance().introScene->active == false && Engine::GetInstance().settingsMenu.get()->active == false)
 	{
 		Engine::GetInstance().render->DrawTexture(Trees, 0, 0);
-		Engine::GetInstance().render->DrawUIimage(Filter,-591/2, -710,1,FilterAngle);
+		Engine::GetInstance().render->DrawUIimage(Filter,-290, -700,1,FilterAngle);
 
 		if (NoEye == true)
 		{
-			Engine::GetInstance().render->DrawUIimage(NoEyeFilter, -591/2, -710, 1, FilterAngle);
+			Engine::GetInstance().render->DrawUIimage(NoEyeFilter, -290, -700, 1, FilterAngle);
 		}
 	}
 
