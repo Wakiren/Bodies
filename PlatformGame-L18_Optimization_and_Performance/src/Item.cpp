@@ -66,8 +66,11 @@ bool Item::Update(float dt)
 	position.setX(METERS_TO_PIXELS(pbodyPos.p.x) - texH / 2);
 	position.setY(METERS_TO_PIXELS(pbodyPos.p.y) - texH / 2);
 
-	Engine::GetInstance().render.get()->DrawTexture(texture, (int)position.getX(), (int)position.getY(), &currentAnimation->GetCurrentFrame());
-	currentAnimation->Update();
+	if (InSight == true)
+	{
+		Engine::GetInstance().render.get()->DrawTexture(texture, (int)position.getX(), (int)position.getY(), &currentAnimation->GetCurrentFrame());
+		currentAnimation->Update();
+	}
 
 	Stabilize();
 
@@ -110,7 +113,7 @@ void Item::Stabilize()
 
 void Item::DrawInInventory(Vector2D pos, int scale)
 {
-	Engine::GetInstance().render.get()->DrawUIimage(texture, (int)pos.getX(), (int)pos.getY(), scale, &currentAnimation->GetCurrentFrame());
+	Engine::GetInstance().render.get()->DrawUIimage(texture, (int)pos.getX(), (int)pos.getY(), scale, 0, &currentAnimation->GetCurrentFrame());
 	currentAnimation->Update();
 
 
@@ -142,7 +145,7 @@ void Item::DrawInInventory(Vector2D pos, int scale)
 	{
 		Engine::GetInstance().render.get()->DrawUIimage(Selected, (int)pos.getX(), (int)pos.getY(), scale);
 		Engine::GetInstance().render.get()->DrawText(name.c_str(), ITEM_POS_X, ITEM_POS_Y - 100, 70, {255, 255, 255});
-		Engine::GetInstance().render.get()->DrawUIimage(texture, ITEM_POS_X, ITEM_POS_Y, PREVIEW_SCALE, &currentAnimation->GetCurrentFrame());
+		Engine::GetInstance().render.get()->DrawUIimage(texture, ITEM_POS_X, ITEM_POS_Y, PREVIEW_SCALE,0, &currentAnimation->GetCurrentFrame());
 	}
 }
 

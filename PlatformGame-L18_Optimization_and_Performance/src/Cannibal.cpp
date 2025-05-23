@@ -79,8 +79,11 @@ bool Cannibal::Update(float dt)
 	position.setX(METERS_TO_PIXELS(pbodyPos.p.x) - texH / 2);
 	position.setY(METERS_TO_PIXELS(pbodyPos.p.y) - texH / 2);
 
-	Engine::GetInstance().render.get()->DrawTexture(texture, (int)position.getX(), (int)position.getY(),
-		&currentAnimation->GetCurrentFrame(), 1, spriteAngle);
+	if(InSight == true)
+	{
+		Engine::GetInstance().render.get()->DrawTexture(texture, (int)position.getX(), (int)position.getY(),
+			&currentAnimation->GetCurrentFrame(), 1, spriteAngle);
+	}
 	currentAnimation->Update();
 
 	if (Engine::GetInstance().physics.get()->debug)

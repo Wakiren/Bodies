@@ -70,11 +70,11 @@ bool CombatUI::Update(float dt)
 		//Background
 		SDL_Rect backgroundRect = { 0, 0, 738, 246 };
 		Engine::GetInstance().render.get()->DrawUIimage(background, Engine::GetInstance().render.get()->camera.w / 2.75,
-		Engine::GetInstance().render.get()->camera.h / 1.6, 1.4f, &backgroundRect);
+		Engine::GetInstance().render.get()->camera.h / 1.6, 1.4f,0, &backgroundRect);
 
 		SDL_Rect background1Rect = { 0, 0, 246, 246 };
 		Engine::GetInstance().render.get()->DrawUIimage(background1, Engine::GetInstance().render.get()->camera.w / 6.5,
-		Engine::GetInstance().render.get()->camera.h / 1.6, 1.4f, &background1Rect);
+		Engine::GetInstance().render.get()->camera.h / 1.6, 1.4f,0, &background1Rect);
 
 		//Assign a result to each button
 		if (Engine::GetInstance().input.get()->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_UP) {

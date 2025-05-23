@@ -16,6 +16,8 @@ struct CombatStats;
 struct SDL_Texture;
 class Inventory;
 
+#define SIGHT_DISTANCE 400
+
 class Player : public Fighter
 {
 public:
@@ -64,6 +66,7 @@ public:
 
 
 	PhysBody* pbody;
+	PhysBody* sight;
 	float jumpForce = 2.5f; // The force to apply when jumping
 	bool isJumping = false; // Flag to check if the player is currently jumping
 	bool isInCombat = false;
@@ -78,6 +81,7 @@ public:
 
 	Inventory* inventory = nullptr;
 	bool openInventory = false;
+	double sightAngle;
 
 private:
 

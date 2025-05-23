@@ -81,15 +81,18 @@ void GuiManager::DisableButton(GuiControl* button)
 
 bool GuiManager::Update(float dt)
 {	
+	//b2Vec2 FilterPos = Engine::GetInstance().scene.get()->player->sight->body->GetPosition();
+	double FilterAngle = Engine::GetInstance().scene.get()->player->sightAngle * (180/b2_pi);
+
 	if (Engine::GetInstance().mainMenu->active == false && Engine::GetInstance().pauseMenu->active == false
 		&& Engine::GetInstance().introScene->active == false && Engine::GetInstance().settingsMenu.get()->active == false)
 	{
 		Engine::GetInstance().render->DrawTexture(Trees, 0, 0);
-		Engine::GetInstance().render->DrawUIimage(Filter, 0, 0);
+		Engine::GetInstance().render->DrawUIimage(Filter,-591/2, -710,1,FilterAngle);
 
 		if (NoEye == true)
 		{
-			Engine::GetInstance().render->DrawUIimage(NoEyeFilter, 0, 0);
+			Engine::GetInstance().render->DrawUIimage(NoEyeFilter, -591/2, -710, 1, FilterAngle);
 		}
 	}
 
@@ -121,6 +124,7 @@ bool GuiManager::Update(float dt)
 		case UIState::INTRO:
 			break;
 		case UIState::TITLE:
+			
 			filterActive = false;
 			//Engine::GetInstance().audio->PlayFx(MainTheme);
 			break;

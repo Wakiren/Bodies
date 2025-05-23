@@ -47,7 +47,13 @@ bool Player::Start() {
 	currentAnimation = &idle;
 
 	// L08 TODO 5: Add physics to the player - initialize physics body
-	pbody = Engine::GetInstance().physics.get()->CreateCircle((int)position.getX(), (int)position.getY(), 8, bodyType::DYNAMIC);
+	pbody = Engine::GetInstance().physics.get()->CreateCircle((int)position.getX() , (int)position.getY() , 8, bodyType::DYNAMIC);
+
+	//Set Sight
+	sight = Engine::GetInstance().physics.get()->CreateRectangleSensor((int)position.getX() , (int)position.getY() , SIGHT_DISTANCE * 2, SIGHT_DISTANCE, bodyType::KINEMATIC);
+	sight->listener = this;
+	sight->ctype = ColliderType::VISION;
+	sight->body->SetGravityScale(0);
 
 	// L08 TODO 6: Assign player class (using "this") to the listener of the pbody. This makes the Physics module to call the OnCollision method
 	pbody->listener = this;
@@ -88,13 +94,12 @@ bool Player::Update(float dt)
 
 
 	b2Transform pbodyPos = pbody->body->GetTransform();
-	position.setX(METERS_TO_PIXELS(pbodyPos.p.x) - texH / 2);
-	position.setY(METERS_TO_PIXELS(pbodyPos.p.y) - texH / 2);
+	position.setX(METERS_TO_PIXELS(pbodyPos.p.x) );
+	position.setY(METERS_TO_PIXELS(pbodyPos.p.y) );
 
-	Engine::GetInstance().render.get()->DrawPlayer(texture, (int)position.getX(), (int)position.getY(),3,
+	Engine::GetInstance().render.get()->DrawPlayer(texture, (int)position.getX() - (texW/2) +10, (int)position.getY() - (texH / 2) + 10, 3,
 	&currentAnimation->GetCurrentFrame(), 1, spriteAngle);
 	currentAnimation->Update();
-
 
 	if (Engine::GetInstance().dialogueSystem.get()->inDialog == false && openInventory == false)
 	{
@@ -126,6 +131,7 @@ bool Player::Update(float dt)
 		inventory->OrganizeInventory();
 	}
 
+
 	return true;
 }
 
@@ -141,21 +147,26 @@ bool Player::CleanUp()
 
 void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	
+	if (physB == nullptr) return;
+	if (physA == nullptr) return;
+	if (physB == sight) return;
+	if (physA == sight) return;
+
 	Vector2D playerPos = GetPosition();
 	Vector2D mousePos = Engine::GetInstance().input.get()->GetMousePosition();
 	mousePos.setX(mousePos.getX() - Engine::GetInstance().render.get()->camera.x / Engine::GetInstance().render.get()->scale);
 	mousePos.setY(mousePos.getY() - Engine::GetInstance().render.get()->camera.y / Engine::GetInstance().render.get()->scale);
 
-	movementVector = vecZero;
-	pbody->body->SetLinearVelocity({ 0,0 });
-	spriteAngle = atan2(mousePos.getX() - playerPos.getX(), mousePos.getY() - playerPos.getY()) * -180 / b2_pi;
-	currentAnimation = &idle;
-
 	switch (physB->ctype)
 	{
 	case ColliderType::PLATFORM:
+		movementVector = vecZero;
+		pbody->body->SetLinearVelocity({ 0,0 });
+		spriteAngle = atan2(mousePos.getX() - playerPos.getX(), mousePos.getY() - playerPos.getY()) * -180 / b2_pi;
+		currentAnimation = &idle;
 		break;
 	case ColliderType::ITEM:
+
 		Engine::GetInstance().audio.get()->PlayFx(pickCoinFxId);
 
 		//Set the Item to the player
@@ -208,8 +219,8 @@ void Player::OnCollisionEnd(PhysBody* physA, PhysBody* physB)
 }
 
 void Player::SetPosition(Vector2D pos) {
-	pos.setX(pos.getX() + texW / 2);
-	pos.setY(pos.getY() + texH / 2);
+	pos.setX(pos.getX() - (texW / 2));
+	pos.setY(pos.getY() - (texH / 2));
 	b2Vec2 bodyPos = b2Vec2(PIXEL_TO_METERS(pos.getX()), PIXEL_TO_METERS(pos.getY()));
 	pbody->body->SetTransform(bodyPos,0);
 }
@@ -231,6 +242,7 @@ void Player::MoveToMousePos()
 	if (abs(destination.getX() - playerPos.getX()) > 1 || abs(destination.getY() - playerPos.getY()) > 1)
 	{
 		spriteAngle = atan2(destination.getX() - playerPos.getX(), destination.getY() - playerPos.getY()) * -180 / b2_pi;
+		sightAngle = -atan2(destination.getX() - playerPos.getX(), destination.getY() - playerPos.getY());
 		pbody->body->SetLinearVelocity({ movementVector.getX() * speed, movementVector.getY() * speed });
 		currentAnimation = &walk;
 	}
@@ -239,8 +251,14 @@ void Player::MoveToMousePos()
 		movementVector = vecZero;
 		pbody->body->SetLinearVelocity({ 0,0 });
 		spriteAngle = atan2(mousePos.getX() - playerPos.getX(), mousePos.getY() - playerPos.getY()) * -180 / b2_pi;
+		sightAngle = -atan2(mousePos.getX() - playerPos.getX(), mousePos.getY() - playerPos.getY());
 		currentAnimation = &idle;
 	}
+
+	b2Vec2 unitaryVector = b2Vec2(cos(sightAngle - 90), sin(sightAngle - 90));
+	b2Vec2 RectanglePos = b2Vec2(pbody->body->GetPosition().x - (3 * unitaryVector.x), pbody->body->GetPosition().y - (3 * unitaryVector.y));
+	sight->body->SetTransform(b2Vec2(RectanglePos.x - (1.5f * unitaryVector.x), RectanglePos.y - (1.5f * unitaryVector.y)), sightAngle);
+
 }
 
 Vector2D Player::GetPosition() {

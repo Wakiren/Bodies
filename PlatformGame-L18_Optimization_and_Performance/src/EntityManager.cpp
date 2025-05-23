@@ -169,6 +169,14 @@ bool EntityManager::Update(float dt)
 		for (const auto entity : entities)
 		{
 			entity->active = true;
+			if (Engine::GetInstance().scene.get()->player->sight->Contains(entity->position.getX(), entity->position.getY()))
+			{
+				entity->InSight = true;
+			}
+			else
+			{
+				entity->InSight = false;
+			}
 		}
 	}
 	

@@ -53,7 +53,7 @@ bool PauseMenu::Update(float dt)
 	// Draw the background
 	//Section to draw the background (window size)
 	SDL_Rect backgroundRect = { 0, 0, 1920, 1080 };
-	Engine::GetInstance().render.get()->DrawUIimage(background, 0, 0, 1, &backgroundRect);
+	Engine::GetInstance().render.get()->DrawUIimage(background, 0, 0, 1, 0,&backgroundRect);
 
 	Engine::GetInstance().render.get()->camera.x = 0;
 	Engine::GetInstance().render.get()->camera.y = 0;

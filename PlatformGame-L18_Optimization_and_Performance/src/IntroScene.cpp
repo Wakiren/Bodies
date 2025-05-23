@@ -45,7 +45,7 @@ bool IntroScene::Update(float dt)
 
 	if (isTitle) {
 		
-		Engine::GetInstance().render.get()->DrawUIimage(title, 0, 0, 1, &backgroundRect);
+		Engine::GetInstance().render.get()->DrawUIimage(title, 0, 0, 1, 0,&backgroundRect);
 		cooldownCounter++;
 		if (cooldownCounter >= cooldown)
 		{
@@ -66,7 +66,7 @@ bool IntroScene::Update(float dt)
 
 	else if (isTeam) {
 		
-		Engine::GetInstance().render.get()->DrawUIimage(teamMembers, 0, 0, 1, &backgroundRect);
+		Engine::GetInstance().render.get()->DrawUIimage(teamMembers, 0, 0, 1, 0,&backgroundRect);
 		cooldownCounter++;
 		if (cooldownCounter >= cooldown)
 		{

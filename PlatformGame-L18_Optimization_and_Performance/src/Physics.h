@@ -30,6 +30,7 @@ enum class ColliderType {
 	ENEMY,
 	UNKNOWN,
 	INTERACTABLE,
+	VISION,
 	// ..
 };
 
