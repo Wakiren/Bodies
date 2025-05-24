@@ -7,7 +7,7 @@ class GuiControlToggle : public GuiControl
 {
 public:
 
-	GuiControlToggle(int id, SDL_Rect bounds, const char* text = "", int fontSize = FONT_SIZE);
+	GuiControlToggle(int id, SDL_Rect bounds, const char* text = "", int fontSize = FONT_SIZE,SDL_Texture*buttonTexture = nullptr);
 	virtual ~GuiControlToggle() {};
 
 	// Called each loop iteration
@@ -23,6 +23,7 @@ private:
 
 	bool inToggle = true;   
 	bool once = true;
+	SDL_Texture* buttonTexture = nullptr;
 
 	SDL_Color fromColor = { 200, 200, 200, 255 };
 	SDL_Color toColor = { 10, 110, 0, 255 };

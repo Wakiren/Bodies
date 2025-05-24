@@ -6,6 +6,7 @@
 #include "GuiControlSlider.h"
 #include "GuiControl.h"
 #include "GuiManager.h"
+#include "Animation.h"
 
 class SettingsMenu : public Module
 {
@@ -38,11 +39,19 @@ private:
 
 	SDL_Texture* background;
 
+	// Texture buttons
+	SDL_Texture* backButtonTexture = nullptr;
+	SDL_Texture* fullscreenButtonTexture = nullptr;
+	SDL_Texture* volumeSliderTexture = nullptr;
+
+	Animation* currentAnimation = nullptr;
+	Animation mainMenuAnimation;
+
 	bool haveToChange = false;
 	bool haveToBack = false;
 	bool haveToFullscreen = false;
 
 	bool startOptions = true;
-
+	int clickSoundUI = 0;
 	bool once = true;
 };

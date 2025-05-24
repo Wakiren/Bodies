@@ -34,7 +34,7 @@ bool GuiManager::Start()
 }
 
 // L16: TODO 1: Implement CreateGuiControl function that instantiates a new GUI control and add it to the list of controls
-GuiControl* GuiManager::CreateGuiControl(GuiControlType type, int id, const char* text, SDL_Rect bounds, int fontSize, Module* observer,bool IsDialog, SDL_Rect sliderBounds, int min, int max, int value)
+GuiControl* GuiManager::CreateGuiControl(GuiControlType type, int id, const char* text, SDL_Rect bounds, int fontSize, Module* observer,bool IsDialog, SDL_Texture* GuiControlTexture, SDL_Rect sliderBounds, int min, int max, int value)
 {
 	GuiControl* guiControl = nullptr;
 
@@ -42,13 +42,13 @@ GuiControl* GuiManager::CreateGuiControl(GuiControlType type, int id, const char
 	switch (type)
 	{
 	case GuiControlType::BUTTON:
-		guiControl = (GuiControl*) new GuiControlButton(id, bounds, text, fontSize);
+		guiControl = (GuiControl*) new GuiControlButton(id, bounds, text, fontSize, GuiControlTexture);
 		break;
 	case GuiControlType::SLIDER:
-		guiControl = (GuiControl*) new GuiControlSlider(id, bounds, text, fontSize, min, max, value);
+		guiControl = (GuiControl*) new GuiControlSlider(id, bounds, text, fontSize, min, max, value, GuiControlTexture);
 		break;
 	case GuiControlType::TOGGLE:
-		guiControl = (GuiControl*) new GuiControlToggle(id, bounds, text, fontSize);
+		guiControl = (GuiControl*) new GuiControlToggle(id, bounds, text, fontSize, GuiControlTexture);
 		break;
 	}
 

@@ -39,18 +39,23 @@ bool MainMenu::Awake()
 // Called before the first frame
 bool MainMenu::Start()
 {
-	background = Engine::GetInstance().textures.get()->Load("Assets/Textures/MainMenu.png");
+	background = Engine::GetInstance().textures.get()->Load("Assets/Textures/MainMenuAnimations.png");
 
+	LOG("background");
 	buttons = Engine::GetInstance().textures.get()->Load("Assets/Textures/Buttons.png");
 
+	mainMenuAnimation.LoadAnimations(configParameters.child("animations").child("particle"));
+	currentAnimation = &mainMenuAnimation;
 	// Load the button textures
 	StartButtonTexture = Engine::GetInstance().textures.get()->Load("Assets/UI/PauseManuContinue.png");
 	OptionsButtonTexture = Engine::GetInstance().textures.get()->Load("Assets/UI/PauseMenuOptions.png");
 	ExitButtonTexture = Engine::GetInstance().textures.get()->Load("Assets/UI/PauseMenuExit.png");
 
-	startButton = (GuiControlButton*)Engine::GetInstance().guiManager.get()->CreateGuiControl(GuiControlType::BUTTON, 1,"Start", { 848, 550, 106, 38 }, 70, this, false);
-	optionsButton = (GuiControlButton*)Engine::GetInstance().guiManager.get()->CreateGuiControl(GuiControlType::BUTTON, 2, "Options", { 848, 700, 106, 38 }, 70, this, false);
-	exitButton = (GuiControlButton*)Engine::GetInstance().guiManager.get()->CreateGuiControl(GuiControlType::BUTTON, 3, "Exit", { 848, 850, 106, 38 }, 70, this, false);
+	startButton = (GuiControlButton*)Engine::GetInstance().guiManager.get()->CreateGuiControl(GuiControlType::BUTTON, 1,"Start", { 848, 550, 106, 38 }, 70, this, false, StartButtonTexture);
+	optionsButton = (GuiControlButton*)Engine::GetInstance().guiManager.get()->CreateGuiControl(GuiControlType::BUTTON, 2, "Options", { 848, 700, 106, 38 }, 70, this, false, OptionsButtonTexture);
+	exitButton = (GuiControlButton*)Engine::GetInstance().guiManager.get()->CreateGuiControl(GuiControlType::BUTTON, 3, "Exit", { 848, 850, 106, 38 }, 70, this, false, ExitButtonTexture);
+
+	clickSoundUI = Engine::GetInstance().audio.get()->LoadFx("Assets/Audio/Fx/clickSoundUI.ogg");
 
 	return true;
 }
@@ -76,8 +81,9 @@ bool MainMenu::Update(float dt)
 
 	// Draw the background
 	//Section to draw the background (window size)
-	SDL_Rect backgroundRect = { 0, 0, 1920, 1080 };
-	Engine::GetInstance().render.get()->DrawUIimage(background, 0, 0, 1, 0,&backgroundRect);
+	//SDL_Rect backgroundRect = { 0, 0, 1920, 1080 };
+	Engine::GetInstance().render.get()->DrawUIimage(background, 0, 0, 1, 0, &currentAnimation->GetCurrentFrame());
+	currentAnimation->Update();
 
 	Engine::GetInstance().render.get()->camera.x = 0;
 	Engine::GetInstance().render.get()->camera.y = 0;
@@ -124,20 +130,24 @@ bool MainMenu::Update(float dt)
 	// Function to detect the mouse click
 	if (Engine::GetInstance().input.get()->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_UP) {
 		if (startButton->state == GuiControlState::PRESSED) {
+			Engine::GetInstance().audio.get()->PlayFx(clickSoundUI, 0);
 			haveToChange = true;
 			haveToStart = true;
 			Engine::GetInstance().fadeManager.get()->Fade(3.0f,300);
 		}
 		if (optionsButton->state == GuiControlState::PRESSED) {
+			Engine::GetInstance().audio.get()->PlayFx(clickSoundUI, 0);
 			haveToChange = true;
 			haveToOptions = true;
 			Engine::GetInstance().fadeManager.get()->Fade(3.0f, 300);
 		}
 		if (exitButton->state == GuiControlState::PRESSED) {
+			Engine::GetInstance().audio.get()->PlayFx(clickSoundUI, 0);
 			haveToChange = true;
 			haveToExit = true;
 			Engine::GetInstance().fadeManager.get()->Fade(3.0f, 300);
 		}
+		
 	}
 
 	// Draw the buttons

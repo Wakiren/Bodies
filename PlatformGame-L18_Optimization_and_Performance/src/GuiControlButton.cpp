@@ -4,11 +4,31 @@
 #include "Window.h"
 #include "Audio.h"
 
-GuiControlButton::GuiControlButton(int id, SDL_Rect bounds, const char* text, int fontSize) : GuiControl(GuiControlType::BUTTON, id)
+//GuiControlButton::GuiControlButton(int id, SDL_Rect bounds, const char* text, int fontSize) : GuiControl(GuiControlType::BUTTON, id)
+//{
+//	this->bounds = bounds;
+//	this->text = text;
+//	this->fontSize = fontSize;
+//	int length = strlen(text);
+//
+//	if (length == 0)
+//	{
+//		length = 8;
+//	}
+//	// The bounds depends on the font size
+//	this->bounds.w = fontSize * 0.75 * length;
+//	this->bounds.h = fontSize + 10;
+//
+//	canClick = true;
+//	drawBasic = false;
+//}
+
+GuiControlButton::GuiControlButton(int id, SDL_Rect bounds, const char* text, int fontSize, SDL_Texture* textureButton) : GuiControl(GuiControlType::BUTTON, id)
 {
 	this->bounds = bounds;
 	this->text = text;
 	this->fontSize = fontSize;
+	this->textureButton = textureButton;
 	int length = strlen(text);
 
 	if (length == 0)
@@ -82,30 +102,56 @@ bool GuiControlButton::Update(float dt)
 bool GuiControlButton::Draw(Render* render)
 {
 	// Draw the right button depending on state
+	SDL_Rect bounds = { this->bounds.x - Spacing, this->bounds.y - Spacing, this->bounds.w + Spacing, this->bounds.h + Spacing };
 	switch (state)
 	{
 
 	case GuiControlState::DISABLED:
 	{
-		render->DrawRectangle({ bounds.x - Spacing , bounds.y - Spacing, bounds.w + Spacing, bounds.h  + Spacing }, 0, 0, 0, 0, true, false);
+		render->DrawRectangle({ bounds.x , bounds.y, bounds.w, bounds.h }, 0, 0, 0, 0, true, false);
 
 	} break;
 
 	case GuiControlState::NORMAL:
 	{
-		render->DrawRectangle({ bounds.x - Spacing, bounds.y - Spacing, bounds.w + Spacing, bounds.h + Spacing }, 0, 0, 0, 125, true, false);
+		/*render->DrawRectangle({ bounds.x - Spacing, bounds.y - Spacing, bounds.w + Spacing, bounds.h + Spacing }, 0, 0, 0, 125, true, false);*/
+		if (textureButton != nullptr)
+		{
+			render->DrawUIimage(textureButton, bounds.x , bounds.y , 1,0);
+			//render->DrawRectangle({ bounds.x , bounds.y , bounds.w , bounds.h }, 0, 0, 0, 125, true, false);
+		}
+		else
+		{
+			render->DrawRectangle({ bounds.x , bounds.y , bounds.w , bounds.h }, 0, 0, 0, 125, true, false);
+		}
 
 	}	break;
 
 	case GuiControlState::FOCUSED:
 	{
-		render->DrawRectangle({ bounds.x - Spacing, bounds.y - Spacing, bounds.w + Spacing, bounds.h + Spacing }, 255, 255, 255, 100, true, false);
+		if (textureButton != nullptr)
+		{
+			render->DrawUIimage(textureButton, bounds.x, bounds.y, 1.5, 0);
+			//render->DrawRectangle({ bounds.x , bounds.y , bounds.w , bounds.h }, 255, 255, 255, 100, true, false);
+		}
+		else
+		{
+			render->DrawRectangle({ bounds.x , bounds.y , bounds.w , bounds.h }, 255, 255, 255, 100, true, false);
+		}
 
 	} break;
 
 	case GuiControlState::PRESSED:
 	{
-		render->DrawRectangle({ bounds.x - Spacing, bounds.y - Spacing, bounds.w + Spacing, bounds.h + Spacing }, 255, 255, 255, 150, true, false);
+		if (textureButton != nullptr)
+		{
+			render->DrawUIimage(textureButton, bounds.x, bounds.y, 1.25, 0);
+			//render->DrawRectangle({ bounds.x , bounds.y , bounds.w , bounds.h }, 255, 255, 255, 150, true, false);
+		}
+		else
+		{
+			render->DrawRectangle({ bounds.x , bounds.y , bounds.w , bounds.h }, 255, 255, 255, 150, true, false);
+		}
 
 	} break;
 
@@ -114,10 +160,13 @@ bool GuiControlButton::Draw(Render* render)
 	}
 
 	int size = fontSize;
-	int x = bounds.w / size * 0.5;
-	int y = bounds.h - size / 4;
+	int x = this->bounds.w / size * 0.5;
+	int y = this->bounds.h - size / 4;
 
-	Engine::GetInstance().render.get()->DrawText(text.GetString(), bounds.x + x, bounds.y, size, {255,255,255});
+	if (textureButton == nullptr)
+	{
+		Engine::GetInstance().render.get()->DrawText(text.GetString(), this->bounds.x + x, this->bounds.y, size, { 255,255,255 });
+	}
 
 	return false;
 }

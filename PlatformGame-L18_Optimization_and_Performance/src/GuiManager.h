@@ -45,7 +45,7 @@ public:
 	bool CleanUp();
 
 	// Additional methods
-	GuiControl* CreateGuiControl(GuiControlType type, int id, const char* text, SDL_Rect bounds, int fontSize, Module* observer, bool IsDialog, SDL_Rect sliderBounds = { 0,0,0,0 }, int min = 0, int max = 0, int value = 0);
+	GuiControl* CreateGuiControl(GuiControlType type, int id, const char* text, SDL_Rect bounds, int fontSize, Module* observer, bool IsDialog, SDL_Texture* GuiControlTexture = nullptr, SDL_Rect sliderBounds = { 0,0,0,0 }, int min = 0, int max = 0, int value = 0);
 	void EnableButton(GuiControl* button);
 	void DisableButton(GuiControl* button);
 

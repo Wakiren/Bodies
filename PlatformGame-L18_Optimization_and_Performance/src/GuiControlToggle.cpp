@@ -2,11 +2,12 @@
 #include "Engine.h"
 #include "Window.h"
 
-GuiControlToggle::GuiControlToggle(int id, SDL_Rect bounds, const char* text, int fontSize) : GuiControl(GuiControlType::TOGGLE, id)
+GuiControlToggle::GuiControlToggle(int id, SDL_Rect bounds, const char* text, int fontSize,SDL_Texture*buttonTexture) : GuiControl(GuiControlType::TOGGLE, id)
 {
     this->bounds = bounds;
     this->text = text;
 	this->fontSize = fontSize;
+	this->buttonTexture = buttonTexture;
     int length = strlen(text);
 
     if (length == 0)
@@ -84,6 +85,7 @@ SDL_Color GuiControlToggle::Toggle(float dt)
 
 bool GuiControlToggle::Draw(Render* render)
 {
+    SDL_Rect bounds = { this->bounds.x - Spacing, this->bounds.y - Spacing, this->bounds.w + Spacing, this->bounds.h + Spacing };
     switch (state)
     {
 
@@ -96,13 +98,8 @@ bool GuiControlToggle::Draw(Render* render)
 
     case GuiControlState::NORMAL:
     {
-        if (isToggled)
-        {
-            render->DrawRectangle({ bounds.x -  Spacing, bounds.y - Spacing, bounds.w + Spacing, bounds.h + Spacing }, toColor.r, toColor.g, toColor.b, toColor.a, true, false);
-        }
-        else if (!isToggled)
-        {
-            render->DrawRectangle({ bounds.x - Spacing, bounds.y - Spacing, bounds.w + Spacing, bounds.h + Spacing }, fromColor.r, fromColor.g, fromColor.b, fromColor.a, true, false);
+        if (buttonTexture != nullptr) {
+             render->DrawUIimage(buttonTexture, bounds.x, bounds.y, 1, 0);
         }
 
     }break;
@@ -110,15 +107,15 @@ bool GuiControlToggle::Draw(Render* render)
     case GuiControlState::FOCUSED:
     {
         LOG("FOCUSED");
-        render->DrawRectangle({ bounds.x - 3, bounds.y - 3, bounds.w + 6, bounds.h + 6 }, 250, 248, 246, 255, true, false);
-        render->DrawRectangle({ bounds.x - Spacing, bounds.y - Spacing, bounds.w + Spacing, bounds.h + Spacing }, 71, 75, 78, fromColor.a, true, false);
-
+        /*render->DrawRectangle({ bounds.x - 3, bounds.y - 3, bounds.w + 6, bounds.h + 6 }, 250, 248, 246, 255, true, false);
+        render->DrawRectangle({ bounds.x, bounds.y, bounds.w + Spacing, bounds.h + Spacing }, 71, 75, 78, fromColor.a, true, false);*/
+		render->DrawUIimage(buttonTexture, bounds.x, bounds.y, 1.5, 0);
     } break;
 
     case GuiControlState::PRESSED:
     {
-        render->DrawRectangle({ bounds.x - Spacing, bounds.y - Spacing, bounds.w + Spacing, bounds.h + Spacing }, fromColor.r, fromColor.g, fromColor.b, fromColor.a, true, false);
-
+        //render->DrawRectangle({ bounds.x, bounds.y, bounds.w + Spacing, bounds.h + Spacing }, fromColor.r, fromColor.g, fromColor.b, fromColor.a, true, false);
+		render->DrawUIimage(buttonTexture, bounds.x, bounds.y, 1.25, 0);
     } break;
 
     case GuiControlState::SELECTED:
@@ -129,6 +126,6 @@ bool GuiControlToggle::Draw(Render* render)
     int x = bounds.w / size * 0.5;
     int y = bounds.h - size / 4;
 
-    Engine::GetInstance().render.get()->DrawText(text.GetString(), bounds.x + x, bounds.y, size, { 255,255,255 });
+    //Engine::GetInstance().render.get()->DrawText(text.GetString(), bounds.x + x, bounds.y, size, { 255,255,255 });
     return false;
 }
