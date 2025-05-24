@@ -82,6 +82,7 @@ public:
 	Inventory* inventory = nullptr;
 	bool openInventory = false;
 	double sightAngle;
+	bool canInteract = false;
 
 private:
 

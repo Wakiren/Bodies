@@ -122,7 +122,7 @@ bool TreePuzzle::Update(float dt)
 		if ((*it)->IsInZone() == true && (*it)->taken == false)
 		{
 			DysplayText("Press E to take Relic");
-			if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_E) == KEY_DOWN )
+			if (Engine::GetInstance().input.get()->GetMouseButtonDown(3) == KeyState::KEY_UP)
 			{
 				Item Key = Engine::GetInstance().scene.get()->CreateItem((*it)->name, (*it)->position);
 				Key.SpawnFromEnemy();
@@ -140,7 +140,7 @@ bool TreePuzzle::Update(float dt)
 		Engine::GetInstance().scene.get()->player->GetPosition().getY()))
 	{
 		DysplayText("Press E to set the 4 Relics");
-		if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_E) == KEY_DOWN && numKeys == 4)
+		if (Engine::GetInstance().input.get()->GetMouseButtonDown(3) == KeyState::KEY_UP && numKeys == 4)
 		{
 			Compleated = true;
 		}
@@ -155,7 +155,7 @@ bool TreePuzzle::Update(float dt)
 		Engine::GetInstance().scene.get()->player->GetPosition().getY()) && Compleated == true && BossDefeated == false)
 	{
 		DysplayText("Press E to invoke the Tree Spirit");
-		if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
+		if (Engine::GetInstance().input.get()->GetMouseButtonDown(3) == KeyState::KEY_UP == KEY_DOWN)
 		{
 			BossDefeated = true;
 			pugi::xml_node enemyNode = Engine::GetInstance().scene->configParameters.child("entities").child("enemies").child("TreeBoss");
@@ -178,7 +178,7 @@ bool TreePuzzle::Update(float dt)
 		Engine::GetInstance().scene.get()->player->GetPosition().getY()))
 	{
 		DysplayText("Press E to enter the Tunnels");
-		if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
+		if (Engine::GetInstance().input.get()->GetMouseButtonDown(3) == KeyState::KEY_UP)
 		{
 			Engine::GetInstance().map.get()->SwapUnderUpper();
 		}
@@ -207,5 +207,6 @@ bool Symbol::IsInZone()
 
 void TreePuzzle::DysplayText(const char* text)
 {
+	Engine::GetInstance().scene.get()->player->canInteract = false;
 	Engine::GetInstance().render.get()->DrawText(text, (Engine::GetInstance().window.get()->width / 2) - SPACING, (Engine::GetInstance().window.get()->height / 2) - 32, 25, { 255,255,255 });
 }

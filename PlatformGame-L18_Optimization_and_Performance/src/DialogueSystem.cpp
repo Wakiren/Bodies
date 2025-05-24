@@ -73,6 +73,7 @@ bool DialogueSystem::OnGuiMouseClickEvent(GuiControl* control)
 		
 		activeTree->activeNode = activeTree->nodeList.at(activeTree->nodeList.size() - 1);
 		inDialog = false;
+		Engine::GetInstance().scene.get()->player->canInteract = false;
 	}
 
 	Engine::GetInstance().guiManager.get()->CleanUp();

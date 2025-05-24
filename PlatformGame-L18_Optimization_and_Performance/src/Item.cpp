@@ -130,7 +130,7 @@ void Item::DrawInInventory(Vector2D pos, int scale)
 	}
 
 	//Selected
-	if ((Engine::GetInstance().input.get()->GetMouseButtonDown(1)|| Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_E) == KEY_DOWN) &&
+	if ((Engine::GetInstance().input.get()->GetMouseButtonDown(1)) &&
 		CheckMouseHover(pos, scale) == true)
 	{
 		InventorySelected = true;

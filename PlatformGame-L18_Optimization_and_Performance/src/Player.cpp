@@ -114,7 +114,7 @@ bool Player::Update(float dt)
 
 
 	}
-	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_I) == KEY_DOWN)
+	if (Engine::GetInstance().input.get()->GetMouseButtonDown(3) == KeyState::KEY_UP && canInteract == true)
 	{
 		if (openInventory == false)
 		{
@@ -126,7 +126,7 @@ bool Player::Update(float dt)
 			inventory->ResetInventory();
 		}
 	}
-	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_R) == KEY_DOWN)
+	if (Engine::GetInstance().input.get()->GetMouseButtonDown(2) == KeyState::KEY_UP)
 	{
 		inventory->OrganizeInventory();
 	}

@@ -232,7 +232,7 @@ bool Scene::PostUpdate()
 		Engine::GetInstance().dialogueSystem.get()->LoadDialogueState();
 	}
 
-	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_8) == KEY_DOWN)
+	if (Engine::GetInstance().input.get()->GetMouseButtonDown(2) == KeyState::KEY_UP)
 	{
 		Engine::GetInstance().pauseMenu.get()->active = true;
 		Engine::GetInstance().pauseMenu.get()->once = true;
@@ -332,7 +332,7 @@ void Scene::StartDialogue(NPC &npc)
 	if (Engine::GetInstance().dialogueSystem->inDialog == false && npc.bloked == false)
 	{(
 		Engine::GetInstance().render.get()->DrawText("Press E to interact", (Engine::GetInstance().window.get()->width / 2) - SPACING, (Engine::GetInstance().window.get()->height / 2) - 32, 25, { 255,255,255 }));
-		if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
+		if (Engine::GetInstance().input.get()->GetMouseButtonDown(3) == KeyState::KEY_UP)
 		{
 			Engine::GetInstance().dialogueSystem.get()->LoadDialogue("dialogues.xml", npc);
 			Engine::GetInstance().dialogueSystem.get()->inDialog = true;
