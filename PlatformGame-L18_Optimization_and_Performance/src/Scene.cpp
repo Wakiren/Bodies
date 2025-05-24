@@ -86,6 +86,7 @@ bool Scene::Start()
 					if (i == 82 && j == 61) //Tutorial Cannibal Has to appear
 					{
 						Cannibal* enemy = (Cannibal*)Engine::GetInstance().entityManager->CreateEntity(EntityType::ENEMY, enemyNode.name());
+						enemyNode.attribute("speed").set_value(enemyNode.attribute("speed").as_int()*2); //Force spawn
 						enemy->SetParameters(enemyNode);
 						enemy->OGPosition = enemyPos;
 						enemy->ItemsInEnemy.push_back("Eye");
