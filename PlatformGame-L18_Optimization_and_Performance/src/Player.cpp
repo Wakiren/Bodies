@@ -64,9 +64,6 @@ bool Player::Start() {
 	// Set the gravity of the body
 	pbody->body->SetGravityScale(0);
 
-	//initialize audio effect
-	pickCoinFxId = Engine::GetInstance().audio.get()->LoadFx("Assets/Audio/Fx/retro-video-game-coin-pickup-38299.ogg");
-
 	//Combat Stats
 	combatStats->attackPoints = parameters.child("combat").attribute("attackPoints").as_int();
 	combatStats->health = parameters.child("combat").attribute("health").as_int();
@@ -83,6 +80,8 @@ bool Player::Start() {
 bool Player::Update(float dt)
 {
 	ZoneScoped;
+
+	LOG("Player in combat %d", isInCombat);
 
 	if (isInCombat) 
 	{
@@ -119,8 +118,9 @@ bool Player::Update(float dt)
 
 
 	}
-	if (Engine::GetInstance().input.get()->GetMouseButtonDown(3) == KeyState::KEY_UP && canInteract == true)
+	if (Engine::GetInstance().input.get()->GetMouseButtonDown(3) == KeyState::KEY_UP && canInteract == false )
 	{
+
 		if (openInventory == false)
 		{
 			openInventory = true;
@@ -135,7 +135,10 @@ bool Player::Update(float dt)
 	{
 		inventory->OrganizeInventory();
 	}
-
+	if (Engine::GetInstance().dialogueSystem.get()->inDialog == true)
+	{
+		openInventory = false;
+	}
 
 	return true;
 }
@@ -172,7 +175,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::ITEM:
 
-		Engine::GetInstance().audio.get()->PlayFx(pickCoinFxId);
+		Engine::GetInstance().audio.get()->PlayRandFx(Effects::PICKUP1, Effects::PICKUP2, Effects::PICKUP3, 2);
 
 		//Set the Item to the player
 		for (int i = 0; i < Engine::GetInstance().scene.get()->itemList.size(); i++)
@@ -214,6 +217,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 
 		if (startCombat) 
 		{
+			isInCombat = true;
 			EnterCombatWith(Engine::GetInstance().combatSystem.get()->actualEnemy);
 			Engine::GetInstance().scene.get()->HandleAudio();
 			cout << "Combat Created" << endl;
@@ -267,6 +271,7 @@ void Player::MoveToMousePos()
 		sightAngle = -atan2(destination.getX() - playerPos.getX(), destination.getY() - playerPos.getY());
 		pbody->body->SetLinearVelocity({ movementVector.getX() * speed, movementVector.getY() * speed });
 		currentAnimation = &walk;
+		Engine::GetInstance().audio.get()->PlayFx(Effects::WLAKING,5);
 	}
 	else
 	{
@@ -275,6 +280,7 @@ void Player::MoveToMousePos()
 		spriteAngle = atan2(mousePos.getX() - playerPos.getX(), mousePos.getY() - playerPos.getY()) * -180 / b2_pi;
 		sightAngle = -atan2(mousePos.getX() - playerPos.getX(), mousePos.getY() - playerPos.getY());
 		currentAnimation = &idle;
+		Engine::GetInstance().audio.get()->StopFx(Effects::WLAKING,5);
 	}
 
 	b2Vec2 unitaryVector = b2Vec2(cos(sightAngle - 90), sin(sightAngle - 90));

@@ -35,7 +35,7 @@ bool SettingsMenu::Start()
 	volumeSlider = (GuiControlSlider*)Engine::GetInstance().guiManager.get()->CreateGuiControl(GuiControlType::SLIDER, 6, "Volume", { 848,800, 675, 50 }, 50, this, false,volumeSliderTexture,{ (int)Engine::GetInstance().window.get()->width / 2 - 100 / 2, (int)(Engine::GetInstance().window.get()->height / 3 * 2.5) + 50, 100, 20 }, 0, 220, 110);
 
 	// Load the fx sound
-	clickSoundUI = Engine::GetInstance().audio.get()->LoadFx("Assets/Audio/Fx/clickSoundUI.ogg");
+	clickSoundUI = Engine::GetInstance().audio.get()->LoadFx("Assets/Audio/Fx/clickSoundUI.ogg", Effects::UICLICK);
 
 	mainMenuAnimation.LoadAnimations(configParameters.child("animations").child("particle"));
 	currentAnimation = &mainMenuAnimation;
@@ -119,13 +119,13 @@ bool SettingsMenu::Update(float dt)
 	// Function to detect the mouse click
 	if (Engine::GetInstance().input.get()->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_UP) {
 		if (backButton->state == GuiControlState::PRESSED) {
-			Engine::GetInstance().audio.get()->PlayFx(clickSoundUI, 0);
+			Engine::GetInstance().audio.get()->PlayFx(Effects::UICLICK, 0);
 			haveToChange = true;
 			haveToBack = true;
 			Engine::GetInstance().fadeManager.get()->Fade(3.0f, 300);
 		}
 		if (fullscreenButton->state == GuiControlState::PRESSED) {
-			Engine::GetInstance().audio.get()->PlayFx(clickSoundUI, 0);
+			Engine::GetInstance().audio.get()->PlayFx(Effects::UICLICK, 1);
 			haveToFullscreen = true;
 			haveToChange = true;
 			/*Engine::GetInstance().window.get()->ToggleFullscreen();

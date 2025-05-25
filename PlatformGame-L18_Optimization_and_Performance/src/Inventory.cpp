@@ -5,6 +5,7 @@
 #include "Render.h"
 #include "GuiControlButton.h"
 #include "GuiManager.h"
+#include "DialogueSystem.h"
 
 Inventory::Inventory()
 {
@@ -71,6 +72,7 @@ void Inventory::UseItem(Item* item, Player* player)
 
 		// Remove the item from the inventory
 		RemoveItem(item);
+		Engine::GetInstance().audio.get()->PlayRandFx(Effects::EAT1, Effects::EAT1, Effects::EAT2,1);
 	}
 	else if (item->type == "Sedative")
 	{
@@ -88,6 +90,7 @@ void Inventory::UseItem(Item* item, Player* player)
 		{
 			player->combatStats->attackPoints -= item->amount;
 		}
+		Engine::GetInstance().audio.get()->PlayFx(Effects::EQUIP,2);
 	}
 	else if (item->type == "Armor")
 	{
@@ -100,15 +103,21 @@ void Inventory::UseItem(Item* item, Player* player)
 		{
 			player->combatStats->defensePoints -= item->amount;
 		}
+		Engine::GetInstance().audio.get()->PlayFx(Effects::EQUIP,2);
 	}
 	else if (item->type == "Equipable")
 	{
 		EquipToggle(item);
+		Engine::GetInstance().audio.get()->PlayFx(Effects::EQUIP,2);
 	}
 }
 
 void Inventory::UpdateInventory(float dt)
 {
+	if (Engine::GetInstance().dialogueSystem.get()->inDialog == true)
+	{
+		return;
+	}
 	// Draw the inventory UI
 	Engine::GetInstance().render->DrawUIimage(texture, 0, 0, 1);
 

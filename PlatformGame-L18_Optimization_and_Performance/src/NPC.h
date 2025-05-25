@@ -4,6 +4,7 @@
 #include "SDL2/SDL.h"
 #include "Box2D/Box2D.h"
 #include "Animation.h"
+#include "Timer.h"
 
 #define NPC_FRONT_TEXTURE_Y 100
 
@@ -68,5 +69,8 @@ public:
 	unsigned int NextID = 0;
 	bool bloked = false;
 	string ObjectToGive;
+
+	Timer ActionTimer;
+
 
 };

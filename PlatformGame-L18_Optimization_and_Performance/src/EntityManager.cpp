@@ -171,6 +171,13 @@ bool EntityManager::Update(float dt)
 			entity->active = true;
 			if (Engine::GetInstance().scene.get()->player->sight->Contains(entity->position.getX(), entity->position.getY()))
 			{
+				if (entity->type == EntityType::ENEMY)
+				{
+					if (Engine::GetInstance().scene.get()->player->isInCombat == false)
+					{
+						Engine::GetInstance().audio.get()->PlayFx(Effects::CHASE, 4);
+					}
+				}
 				entity->InSight = true;
 			}
 			else
@@ -178,6 +185,11 @@ bool EntityManager::Update(float dt)
 				entity->InSight = false;
 			}
 		}
+	}
+
+	if (Engine::GetInstance().scene.get()->player->isInCombat == true)
+	{
+		Engine::GetInstance().audio.get()->StopFx(Effects::CHASE, 4);
 	}
 	
 	for(const auto entity : entities)

@@ -50,6 +50,7 @@ bool DialogueSystem::OnGuiMouseClickEvent(GuiControl* control)
 
 	// TODO 4: Buttons ID match the choice ID. Use it to access to its attributes
 	playerInput = activeTree->activeNode->choicesList[control->id];
+	activeTree->whaitDialog.Start();
 
 	// TODO 4: Save important choices
 	if (playerInput->eventReturn == DIALOGUE_SAVE)

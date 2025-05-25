@@ -60,14 +60,16 @@ bool DialogueTree::UpdateTree(float dt, Module* mod, Vector2D pos)
 		//THE X IN HERE SHOULD BE THE HITBOX OF THE TALKING CHARCATER
 		Engine::GetInstance().render.get()->DrawText(activeNode->texts[i].GetString(), DIALOGUE_W + SPACING, (Engine::GetInstance().window.get()->height - DIALOGUE_H) + 50* i + SPACING, fontSize, { 0, 0, 0});
 
-
 	}
 
 	EventReturn(mod, pos);
 
 	if (!updateOptions)
 	{
-		updateOptions = UpdateChoices(mod, pos, fontSize);
+		if(whaitDialog.ReadSec()>3)
+		{
+			updateOptions = UpdateChoices(mod, pos, fontSize);
+		}
 	}
 
 	return true;
@@ -81,7 +83,7 @@ bool DialogueTree::UpdateChoices(Module* mod, Vector2D pos, int fontSize)
 	for (int i = 0; i < activeNode->choicesList.size(); i++)
 	{
 		const char* ch_option = activeNode->choicesList[i]->text.GetString();	// SString to const char*	
-		int w = activeNode->choicesList[i]->text.Length() * fontSize * 0.5 + 10;
+		int w = activeNode->choicesList[i]->text.Length() * fontSize * 0.75;
 		int h = fontSize + fontSize / 4;
 		SDL_Rect bounds = { Engine::GetInstance().window.get()->width - w, pos.getY() - (h + fontSize) * (i + 1) - DIALOGUE_H , w, h};
 

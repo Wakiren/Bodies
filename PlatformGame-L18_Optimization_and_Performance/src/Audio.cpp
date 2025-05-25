@@ -47,6 +47,7 @@ bool Audio::Awake()
 		ret = true;
 	}
 
+
 	return ret;
 }
 
@@ -64,7 +65,7 @@ bool Audio::CleanUp()
 	}
 
 	for (const auto& fxItem : fx) {
-		Mix_FreeChunk(fxItem);
+		Mix_FreeChunk(fxItem->sound);
 	}
 	fx.clear();
 
@@ -130,7 +131,7 @@ bool Audio::PlayMusic(const char* path, float fadeTime)
 }
 
 // Load WAV
-int Audio::LoadFx(const char* path)
+int Audio::LoadFx(const char* path, Effects type)
 {
 	int ret = 0;
 
@@ -145,7 +146,12 @@ int Audio::LoadFx(const char* path)
 	}
 	else
 	{
-		fx.push_back(chunk);
+		SFX* sfx = new SFX;
+		sfx->sound = chunk;
+		sfx->typeFx = type;
+
+		fx.push_back(sfx);
+
 		ret = (int)fx.size();
 	}
 
@@ -153,21 +159,69 @@ int Audio::LoadFx(const char* path)
 }
 
 // Play WAV
-bool Audio::PlayFx(int id, int repeat)
+bool Audio::PlayFx(Effects type, int channel, int repeat)
 {
 	bool ret = false;
 
 	if(!active)
 		return false;
 
-	if(id > 0 && id <= fx.size())
-	{
-		auto fxIt = fx.begin();
-		std::advance(fxIt, id-1);
-		Mix_PlayChannel(-1, *fxIt, repeat);
+
+		for (const auto& fxItem : fx) {
+			if (fxItem->typeFx == type) {
+				LOG("Playing sound effect %d", type);
+				if (Mix_Playing(channel) == true)
+				{
+					ret = true;
+					break;
+				}
+
+				Mix_PlayChannel(channel, fxItem->sound, repeat);
+				ret = true;
+				break;
+			}
+		}
+
+	return ret;
+}
+
+bool Audio::StopFx(Effects type, int channel)
+{
+	bool ret = false;
+
+	if (!active)
+		return false;
+
+	for (const auto& fxItem : fx) {
+		if (fxItem->typeFx == type) {
+			if (Mix_Playing(channel) == true)
+			{
+				Mix_HaltChannel(channel);
+				ret = true;
+				break;
+			}
+		}
 	}
 
 	return ret;
+}
+
+void Audio::PlayRandFx(Effects type1, Effects type2, Effects type3, int channel)
+{
+	int val = rand() % 3;
+
+	if (val == 0 && type1 != Effects::UNKNOWN)
+	{
+		PlayFx(type1, channel, 0);
+	}
+	else if (val == 1 && type2 != Effects::UNKNOWN)
+	{
+		PlayFx(type2, channel, 0);
+	}
+	else if (val == 2 && type3 != Effects::UNKNOWN)
+	{
+		PlayFx(type3, channel, 0);
+	}
 }
 
 bool Audio::StopMusic()

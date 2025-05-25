@@ -86,9 +86,9 @@ bool Scene::Start()
 					if (i == 82 && j == 61) //Tutorial Cannibal Has to appear
 					{
 						Cannibal* enemy = (Cannibal*)Engine::GetInstance().entityManager->CreateEntity(EntityType::ENEMY, enemyNode.name());
-						enemyNode.attribute("speed").set_value(enemyNode.attribute("speed").as_int()*2); //Force spawn
 						enemy->SetParameters(enemyNode);
 						enemy->OGPosition = enemyPos;
+						enemy->speed = 4;
 						enemy->ItemsInEnemy.push_back("Eye");
 						enemyList.push_back(enemy);
 
@@ -120,7 +120,25 @@ bool Scene::Start()
 		}
 	}
 
+	//Load the SFX
 
+	Engine::GetInstance().audio.get()->LoadFx("Assets/Audio/Fx/chace.wav", Effects::CHASE);
+	Engine::GetInstance().audio.get()->LoadFx("Assets/Audio/Fx/Coughf1.wav", Effects::COUGHF1);
+	Engine::GetInstance().audio.get()->LoadFx("Assets/Audio/Fx/Coughf2.wav", Effects::COUGHF2);
+	Engine::GetInstance().audio.get()->LoadFx("Assets/Audio/Fx/Coughf3.wav", Effects::COUGHF3);
+	Engine::GetInstance().audio.get()->LoadFx("Assets/Audio/Fx/Eat1.wav", Effects::EAT1);
+	Engine::GetInstance().audio.get()->LoadFx("Assets/Audio/Fx/Eat2.wav", Effects::EAT2);
+	Engine::GetInstance().audio.get()->LoadFx("Assets/Audio/Fx/enemyHit.wav", Effects::ENEMY_HIT);
+	Engine::GetInstance().audio.get()->LoadFx("Assets/Audio/Fx/equip.wav", Effects::EQUIP);
+	Engine::GetInstance().audio.get()->LoadFx("Assets/Audio/Fx/Hit1.wav", Effects::HIT1);
+	Engine::GetInstance().audio.get()->LoadFx("Assets/Audio/Fx/Hit2.wav", Effects::HIT2);
+	Engine::GetInstance().audio.get()->LoadFx("Assets/Audio/Fx/Hit3.wav", Effects::HIT3);
+	Engine::GetInstance().audio.get()->LoadFx("Assets/Audio/Fx/pickUp1.wav", Effects::PICKUP1);
+	Engine::GetInstance().audio.get()->LoadFx("Assets/Audio/Fx/pickUp2.wav", Effects::PICKUP2);
+	Engine::GetInstance().audio.get()->LoadFx("Assets/Audio/Fx/pickUp3.wav", Effects::PICKUP3);
+	Engine::GetInstance().audio.get()->LoadFx("Assets/Audio/Fx/SamExhaust.wav", Effects::SAM_EXHAUST);
+	Engine::GetInstance().audio.get()->LoadFx("Assets/Audio/Fx/walking.wav", Effects::WLAKING);
+	Engine::GetInstance().audio.get()->LoadFx("Assets/Audio/Fx/clickSoundUI.ogg", Effects::UICLICK);
 	
 
 	return true;
@@ -331,8 +349,8 @@ int Scene::RandomValue(int min, int max)
 void Scene::StartDialogue(NPC &npc)
 {
 	if (Engine::GetInstance().dialogueSystem->inDialog == false && npc.bloked == false)
-	{(
-		Engine::GetInstance().render.get()->DrawText("Press E to interact", (Engine::GetInstance().window.get()->width / 2) - SPACING, (Engine::GetInstance().window.get()->height / 2) - 32, 25, { 255,255,255 }));
+	{
+		Engine::GetInstance().render.get()->DrawText("Press E to interact", (Engine::GetInstance().window.get()->width / 2) - SPACING, (Engine::GetInstance().window.get()->height / 2) - 32, 25, { 255,255,255 });
 		if (Engine::GetInstance().input.get()->GetMouseButtonDown(3) == KeyState::KEY_UP)
 		{
 			Engine::GetInstance().dialogueSystem.get()->LoadDialogue("dialogues.xml", npc);

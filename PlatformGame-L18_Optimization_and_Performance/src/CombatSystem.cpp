@@ -103,6 +103,7 @@ void CombatSystem::EnemyTurn()
     cout << "ENEMY ATTACKS!" << endl;
 
     messageToPut = "Enemy deals " + to_string(50) + " damage";
+    Engine::GetInstance().audio.get()->PlayFx(Effects::ENEMY_HIT,1);
 
     DisplayMessageAfterDelay(2);
     cout << Engine::GetInstance().combatui.get()->text << endl;
@@ -122,6 +123,7 @@ void CombatSystem::PlayerTurn()
        // snprintf(buffer, sizeof(buffer), "Player deals &d damage", player->damage);
 
 		messageToPut = "Player deals " + to_string(player->combatStats->attackPoints) + " damage";
+        Engine::GetInstance().audio.get()->PlayRandFx(Effects::HIT1, Effects::HIT1, Effects::HIT2, 1);
 
         DisplayMessageAfterDelay(1);
         cout << Engine::GetInstance().combatui.get()->text << endl;
@@ -135,6 +137,7 @@ void CombatSystem::PlayerTurn()
         player->combatStats->isGuarding = false;
         cout << "PLAYER GUARDS!" << endl;
 		messageToPut = "Player Guards!";
+		Engine::GetInstance().audio.get()->PlayFx(Effects::EQUIP,2);
         DisplayMessageAfterDelay(1);
         cout << Engine::GetInstance().combatui.get()->text << endl;
         player->Guard();
@@ -147,7 +150,7 @@ void CombatSystem::PlayerTurn()
         break;
 
     case  CombatUI::CombatInput::FLEE:
-
+        Engine::GetInstance().audio.get()->PlayFx(Effects::SAM_EXHAUST,3);
         fleed = true;
         break;
         
@@ -201,11 +204,11 @@ bool CombatSystem::isCombatOver(Player* player, Enemy* enemy)
             //DisplayMessageAfterDelay(1);
             cout << "Enemy defeated!\n";
             cout << Engine::GetInstance().combatui.get()->text << endl;
-			Engine::GetInstance().scene.get()->HandleAudio();
         }
 
        player->isInCombat = false;
        Engine::GetInstance().scene.get()->HandleAudio();
+
         if (player->EnemyInCombat != nullptr) 
         {
             if (player->EnemyInCombat->body != nullptr)

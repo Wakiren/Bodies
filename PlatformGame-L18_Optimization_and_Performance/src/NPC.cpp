@@ -64,6 +64,15 @@ bool NPC::Update(float dt)
 	if (CheckDistance(Engine::GetInstance().scene.get()->GetPlayerPosition()) < 100)
 	{
 		Engine::GetInstance().scene.get()->StartDialogue(*this);
+		
+		if (ActionTimer.ReadSec() > 30)
+		{
+			if (type == NPCType::HENRY)
+			{
+				Engine::GetInstance().audio.get()->PlayRandFx(Effects::COUGHF1, Effects::COUGHF2, Effects::COUGHF3,7);
+				ActionTimer.Start();
+			}
+		}
 	}
 
 	CheckForProgress();

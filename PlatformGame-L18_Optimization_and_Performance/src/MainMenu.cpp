@@ -55,8 +55,6 @@ bool MainMenu::Start()
 	optionsButton = (GuiControlButton*)Engine::GetInstance().guiManager.get()->CreateGuiControl(GuiControlType::BUTTON, 2, "Options", { 848, 700, 106, 38 }, 70, this, false, OptionsButtonTexture);
 	exitButton = (GuiControlButton*)Engine::GetInstance().guiManager.get()->CreateGuiControl(GuiControlType::BUTTON, 3, "Exit", { 848, 850, 106, 38 }, 70, this, false, ExitButtonTexture);
 
-	clickSoundUI = Engine::GetInstance().audio.get()->LoadFx("Assets/Audio/Fx/clickSoundUI.ogg");
-
 	return true;
 }
 
@@ -130,19 +128,19 @@ bool MainMenu::Update(float dt)
 	// Function to detect the mouse click
 	if (Engine::GetInstance().input.get()->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_UP) {
 		if (startButton->state == GuiControlState::PRESSED) {
-			Engine::GetInstance().audio.get()->PlayFx(clickSoundUI, 0);
+			Engine::GetInstance().audio.get()->PlayFx(Effects::UICLICK, 0);
 			haveToChange = true;
 			haveToStart = true;
 			Engine::GetInstance().fadeManager.get()->Fade(3.0f,300);
 		}
 		if (optionsButton->state == GuiControlState::PRESSED) {
-			Engine::GetInstance().audio.get()->PlayFx(clickSoundUI, 0);
+			Engine::GetInstance().audio.get()->PlayFx(Effects::UICLICK, 1);
 			haveToChange = true;
 			haveToOptions = true;
 			Engine::GetInstance().fadeManager.get()->Fade(3.0f, 300);
 		}
 		if (exitButton->state == GuiControlState::PRESSED) {
-			Engine::GetInstance().audio.get()->PlayFx(clickSoundUI, 0);
+			Engine::GetInstance().audio.get()->PlayFx(Effects::UICLICK, 2);
 			haveToChange = true;
 			haveToExit = true;
 			Engine::GetInstance().fadeManager.get()->Fade(3.0f, 300);

@@ -13,6 +13,7 @@
 #include <vector>
 #include "Textures.h"
 #include "NPC.h"
+#include "Timer.h"
 
 
 #define DIALOGUE_INPUT 2
@@ -97,6 +98,8 @@ public:
 	bool updateOptions;
 	int fontSize = FONT_SIZE;
 	int max_chars_line;
+
+	Timer whaitDialog;
 };
 
 #endif //__DIALOGTREE_H__

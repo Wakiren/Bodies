@@ -145,6 +145,10 @@ bool TreePuzzle::Update(float dt)
 			Compleated = true;
 		}
 	}
+	else
+	{
+		Engine::GetInstance().scene.get()->player->canInteract = false;
+	}
 
 	if (Compleated)
 	{
@@ -173,6 +177,10 @@ bool TreePuzzle::Update(float dt)
 			Engine::GetInstance().scene->enemyList.push_back(enemy);
 		}
 	}
+	else
+	{
+		Engine::GetInstance().scene.get()->player->canInteract = false;
+	}
 
 	if (TunnelsEntrance->Contains(Engine::GetInstance().scene.get()->player->GetPosition().getX(),
 		Engine::GetInstance().scene.get()->player->GetPosition().getY()))
@@ -183,6 +191,10 @@ bool TreePuzzle::Update(float dt)
 			Engine::GetInstance().map.get()->SwapUnderUpper();
 		}
 
+	}
+	else
+	{
+		Engine::GetInstance().scene.get()->player->canInteract = false;
 	}
 
 	return ret;
@@ -207,6 +219,6 @@ bool Symbol::IsInZone()
 
 void TreePuzzle::DysplayText(const char* text)
 {
-	Engine::GetInstance().scene.get()->player->canInteract = false;
+	Engine::GetInstance().scene.get()->player->canInteract = true;
 	Engine::GetInstance().render.get()->DrawText(text, (Engine::GetInstance().window.get()->width / 2) - SPACING, (Engine::GetInstance().window.get()->height / 2) - 32, 25, { 255,255,255 });
 }
