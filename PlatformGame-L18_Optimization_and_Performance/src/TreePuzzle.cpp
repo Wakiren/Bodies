@@ -131,6 +131,10 @@ bool TreePuzzle::Update(float dt)
 				numKeys++;
 			}
 		}
+		else
+		{
+			Engine::GetInstance().scene.get()->player->canInteract = false;
+		}
 
 	}
 
