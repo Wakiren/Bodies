@@ -359,7 +359,7 @@ bool Render::DrawText(const char* text, int x, int y, int size, SDL_Color color)
 
 	if (ttf_surface == nullptr)
 	{
-		LOG("Cannot open font. SDL_Surface* error: %s", SDL_GetError());
+		//LOG("Cannot open font. SDL_Surface* error: %s", SDL_GetError());
 		ret = false;
 	}
 	else

@@ -48,6 +48,18 @@ bool CombatSystem::CleanUp()
 
 void CombatSystem::MainLoop()
 {
+    if (player != nullptr) 
+    {
+        if (!player->isInCombat) 
+        {
+            Engine::GetInstance().entityManager.get()->UnPauseEntities();
+            return;
+        }
+    }
+    else 
+    {
+        return;
+    }
     if (!isCombatOver(player, enemy)) 
     {
         Engine::GetInstance().entityManager.get()->PauseEntities();
@@ -55,7 +67,7 @@ void CombatSystem::MainLoop()
         actualEnemy->DrawInCombat();
         if(isPlayerTurn) 
         {
-            Engine::GetInstance().scene.get()->player->isInCombat = true;
+            player->isInCombat = true;
             PlayerTurn();
             if (isCombatOver(player, enemy))
             {
@@ -92,9 +104,9 @@ void CombatSystem::EnemyTurn()
 
     messageToPut = "Enemy deals " + to_string(50) + " damage";
 
-    DisplayMessageAfterDelay(1);
+    DisplayMessageAfterDelay(2);
     cout << Engine::GetInstance().combatui.get()->text << endl;
-    enemy->Attack(enemy, player);
+    enemy->Attack(player);
     isPlayerTurn = true;
 }
 
@@ -113,7 +125,7 @@ void CombatSystem::PlayerTurn()
 
         DisplayMessageAfterDelay(1);
         cout << Engine::GetInstance().combatui.get()->text << endl;
-        player->Attack(player, enemy);
+        player->Attack(enemy);
         isPlayerTurn = false;
         break;
     }
@@ -125,7 +137,7 @@ void CombatSystem::PlayerTurn()
 		messageToPut = "Player Guards!";
         DisplayMessageAfterDelay(1);
         cout << Engine::GetInstance().combatui.get()->text << endl;
-        player->Guard(player);
+        player->Guard();
         isPlayerTurn = false;
 
         break;
@@ -135,9 +147,7 @@ void CombatSystem::PlayerTurn()
         break;
 
     case  CombatUI::CombatInput::FLEE:
-        player->combatStats->isGuarding = false;
-		player->isInCombat = false;
-        enemy->isInCombat = false;
+
         fleed = true;
         break;
         
@@ -156,25 +166,33 @@ void CombatSystem::DeletePhysicalEnemy(PhysBody* enemy)
 
 bool CombatSystem::isCombatOver(Player* player, Enemy* enemy)
 {
-    Engine::GetInstance().scene.get()->player->isInCombat = false;
     if(player == nullptr || enemy == nullptr)
     {
         return true;
     }
     if (fleed) 
     {
+        enemy->timeStopped = 2000;
+
+        player->combatStats->isGuarding = false;
+        enemy->isInCombat = false;
+        player->isInCombat = false;
+        Engine::GetInstance().scene.get()->HandleAudio();
+        player->EnemyInCombat = nullptr;
+        enemy = nullptr;
+        fleed = false;
         return true;
     }
-    if (!player->isAlive(player)) {
+    if (!player->isAlive()) {
 		messageToPut = "Player Defeated!";
         DisplayMessageAfterDelay(1);
         cout << "Player defeated!\n";
         cout << Engine::GetInstance().combatui.get()->text << endl;
-        Engine::GetInstance().scene.get()->player->isInCombat = false;
+        player->isInCombat = false;
         Engine::GetInstance().scene.get()->HandleAudio();
         return true;
     }
-    if (!enemy->isAlive(enemy))
+    if (!enemy->isAlive())
     {
         if (Engine::GetInstance().scene.get()->player->EnemyInCombat != nullptr) 
         {
@@ -185,15 +203,15 @@ bool CombatSystem::isCombatOver(Player* player, Enemy* enemy)
 			Engine::GetInstance().scene.get()->HandleAudio();
         }
 
-        Engine::GetInstance().scene.get()->player->isInCombat = false;
+       player->isInCombat = false;
 
-        if (Engine::GetInstance().scene.get()->player->EnemyInCombat != nullptr) 
+        if (player->EnemyInCombat != nullptr) 
         {
-            if (Engine::GetInstance().scene.get()->player->EnemyInCombat->body != nullptr)
+            if (player->EnemyInCombat->body != nullptr)
             {
 				SpawnItems();
-                DeletePhysicalEnemy(Engine::GetInstance().scene.get()->player->EnemyInCombat);
-                Engine::GetInstance().scene.get()->player->EnemyInCombat = nullptr;
+                DeletePhysicalEnemy(player->EnemyInCombat);
+                player->EnemyInCombat = nullptr;
             }
         }
 

@@ -10,11 +10,11 @@ class Fighter: public Entity
 	Fighter(EntityType _type);
 	~Fighter();
 
-	void Attack(Fighter* attacker, Fighter* target);
-	void Guard(Fighter* fighter);
-	bool isAlive(Fighter* Fighter);
-	void TakeDamage(Fighter* fighter, int amount);
-	void Heal(Fighter* fighter, int amount);
+	void Attack(Fighter* target);
+	void Guard();
+	bool isAlive();
+	void TakeDamage(int amount);
+	void Heal(int amount);
 
 	CombatStats* combatStats;
 	int damage;

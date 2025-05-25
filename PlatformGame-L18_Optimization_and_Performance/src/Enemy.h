@@ -60,7 +60,6 @@ public:
 
 public:
 
-	CombatStats* combatStats = new CombatStats;
 	Vector2D OGPosition;
 
 	SDL_Texture* texture;
@@ -99,4 +98,6 @@ public:
 	bool isInCombat = false;
 
 	std::vector<string> ItemsInEnemy;
+
+	float timeStopped = 0;
 };

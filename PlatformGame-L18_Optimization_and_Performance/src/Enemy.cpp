@@ -54,6 +54,7 @@ bool Enemy::Start() {
 	pbody->body->SetGravityScale(0);
 
 	//Combat Stats
+	combatStats = new CombatStats;
 	combatStats->attackPoints = parameters.child("combat").attribute("attackPoints").as_int();
 	combatStats->health = parameters.child("combat").attribute("health").as_int();
 	combatStats->maxHealth = parameters.child("combat").attribute("maxHealth").as_int();

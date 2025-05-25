@@ -20,6 +20,12 @@ Cannibal::Cannibal() : Enemy()
 bool Cannibal::Update(float dt)
 {
 	ZoneScoped;
+	if (timeStopped > 0) 
+	{
+		timeStopped -= dt;
+		
+		return true;
+	}
 
 	if (pbody->body == nullptr)
 	{

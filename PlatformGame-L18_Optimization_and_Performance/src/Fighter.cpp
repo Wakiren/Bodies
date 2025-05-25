@@ -12,9 +12,9 @@ Fighter::~Fighter()
 {
 }
 
-void Fighter::Attack(Fighter* attacker, Fighter* target)
+void Fighter::Attack(Fighter* target)
 {
-    damage = attacker->combatStats->attackPoints - target->combatStats->defensePoints;
+    damage = combatStats->attackPoints - target->combatStats->defensePoints;
     if (damage < 0)
     {
         damage = 0;
@@ -22,7 +22,7 @@ void Fighter::Attack(Fighter* attacker, Fighter* target)
 
 	if (target->combatStats->isGuarding != true) 
 	{
-		target->TakeDamage(target, damage);
+		target->TakeDamage(damage);
 	}
 	else 
 	{
@@ -33,28 +33,32 @@ void Fighter::Attack(Fighter* attacker, Fighter* target)
  
 }
 
-void Fighter::Guard(Fighter* fighter)
+void Fighter::Guard()
 {
-	fighter->combatStats->isGuarding = true;
+	combatStats->isGuarding = true;
 }
 
-bool Fighter::isAlive(Fighter* fighter)
+bool Fighter::isAlive()
 { 
-    return fighter->combatStats->health > 0; 
+	if (combatStats == nullptr) 
+	{
+		return false;
+	}
+    return combatStats->health > 0; 
 }
 
-void Fighter::TakeDamage(Fighter* fighter, int amount) {
-	fighter->combatStats->health -= amount;
-	if (fighter->combatStats->health < 0)
+void Fighter::TakeDamage(int amount) {
+	combatStats->health -= amount;
+	if (combatStats->health < 0)
 	{
-		fighter->combatStats->health = 0;
+		combatStats->health = 0;
 	}
 }
 
-void Fighter::Heal(Fighter* fighter, int amount) {
-	fighter->combatStats->health += amount;
-	if (fighter->combatStats->health > fighter->combatStats->maxHealth)
+void Fighter::Heal( int amount) {
+	combatStats->health += amount;
+	if (combatStats->health > combatStats->maxHealth)
 	{
-		fighter->combatStats->health = fighter->combatStats->maxHealth;
+		combatStats->health = combatStats->maxHealth;
 	}
 }

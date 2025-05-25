@@ -84,13 +84,18 @@ bool Player::Update(float dt)
 {
 	ZoneScoped;
 
+	if (isInCombat) 
+	{
+		return true;
+	}
+
 	b2Vec2 velocity = b2Vec2(0,0);
 
 	if (!parameters.attribute("gravity").as_bool()) {
 		velocity = b2Vec2(0,0);
 	}
 
-	LOG("Time: %d", time->ReadSec());
+	//LOG("Time: %d", time->ReadSec());
 
 
 	b2Transform pbodyPos = pbody->body->GetTransform();
@@ -184,22 +189,39 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::UNKNOWN:
 		break;
-	case ColliderType::ENEMY:
-	
+	case ColliderType::ENEMY: 
+		
+	{
 		EnemyInCombat = physB;
+
+		bool startCombat = false;
 
 		for (int i = 0; i < Engine::GetInstance().scene.get()->enemyList.size(); i++)
 		{
 			if (Engine::GetInstance().scene.get()->enemyList[i]->pbody == physB)
 			{
-				Engine::GetInstance().combatSystem.get()->actualEnemy = Engine::GetInstance().scene.get()->enemyList[i];
-				Engine::GetInstance().scene.get()->player->isInCombat = true;
+				Enemy* enemy = Engine::GetInstance().scene.get()->enemyList[i];
+				if (enemy->timeStopped <= 0)
+				{
+					Engine::GetInstance().combatSystem.get()->actualEnemy = enemy;
+					startCombat = true;
+					break;
+				}
+
+			
 			}
 		}
 
-		EnterCombatWith(Engine::GetInstance().combatSystem.get()->actualEnemy);
-		Engine::GetInstance().scene.get()->HandleAudio();
-		cout << "Combat Created" << endl;
+		if (startCombat) 
+		{
+			EnterCombatWith(Engine::GetInstance().combatSystem.get()->actualEnemy);
+			Engine::GetInstance().scene.get()->HandleAudio();
+			cout << "Combat Created" << endl;
+		}
+
+	}
+	
+
 		break;
 	}
 }
@@ -275,15 +297,9 @@ void Player::OnPause()
 void Player::EnterCombatWith(Enemy* enemy_)
 {
 
-	Fighter* player = new Fighter(pbody->listener->type);
-	player->combatStats = combatStats;
+	Engine::GetInstance().combatSystem.get()->player = this;
+	Engine::GetInstance().combatSystem.get()->enemy = enemy_;
 
 
-	Fighter* enemy = new Fighter(enemy_->pbody->listener->type);
-	enemy->combatStats = new CombatStats;
-	enemy->combatStats = enemy_->combatStats;
-
-
-	Engine::GetInstance().combatSystem.get()->player = (Player*)player;
-	Engine::GetInstance().combatSystem.get()->enemy = (Enemy*)enemy;
+	isInCombat = true;
 }
