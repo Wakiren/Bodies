@@ -209,6 +209,7 @@ bool CombatSystem::isCombatOver(Player* player, Enemy* enemy)
        player->isInCombat = false;
        Engine::GetInstance().scene.get()->HandleAudio();
 
+
         if (player->EnemyInCombat != nullptr) 
         {
             if (player->EnemyInCombat->body != nullptr)
