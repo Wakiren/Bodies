@@ -190,6 +190,7 @@ bool CombatSystem::isCombatOver(Player* player, Enemy* enemy)
         cout << Engine::GetInstance().combatui.get()->text << endl;
         player->isInCombat = false;
         Engine::GetInstance().scene.get()->HandleAudio();
+        dead = true;
         return true;
     }
     if (!enemy->isAlive())

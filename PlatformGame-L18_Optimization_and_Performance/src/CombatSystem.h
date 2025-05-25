@@ -51,4 +51,6 @@ public:
 
 	string messageToPut;
 	int delaySeconds;
+
+	bool dead = false;
 };

@@ -43,6 +43,7 @@ private:
 
 	SDL_Texture* CursorIdle;
 	SDL_Texture* CursorPress;
+	SDL_Texture* DeathScreen;
 
 	GuiControlButton* attackButton = nullptr;
 	GuiControlButton* guardButton = nullptr;

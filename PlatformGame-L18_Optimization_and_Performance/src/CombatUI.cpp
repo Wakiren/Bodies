@@ -11,6 +11,7 @@
 #include "Engine.h"
 #include "FadeManager.h"
 #include "GuiManager.h"
+#include "CombatSystem.h"
 #include <string>
 
 #include "Defs.h"
@@ -36,6 +37,7 @@ bool CombatUI::Start()
 	background = Engine::GetInstance().textures.get()->Load("Assets/Combat/CombatUI2.png");
 	CursorIdle = Engine::GetInstance().textures.get()->Load("Assets/UI/CursorIdle.png");
 	CursorPress = Engine::GetInstance().textures.get()->Load("Assets/UI/CursorPress.png");
+	DeathScreen = Engine::GetInstance().textures.get()->Load("Assets/Textures/DeathScreen.png");
 
 	//Create Buttons
 	attackButton = (GuiControlButton*)Engine::GetInstance().guiManager.get()->CreateGuiControl
@@ -117,6 +119,17 @@ bool CombatUI::Update(float dt)
 	else
 	{
 		Engine::GetInstance().render.get()->DrawUIimage(CursorIdle, mPos.getX(), mPos.getY(), 3);
+	}
+
+	if (Engine::GetInstance().combatSystem.get()->dead) 
+	{
+
+		Engine::GetInstance().render.get()->DrawUIimage(DeathScreen, 0, 0, 4);
+		if (Engine::GetInstance().input.get()->GetMouseButtonDown(1))
+		{
+			Engine::GetInstance().combatSystem.get()->dead = false;
+			Engine::GetInstance().scene.get()->LoadState();
+		}
 	}
 
 	return true;
