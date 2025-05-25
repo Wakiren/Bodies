@@ -196,15 +196,15 @@ bool CombatSystem::isCombatOver(Player* player, Enemy* enemy)
     {
         if (Engine::GetInstance().scene.get()->player->EnemyInCombat != nullptr) 
         {
-            messageToPut = "Enemy Defeated!";
-            DisplayMessageAfterDelay(1);
+            //messageToPut = "Enemy Defeated!";
+            //DisplayMessageAfterDelay(1);
             cout << "Enemy defeated!\n";
             cout << Engine::GetInstance().combatui.get()->text << endl;
 			Engine::GetInstance().scene.get()->HandleAudio();
         }
 
        player->isInCombat = false;
-
+       Engine::GetInstance().scene.get()->HandleAudio();
         if (player->EnemyInCombat != nullptr) 
         {
             if (player->EnemyInCombat->body != nullptr)
