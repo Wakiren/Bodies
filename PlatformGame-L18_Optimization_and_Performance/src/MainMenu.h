@@ -4,6 +4,8 @@
 #include "Module.h"
 #include "SDL2/SDL.h"
 #include "GuiControlButton.h"
+#include "GuiControlToggle.h"
+#include "GuiControlSlider.h"
 #include "Animation.h"
 
 class MainMenu : public Module
@@ -49,9 +51,8 @@ public:
 private:
 	
 	SDL_Texture* background;
-	SDL_Texture* background2;
-	SDL_Texture* background3;
-	SDL_Texture* background4;
+
+	SDL_Texture* controlsBackground;
 
 	bool background1_ = true;
 	bool background2_ = false;
@@ -63,11 +64,18 @@ private:
 
 	GuiControlButton* startButton = nullptr;
 	GuiControlButton* optionsButton = nullptr;
+	GuiControlButton* controlsButton = nullptr;
 	GuiControlButton* exitButton = nullptr;
+	GuiControlButton* backButton = nullptr;
+
+	GuiControlToggle* fullscreenButton = nullptr;
+	GuiControlSlider* volumeSlider = nullptr;	
 
 	SDL_Texture* StartButtonTexture = nullptr;
 	SDL_Texture* OptionsButtonTexture = nullptr;
 	SDL_Texture* ExitButtonTexture = nullptr;
+	SDL_Texture* fullscreenButtonTexture = nullptr;
+	SDL_Texture* volumeSliderTexture = nullptr;
 
 	Animation* currentAnimation = nullptr;
 	Animation mainMenuAnimation;
@@ -76,8 +84,16 @@ private:
 	bool haveToStart = false;
 	bool haveToOptions = false;
 	bool haveToExit = false;
-
+	bool haveToBack = false;
+	bool haveToFullscreen = false;
+	bool controlsMenu = false;
+	bool backControlsMenu = false;
+	bool startOptions = false;
 	bool startMenu = true;
+
+
+	bool inOptions = false;
+	bool inControlsMenu = false;
 
 	int clickSoundUI = 0;
 };

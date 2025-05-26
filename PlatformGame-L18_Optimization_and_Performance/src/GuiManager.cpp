@@ -72,11 +72,13 @@ GuiControl* GuiManager::CreateGuiControl(GuiControlType type, int id, const char
 void GuiManager::EnableButton(GuiControl* button)
 {
 	button->active = true;
+	button->state = GuiControlState::NORMAL;
 }
 
 void GuiManager::DisableButton(GuiControl* button)
 {
 	button->active = false;
+	button->state = GuiControlState::DISABLED;
 }
 
 bool GuiManager::Update(float dt)
@@ -85,7 +87,7 @@ bool GuiManager::Update(float dt)
 	double FilterAngle = Engine::GetInstance().scene.get()->player->sightAngle * (180/b2_pi);
 
 	if (Engine::GetInstance().mainMenu->active == false && Engine::GetInstance().pauseMenu->active == false
-		&& Engine::GetInstance().introScene->active == false && Engine::GetInstance().settingsMenu.get()->active == false)
+		&& Engine::GetInstance().introScene->active == false)
 	{
 		Engine::GetInstance().render->DrawTexture(Trees, 0, 0);
 		Engine::GetInstance().render->DrawUIimage(Filter,-290, -700,1,FilterAngle);

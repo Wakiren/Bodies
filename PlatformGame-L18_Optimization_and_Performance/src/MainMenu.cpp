@@ -50,10 +50,23 @@ bool MainMenu::Start()
 	StartButtonTexture = Engine::GetInstance().textures.get()->Load("Assets/UI/PauseManuContinue.png");
 	OptionsButtonTexture = Engine::GetInstance().textures.get()->Load("Assets/UI/PauseMenuOptions.png");
 	ExitButtonTexture = Engine::GetInstance().textures.get()->Load("Assets/UI/PauseMenuExit.png");
+	controlsBackground = Engine::GetInstance().textures.get()->Load("Assets/UI/Controls.png");
+	fullscreenButtonTexture = Engine::GetInstance().textures.get()->Load("Assets/UI/SettingsFullscreen.png");
+	volumeSliderTexture = Engine::GetInstance().textures.get()->Load("Assets/UI/PauseMenuOptions.png");
+
+	fullscreenButton = (GuiControlToggle*)Engine::GetInstance().guiManager.get()->CreateGuiControl(GuiControlType::TOGGLE, 5, "Fullscreen", { 848, 650, 100, 20 }, 50, this, false, fullscreenButtonTexture);
+	volumeSlider = (GuiControlSlider*)Engine::GetInstance().guiManager.get()->CreateGuiControl(GuiControlType::SLIDER, 6, "Volume", { 848,800, 675, 50 }, 50, this, false, volumeSliderTexture, { (int)Engine::GetInstance().window.get()->width / 2 - 100 / 2, (int)(Engine::GetInstance().window.get()->height / 3 * 2.5) + 50, 100, 20 }, 0, 220, 110);
 
 	startButton = (GuiControlButton*)Engine::GetInstance().guiManager.get()->CreateGuiControl(GuiControlType::BUTTON, 1,"Start", { 848, 550, 106, 38 }, 70, this, false, StartButtonTexture);
 	optionsButton = (GuiControlButton*)Engine::GetInstance().guiManager.get()->CreateGuiControl(GuiControlType::BUTTON, 2, "Options", { 848, 700, 106, 38 }, 70, this, false, OptionsButtonTexture);
-	exitButton = (GuiControlButton*)Engine::GetInstance().guiManager.get()->CreateGuiControl(GuiControlType::BUTTON, 3, "Exit", { 848, 850, 106, 38 }, 70, this, false, ExitButtonTexture);
+	exitButton = (GuiControlButton*)Engine::GetInstance().guiManager.get()->CreateGuiControl(GuiControlType::BUTTON, 3, "Exit", { 848, 1000, 106, 38 }, 70, this, false, ExitButtonTexture);
+	backButton = (GuiControlButton*)Engine::GetInstance().guiManager.get()->CreateGuiControl(GuiControlType::BUTTON, 8, "Back", { 900, 520, 106, 38 }, 50, this, false);
+	controlsButton = (GuiControlButton*)Engine::GetInstance().guiManager.get()->CreateGuiControl(GuiControlType::BUTTON, 7, "Controls", { 848, 850, 106, 38 }, 70, this, false);
+
+	Engine::GetInstance().guiManager.get()->DisableButton(backButton);
+	Engine::GetInstance().guiManager.get()->DisableButton(fullscreenButton);
+	Engine::GetInstance().guiManager.get()->DisableButton(volumeSlider);
+
 
 	return true;
 }
@@ -74,7 +87,23 @@ bool MainMenu::Update(float dt)
 		Engine::GetInstance().guiManager.get()->EnableButton(startButton);
 		Engine::GetInstance().guiManager.get()->EnableButton(optionsButton);
 		Engine::GetInstance().guiManager.get()->EnableButton(exitButton);
+		Engine::GetInstance().guiManager.get()->DisableButton(backButton);
+		Engine::GetInstance().guiManager.get()->DisableButton(fullscreenButton);
+		Engine::GetInstance().guiManager.get()->DisableButton(volumeSlider);
+		
 		startMenu = false;
+	}
+
+	if (startOptions)
+	{
+		Engine::GetInstance().guiManager.get()->EnableButton(backButton);
+		Engine::GetInstance().guiManager.get()->EnableButton(fullscreenButton);
+		Engine::GetInstance().guiManager.get()->EnableButton(volumeSlider);
+		Engine::GetInstance().guiManager.get()->DisableButton(startButton);
+		Engine::GetInstance().guiManager.get()->DisableButton(optionsButton);
+		Engine::GetInstance().guiManager.get()->DisableButton(exitButton);
+
+		startOptions = false;
 	}
 
 	// Draw the background
@@ -82,6 +111,19 @@ bool MainMenu::Update(float dt)
 	//SDL_Rect backgroundRect = { 0, 0, 1920, 1080 };
 	Engine::GetInstance().render.get()->DrawUIimage(background, 0, 0, 1, 0, &currentAnimation->GetCurrentFrame());
 	currentAnimation->Update();
+
+	if (inControlsMenu)
+	{
+		Engine::GetInstance().render.get()->DrawUIimage(controlsBackground, 0, 0, 1, 0);
+		backButton->Draw(Engine::GetInstance().render.get());
+	}
+
+	if (inOptions)
+	{
+		fullscreenButton->Draw(Engine::GetInstance().render.get());
+		volumeSlider->Draw(Engine::GetInstance().render.get());
+		backButton->Draw(Engine::GetInstance().render.get());
+	}
 
 	Engine::GetInstance().render.get()->camera.x = 0;
 	Engine::GetInstance().render.get()->camera.y = 0;
@@ -106,12 +148,17 @@ bool MainMenu::Update(float dt)
 		}
 		else if (haveToOptions) {
 			haveToOptions = false;
-			Engine::GetInstance().settingsMenu.get()->active = true;
-			Engine::GetInstance().mainMenu.get()->active = false;
+			//Engine::GetInstance().settingsMenu.get()->active = true;
+			//Engine::GetInstance().mainMenu.get()->active = false;
 			Engine::GetInstance().guiManager.get()->DisableButton(startButton);
 			Engine::GetInstance().guiManager.get()->DisableButton(optionsButton);
 			Engine::GetInstance().guiManager.get()->DisableButton(exitButton);
-			startMenu = true;
+			Engine::GetInstance().guiManager.get()->DisableButton(controlsButton);
+			Engine::GetInstance().guiManager.get()->EnableButton(backButton);
+			Engine::GetInstance().guiManager.get()->EnableButton(fullscreenButton);
+			Engine::GetInstance().guiManager.get()->EnableButton(volumeSlider);
+			startMenu = false;
+			inOptions = true;
 			haveToChange = false;
 		}
 		else if (haveToExit) {
@@ -123,6 +170,68 @@ bool MainMenu::Update(float dt)
 			haveToChange = false;
 			ret = false;
 		}
+		else if (haveToBack) {
+			Engine::GetInstance().guiManager.get()->EnableButton(startButton);
+			Engine::GetInstance().guiManager.get()->EnableButton(optionsButton);
+			Engine::GetInstance().guiManager.get()->EnableButton(controlsButton);
+			Engine::GetInstance().guiManager.get()->EnableButton(exitButton);
+			Engine::GetInstance().guiManager.get()->DisableButton(backButton);
+			Engine::GetInstance().guiManager.get()->DisableButton(fullscreenButton);
+			Engine::GetInstance().guiManager.get()->DisableButton(volumeSlider);
+			startMenu = true;
+			haveToBack = false;
+			haveToChange = false;
+			inControlsMenu = false;
+			inOptions = false;
+		}
+		else if (controlsMenu)
+		{
+			controlsMenu = false;
+			inControlsMenu = true;
+			haveToChange = false;
+			Engine::GetInstance().guiManager.get()->DisableButton(startButton);
+			Engine::GetInstance().guiManager.get()->DisableButton(optionsButton);
+			Engine::GetInstance().guiManager.get()->DisableButton(exitButton);
+			Engine::GetInstance().guiManager.get()->DisableButton(controlsButton);
+			Engine::GetInstance().guiManager.get()->EnableButton(backButton);
+		}
+		else if (backControlsMenu)
+		{
+			Engine::GetInstance().guiManager.get()->EnableButton(controlsButton);
+			Engine::GetInstance().guiManager.get()->DisableButton(backButton);
+			Engine::GetInstance().guiManager.get()->EnableButton(startButton);
+			Engine::GetInstance().guiManager.get()->EnableButton(optionsButton);
+			Engine::GetInstance().guiManager.get()->EnableButton(exitButton);
+			backControlsMenu = false;
+			haveToChange = false;
+			inControlsMenu = false;
+			inOptions = false;
+		}
+	}
+
+	if (haveToChange && haveToFullscreen) {
+		if (fullscreenButton->IsToggled()) {
+			Uint32 flags = SDL_GetWindowFlags(Engine::GetInstance().window->window);
+
+			if (flags & SDL_WINDOW_FULLSCREEN_DESKTOP) {
+				SDL_SetWindowFullscreen(Engine::GetInstance().window->window, 0);
+			}
+			else {
+				SDL_SetWindowFullscreen(Engine::GetInstance().window->window, SDL_WINDOW_FULLSCREEN_DESKTOP);
+			}
+		}
+		else if (!fullscreenButton->IsToggled()) {
+			Uint32 flags = SDL_GetWindowFlags(Engine::GetInstance().window->window);
+
+			if (flags & SDL_WINDOW_FULLSCREEN_DESKTOP) {
+				SDL_SetWindowFullscreen(Engine::GetInstance().window->window, 0);
+			}
+			else {
+				SDL_SetWindowFullscreen(Engine::GetInstance().window->window, SDL_WINDOW_FULLSCREEN_DESKTOP);
+			}
+		}
+		haveToFullscreen = false;
+		haveToChange = false;
 	}
 
 	// Function to detect the mouse click
@@ -145,6 +254,31 @@ bool MainMenu::Update(float dt)
 			haveToExit = true;
 			Engine::GetInstance().fadeManager.get()->Fade(3.0f, 300);
 		}
+		if (controlsButton->state == GuiControlState::PRESSED) {
+			Engine::GetInstance().audio.get()->PlayFx(Effects::UICLICK, 3);
+			haveToChange = true;
+			controlsMenu = true;
+			Engine::GetInstance().fadeManager.get()->Fade(3.0f, 300);
+		}
+		if (backButton->state == GuiControlState::PRESSED) {
+			Engine::GetInstance().audio.get()->PlayFx(Effects::UICLICK, 4);
+			haveToChange = true;
+			backControlsMenu = true;
+			Engine::GetInstance().fadeManager.get()->Fade(3.0f, 300);
+		}
+		if (backButton->state == GuiControlState::PRESSED) {
+			Engine::GetInstance().audio.get()->PlayFx(Effects::UICLICK, 0);
+			haveToChange = true;
+			haveToBack = true;
+			Engine::GetInstance().fadeManager.get()->Fade(3.0f, 300);
+		}
+		if (fullscreenButton->state == GuiControlState::PRESSED) {
+			Engine::GetInstance().audio.get()->PlayFx(Effects::UICLICK, 1);
+			haveToFullscreen = true;
+			haveToChange = true;
+			/*Engine::GetInstance().window.get()->ToggleFullscreen();
+			fullscreenButton->state = GuiControlState::NORMAL;*/
+		}
 		
 	}
 
@@ -152,6 +286,10 @@ bool MainMenu::Update(float dt)
 	startButton->Draw(Engine::GetInstance().render.get());
 	exitButton->Draw(Engine::GetInstance().render.get());
 	optionsButton->Draw(Engine::GetInstance().render.get());
+	
+	if (!inControlsMenu && !inOptions) {
+		controlsButton->Draw(Engine::GetInstance().render.get());
+	}
 
 	////Button textures
 	//Engine::GetInstance().render.get()->DrawUIimage(StartButtonTexture, startButton->bounds.x, startButton->bounds.y, 1, &(startButton->bounds));
