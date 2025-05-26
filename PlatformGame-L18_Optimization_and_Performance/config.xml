@@ -14,6 +14,9 @@
 		<resizable value="true" />
 		<fullscreen_window value="false" />
 	</window>
+	<audio>
+		<volume general="70" sfx="70" music="70" />
+	</audio>
 	<scene>
 		<map path="Assets/Maps/" name="MainMap.tmx" />
 		<entities>

@@ -279,9 +279,15 @@ bool MainMenu::Update(float dt)
 			/*Engine::GetInstance().window.get()->ToggleFullscreen();
 			fullscreenButton->state = GuiControlState::NORMAL;*/
 		}
+		if (volumeSlider->state == GuiControlState::PRESSED) {
+			Engine::GetInstance().audio.get()->ChangeGlobalVolume(volumeSlider->GetValuePercent());
+			//Engine::GetInstance().audio.get()->PlayFx(Effects::UICLICK, 5);
+			haveToChange = true;
+		}
 		
 	}
 
+	LOG("Value: %f", volumeSlider->GetValuePercent());
 	// Draw the buttons
 	startButton->Draw(Engine::GetInstance().render.get());
 	exitButton->Draw(Engine::GetInstance().render.get());

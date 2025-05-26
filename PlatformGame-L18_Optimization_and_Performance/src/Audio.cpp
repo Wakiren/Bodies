@@ -51,6 +51,11 @@ bool Audio::Awake()
 	return ret;
 }
 
+bool Audio::Start()
+{
+	return true;
+}
+
 // Called before quitting
 bool Audio::CleanUp()
 {
@@ -204,6 +209,56 @@ bool Audio::StopFx(Effects type, int channel)
 	}
 
 	return ret;
+}
+
+void Audio::ChangeGlobalVolume(float percentage)
+{
+	general = std::max(0.0f, std::min(percentage, 1.0f));
+
+	ChangeGeneralVolume(general);
+	ChangeSfxVolume(sfxVolume);
+	ChangeMusicVolume(musicVolume);
+}
+
+void Audio::ChangeGeneralVolume(float percentage)
+{
+	general = std::max(0.0f, std::min(percentage, 1.0f)); // Clamp between 0 and 1
+	pugi::xml_node audioNode = configParameters.child("volume");
+	if (audioNode == nullptr)
+	{
+		LOG("Audio node not found in config");
+		return;
+	}
+	audioNode.attribute("general").set_value(general);
+	Mix_Volume(-1, static_cast<int>(general * MIX_MAX_VOLUME)); // -1 means all channels
+	Mix_VolumeMusic(static_cast<int>(general * MIX_MAX_VOLUME));
+
+}
+
+void Audio::ChangeSfxVolume(float percentage)
+{
+	sfxVolume = std::max(0.0f, std::min(percentage, 1.0f)); // Clamp between 0 and 1
+	pugi::xml_node audioNode = configParameters.child("volume");
+	if (audioNode == nullptr)
+	{
+		LOG("Audio node not found in config");
+		return;
+	}
+	audioNode.attribute("sfx").set_value(sfxVolume);
+	Mix_Volume(-1, static_cast<int>(general * sfxVolume * MIX_MAX_VOLUME)); // -1 means all channels
+}
+
+void Audio::ChangeMusicVolume(float percentage)
+{
+	musicVolume = std::max(0.0f, std::min(percentage, 1.0f)); // Clamp between 0 and 1
+	pugi::xml_node audioNode = configParameters.child("volume");
+	if (audioNode == nullptr)
+	{
+		LOG("Audio node not found in config");
+		return;
+	}
+	audioNode.attribute("music").set_value(musicVolume);
+	Mix_VolumeMusic(static_cast<int>(general * musicVolume * MIX_MAX_VOLUME)); // -1 means all channels
 }
 
 void Audio::PlayRandFx(Effects type1, Effects type2, Effects type3, int channel)

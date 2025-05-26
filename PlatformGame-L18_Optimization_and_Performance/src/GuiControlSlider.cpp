@@ -5,7 +5,7 @@
 #include "Textures.h"
 #include "Window.h"
 
-GuiControlSlider::GuiControlSlider(int id, SDL_Rect bounds, const char* text, int fontSize, int min, int max, int value,SDL_Texture*buttonTexture) : GuiControl(GuiControlType::SLIDER, id)
+GuiControlSlider::GuiControlSlider(int id, SDL_Rect bounds, const char* text, int fontSize, int min, int max, float value,SDL_Texture*buttonTexture) : GuiControl(GuiControlType::SLIDER, id)
 {
 	this->bounds = bounds;
 	this->auxRect = bounds;
@@ -126,13 +126,14 @@ bool GuiControlSlider::Draw(Render* render)
 	return false;
 }
 
-int GuiControlSlider::GetValuePercent() const
+float GuiControlSlider::GetValuePercent() const
 {
-	int auxValue = (this->value / this->maxValue);
+	float auxValue = (this->value / this->maxValue);
+	LOG("auxValue: %f", auxValue);
 	return auxValue;
 }
 
-void GuiControlSlider::SetValue(int value)
+void GuiControlSlider::SetValue(float value)
 {
 	this->value = value * 2;
 	NotifyObserver();

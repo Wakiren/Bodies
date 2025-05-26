@@ -50,6 +50,8 @@ public:
 	// Called before render is available
 	bool Awake();
 
+	bool Start();
+
 	// Called before quitting
 	bool CleanUp();
 
@@ -65,10 +67,25 @@ public:
 
 	bool StopFx(Effects type, int channel);
 
+	// Function to reduce volume with percentatges
+	void ChangeGlobalVolume(float percentage);
+	void ChangeGeneralVolume(float percentage);
+	void ChangeSfxVolume(float percentage);
+	void ChangeMusicVolume(float percentage);
+
+	// Getters
+	float GetGeneralVolume() const { return general; }
+	float GetSfxVolume() const { return sfxVolume; }
+	float GetMusicVolume() const { return musicVolume; }
+
 	bool StopMusic();
 
 private:
 
 	_Mix_Music* music;
 	std::vector<SFX*> fx;
+
+	float general = 1.0f; // General volume multiplier
+	float sfxVolume = 1.0f; // Default volume for SFX
+	float musicVolume = 1.0f; // Default volume for music
 };

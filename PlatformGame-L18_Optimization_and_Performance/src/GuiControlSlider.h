@@ -9,15 +9,15 @@ class GuiControlSlider : public GuiControl
 
 public:
 
-	GuiControlSlider(int id, SDL_Rect bounds, const char* text = "", int fontSize = FONT_SIZE,int min = 0, int max = 0, int value = 0, SDL_Texture*buttonTexture = nullptr);
+	GuiControlSlider(int id, SDL_Rect bounds, const char* text = "", int fontSize = FONT_SIZE,int min = 0, int max = 0, float value = 0, SDL_Texture*buttonTexture = nullptr);
 	virtual ~GuiControlSlider();
 
 	// Called each loop iteration
 	bool Update(float dt);
 	bool Draw(Render* render);
 
-	int GetValuePercent() const;
-	void SetValue(int value);
+	float GetValuePercent() const;
+	void SetValue(float value);
 
 	SDL_Texture* textureButton = nullptr;
 
@@ -28,7 +28,7 @@ private:
 	void CalculeValue();
 
 	SDL_Rect slider;
-	int value;
+	float value;
 
 	int minValue;
 	int maxValue;
