@@ -27,220 +27,234 @@
 <dialogues>
 	<dialogueTree ID="0" NPC = "1">
 
-		<node id="0" text="You are not him… you don't smell like him… you are just another piece of flesh to his collection… at least you haven't gone psychotic  ">
-			<choice id="0" option="What are you talking about?? " nextNode="2" eventReturn="1"/>
-			<choice id="0" option="Who are you? " nextNode="1" eventReturn="1"/>
+		<node id="0" text="Well you must be a new one... a fearly normal one too">
+			<choice id="0" option="Who the fuck are you " nextNode="1" eventReturn="1"/>
+			<choice id="1" option="None of this is normal " nextNode="2" eventReturn="1"/>
+		</node>
+		<node id="1" text="And you can talk!!! this one looks preaty good">
+			<choice id="0" option="Officer Sam Skyler, respond to me, who are you!" nextNode="3"  eventReturn="1"/>
+			<choice id="1" option="Talk? of course i can talk" nextNode="4"  eventReturn="1"/>
+		</node>
+		<node id="2" text="Belive me this is one of the most normal interactions i've had in a while... and you where?">
+			<choice id="0" option="Officer Sam Skyler, respond to me, who are you!" nextNode="3"  eventReturn="1"/>
+		</node>
+		<node id="3" text="JAJAJAJA!!! A police officer, he has outdone himself this time">
+			<choice id="0" option="Respond to me you bastard!!!" nextNode="5"  eventReturn="1"/>
+		</node>
+		<node id="4" text="You would be suprised by the amount of them that can't... and you where?">
+			<choice id="0" option="Officer Sam Skyler, respond to me, who are you!" nextNode="3"  eventReturn="1"/>
+		</node>
+		<node id="5" text="Ok ok... Calm down... My name is Henry and you are the result of an experiment done by a crazy cientist bla bla bla... you are deformed and don't feel pain bla bla bla...">
+			<choice id="0" option="What the fuck???" nextNode="6"  eventReturn="1"/>
+			<choice id="1" option="It all makes sense now thanks..." nextNode="7"  eventReturn="1"/>
+		</node>
+		<node id="6" text="That's what they all say... well no... normaly they ust mumble some uncomprehensible bullshit and run away screaming">
+			<choice id="0" option="Ok, you are fucking usless" nextNode="8"  eventReturn="1"/>
+			<choice id="1" option="If I had my gun I'd shoot you right here" nextNode="9"  eventReturn="1"/>
+		</node>
+		<node id="7" text="Ho you are welcome, do you need enything else? I can offer you some fresh human meat?">
+			<choice id="0" option="What the fuck???" nextNode="6"  eventReturn="1"/>
+			<choice id="1" option="Ok, you are fucking usless" nextNode="9"  eventReturn="1"/>
+		</node>
+		<node id="8" text="Get in line then...">
+			<choice id="0" option="Ok, you are fucking usless" nextNode="9"  eventReturn="1"/>
+		</node>
+		<node id="9" text="Look if you whant to know what the fuck is going on beafore you die just go talk to Sally, she will help you, tell her I said hi... now go, i've grown tiered of this conversation.">
+			<choice id="0" option="Leave" nextNode="-1"  eventReturn="1"/>
 		</node>
 
-		<node id="1" text="Im just a lonley old fella called Henry... you must be new... you smell different...  ">
-			<choice id="0" option="I just got here, what is this place? What has happened to my body? " nextNode="3"  eventReturn="3"/>
-		</node>
-
-		<node id="2" text="Nothing... stranger... my name is Henry, you must be new, you don't smell familiar...  ">
-			<choice id="0" option="I just got here, what is this place? What has happened to my body? " nextNode="3" eventReturn="1"/>
-		</node>
-
-		<node id="3" text="Calm down honey... whats your name, lets start there... ">
-			<choice id="0" option="My name is Sam, Sam Skyler " nextNode="4" eventReturn="1"/>
-			<choice id="1" option="Officer Sam, badge number 0458. Now answer me where am I ?! " nextNode="5" eventReturn="1"/>
-		</node>
-
-		<node id="4" text="Then Sam... why do you think i would tell you where you are and why... what do I get in return...  ">
-			<choice id="0" option="Im a police officer, badge number 0458, you are under interrogation due to specific situations, now be carefull with what you say  " nextNode="5" eventReturn="1"/>
-		</node>
-
-		<node id="5" text="JAJAJAJJ... *Caches his breath... A police officer... don't make me laughf... do you really think you have eny type of power here?... look at you, disfigured, harmless, no weapon and with barely eny clothes... Now... if you really whant to know things... just do me a favour...  ">
-			<choice id="0" option="Go to hell " nextNode="6" eventReturn="1"/>
-			<choice id="0" option="...ok " nextNode="7" eventReturn="1"/>
-		</node>
-
-		<node id="6" text="JAJJAJAJJA... *Catches breath... Honey we are already in it... ">
-			<choice id="0" option="*Leave " nextNode="-1" eventReturn="3" bloked="true" NextID="1"/>
-		</node>
-
-		<node id="7" text ="It's fearly simple... just go give this present to Sally... She is on the hut next door... its just a simple present... do it for this lonley old man... come one... its harmless... then i'll tell you enything you want...  ">
-			<choice id="0" option="Shure *take the present " nextNode="-1"  eventReturn="1" NextID="1" bloked="true"/>
-		</node>
 	</dialogueTree>
-
 	<dialogueTree ID="0" NPC = "2">
-		<node id="0" text="... ">
-			<choice id="0" option="Hello? " nextNode="1" eventReturn="1"/>
-		</node>
-
-		<node id="1" text="... Give me one second ... ">
-			<choice id="0" option="Henry sent me here... " nextNode="2"  eventReturn="1"/>
-			<choice id="0" option="What are you working on... " nextNode="3"  eventReturn="1"/>
-		</node>
-
-		<node id="2" text="Why would Henry... *looks up... hoooo... you are new, thats why. And what does Henry want from me? ">
-			<choice id="0" option="He told me to give you this *Give present " nextNode="4"  eventReturn="1"/>
-		</node>
-
-		<node id="3" text="Im trying to conect his two tishues but... looks up... hooo... you are new i see... Let me gess, you've apreared here, a place compleatly unknown to you, and you are talking to a deformed figure just like yourselve, full of stitches adn open woonds... you must have a lot of questions, but first ask yourseve this one... why don't you feel eny pain? ">
-			<choice id="0" option="You'r right... i feel nothing " nextNode="5"  eventReturn="1"/>
-		</node>
-
-		<node id="4" text="Haaaug... ok I think I already know where this is going *opens the present* yeah just what i expected, another small piece of his scrotoum... *Henry laughs histariusly from a far and caughfs* ... YOU WILL END UP WITH NO SKIN AROUND YOUR BALLS IF YOU CONTINUE LIKE THIS HENRY *Sally yells*">
-			<choice id="0" option="What a piece of shit " nextNode="6"  eventReturn="1"/>
-			<choice id="1" option="Im so sorry " nextNode="8"  eventReturn="1"/>
-		</node>
-
-		<node id="6" text="You can hate him as much as you whant, but he is a valuable person here, without him most of us would be dead ">
-			<choice id="0" option="How? " nextNode="10"  eventReturn="1" />
-		</node>
-		<node id="8" text="Don't worry, as much as I hate him he is a valuable person here, without him most of us would be dead ">
-			<choice id="0" option="How? " nextNode="10"  eventReturn="1"/>
-		</node>
-
-		<node id="10" text="Well you see, he is a trader in nature, so eaven though his morals are compleatly gone, he will give you the main tools to survive here... but I still belive that he will change... some day... Give me just a second with this and I'll help you  ">
-			<choice id="0" option="What exacly are you doing? " nextNode="12"  eventReturn="1"/>
-		</node>
-
-		<node id="12" text="Let me gess, you've apreared here, a place compleatly unknown to you, and you are talking to a deformed figure just like yourselve, full of stitches adn open woonds... you must have a lot of questions, but first ask yourseve this one... why don't you feel eny pain? ">
-			<choice id="0" option="You'r right... i feel nothing... " nextNode="5"  eventReturn="1"/>
-		</node>
-
-		<node id="7" text="That's what im so busy tring to figure out, how is this possible. By the way, you are compleatly missing an eye, you may whant to get another one...I can hel you with that ">
-			<choice id="0" option="Get another one? " nextNode="9"  eventReturn="1"/>
-		</node>
-
-		<node id="9" text="Yeah... like... another one... Its difficult to explain... just go a little mre further north and you will find one there, bring it back to me and i will help you understand what's going on... ">
-			<choice id="0" option="Thank you? " nextNode="-1"  eventReturn="1" NextID="1" bloked ="true"/>
-			<choice id="1" option="Henry told me something about a present for you? " nextNode="11"  eventReturn="1"/>
-		</node>
-
-		<node id="11" text="Ho yeah it was probably another piece of his scrotoum, hea does that some times. HEY HENRY YOU WILL END UP WITH NO SKIN ARROUND YOUR BALLS IF YOU CONTINUE LIKE THIS *Sally yells* *Henry grunts loudly next door* ">
-			<choice id="0" option="What a piece of shit " nextNode="6"  eventReturn="1"/>
-		</node>
+		
+	<node id="0" text="*She's woking on something... cutting some skin oppen and extracting a black substance*">
+		<choice id="0" option="Hello?" nextNode="2"  eventReturn="1"/>
+		<choice id="1" option="Henry sent me here" nextNode="1"  eventReturn="1"/>
+	</node>
+	<node id="1" text="...">
+		<choice id="0" option="Henry sent me here" nextNode="1"  eventReturn="1"/>
+		<choice id="1" option="Hello?" nextNode="2"  eventReturn="1"/>
+	</node>
+	<node id="2" text="Ho hi didn't see you there... and you can talk! Thats nice">
+		<choice id="0" option="Why does everyone get suprised by that" nextNode="3"  eventReturn="1"/>
+		<choice id="1" option="That old man won't tell me what's goin on" nextNode="4"  eventReturn="1"/>
+	</node>
+	<node id="3" text="Unfortunately he can be like that sometimes...">
+		<choice id="0" option="Can you explain it to me?" nextNode="5"  eventReturn="1"/>
+	</node>
+	<node id="4" text="You would be surprised of how unusual it is for experiments like us to be able to talk">
+		<choice id="0" option="That old man won't tell me what's goin on" nextNode="3"  eventReturn="1"/>
+	</node>
+	<node id="5" text="I would... but i looks like you are missing an eye, and i think thats a little more important, i can get infected and affect the brain...">
+		<choice id="0" option="WHAT THE FUCK???" nextNode="7"  eventReturn="1"/>
+		<choice id="1" option="This is normal at this point" nextNode="6"  eventReturn="1"/>
+	</node>
+	<node id="6" text="I see you are getting the gist of it... let me help you. I've seen one layiong arround north from here, not too far...">
+		<choice id="0" option="This is still normal" nextNode="8"  eventReturn="1"/>
+		<choice id="1" option="So there is an eye just laying there..." nextNode="9"  eventReturn="1"/>
+	</node>
+	<node id="7" text="Ok ok... don't freak out, let me help you. I've seen one layiong arround north from here, not too far...">
+		<choice id="0" option="So there is an eye just laying there..." nextNode="9"  eventReturn="1"/>
+		<choice id="1" option="This is still normal" nextNode="8"  eventReturn="1"/>
+	</node>
+	<node id="8" text="Yup... If you get it I can reattach it to you, Im a professional surgeon you see...">
+		<choice id="0" option="In fact i can't, literally and methaforically" nextNode="11"  eventReturn="1"/>
+		<choice id="1" option="How can i trust you on this" nextNode="0"  eventReturn="10"/>
+	</node>
+	<node id="9" text="Yup... If you get it I can reattach it to you, Im a professional surgeon you see...">
+		<choice id="0" option="In fact i can't, literally and methaforically" nextNode="11"  eventReturn="1"/>
+	</node>
+	<node id="10" text="You can't, but now if you die from the pison on your head my concience will be clear...">
+		<choice id="0" option="What?" nextNode="13"  eventReturn="1"/>
+	</node>
+	<node id="11" text="I see...">
+		<choice id="0" option="Lucky you" nextNode="12"  eventReturn="1"/>
+	</node>
+	<node id="12" text="Just go already beafore you get your head infected with poison">
+		<choice id="0" option="What?" nextNode="13"  eventReturn="1"/>
+	</node>
+	<node id="13" text="Nothing I'll tell you latter, trust me, go go">
+		<choice id="0" option="Leave" nextNode="-1"  eventReturn="1"/>
+	</node>
 
 	</dialogueTree>
 
 	<dialogueTree ID="1" NPC = "2">
-		<node id="0" text="Well done! It seems like you have found your new eye. Now lay on this operating table and let me explain while I do my work.">
-			<choice id="0" option="Wait, aren't you going to use any anesthetics? " nextNode="1"  eventReturn="1"/>
-			<choice id="1" option="Do you know what you are doing?" nextNode="2"  eventReturn="1"/>
+		<node id="0" text="You'r back! Do you have the eye?">
+			<choice id="0" option="Yes, but a psicopath was holding it" nextNode="1"  eventReturn="1"/>
+			<choice id="1" option="Yes, but Im not shure about this..." nextNode="2"  eventReturn="1"/>
 		</node>
-		<node id="1" text="Don't worry, little one; remember, you don't feel any pain, and I'll be fast, I promise.">
-			<choice id="0" option="I guess you are right..." nextNode="3"  eventReturn="1"/>
+		<node id="1" text="Ho im sorry about that, you must have stumbled upon one of the others...">
+			<choice id="0" option="Who are others" nextNode="1"  eventReturn="3"/>
+			<choice id="1" option="He tried to bite me..." nextNode="4"  eventReturn="1"/>
 		</node>
-		<node id="1" text="I used to be an excellent surgeon in my past outside this place. I'll do it quick, even though you don't feel any pain.">
-			<choice id="0" option="I guess you are right..." nextNode="3"  eventReturn="1"/>
+		<node id="2" text="Don't worry really, I'm a real surgeon, I've been in this forest for a while now, if it wheren't from me henry, Billy and most of the others would be dead...">
+			<choice id="0" option="I still need to know what is going on..." nextNode="3"  eventReturn="1"/>
+			<choice id="1" option="Who are others" nextNode="5"  eventReturn="1"/>
 		</node>
-		<node id="3" text="Now let me explain. Like you, none of us remember how exactly we got here or why; all we know is that, despite all, we are very lucky.">
-			<choice id="0" option="Lucky?" nextNode="4"  eventReturn="1"/>
+		<node id="3" text="I'll explain while the surgery...">
+			<choice id="0" option="While?" nextNode="6"  eventReturn="1"/>
 		</node>
-		<node id="4" text="Yes! We've all been artificially experimented on, deformed, and left in an unescapable forest by someone we ourselves call the doctor. We don't know Its identity or why It did this; all we know is that from time to time he likes to bless us with another one of Its experiments.">
-			<choice id="0" option="How is that Lucky still..." nextNode="5"  eventReturn="1"/>
+		<node id="4" text="Ho they tend to do that...">
+			<choice id="0" option="Do they" nextNode="7"  eventReturn="1"/>
 		</node>
-		<node id="5" text="Well... do you crave human flesh?">
-			<choice id="0" option="YES!" nextNode="6"  eventReturn="1"/>
-			<choice id="1" option="No" nextNode="7"  eventReturn="1"/>
+		<node id="5" text="I'll explain while the surgery...">
+			<choice id="0" option="While?" nextNode="6"  eventReturn="1"/>
 		</node>
-		<node id="6" text="Really?">
-			<choice id="0" option="No" nextNode="7"  eventReturn="1"/>
+		<node id="6" text="Ok then... You have been deformed and experimented on by a psicopath, who has turned you into this. ">
+			<choice id="0" option="Ok?" nextNode="8"  eventReturn="1"/>
 		</node>
-		<node id="7" text="Do you believe you are the prettiest person alive?">
-			<choice id="0" option="No" nextNode="8"  eventReturn="1"/>
-			<choice id="1" option="No, you are" nextNode="9"  eventReturn="1"/>
+		<node id="7" text="I'll explain while the surgery...">
+			<choice id="0" option="While?" nextNode="6"  eventReturn="1"/>
 		</node>
-		<node id="9" text="Im flattered, but that's not the case.">
-			<choice id="0" option="No" nextNode="8"  eventReturn="1"/>
+		<node id="8" text="And somehow you don't feel eny pain from eny of your reacent stitches or woonds...">
+			<choice id="0" option="Somehow?" nextNode="9"  eventReturn="1"/>
 		</node>
-		<node id="8" text="Well, some of the experiments become... psychotic... they develop multiple personalities; they become narcissists and cannibals, but you, and me, and some others are lucky to still have our minds.">
-			<choice id="0" option="I see..." nextNode="10"  eventReturn="1"/>
+		<node id="9" text="To make this transformations on you, this psicopaths has used a really potent and illegal sedative, to the point that it has killed all pain receptors in your body">
+			<choice id="0" option="And that's why you can operate on me like this" nextNode="10"  eventReturn="1"/>
 		</node>
-		<node id="10" text="Yes! Well, mentally and physically, you are all done.">
-			<choice id="0" option="That wasn't so bad" nextNode="11"  eventReturn="1"/>
+		<node id="10" text="Correct... But most of his experiments beacome psichotic beacouse of this sedative, that is why the others exist, deformed and psichotic failed experiments.">
+			<choice id="0" option="I see" nextNode="11"  eventReturn="1"/>
 		</node>
-		<node id="11" text="Told you so. By the way, I don't know much else about this place either; I've been helping everyone in need since the first day I arrived; I don't even remember when that was... If you need anything else done... please tell me, and be careful.">
-			<choice id="0" option="Thank you" nextNode="-1"  eventReturn="1" NextID="2" bloked ="true"/>
+		<node id="11" text="Yes you can... phisically and methaforically">
+			<choice id="0" option="Is there a way to get out?" nextNode="12"  eventReturn="1"/>
+		</node>
+		<node id="12" text="I really don't know, the one who knows more about this is Henry, for what i know he was the firs "successfull" experiment">
+			<choice id="0" option="Thank you for everything" nextNode="13"  eventReturn="1"/>
+		</node>
+		<node id="0" text="If you need enything else or some new pieces of your body reattached, just tell me.">
+			<choice id="0" option="Leave" nextNode="-1"  eventReturn="1"/>
 		</node>
 	</dialogueTree>
 
 
-	<dialogTree>
-		<node id="0" text="Welcome back, baby... I see you see... get it...">
-			<choice id="0" option="Shut up, Henry, and don't call me that" nextNode="1" eventReturn="1"/>
-			<choice id="1" option="I need more information about this place" nextNode="2" eventReturn="1"/>
-			<choice id="2" option="I need something (enter shop)" nextNode="3" eventReturn="1"/>
+	<dialogTree ID="1" NPC = "1">
+		<node id="0" text="You'r back, and you look... alive">
+			<choice id="0" option="Why wouldn't I be" nextNode="1"  eventReturn="1"/>
+			<choice id="1" option="Shut up Henry" nextNode="2"  eventReturn="1"/>>
 		</node>
-
-		<node id="1" text="WOOOOW, sure... sweetie... need anything?">
-			<choice id="0" option="Don't call me that either, I need some info" nextNode="2" eventReturn="1"/>
-			<choice id="1" option="I need something (enter shop)" nextNode="3" eventReturn="1"/>
+		<node id="1" text="You know...">
+			<choice id="0" option="Know what?" nextNode="4"  eventReturn="1"/>
+			<choice id="1" option="Shut up Henry" nextNode="2"  eventReturn="1"/>
 		</node>
-
-		<node id="2" text="I can help you with that, what type of info do you need?">
-			<choice id="0" option="Who are you exactly?" nextNode="4" eventReturn="1"/>
-			<choice id="1" option="Who is the Doctor?" nextNode="5" eventReturn="1"/>
-			<choice id="2" option="Is there a way to get out of here?" nextNode="6" eventReturn="1"/>
+		<node id="2" text="Calm down... What do you need">
+			<choice id="0" option="Do you know a way out of here?" nextNode="3"  eventReturn="1"/>
 		</node>
-
-		<node id="4" text="Invite me to dinner first, honey...">
-			<choice id="0" option="..." nextNode="2" eventReturn="1"/>
+		<node id="3" text="Maybe... what do I get in return if a tell you...">
+			<choice id="0" option="You manage to preserve your skull" nextNode="6"  eventReturn="1"/>
+			<choice id="1" option="My thanks" nextNode="5"  eventReturn="1"/>
+			<choice id="2" option="What do you want..." nextNode="7"  eventReturn="1"/>
 		</node>
-
-		<node id="5" text="Never heard of him">
-			<choice id="0" option="..." nextNode="2" eventReturn="1"/>
+		<node id="4" text="Come one don't make me say it...">
+			<choice id="0" option="..." nextNode="8"  eventReturn="1"/>
+			<choice id="1" option="Shut up Henry" nextNode="2"  eventReturn="1"/>
 		</node>
-
-		<node id="6" text="Let me be clear, gorgeous... If you want some useful information from me... it won't be that easy... I'll need a favor in return...">
-			<choice id="0" option="What is it?" nextNode="7" eventReturn="1"/>
+		<node id="5" text="*Spits on the floor*">
+			<choice id="0" option="What do you want..." nextNode="7"  eventReturn="1"/>
 		</node>
-
-		<node id="7" text="There are a couple of cannibals right behind this hut... they've been stealing from me for a while... since you are... a police officer... I think you should go reprehend them... sweetie.">
-			<choice id="0" option="Do not call me that... I'll go handle the cannibals, but after that you tell me everything you know" nextNode="8" eventReturn="1"/>
+		<node id="6" text="But if I don't you don't get your infromation... Im in the advantage here honey...">
+			<choice id="0" option="What do you want..." nextNode="7"  eventReturn="1"/>
 		</node>
-
-		<node id="8" text="Everything...">
-			<choice id="0" option="..." nextNode="-1"  eventReturn="1" NextID="2" bloked ="true"/>
+		<node id="7" text="You see, there is a bunch of cannibals here behind my cabin, and as you know im just an old man... So would you be able to... take care of them?">
+			<choice id="0" option="I hate you so much" nextNode="9"  eventReturn="1"/>
+			<choice id="1" option="Shure" nextNode="10"  eventReturn="1"/>
 		</node>
-
+		<node id="8" text="Beacouse you are a woman you know, you are... you know... less">
+			<choice id="0" option="That's Gay" nextNode="11"  eventReturn="1"/>
+			<choice id="1" option="And you are a crippled old man who could die at any second" nextNode="12"  eventReturn="1"/>
+		</node>
+		<node id="9" text="Thank you">
+			<choice id="0" option="Leave" nextNode="-1"  eventReturn="1"/>
+		</node>
+		<node id="10" text="Love you too...">
+			<choice id="0" option="Leave" nextNode="-1"  eventReturn="1"/>
+		</node>
+		<node id="11" text="Wooooooow thats crossing the line...">
+			<choice id="0" option="Ho shut up Henry" nextNode="13"  eventReturn="1"/>
+		</node>
+		<node id="12" text="OKOK...Calm down... What do you need">
+			<choice id="0" option="Do you know a way out of here?" nextNode="3"  eventReturn="1"/>
+		</node>
+		<node id="13" text="Calm down... What do you need">
+			<choice id="0" option="Do you know a way out of here?" nextNode="3"  eventReturn="1"/>
+		</node>
 	</dialogTree>
 
-	<dialogTree>
-		<node id="0" text="Welcome back, baby...">
-			<choice id="0" option="I told you to not call me that... the cannibals are gone" nextNode="1" eventReturn="1"/>
+	<dialogTree ID="2" NPC = "1">
+		<node id="0" text="I've seen they'r gone... Thank you...">
+			<choice id="0" option="Your wealcome]" nextNode="1"  eventReturn="1"/>
+			<choice id="1" option="Shut up and tell me how tro get out fo here" nextNode="2"  eventReturn="1"/>
 		</node>
-
-		<node id="1" text="How can I be sure of that">
-			<choice id="0" option="(Show the weird symbol you found)" nextNode="2" eventReturn="1"/>
+		<node id="1" text="So you wanted to know how to get out of here right?">
+			<choice id="0" option="Yes" nextNode="3"  eventReturn="1"/>
+			<choice id="1" option="And you know how to right?" nextNode="4"  eventReturn="1"/>
 		</node>
-
-		<node id="2" text="I see, you managed to get one of those weirdos symbols... What do you want to know...">
-			<choice id="0" option="How can I scape from here" nextNode="3" eventReturn="1"/>
-			<choice id="1" option="Who is the Doctor" nextNode="7" eventReturn="1"/>
-			<choice id="2" option="Who are you" nextNode="8" eventReturn="1"/>
-			<choice id="3" option="Leave" nextNode="-1" eventReturn="1" NextID="3" bloked ="true"/>
+		<node id="2" text="No need to get agressive... there is a problem though">
+			<choice id="0" option="What is it now" nextNode="5"  eventReturn="1"/>
 		</node>
-
-		<node id="3" text="Well... there is a really huge fence that covers all the forest that surrounds us... and the Doctor made us disabled enough to not be able to climb it...">
-			<choice id="0" option="So it's impossible to scape..." nextNode="4" eventReturn="1"/>
+		<node id="3" text="Of course, but there is a little problem">
+			<choice id="0" option="What is it now" nextNode="5"  eventReturn="1"/>
 		</node>
-
-		<node id="4" text="Not quite... if you manage to find pincers you would be able to cut through the fence... In fact, when just after you left to manage the cannibals, I saw ones tucked to a cadaver...">
-			<choice id="0" option="WHERE?" nextNode="5" eventReturn="1"/>
+		<node id="4" text="Well...">
+			<choice id="0" option="What is it now" nextNode="5"  eventReturn="1"/>
 		</node>
-
-		<node id="5" text="Well... there is a problem sweetie... It seems the cadaver is gone... most probably the cannibals took it to their sacrificial tree...">
-			<choice id="0" option="What the fuck are you talking about, are you...!" nextNode="6" eventReturn="1"/>
+		<node id="5" text="Its impossible to get out... You see, the forest is sorrounded by a fence that is basically unepenetrable without tools and everyone, including you, is unable to climb it.">
+			<choice id="0" option="Excse me?!" nextNode="6"  eventReturn="1"/>
 		</node>
-
-		<node id="6" text="Shhh... don't scream at me... If you want to get the pincers so bad, just follow the path of symbols between cannibal camps...">
-			<choice id="0" option="..." nextNode="2" eventReturn="1"/>
+		<node id="6" text="And eaven if you do the surgeon will likely kill you with his rifle or the dogs will eat you alive...">
+			<choice id="0" option="I swear im going to kill you" nextNode="7"  eventReturn="1"/>
+			<choice id="1" option="You are kidding" nextNode="8"  eventReturn="1"/>
 		</node>
-
-		<node id="7" text="I'm sure that Sally already told you this... what she knows is what I know... It did this to us... and now we are here, that's all...">
-			<choice id="0" option="..." nextNode="2" eventReturn="1"/>
+		<node id="7" text="Whait whait, let's not be haisty... just beafore you came in, i swear i saw some pincers burried on the chest of a dead body outside... but i see the cannibals have stolen it.">
+			<choice id="0" option="Is there a way to take it back?" nextNode="9"  eventReturn="1"/>
 		</node>
-
-		<node id="8" text="My name, as you know, is Henry... that's all you need to know... but because you seem specially interested in me, I'll tell you one more thing...">
-			<choice id="0" option="What is it" nextNode="9" eventReturn="1"/>
+		<node id="8" text="Nop... life is hard... anything else... somethinf for your period?">
+			<choice id="0" option="I swear im going to kill you" nextNode="7"  eventReturn="1"/>
 		</node>
-
-		<node id="9" text="You will never get a good trade from me... but you will NEVER get a better trade here...">
-			<choice id="0" option="You have an ego higher than your prices" nextNode="2" eventReturn="1"/>
+		<node id="9" text="The cannibals have different settlements all arround the forest, conected by signs... If you follow the path you will end up on their main camp... they will be there probably...">
+			<choice id="0" option="Thanks i guess" nextNode="10"  eventReturn="1"/>
+		</node>
+		<node id="10" text="Make shure to grab everything from the camps... they tend to use symbols to make rituals... you will probably need some if you want to get those pincers...">
+			<choice id="0" option="Leave" nextNode="-1"  eventReturn="1"/>
 		</node>
 	</dialogTree>
 
