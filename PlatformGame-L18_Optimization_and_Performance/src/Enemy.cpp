@@ -43,7 +43,7 @@ bool Enemy::Start() {
 	currentAnimation = &idle;
 	
 	//Add a physics to an item - initialize the physics body
-	pbody = Engine::GetInstance().physics.get()->CreateCircle((int)position.getX() + texH / 2, (int)position.getY() + texH / 2, texH / 3, bodyType::DYNAMIC);
+	pbody = Engine::GetInstance().physics.get()->CreateCircle((int)position.getX() - 16, (int)position.getY() -16, 16, bodyType::DYNAMIC);
 
 	//Assign collider type
 	pbody->ctype = ColliderType::ENEMY;
@@ -90,8 +90,8 @@ bool Enemy::CleanUp()
 }
 
 void Enemy::SetPosition(Vector2D pos) {
-	pos.setX(pos.getX() + texW / 2);
-	pos.setY(pos.getY() + texH / 2);
+	pos.setX(pos.getX() + (texW / 2));
+	pos.setY(pos.getY() + (texH / 2));
 	b2Vec2 bodyPos = b2Vec2(PIXEL_TO_METERS(pos.getX()), PIXEL_TO_METERS(pos.getY()));
 	pbody->body->SetTransform(bodyPos, 0);
 }

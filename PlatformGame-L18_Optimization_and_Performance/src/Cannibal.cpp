@@ -87,7 +87,7 @@ bool Cannibal::Update(float dt)
 
 	if(InSight == true)
 	{
-		Engine::GetInstance().render.get()->DrawTexture(texture, (int)position.getX(), (int)position.getY(),
+		Engine::GetInstance().render.get()->DrawPlayer(texture, (int)position.getX() + 10, (int)position.getY() + 10, 3,
 			&currentAnimation->GetCurrentFrame(), 1, spriteAngle);
 	}
 	currentAnimation->Update();
