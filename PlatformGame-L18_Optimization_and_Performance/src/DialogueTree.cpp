@@ -66,7 +66,7 @@ bool DialogueTree::UpdateTree(float dt, Module* mod, Vector2D pos)
 
 	if (!updateOptions)
 	{
-		if(whaitDialog.ReadSec()>3)
+		if(whaitDialog.ReadSec() > lines)
 		{
 			updateOptions = UpdateChoices(mod, pos, fontSize);
 		}

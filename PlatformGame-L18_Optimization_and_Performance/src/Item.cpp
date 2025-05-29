@@ -144,7 +144,6 @@ void Item::DrawInInventory(Vector2D pos, int scale)
 	if (InventorySelected == true)
 	{
 		Engine::GetInstance().render.get()->DrawUIimage(Selected, (int)pos.getX(), (int)pos.getY(), scale);
-		Engine::GetInstance().render.get()->DrawText(name.c_str(), ITEM_POS_X, ITEM_POS_Y - 100, 70, {255, 255, 255});
 		Engine::GetInstance().render.get()->DrawUIimage(texture, ITEM_POS_X, ITEM_POS_Y, PREVIEW_SCALE,0, &currentAnimation->GetCurrentFrame());
 
 	}

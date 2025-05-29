@@ -110,6 +110,7 @@ bool TreePuzzle::Update(float dt)
 {
 	bool ret = true;
 
+	TextActive = false;
 
 	for (auto it = symbols.begin(); it != symbols.end(); ++it) {
 
@@ -121,7 +122,7 @@ bool TreePuzzle::Update(float dt)
 
 		if ((*it)->IsInZone() == true && (*it)->taken == false)
 		{
-			DysplayText("Press E to take Relic");
+			DysplayText("R-Click to take Relic");
 			if (Engine::GetInstance().input.get()->GetMouseButtonDown(3) == KeyState::KEY_UP)
 			{
 				Item Key = Engine::GetInstance().scene.get()->CreateItem((*it)->name, (*it)->position);
@@ -131,10 +132,6 @@ bool TreePuzzle::Update(float dt)
 				numKeys++;
 			}
 		}
-		else
-		{
-			Engine::GetInstance().scene.get()->player->canInteract = false;
-		}
 
 	}
 
@@ -143,15 +140,11 @@ bool TreePuzzle::Update(float dt)
 	if (Altar->Contains(Engine::GetInstance().scene.get()->player->GetPosition().getX(),
 		Engine::GetInstance().scene.get()->player->GetPosition().getY()))
 	{
-		DysplayText("Press E to set the 4 Relics");
+		DysplayText("R-Click to set the 4 Relics");
 		if (Engine::GetInstance().input.get()->GetMouseButtonDown(3) == KeyState::KEY_UP && numKeys == 4)
 		{
 			Compleated = true;
 		}
-	}
-	else
-	{
-		Engine::GetInstance().scene.get()->player->canInteract = false;
 	}
 
 	if (Compleated)
@@ -162,7 +155,7 @@ bool TreePuzzle::Update(float dt)
 	if (TreeBossZone->Contains(Engine::GetInstance().scene.get()->player->GetPosition().getX(),
 		Engine::GetInstance().scene.get()->player->GetPosition().getY()) && Compleated == true && BossDefeated == false)
 	{
-		DysplayText("Press E to invoke the Tree Spirit");
+		DysplayText("R-Click to invoke the Tree Spirit");
 		if (Engine::GetInstance().input.get()->GetMouseButtonDown(3) == KeyState::KEY_UP == KEY_DOWN)
 		{
 			BossDefeated = true;
@@ -181,20 +174,21 @@ bool TreePuzzle::Update(float dt)
 			Engine::GetInstance().scene->enemyList.push_back(enemy);
 		}
 	}
-	else
-	{
-		Engine::GetInstance().scene.get()->player->canInteract = false;
-	}
 
 	if (TunnelsEntrance->Contains(Engine::GetInstance().scene.get()->player->GetPosition().getX(),
 		Engine::GetInstance().scene.get()->player->GetPosition().getY()))
 	{
-		DysplayText("Press E to enter the Tunnels");
+		DysplayText("R-Click to enter the Tunnels");
 		if (Engine::GetInstance().input.get()->GetMouseButtonDown(3) == KeyState::KEY_UP)
 		{
 			Engine::GetInstance().map.get()->SwapUnderUpper();
 		}
 
+	}
+
+	if (TextActive)
+	{
+		Engine::GetInstance().scene.get()->player->canInteract = true;
 	}
 	else
 	{
@@ -223,6 +217,6 @@ bool Symbol::IsInZone()
 
 void TreePuzzle::DysplayText(const char* text)
 {
-	Engine::GetInstance().scene.get()->player->canInteract = true;
+	TextActive = true;
 	Engine::GetInstance().render.get()->DrawText(text, (Engine::GetInstance().window.get()->width / 2) - SPACING, (Engine::GetInstance().window.get()->height / 2) - 32, 25, { 255,255,255 });
 }

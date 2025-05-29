@@ -38,6 +38,7 @@ public:
 
 	bool Compleated = false;
 	bool BossDefeated = false;
+	bool TextActive = false;
 };
 
 class Symbol : public Entity

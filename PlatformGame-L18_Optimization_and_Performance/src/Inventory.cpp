@@ -173,11 +173,15 @@ void Inventory::UpdateInventory(float dt)
 		Drop->Draw(Engine::GetInstance().render.get());
 
 		//Draw the item description
-		size_t lines = items[currentItem]->desc.size();
-		for (size_t i = 0; i < lines; i++)
+		if (currentItem != -1)
 		{
-			Engine::GetInstance().render.get()->DrawText(items[currentItem]->desc[i].GetString(), Drop->bounds.x, Drop->bounds.y + (Drop->bounds.h + fontSize) + (fontSize *i), fontSize, {255,255,255});
+			size_t lines = items[currentItem]->desc.size();
+			for (size_t i = 0; i < lines; i++)
+			{
+				Engine::GetInstance().render.get()->DrawText(items[currentItem]->desc[i].GetString(), (Drop->bounds.x - (16 * PREVIEW_SCALE)), (Drop->bounds.y + fontSize) + (Drop->bounds.h + fontSize) + ((fontSize * 2) * i), fontSize, { 255,255,255 });
+			}
 		}
+
 	}
 
 	//Update stats

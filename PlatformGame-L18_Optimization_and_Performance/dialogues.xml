@@ -60,13 +60,13 @@
 			<choice id="0" option="Ok, you are fucking usless" nextNode="9"  eventReturn="1"/>
 		</node>
 		<node id="9" text="Look if you whant to know what the fuck is going on beafore you die just go talk to Sally, she will help you, tell her I said hi... now go, i've grown tiered of this conversation.">
-			<choice id="0" option="Leave" nextNode="-1"  eventReturn="1"/>
+			<choice id="0" option="Leave" nextNode="-1"  eventReturn="1" NextID="1" bloked="true"/>
 		</node>
 
 	</dialogueTree>
 	<dialogueTree ID="0" NPC = "2">
 		
-	<node id="0" text="*She's woking on something... cutting some skin oppen and extracting a black substance*">
+	<node id="0" text=" - She's woking on something... cutting some skin oppen and extracting a black substance - ">
 		<choice id="0" option="Hello?" nextNode="2"  eventReturn="1"/>
 		<choice id="1" option="Henry sent me here" nextNode="1"  eventReturn="1"/>
 	</node>
@@ -113,7 +113,7 @@
 		<choice id="0" option="What?" nextNode="13"  eventReturn="1"/>
 	</node>
 	<node id="13" text="Nothing I'll tell you latter, trust me, go go">
-		<choice id="0" option="Leave" nextNode="-1"  eventReturn="1"/>
+		<choice id="0" option="Leave" nextNode="-1"  eventReturn="1" NextID="1" bloked="true"/>
 	</node>
 
 	</dialogueTree>
@@ -162,7 +162,7 @@
 			<choice id="0" option="Thank you for everything" nextNode="13"  eventReturn="1"/>
 		</node>
 		<node id="0" text="If you need enything else or some new pieces of your body reattached, just tell me.">
-			<choice id="0" option="Leave" nextNode="-1"  eventReturn="1"/>
+			<choice id="0" option="Leave" nextNode="-1"  eventReturn="1" NextID="2" bloked="true"/>
 		</node>
 	</dialogueTree>
 
@@ -203,10 +203,10 @@
 			<choice id="1" option="And you are a crippled old man who could die at any second" nextNode="12"  eventReturn="1"/>
 		</node>
 		<node id="9" text="Thank you">
-			<choice id="0" option="Leave" nextNode="-1"  eventReturn="1"/>
+			<choice id="0" option="Leave" nextNode="-1"  eventReturn="1" NextID="2" bloked="true"/>
 		</node>
 		<node id="10" text="Love you too...">
-			<choice id="0" option="Leave" nextNode="-1"  eventReturn="1"/>
+			<choice id="0" option="Leave" nextNode="-1"  eventReturn="1" NextID="2" bloked="true"/>
 		</node>
 		<node id="11" text="Wooooooow thats crossing the line...">
 			<choice id="0" option="Ho shut up Henry" nextNode="13"  eventReturn="1"/>
@@ -254,7 +254,7 @@
 			<choice id="0" option="Thanks i guess" nextNode="10"  eventReturn="1"/>
 		</node>
 		<node id="10" text="Make shure to grab everything from the camps... they tend to use symbols to make rituals... you will probably need some if you want to get those pincers...">
-			<choice id="0" option="Leave" nextNode="-1"  eventReturn="1"/>
+			<choice id="0" option="Leave" nextNode="-1"  eventReturn="1" NextID="3" bloked="true"/>
 		</node>
 	</dialogTree>
 
