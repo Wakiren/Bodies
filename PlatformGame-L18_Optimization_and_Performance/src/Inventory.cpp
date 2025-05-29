@@ -171,10 +171,16 @@ void Inventory::UpdateInventory(float dt)
 
 		Use->Draw(Engine::GetInstance().render.get());
 		Drop->Draw(Engine::GetInstance().render.get());
+
+		//Draw the item description
+		size_t lines = items[currentItem]->desc.size();
+		for (size_t i = 0; i < lines; i++)
+		{
+			Engine::GetInstance().render.get()->DrawText(items[currentItem]->desc[i].GetString(), Drop->bounds.x, Drop->bounds.y + (Drop->bounds.h + fontSize) + (fontSize *i), fontSize, {255,255,255});
+		}
 	}
 
 	//Update stats
-
 	if (Engine::GetInstance().scene.get()->player != nullptr)
 	{
 		health = to_string( Engine::GetInstance().scene.get()->player->combatStats->health);

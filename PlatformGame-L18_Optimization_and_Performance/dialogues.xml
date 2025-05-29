@@ -158,7 +158,7 @@
 		<node id="11" text="Yes you can... phisically and methaforically">
 			<choice id="0" option="Is there a way to get out?" nextNode="12"  eventReturn="1"/>
 		</node>
-		<node id="12" text="I really don't know, the one who knows more about this is Henry, for what i know he was the firs "successfull" experiment">
+		<node id="12" text="I really don't know, the one who knows more about this is Henry, for what i know he was the firs successfull experiment">
 			<choice id="0" option="Thank you for everything" nextNode="13"  eventReturn="1"/>
 		</node>
 		<node id="0" text="If you need enything else or some new pieces of your body reattached, just tell me.">

@@ -8,6 +8,7 @@
 #include "GuiControlButton.h"
 #include <vector>
 #include <string>
+#include "SString.h"
 
 #define MAX_ITEMS 117
 #define ITEM_SCALE 4
@@ -35,6 +36,7 @@ public:
 
 	vector<Item*> items;
 	bool isFull;
+	int fontSize = 20;
 
 public:
 

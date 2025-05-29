@@ -135,7 +135,7 @@
 					</animations>
 				</HumanFlesh>
 				<Eye name="Eye" x="48" y="0" w="16" h="16" texture="Assets/Items/Items.png">
-					<effect type="Upgrade"/>
+					<effect type="Upgrade" description ="This is just an eye"/>
 					<animations>
 						<idle loop="true" speed="0.1">
 							<frame x="48" y="0" w="16" h="16" />

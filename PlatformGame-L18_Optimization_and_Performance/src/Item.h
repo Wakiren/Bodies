@@ -3,6 +3,8 @@
 #include "Entity.h"
 #include "SDL2/SDL.h"
 #include "Animation.h"
+#include "SString.h"
+#include <vector>
 
 struct SDL_Texture;
 using namespace std;
@@ -41,6 +43,8 @@ public:
 
 	bool CheckMouseHover(Vector2D pos, int scale);
 
+	void SplitDesc(SString text, int fontSize_, int max_chars_line_);
+
 public:
 
 	bool isPicked = false;
@@ -49,7 +53,7 @@ public:
 	//Atributes
 	string type;
 	int amount;
-	string description;
+	vector<SString> desc;
 	bool equiped = false;
 
 	//Inventory

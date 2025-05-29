@@ -41,7 +41,7 @@ bool Item::Start() {
 	name = parameters.attribute("name").as_string();
   	type = parameters.child("effect").attribute("type").as_string();
 	amount = parameters.child("effect").attribute("amount").as_int();
-	description = parameters.child("effect").attribute("description").as_string();
+	SplitDesc(parameters.child("effect").attribute("description").as_string(),20,40);
 	
 	// L08 TODO 4: Add a physics to an item - initialize the physics body
 	pbody = Engine::GetInstance().physics.get()->CreateCircle((int)position.getX() + texH / 2, (int)position.getY() + texH / 2, texH / 2, bodyType::DYNAMIC);
@@ -146,6 +146,7 @@ void Item::DrawInInventory(Vector2D pos, int scale)
 		Engine::GetInstance().render.get()->DrawUIimage(Selected, (int)pos.getX(), (int)pos.getY(), scale);
 		Engine::GetInstance().render.get()->DrawText(name.c_str(), ITEM_POS_X, ITEM_POS_Y - 100, 70, {255, 255, 255});
 		Engine::GetInstance().render.get()->DrawUIimage(texture, ITEM_POS_X, ITEM_POS_Y, PREVIEW_SCALE,0, &currentAnimation->GetCurrentFrame());
+
 	}
 }
 
@@ -159,4 +160,35 @@ bool Item::CheckMouseHover(Vector2D pos, int scale)
 		return true;
 	}
 	return false;
+}
+
+void Item::SplitDesc(SString description, int fontSize_, int max_chars_line_)
+{
+	string line = description.GetString();
+
+	// TODO 6: adapt text to the text box
+	if (description.Length() > max_chars_line_)
+	{
+		int a, b, startIndex = 0;
+		for (int j = 0; j <= line.length() / max_chars_line_; j++)	// <= -> in case of decimal, get the round up number 
+		{
+			a = max_chars_line_ + startIndex;
+
+			b = line.find_first_of(" ", a);
+			if (b == std::string::npos) {
+				b = line.length();
+			}
+
+			// If we reached the end of the word or the end of the input.
+			string temp;
+			temp.append(line, startIndex, b - startIndex);	// string text to append, int index start, int size of text to append
+			desc.push_back(temp.c_str());
+			startIndex = b;
+		}
+	}
+	else
+	{
+		desc.push_back(line.c_str());
+	}
+
 }
