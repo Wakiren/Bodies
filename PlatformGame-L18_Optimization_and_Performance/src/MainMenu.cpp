@@ -40,6 +40,10 @@ bool MainMenu::Awake()
 bool MainMenu::Start()
 {
 	background = Engine::GetInstance().textures.get()->Load("Assets/Textures/MainMenuAnimations.png");
+	Scene1 = Engine::GetInstance().textures.get()->Load("Assets/Textures/TeamLogo.png");
+	Scene2 = Engine::GetInstance().textures.get()->Load("Assets/Textures/TeamLogo1.png");
+	Scene3 = Engine::GetInstance().textures.get()->Load("Assets/Textures/TeamLogo2.png");
+
 
 	LOG("background");
 	buttons = Engine::GetInstance().textures.get()->Load("Assets/Textures/Buttons.png");
@@ -129,7 +133,7 @@ bool MainMenu::Update(float dt)
 	Engine::GetInstance().render.get()->camera.y = 0;
 
 	// Active the scene and the entity manager, and deactivate the main menu
-	if (haveToChange && Engine::GetInstance().fadeManager.get()->GetCurrentFadeType() == FadeType::FADE_IN) {
+	if (haveToChange && Engine::GetInstance().fadeManager.get()->GetCurrentFadeType() == FadeType::FADE_IN ) {
 		if (haveToStart) {
 			haveToStart = false;
 			Engine::GetInstance().physics.get()->active = true;
@@ -235,12 +239,13 @@ bool MainMenu::Update(float dt)
 	}
 
 	// Function to detect the mouse click
-	if (Engine::GetInstance().input.get()->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_UP) {
+	if (Engine::GetInstance().input.get()->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_UP && intro == false) {
 		if (startButton->state == GuiControlState::PRESSED) {
 			Engine::GetInstance().audio.get()->PlayFx(Effects::UICLICK, 0);
-			haveToChange = true;
-			haveToStart = true;
-			Engine::GetInstance().fadeManager.get()->Fade(3.0f,300);
+			if (intro == false)
+			{
+				intro = true;
+			}
 		}
 		if (optionsButton->state == GuiControlState::PRESSED) {
 			Engine::GetInstance().audio.get()->PlayFx(Effects::UICLICK, 1);
@@ -325,6 +330,11 @@ bool MainMenu::Update(float dt)
 		option = SELECTED::NONE;
 	}
 
+	if (intro == true)
+	{
+		Scenes();
+	}
+
 	return ret;
 }
 
@@ -340,5 +350,53 @@ bool MainMenu::CleanUp()
 {
 	LOG("Freeing main menu");
 
+	return true;
+}
+
+bool MainMenu::Scenes()
+{
+	if(Engine::GetInstance().input.get()->GetMouseButtonDown(1) == KeyState::KEY_UP || sceneChange == 0)
+	{
+		sceneChange++;
+		Engine::GetInstance().fadeManager.get()->Fade(3.0f, 300);
+		sceneTimer.Start();
+	}
+	if (sceneChange == 1 && Engine::GetInstance().fadeManager.get()->GetCurrentFadeType() == FadeType::FADE_IN)
+	{
+		Engine::GetInstance().render.get()->DrawUIimage(Scene1, 0, 0, 1, 0);
+		return true;
+	}
+	else if (sceneChange == 2)
+	{
+
+		if(Engine::GetInstance().fadeManager.get()->GetCurrentFadeType() == FadeType::FADE_IN)
+			Engine::GetInstance().render.get()->DrawUIimage(Scene2, 0, 0, 1, 0);
+		else if(Engine::GetInstance().fadeManager.get()->GetCurrentFadeType() == FadeType::FADE_OUT)
+			Engine::GetInstance().render.get()->DrawUIimage(Scene1, 0, 0, 1, 0);
+
+		return true;
+	}
+	else if (sceneChange == 3)
+	{
+		if (Engine::GetInstance().fadeManager.get()->GetCurrentFadeType() == FadeType::FADE_IN)
+			Engine::GetInstance().render.get()->DrawUIimage(Scene3, 0, 0, 1, 0);
+		else if (Engine::GetInstance().fadeManager.get()->GetCurrentFadeType() == FadeType::FADE_OUT)
+		{
+			Engine::GetInstance().render.get()->DrawUIimage(Scene2, 0, 0, 1, 0);
+		}
+		return true;
+	}
+	else if (sceneChange >3)
+	{
+		if (Engine::GetInstance().fadeManager.get()->GetCurrentFadeType() == FadeType::FADE_IN)
+		{
+			Engine::GetInstance().render.get()->DrawUIimage(Scene3, 0, 0, 1, 0);
+			haveToStart = true;
+			haveToChange = true;
+			intro = false;
+		}
+		Engine::GetInstance().render.get()->DrawUIimage(Scene3, 0, 0, 1, 0);
+
+	}
 	return true;
 }

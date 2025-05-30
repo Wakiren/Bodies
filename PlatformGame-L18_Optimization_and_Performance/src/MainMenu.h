@@ -7,6 +7,7 @@
 #include "GuiControlToggle.h"
 #include "GuiControlSlider.h"
 #include "Animation.h"
+#include "Timer.h"
 
 class MainMenu : public Module
 {
@@ -34,6 +35,8 @@ public:
 
 	bool CleanUp();
 
+	bool Scenes();
+
 public:
 	enum class SELECTED {
 		START = 1,
@@ -51,6 +54,9 @@ public:
 private:
 	
 	SDL_Texture* background;
+	SDL_Texture* Scene1;
+	SDL_Texture* Scene2;
+	SDL_Texture* Scene3;
 
 	SDL_Texture* controlsBackground;
 
@@ -96,6 +102,10 @@ private:
 	bool inControlsMenu = false;
 
 	int clickSoundUI = 0;
+
+	bool intro = false;
+	int sceneChange = 0;
+	Timer sceneTimer;
 };
 
 #endif // __MAINMENU_H__
