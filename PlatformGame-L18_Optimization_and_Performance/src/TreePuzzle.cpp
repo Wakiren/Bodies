@@ -218,5 +218,5 @@ bool Symbol::IsInZone()
 void TreePuzzle::DysplayText(const char* text)
 {
 	TextActive = true;
-	Engine::GetInstance().render.get()->DrawText(text, (Engine::GetInstance().window.get()->width / 2) - SPACING, (Engine::GetInstance().window.get()->height / 2) - 32, 25, { 255,255,255 });
+	Engine::GetInstance().scene.get()->DrawRClick(text);
 }

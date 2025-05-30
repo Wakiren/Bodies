@@ -257,6 +257,7 @@ void Player::MoveToMousePos()
 	Vector2D mousePos = Engine::GetInstance().input.get()->GetMousePosition();
 	mousePos.setX(mousePos.getX() - Engine::GetInstance().render.get()->camera.x / Engine::GetInstance().render.get()->scale);
 	mousePos.setY(mousePos.getY() - Engine::GetInstance().render.get()->camera.y / Engine::GetInstance().render.get()->scale);
+	mouseAngle = -atan2(mousePos.getX() - playerPos.getX(), mousePos.getY() - playerPos.getY());
 
 	if (Engine::GetInstance().input.get()->GetMouseButtonDown(1))
 	{
@@ -268,7 +269,7 @@ void Player::MoveToMousePos()
 	if (abs(destination.getX() - playerPos.getX()) > 1 || abs(destination.getY() - playerPos.getY()) > 1)
 	{
 		spriteAngle = atan2(destination.getX() - playerPos.getX(), destination.getY() - playerPos.getY()) * -180 / b2_pi;
-		sightAngle = -atan2(destination.getX() - playerPos.getX(), destination.getY() - playerPos.getY());
+		sightAngle = Engine::GetInstance().scene.get()->LerpAngle(mouseAngle, sightAngle, 0.95f);
 		pbody->body->SetLinearVelocity({ movementVector.getX() * speed, movementVector.getY() * speed });
 		currentAnimation = &walk;
 		Engine::GetInstance().audio.get()->PlayFx(Effects::WLAKING,5);
@@ -278,7 +279,7 @@ void Player::MoveToMousePos()
 		movementVector = vecZero;
 		pbody->body->SetLinearVelocity({ 0,0 });
 		spriteAngle = atan2(mousePos.getX() - playerPos.getX(), mousePos.getY() - playerPos.getY()) * -180 / b2_pi;
-		sightAngle = -atan2(mousePos.getX() - playerPos.getX(), mousePos.getY() - playerPos.getY());
+		sightAngle = Engine::GetInstance().scene.get()->LerpAngle(mouseAngle,sightAngle,0.f);
 		currentAnimation = &idle;
 		Engine::GetInstance().audio.get()->StopFx(Effects::WLAKING,5);
 	}

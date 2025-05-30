@@ -49,8 +49,8 @@
 			<choice id="1" option="It all makes sense now thanks..." nextNode="7"  eventReturn="1"/>
 		</node>
 		<node id="6" text="That's what they all say... well no... normaly they ust mumble some uncomprehensible bullshit and run away screaming">
-			<choice id="0" option="Ok, you are fucking usless" nextNode="8"  eventReturn="1"/>
-			<choice id="1" option="If I had my gun I'd shoot you right here" nextNode="9"  eventReturn="1"/>
+			<choice id="0" option="Ok, you are fucking usless" nextNode="9"  eventReturn="1"/>
+			<choice id="1" option="If I had my gun I'd shoot you right here" nextNode="8"  eventReturn="1"/>
 		</node>
 		<node id="7" text="Ho you are welcome, do you need enything else? I can offer you some fresh human meat?">
 			<choice id="0" option="What the fuck???" nextNode="6"  eventReturn="1"/>
@@ -94,7 +94,6 @@
 	</node>
 	<node id="7" text="Ok ok... don't freak out, let me help you. I've seen one layiong arround north from here, not too far...">
 		<choice id="0" option="So there is an eye just laying there..." nextNode="9"  eventReturn="1"/>
-		<choice id="1" option="This is still normal" nextNode="8"  eventReturn="1"/>
 	</node>
 	<node id="8" text="Yup... If you get it I can reattach it to you, Im a professional surgeon you see...">
 		<choice id="0" option="In fact i can't, literally and methaforically" nextNode="11"  eventReturn="1"/>
@@ -161,7 +160,7 @@
 		<node id="12" text="I really don't know, the one who knows more about this is Henry, for what i know he was the firs successfull experiment">
 			<choice id="0" option="Thank you for everything" nextNode="13"  eventReturn="1"/>
 		</node>
-		<node id="0" text="If you need enything else or some new pieces of your body reattached, just tell me.">
+		<node id="13" text="If you need enything else or some new pieces of your body reattached, just tell me.">
 			<choice id="0" option="Leave" nextNode="-1"  eventReturn="1" NextID="2" bloked="true"/>
 		</node>
 	</dialogueTree>

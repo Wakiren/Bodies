@@ -8,6 +8,8 @@
 #include "GuiControlButton.h"
 #include "Physics.h"
 #include "Item.h"
+#define RCLIK_SPACING 250
+
 
 struct SDL_Texture;
 
@@ -51,11 +53,15 @@ public:
 
 	float Slower(float ogPos, float goalPos, float time);
 
+	float LerpAngle(float a, float b, float t);
+
 	void StartDialogue(NPC &npc);
 
 	Item CreateItem(string name, Vector2D pos);
 
 	void HandleAudio();
+
+	void DrawRClick(const char* text);
 
 public:
 	// Get tilePosDebug value

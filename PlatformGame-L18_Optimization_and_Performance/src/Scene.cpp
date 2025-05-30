@@ -341,6 +341,16 @@ float Scene::Slower(float ogPos, float goalPos, float time)
 	return speed;
 }
 
+float Scene::LerpAngle(float a, float b, float t) {
+	float diff = b - a;
+
+	while (diff < -M_PI) diff += 2.0f * M_PI;
+	while (diff > M_PI) diff -= 2.0f * M_PI;
+
+	return a + diff * t;
+}
+
+
 int Scene::RandomValue(int min, int max)
 {
 	return rand() % (max - min + 1) + min;
@@ -350,7 +360,7 @@ void Scene::StartDialogue(NPC &npc)
 {
 	if (Engine::GetInstance().dialogueSystem->inDialog == false && npc.bloked == false)
 	{
-		Engine::GetInstance().render.get()->DrawText("Press E to interact", (Engine::GetInstance().window.get()->width / 2) - SPACING, (Engine::GetInstance().window.get()->height / 2) - 32, 25, { 255,255,255 });
+		DrawRClick("R-Click to talk");
 		if (Engine::GetInstance().input.get()->GetMouseButtonDown(3) == KeyState::KEY_UP)
 		{
 			Engine::GetInstance().dialogueSystem.get()->LoadDialogue("dialogues.xml", npc);
@@ -370,4 +380,12 @@ Item Scene::CreateItem(string name, Vector2D pos)
 	itemList.push_back(item);
 
 	return *item;
+}
+
+void Scene::DrawRClick(const char* text)
+{
+	b2Vec2 unitaryVector = b2Vec2(cos(player->sightAngle - 90), sin(player->sightAngle - 90));
+	unitaryVector.Set(-unitaryVector.x * RCLIK_SPACING, -unitaryVector.y * RCLIK_SPACING); // Scale the vector to make it bigger
+
+	Engine::GetInstance().render.get()->DrawText(text, unitaryVector.x + ((Engine::GetInstance().window.get()->width - (RCLIK_SPACING)) / 2), unitaryVector.y + ((Engine::GetInstance().window.get()->height - (RCLIK_SPACING / 2)) / 2), 25, { 255,255,255 });
 }
