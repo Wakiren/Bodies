@@ -135,8 +135,6 @@ bool TreePuzzle::Update(float dt)
 
 	}
 
-	numKeys = 4;
-
 	if (Altar->Contains(Engine::GetInstance().scene.get()->player->GetPosition().getX(),
 		Engine::GetInstance().scene.get()->player->GetPosition().getY()))
 	{
@@ -176,7 +174,7 @@ bool TreePuzzle::Update(float dt)
 	}
 
 	if (TunnelsEntrance->Contains(Engine::GetInstance().scene.get()->player->GetPosition().getX(),
-		Engine::GetInstance().scene.get()->player->GetPosition().getY()))
+		Engine::GetInstance().scene.get()->player->GetPosition().getY()) && BossDefeated == true)
 	{
 		DysplayText("R-Click to enter the Tunnels");
 		if (Engine::GetInstance().input.get()->GetMouseButtonDown(3) == KeyState::KEY_UP)

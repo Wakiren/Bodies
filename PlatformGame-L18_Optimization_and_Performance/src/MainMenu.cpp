@@ -40,9 +40,9 @@ bool MainMenu::Awake()
 bool MainMenu::Start()
 {
 	background = Engine::GetInstance().textures.get()->Load("Assets/Textures/MainMenuAnimations.png");
-	Scene1 = Engine::GetInstance().textures.get()->Load("Assets/Textures/TeamLogo.png");
-	Scene2 = Engine::GetInstance().textures.get()->Load("Assets/Textures/TeamLogo1.png");
-	Scene3 = Engine::GetInstance().textures.get()->Load("Assets/Textures/TeamLogo2.png");
+	Scene1 = Engine::GetInstance().textures.get()->Load("Assets/Textures/Scene1.png");
+	Scene2 = Engine::GetInstance().textures.get()->Load("Assets/Textures/Scene2.png");
+	Scene3 = Engine::GetInstance().textures.get()->Load("Assets/Textures/Scene3.png");
 
 
 	LOG("background");
@@ -358,7 +358,7 @@ bool MainMenu::Scenes()
 	if(Engine::GetInstance().input.get()->GetMouseButtonDown(1) == KeyState::KEY_UP || sceneChange == 0)
 	{
 		sceneChange++;
-		Engine::GetInstance().fadeManager.get()->Fade(3.0f, 300);
+		Engine::GetInstance().fadeManager.get()->Fade(5.0f, 300);
 		sceneTimer.Start();
 	}
 	if (sceneChange == 1 && Engine::GetInstance().fadeManager.get()->GetCurrentFadeType() == FadeType::FADE_IN)
@@ -371,8 +371,11 @@ bool MainMenu::Scenes()
 
 		if(Engine::GetInstance().fadeManager.get()->GetCurrentFadeType() == FadeType::FADE_IN)
 			Engine::GetInstance().render.get()->DrawUIimage(Scene2, 0, 0, 1, 0);
-		else if(Engine::GetInstance().fadeManager.get()->GetCurrentFadeType() == FadeType::FADE_OUT)
+		else if (Engine::GetInstance().fadeManager.get()->GetCurrentFadeType() == FadeType::FADE_OUT)
+		{
 			Engine::GetInstance().render.get()->DrawUIimage(Scene1, 0, 0, 1, 0);
+			Engine::GetInstance().audio.get()->PlayFx(Effects::CARCRASH, 3);
+		}
 
 		return true;
 	}
@@ -383,6 +386,7 @@ bool MainMenu::Scenes()
 		else if (Engine::GetInstance().fadeManager.get()->GetCurrentFadeType() == FadeType::FADE_OUT)
 		{
 			Engine::GetInstance().render.get()->DrawUIimage(Scene2, 0, 0, 1, 0);
+			Engine::GetInstance().audio.get()->PlayFx(Effects::ENEMY_HIT, 4);
 		}
 		return true;
 	}

@@ -88,7 +88,6 @@ bool Scene::Start()
 						Cannibal* enemy = (Cannibal*)Engine::GetInstance().entityManager->CreateEntity(EntityType::ENEMY, enemyNode.name());
 						enemy->SetParameters(enemyNode);
 						enemy->OGPosition = enemyPos;
-						enemy->speed = 4;
 						enemy->ItemsInEnemy.push_back("Eye");
 						enemyList.push_back(enemy);
 
@@ -138,6 +137,7 @@ bool Scene::Start()
 	Engine::GetInstance().audio.get()->LoadFx("Assets/Audio/Fx/pickUp3.wav", Effects::PICKUP3);
 	Engine::GetInstance().audio.get()->LoadFx("Assets/Audio/Fx/SamExhaust.wav", Effects::SAM_EXHAUST);
 	Engine::GetInstance().audio.get()->LoadFx("Assets/Audio/Fx/walking.wav", Effects::WLAKING);
+	Engine::GetInstance().audio.get()->LoadFx("Assets/Audio/Fx/CarCrash.wav", Effects::CARCRASH);
 	Engine::GetInstance().audio.get()->LoadFx("Assets/Audio/Fx/clickSoundUI.ogg", Effects::UICLICK);
 	
 

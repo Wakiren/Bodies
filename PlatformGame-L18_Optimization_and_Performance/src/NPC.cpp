@@ -72,8 +72,15 @@ bool NPC::Update(float dt)
 				Engine::GetInstance().audio.get()->PlayRandFx(Effects::COUGHF1, Effects::COUGHF2, Effects::COUGHF3,7);
 				ActionTimer.Start();
 			}
+			if (type == NPCType::BILLY)
+			{
+				Engine::GetInstance().audio.get()->PlayRandFx(Effects::ENEMY_HIT, Effects::HIT3, Effects::HIT2, 7);
+				ActionTimer.Start();
+			}
 		}
 	}
+
+	LOG("NPC Type: %d is bloked %d", (int)type,(int)bloked);
 
 	CheckForProgress();
 
@@ -118,11 +125,11 @@ void NPC::CheckForProgress()
 
 	for (int i = 0; i < Engine::GetInstance().scene.get()->player->inventory->items.size(); i++)
 	{
-		if (Engine::GetInstance().scene.get()->player->inventory->items[i]->name == "Eye" && NextID == 1)
+		if (Engine::GetInstance().scene.get()->player->inventory->items[i]->name == "Eye" )
 		{
 			bloked = false;
 		}
-		if (Engine::GetInstance().scene.get()->player->inventory->items[i]->name == "Alpha" && NextID == 2)
+		if (Engine::GetInstance().scene.get()->player->inventory->items[i]->name == "Alpha")
 		{
 			bloked = false;
 		}

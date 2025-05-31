@@ -75,6 +75,14 @@ bool DialogueSystem::OnGuiMouseClickEvent(GuiControl* control)
 		activeTree->activeNode = activeTree->nodeList.at(activeTree->nodeList.size() - 1);
 		inDialog = false;
 		Engine::GetInstance().scene.get()->player->canInteract = false;
+
+		for (int i = 0; i < Engine::GetInstance().scene.get()->player->inventory->items.size(); i++)
+		{
+			if (Engine::GetInstance().scene.get()->player->inventory->items[i]->name == "Eye")
+			{
+				Engine::GetInstance().scene.get()->player->inventory->RemoveItem(Engine::GetInstance().scene.get()->player->inventory->items[i]);
+			}
+		}
 	}
 
 	Engine::GetInstance().guiManager.get()->CleanUp();
@@ -120,7 +128,7 @@ int DialogueSystem::LoadDialogue(const char* file, NPC &npc)
 
 		while (pugiNode != NULL)
 		{
-			if (pugiNode.attribute("ID").as_int() == npc.NextID && pugiNode.attribute("NPC").as_int() == (int)npc.type)
+			if (pugiNode.attribute("NPC").as_int() == (int)npc.type && pugiNode.attribute("ID").as_int() == npc.NextID)
 			{
 				tree->treeID = pugiNode.attribute("ID").as_int();
 				tree->npc = &npc;

@@ -35,6 +35,15 @@ bool Enemy::Start() {
 	texW = parameters.attribute("w").as_int();
 	texH = parameters.attribute("h").as_int();
 	speed = parameters.attribute("speed").as_float();
+
+	for (int i = 0; i<ItemsInEnemy.size(); i++)
+	{
+		if (ItemsInEnemy[i] == "Eye")
+		{
+			speed = 4.0f; // Eye enemies are faster
+		}
+	}
+
 	HelpDistance.setX(parameters.attribute("HelpDistance").as_int());
 	HelpDistance.setY(parameters.attribute("HelpDistance").as_int());
 	//Load animations
@@ -175,13 +184,18 @@ void Enemy::SetItemsInEnemy()
 		{
 			ItemsInEnemy.push_back("MixedMeat");
 		}
-		else if (num <= 8 && num > 5)
+		else if (num < 8 && num > 5)
 		{
 			ItemsInEnemy.push_back("AnimalSkin");
 		}
-		else
+		else if (num <= 8 && num > 9)
 		{
 			ItemsInEnemy.push_back("HumanFlesh");
+		}
+		else
+		{
+			ItemsInEnemy.push_back("Sizors");
+			ItemsInEnemy.push_back("Lighter");
 		}
 	}	
 }

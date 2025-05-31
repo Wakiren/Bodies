@@ -26,6 +26,7 @@ enum class Effects
 	SAM_EXHAUST,
 	WLAKING,
 	UICLICK,
+	CARCRASH,
 	UNKNOWN // Default value for uninitialized effects
 };
 

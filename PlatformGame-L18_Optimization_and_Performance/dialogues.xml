@@ -123,7 +123,7 @@
 			<choice id="1" option="Yes, but Im not shure about this..." nextNode="2"  eventReturn="1"/>
 		</node>
 		<node id="1" text="Ho im sorry about that, you must have stumbled upon one of the others...">
-			<choice id="0" option="Who are others" nextNode="1"  eventReturn="3"/>
+			<choice id="0" option="Who are others" nextNode="5"  eventReturn="3"/>
 			<choice id="1" option="He tried to bite me..." nextNode="4"  eventReturn="1"/>
 		</node>
 		<node id="2" text="Don't worry really, I'm a real surgeon, I've been in this forest for a while now, if it wheren't from me henry, Billy and most of the others would be dead...">
