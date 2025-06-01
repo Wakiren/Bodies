@@ -166,7 +166,7 @@
 	</dialogueTree>
 
 
-	<dialogTree ID="1" NPC = "1">
+	<dialogueTree ID="1" NPC = "1">
 		<node id="0" text="You'r back, and you look... alive">
 			<choice id="0" option="Why wouldn't I be" nextNode="1"  eventReturn="1"/>
 			<choice id="1" option="Shut up Henry" nextNode="2"  eventReturn="1"/>>
@@ -216,9 +216,9 @@
 		<node id="13" text="Calm down... What do you need">
 			<choice id="0" option="Do you know a way out of here?" nextNode="3"  eventReturn="1"/>
 		</node>
-	</dialogTree>
+	</dialogueTree>
 
-	<dialogTree ID="2" NPC = "1">
+	<dialogueTree ID="2" NPC = "1">
 		<node id="0" text="I've seen they'r gone... Thank you...">
 			<choice id="0" option="Your wealcome]" nextNode="1"  eventReturn="1"/>
 			<choice id="1" option="Shut up and tell me how tro get out fo here" nextNode="2"  eventReturn="1"/>
@@ -255,7 +255,7 @@
 		<node id="10" text="Make shure to grab everything from the camps... they tend to use symbols to make rituals... you will probably need some if you want to get those pincers...">
 			<choice id="0" option="Leave" nextNode="-1"  eventReturn="1" NextID="3" bloked="true"/>
 		</node>
-	</dialogTree>
+	</dialogueTree>
 
 </dialogues>
 
