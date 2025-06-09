@@ -24,11 +24,7 @@ bool CombatSystem::Awake()
 
 bool CombatSystem::Start()
 {
-    //MessageFunctionEstaSiQueSi("a");
-    //MessageFunctionEstaSiQueSi("b");
-    //MessageFunctionEstaSiQueSi("c");
-    //MessageFunctionEstaSiQueSi("d");
-    //MessageFunctionEstaSiQueSi("e");
+
     fleed = false;
 	return true;
 }
@@ -37,17 +33,7 @@ bool CombatSystem::Update(float dt)
 {
     MessageManager();
     MainLoop();
-    //if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_0)) 
-    //{
-    //    ShowMessages();
-    //}
     ShowMessages();
-    //if (!initialized && timer.ReadSec() >= delaySeconds) {
-    //    Engine::GetInstance().combatui.get()->text = messageToPut;
-    //    initialized = true;
-    //    cout << "MESSAGE DELIVERED" << endl;
-    //    return true;
-    //}
 
 	return true;
 }
@@ -84,7 +70,6 @@ void CombatSystem::MainLoop()
             {
                 //END COMBAT
                 cout << "COMBAT OVER" << endl;
-                //std::this_thread::sleep_for(std::chrono::seconds(1));
                 Engine::GetInstance().combatui.get()->active = false;
                 isPlayerTurn = true;
             }
@@ -96,7 +81,6 @@ void CombatSystem::MainLoop()
             {
                 //END COMBAT
                 cout << "COMBAT OVER" << endl;
-                //std::this_thread::sleep_for(std::chrono::seconds(1));
                 Engine::GetInstance().combatui.get()->active = false;
                 isPlayerTurn = true;
                 

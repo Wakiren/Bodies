@@ -193,8 +193,12 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::UNKNOWN:
 		break;
 	case ColliderType::ENEMY: 
-		
 	{
+		for (size_t i = 0; i < Engine::GetInstance().combatSystem.get()->messages.size(); i++)
+		{
+			Engine::GetInstance().combatSystem.get()->messages[i] = " ";
+		}
+
 		EnemyInCombat = physB;
 
 		bool startCombat = false;
