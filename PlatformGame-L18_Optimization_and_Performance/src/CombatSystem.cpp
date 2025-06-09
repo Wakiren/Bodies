@@ -24,19 +24,30 @@ bool CombatSystem::Awake()
 
 bool CombatSystem::Start()
 {
+    //MessageFunctionEstaSiQueSi("a");
+    //MessageFunctionEstaSiQueSi("b");
+    //MessageFunctionEstaSiQueSi("c");
+    //MessageFunctionEstaSiQueSi("d");
+    //MessageFunctionEstaSiQueSi("e");
     fleed = false;
 	return true;
 }
 
 bool CombatSystem::Update(float dt)
 {
+    MessageManager();
     MainLoop();
-    if (!initialized && timer.ReadSec() >= delaySeconds) {
-        Engine::GetInstance().combatui.get()->text = messageToPut;
-        initialized = true;
-        cout << "MESSAGE DELIVERED" << endl;
-        return true;
-    }
+    //if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_0)) 
+    //{
+    //    ShowMessages();
+    //}
+    ShowMessages();
+    //if (!initialized && timer.ReadSec() >= delaySeconds) {
+    //    Engine::GetInstance().combatui.get()->text = messageToPut;
+    //    initialized = true;
+    //    cout << "MESSAGE DELIVERED" << endl;
+    //    return true;
+    //}
 
 	return true;
 }
@@ -94,6 +105,10 @@ void CombatSystem::MainLoop()
     }
     else 
     {
+        for (size_t i = 0; i < messages.size(); i++)
+        {
+            messages[i] = "";
+        }
         Engine::GetInstance().entityManager.get()->UnPauseEntities();
     }
 }
@@ -102,10 +117,10 @@ void CombatSystem::EnemyTurn()
 {
     cout << "ENEMY ATTACKS!" << endl;
 
-    messageToPut = "Enemy deals " + to_string(50) + " damage";
     Engine::GetInstance().audio.get()->PlayFx(Effects::ENEMY_HIT,1);
 
-    DisplayMessageAfterDelay(2);
+    MessageFunctionEstaSiQueSi("Enemy deals " + to_string(50) + " damage");
+    //DisplayMessageAfterDelay(2);
     cout << Engine::GetInstance().combatui.get()->text << endl;
     enemy->Attack(player);
     isPlayerTurn = true;
@@ -113,19 +128,23 @@ void CombatSystem::EnemyTurn()
 
 void CombatSystem::PlayerTurn()
 {
+    
     switch ((Engine::GetInstance().combatui.get()->combatInput))
     {
 
     case  CombatUI::CombatInput::ATTACK:
     {
+        messages.clear();
         player->combatStats->isGuarding = false;
         cout << "PLAYER ATTACKS!" << endl;
        // snprintf(buffer, sizeof(buffer), "Player deals &d damage", player->damage);
+        MessageFunctionEstaSiQueSi("Player deals " + to_string(player->combatStats->attackPoints) + " damage");
+        timer.Start();
 
-		messageToPut = "Player deals " + to_string(player->combatStats->attackPoints) + " damage";
+        Engine::GetInstance().combatui.get()->text = messages[0];
         Engine::GetInstance().audio.get()->PlayRandFx(Effects::HIT1, Effects::HIT1, Effects::HIT2, 1);
 
-        DisplayMessageAfterDelay(1);
+        //DisplayMessageAfterDelay(1);
         cout << Engine::GetInstance().combatui.get()->text << endl;
         player->Attack(enemy);
         isPlayerTurn = false;
@@ -134,11 +153,16 @@ void CombatSystem::PlayerTurn()
        
 
     case  CombatUI::CombatInput::GUARD:
+        messages.clear();
         player->combatStats->isGuarding = false;
         cout << "PLAYER GUARDS!" << endl;
 		messageToPut = "Player Guards!";
+
+        MessageFunctionEstaSiQueSi("Player guards!");
+        timer.Start();
+        Engine::GetInstance().combatui.get()->text = messages[0];
 		Engine::GetInstance().audio.get()->PlayFx(Effects::EQUIP,2);
-        DisplayMessageAfterDelay(1);
+        //DisplayMessageAfterDelay(1);
         cout << Engine::GetInstance().combatui.get()->text << endl;
         player->Guard();
         isPlayerTurn = false;
@@ -150,6 +174,7 @@ void CombatSystem::PlayerTurn()
         break;
 
     case  CombatUI::CombatInput::FLEE:
+        messages.clear();
         Engine::GetInstance().audio.get()->PlayFx(Effects::SAM_EXHAUST,3);
         fleed = true;
         break;
@@ -169,6 +194,7 @@ void CombatSystem::DeletePhysicalEnemy(PhysBody* enemy)
 
 bool CombatSystem::isCombatOver(Player* player, Enemy* enemy)
 {
+
     if(player == nullptr || enemy == nullptr)
     {
         return true;
@@ -187,8 +213,9 @@ bool CombatSystem::isCombatOver(Player* player, Enemy* enemy)
         return true;
     }
     if (!player->isAlive()) {
+
 		messageToPut = "Player Defeated!";
-        DisplayMessageAfterDelay(1);
+        //DisplayMessageAfterDelay(1);
         cout << "Player defeated!\n";
         cout << Engine::GetInstance().combatui.get()->text << endl;
         player->isInCombat = false;
@@ -198,6 +225,10 @@ bool CombatSystem::isCombatOver(Player* player, Enemy* enemy)
     }
     if (!enemy->isAlive())
     {
+        for (size_t i = 0; i < messages.size(); i++)
+        {
+            messages[i] = "";
+        }
         if (Engine::GetInstance().scene.get()->player->EnemyInCombat != nullptr) 
         {
             //messageToPut = "Enemy Defeated!";
@@ -245,4 +276,37 @@ void CombatSystem::DisplayMessageAfterDelay(int delaySeconds_) {
         cout << "currentTime: " << timer.ReadSec();
         cout << "toDO: " << delaySeconds_;
         initialized = false;
+}
+
+void CombatSystem::MessageFunctionEstaSiQueSi(string message)
+{
+    messages.push_back(message);
+}
+
+void CombatSystem::MessageManager()
+{
+    cout << timer.ReadSec() << endl;
+    if (messages.size() > 0 && !locked)
+    {
+        Engine::GetInstance().combatui.get()->text = messages[0];
+        locked = true;
+        timer.Start();
+    }
+    if (timer.ReadSec() >= 1) 
+    {
+        if (messages.size() > 0)
+        {
+            messages.erase(messages.begin());
+            locked = false;
+        }
+    }
+}
+
+void CombatSystem::ShowMessages()
+{
+    for (size_t i = 0; i < messages.size(); i++)
+    {
+        cout << "Message " << i << ": " << messages[i] << endl;
+    }
+    cout << endl;
 }

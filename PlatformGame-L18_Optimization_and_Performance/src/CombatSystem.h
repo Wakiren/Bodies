@@ -32,6 +32,12 @@ public:
 
 	void DisplayMessageAfterDelay( int delaySeconds_);
 
+	void MessageFunctionEstaSiQueSi(string message);
+
+	void MessageManager();
+
+	void ShowMessages();
+
 public:
 
 	Player* player = nullptr;
@@ -53,4 +59,8 @@ public:
 	int delaySeconds;
 
 	bool dead = false;
+
+	vector<string> messages;
+
+	bool locked;
 };

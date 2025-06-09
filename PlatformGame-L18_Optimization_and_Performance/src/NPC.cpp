@@ -80,7 +80,7 @@ bool NPC::Update(float dt)
 		}
 	}
 
-	LOG("NPC Type: %d is bloked %d", (int)type,(int)bloked);
+	//LOG("NPC Type: %d is bloked %d", (int)type,(int)bloked);
 
 	CheckForProgress();
 

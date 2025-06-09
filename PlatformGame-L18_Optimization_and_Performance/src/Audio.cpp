@@ -174,7 +174,7 @@ bool Audio::PlayFx(Effects type, int channel, int repeat)
 
 		for (const auto& fxItem : fx) {
 			if (fxItem->typeFx == type) {
-				LOG("Playing sound effect %d", type);
+				//LOG("Playing sound effect %d", type);
 				if (Mix_Playing(channel) == true)
 				{
 					ret = true;

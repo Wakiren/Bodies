@@ -46,7 +46,7 @@
 				<combat health="100" maxHealth="150" attackPoints="50" defensePoints="50" />
 			</player>
 			<enemies>
-				<Cannibal name="Cannibal" x="2700" y="3180" w="64" h="64" speed ="2" texture="Assets/Characters/SamSpriteSheet.png" frontTexture="Assets/Characters/CannibalDONE.png" gravity="true" SpawnRate="3" HelpDistance="10">
+				<Cannibal name="Cannibal" x="2700" y="3180" w="64" h="64" speed="2" texture="Assets/Characters/SamSpriteSheet.png" frontTexture="Assets/Characters/CannibalDONE.png" gravity="true" SpawnRate="3" HelpDistance="10">
 					<animations>
 						<walk loop="true" speed="0.25">
 							<frame x="0" y="128" w="64" h="64" />
@@ -68,7 +68,7 @@
 					</animations>
 					<combat health="100" maxHealth="150" attackPoints="75" defensePoints="0" />
 				</Cannibal>
-				<Narcissist name="Narcissist" x="2700" y="3180" w="32" h="32" speed ="2" texture="Assets/Characters/AnimationSpriteSheet.png" frontTexture="Assets/Characters/NarcissistDONE.png" gravity="true" SpawnRate="1" HelpDistance="3">
+				<Narcissist name="Narcissist" x="2700" y="3180" w="32" h="32" speed="2" texture="Assets/Characters/AnimationSpriteSheet.png" frontTexture="Assets/Characters/NarcissistDONE.png" gravity="true" SpawnRate="1" HelpDistance="3">
 					<animations>
 						<walk loop="true" speed="0.1">
 							<frame x="32" y="192" w="32" h="32" />
@@ -82,7 +82,7 @@
 					</animations>
 					<combat health="100" maxHealth="150" attackPoints="75" defensePoints="0" />
 				</Narcissist>
-				<TreeBoss name="TreeBoss" x="0" y="0" w="32" h="32" speed ="2" texture="Assets/Characters/AnimationSpriteSheet.png" frontTexture="Assets/Characters/TreeBossDONE.png" gravity="true">
+				<TreeBoss name="TreeBoss" x="0" y="0" w="32" h="32" speed="2" texture="Assets/Characters/AnimationSpriteSheet.png" frontTexture="Assets/Characters/TreeBossDONE.png" gravity="true">
 					<animations>
 						<idle loop="true" speed="0.1">
 							<frame x="0" y="0" w="32" h="32" />
@@ -92,21 +92,21 @@
 				</TreeBoss>
 			</enemies>
 			<NPCs>
-				<NPC name="Sally" x="0" y="0" w="32" h="32" speed ="0.1" texture="Assets/Characters/AnimationSpriteSheet.png" frontTexture="Assets/Characters/SallyDONE.png" gravity="true">
+				<NPC name="Sally" x="0" y="0" w="32" h="32" speed="0.1" texture="Assets/Characters/AnimationSpriteSheet.png" frontTexture="Assets/Characters/SallyDONE.png" gravity="true">
 					<animations>
 						<idle loop="true" speed="0.1">
 							<frame x="0" y="0" w="32" h="32" />
 						</idle>
 					</animations>
 				</NPC>
-				<NPC name="Billy" x="3105" y="2592" w="32" h="32" speed ="0.01" texture="Assets/Characters/AnimationSpriteSheet.png" frontTexture="Assets/Characters/BillyDONE.png" gravity="true">
+				<NPC name="Billy" x="3105" y="2592" w="32" h="32" speed="0.01" texture="Assets/Characters/AnimationSpriteSheet.png" frontTexture="Assets/Characters/BillyDONE.png" gravity="true">
 					<animations>
 						<idle loop="true" speed="0.1">
 							<frame x="0" y="64" w="96" h="96" />
 						</idle>
 					</animations>
 				</NPC>
-				<NPC name="Henry" x="2369" y="2913" w="32" h="32" speed ="0.01" texture="Assets/Characters/AnimationSpriteSheet.png" frontTexture="Assets/Characters/HenryDONE.png" gravity="true">
+				<NPC name="Henry" x="2369" y="2913" w="32" h="32" speed="0.01" texture="Assets/Characters/AnimationSpriteSheet.png" frontTexture="Assets/Characters/HenryDONE.png" gravity="true">
 					<animations>
 						<idle loop="true" speed="0.1">
 							<frame x="0" y="32" w="32" h="32" />
@@ -119,7 +119,7 @@
 			</NPCs>
 			<items>
 				<MixedMeat name="MixedMeat" x="0" y="0" w="16" h="16" texture="Assets/Items/Items.png">
-					<effect type="Heal" amount="25" description = "A mix of human and animal flesh, mmmm yummyyy"/>
+					<effect type="Heal" amount="25" description="A mix of human and animal flesh, mmmm yummyyy" />
 					<animations>
 						<idle loop="true" speed="0.1">
 							<frame x="0" y="0" w="16" h="16" />
@@ -127,7 +127,7 @@
 					</animations>
 				</MixedMeat>
 				<AnimalSkin name="AnimalSkin" x="0" y="0" w="16" h="16" texture="Assets/Items/Items.png">
-					<effect type="Heal" amount="10" description ="Pale and hard animal skin, It has less nutritional value, but its better than eating human flesh... right?"/>
+					<effect type="Heal" amount="10" description="Pale and hard animal skin, It has less nutritional value, but its better than eating human flesh... right?" />
 					<animations>
 						<idle loop="true" speed="0.1">
 							<frame x="16" y="0" w="16" h="16" />
@@ -135,7 +135,7 @@
 					</animations>
 				</AnimalSkin>
 				<HumanFlesh name="HumanFlesh" x="32" y="0" w="16" h="16" texture="Assets/Items/Items.png">
-					<effect type="Heal" amount="15" description ="Soft and moist human flesh, it looks rich in nutrients..."/>
+					<effect type="Heal" amount="15" description="Soft and moist human flesh, it looks rich in nutrients..." />
 					<animations>
 						<idle loop="true" speed="0.1">
 							<frame x="32" y="0" w="16" h="16" />
@@ -143,7 +143,7 @@
 					</animations>
 				</HumanFlesh>
 				<Eye name="Eye" x="48" y="0" w="16" h="16" texture="Assets/Items/Items.png">
-					<effect type="Upgrade" description ="A green squishy eye, I can take it to Sally so that I can recover my vision"/>
+					<effect type="Upgrade" description="A green squishy eye, I can take it to Sally so that I can recover my vision" />
 					<animations>
 						<idle loop="true" speed="0.1">
 							<frame x="48" y="0" w="16" h="16" />
@@ -151,7 +151,7 @@
 					</animations>
 				</Eye>
 				<Sedative name="Sedative" x="64" y="0" w="16" h="16" texture="Assets/Items/Items.png">
-					<effect type="Narcotic" amount="50" description ="This will calm me for a while..."/>
+					<effect type="Narcotic" amount="50" description="This will calm me for a while..." />
 					<animations>
 						<idle loop="true" speed="0.1">
 							<frame x="64" y="0" w="16" h="16" />
@@ -159,7 +159,7 @@
 					</animations>
 				</Sedative>
 				<CookedMixedMeat name="CookedMixedMeat" x="80" y="0" w="16" h="16" texture="Assets/Items/Items.png">
-					<effect type="Heal" amount="25" description ="Smells delicious... but there is still human flesh there..."/>
+					<effect type="Heal" amount="25" description="Smells delicious... but there is still human flesh there..." />
 					<animations>
 						<idle loop="true" speed="0.1">
 							<frame x="80" y="0" w="16" h="16" />
@@ -167,7 +167,7 @@
 					</animations>
 				</CookedMixedMeat>
 				<CookedAnimalSkin name="CookedAnimalSkin" x="96" y="0" w="16" h="16" texture="Assets/Items/Items.png">
-					<effect type="Heal" amount="10" description ="Smells like bacon"/>
+					<effect type="Heal" amount="10" description="Smells like bacon" />
 					<animations>
 						<idle loop="true" speed="0.1">
 							<frame x="96" y="0" w="16" h="16" />
@@ -175,7 +175,7 @@
 					</animations>
 				</CookedAnimalSkin>
 				<CookedHumanFlesh name="CookedHumanFlesh" x="112" y="0" w="16" h="16" texture="Assets/Items/Items.png">
-					<effect type="Heal" amount="15" description ="Looks extreamly jucy..."/>
+					<effect type="Heal" amount="15" description="Looks extreamly jucy..." />
 					<animations>
 						<idle loop="true" speed="0.1">
 							<frame x="112" y="0" w="16" h="16" />
@@ -183,7 +183,7 @@
 					</animations>
 				</CookedHumanFlesh>
 				<Sizors name="Sizors" x="128" y="0" w="16" h="16" texture="Assets/Items/Items.png">
-					<effect type="Weapon" amount="50" description ="I guess I could use this as a weapon for now"/>
+					<effect type="Weapon" amount="50" description="I guess I could use this as a weapon for now" />
 					<animations>
 						<idle loop="true" speed="0.1">
 							<frame x="128" y="0" w="16" h="16" />
@@ -191,7 +191,7 @@
 					</animations>
 				</Sizors>
 				<Torch name="Torch" x="144" y="0" w="16" h="16" texture="Assets/Items/Items.png">
-					<effect type="Equipable" description ="This will light my way"/>
+					<effect type="Equipable" description="This will light my way" />
 					<animations>
 						<idle loop="true" speed="0.1">
 							<frame x="144" y="0" w="16" h="16" />
@@ -199,7 +199,7 @@
 					</animations>
 				</Torch>
 				<Alpha name="Alpha" x="160" y="0" w="16" h="16" texture="Assets/Items/Items.png">
-					<effect type="Puzzle" description ="A sign used for rituals, I found this on the first camp... It could be of use latter"/>
+					<effect type="Puzzle" description="A sign used for rituals, I found this on the first camp... It could be of use latter" />
 					<animations>
 						<idle loop="true" speed="0.1">
 							<frame x="160" y="0" w="16" h="16" />
@@ -207,7 +207,7 @@
 					</animations>
 				</Alpha>
 				<Beta name="Beta" x="176" y="0" w="16" h="16" texture="Assets/Items/Items.png">
-					<effect type="Puzzle" description ="A sign used for rituals, I found this on the second camp... It could be of use latter"/>
+					<effect type="Puzzle" description="A sign used for rituals, I found this on the second camp... It could be of use latter" />
 					<animations>
 						<idle loop="true" speed="0.1">
 							<frame x="176" y="0" w="16" h="16" />
@@ -215,7 +215,7 @@
 					</animations>
 				</Beta>
 				<Omega name="Omega" x="192" y="0" w="16" h="16" texture="Assets/Items/Items.png">
-					<effect type="Puzzle" description ="A sign used for rituals, I found this on the third camp... It could be of use latter"/>
+					<effect type="Puzzle" description="A sign used for rituals, I found this on the third camp... It could be of use latter" />
 					<animations>
 						<idle loop="true" speed="0.1">
 							<frame x="192" y="0" w="16" h="16" />
@@ -223,7 +223,7 @@
 					</animations>
 				</Omega>
 				<Sigma name="Sigma" x="208" y="0" w="16" h="16" texture="Assets/Items/Items.png">
-					<effect type="Puzzle" description ="A sign used for rituals, I found this on the fourth camp... It could be of use latter"/>
+					<effect type="Puzzle" description="A sign used for rituals, I found this on the fourth camp... It could be of use latter" />
 					<animations>
 						<idle loop="true" speed="0.1">
 							<frame x="208" y="0" w="16" h="16" />
@@ -231,7 +231,7 @@
 					</animations>
 				</Sigma>
 				<Shovel name="Shovel" x="224" y="0" w="16" h="16" texture="Assets/Items/Items.png">
-					<effect type="Puzzle" description ="I think this cound be used to get rid of piles of bodies... like the one I woke up on"/>
+					<effect type="Puzzle" description="I think this cound be used to get rid of piles of bodies... like the one I woke up on" />
 					<animations>
 						<idle loop="true" speed="0.1">
 							<frame x="224" y="0" w="16" h="16" />
@@ -239,7 +239,7 @@
 					</animations>
 				</Shovel>
 				<Lighter name="Lighter" x="240" y="0" w="16" h="16" texture="Assets/Items/Items.png">
-					<effect type="Weapon" amount="50" description ="This should be able to start a preatty good camp fire... just need to find a big tree"/>
+					<effect type="Weapon" amount="50" description="This should be able to start a preatty good camp fire... just need to find a big tree" />
 					<animations>
 						<idle loop="true" speed="0.1">
 							<frame x="240" y="0" w="16" h="16" />

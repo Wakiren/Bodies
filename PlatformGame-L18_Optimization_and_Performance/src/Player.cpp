@@ -81,7 +81,7 @@ bool Player::Update(float dt)
 {
 	ZoneScoped;
 
-	LOG("Player in combat %d", isInCombat);
+	//LOG("Player in combat %d", isInCombat);
 
 	if (isInCombat) 
 	{
